@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blacksmith & Witches (b&w) — The Catalogue</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandBlue: '#0F3D91',
+                        brandDarkBlue: '#0A2458',
+                        brandYellow: '#FFD000',
+                        brandYellowHover: '#E5BA00',
+                        brandBg: '#F4F8FF',
+                        brandCard: '#FFFFFF',
+                        brandText: '#1E293B',
+                        brandMuted: '#64748B'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Supabase JS Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
+    </style>
+</head>
+<body class="bg-brandBg text-brandText min-h-screen flex flex-col font-sans selection:bg-brandYellow selection:text-brandDarkBlue">
+
+    <!-- TOP BAR NAVIGATION -->
+    <header class="bg-brandDarkBlue text-white border-b border-blue-900 sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-lg bg-brandYellow flex items-center justify-center font-black text-brandDarkBlue text-xl shadow">
+                    b&w
+                </div>
+                <div>
+                    <a href="https://app.blacksmithandwitches.com" class="font-bold text-lg tracking-tight hover:text-brandYellow transition">Blacksmith & Witches</a>
+                    <span class="text-xs block text-blue-200 uppercase tracking-widest">The Catalogue</span>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <button onclick="openDbModal()" class="hidden sm:flex items-center space-x-1.5 text-xs bg-blue-900/80 hover:bg-blue-900 text-blue-100 px-3 py-1.5 rounded-full border border-blue-700 transition">
+                    <i data-lucide="database" class="w-3.5 h-3.5 text-brandYellow"></i>
+                    <span id="dbStatusText">Configure DB</span>
+                </button>
+                <button onclick="openSubmitModal()" class="bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-4 py-2 rounded-lg text-sm transition shadow flex items-center space-x-1.5">
+                    <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                    <span>Publish Work</span>
+                </button>
+                <button onclick="toggleCart()" class="relative bg-blue-900/60 hover:bg-blue-900 text-white p-2.5 rounded-lg transition border border-blue-700/60">
+                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                    <span id="cartCount" class="absolute -top-1.5 -right-1.5 bg-brandYellow text-brandDarkBlue text-xs font-black w-5 h-5 rounded-full flex items-center justify-center shadow">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO BANNER -->
+    <section class="bg-gradient-to-b from-brandDarkBlue to-brandBlue text-white py-12 px-4 sm:px-6 shadow-inner">
+        <div class="max-w-4xl mx-auto text-center space-y-4">
+            <div class="inline-flex items-center space-x-2 bg-white/10 text-brandYellow px-3.5 py-1 rounded-full text-xs font-semibold tracking-wide border border-white/10">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                <span>House Publications & Creator Marketplace</span>
+            </div>
+            <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-white">
+                Independent Digital Editions & Media
+            </h1>
+            <p class="text-blue-100 text-sm sm:text-base max-w-2xl mx-auto font-light">
+                Explore flagship dark sci-fi series, zines, audio releases, games, and independent apps published by the b&w house and guest creators.
+            </p>
+        </div>
+    </section>
+
+    <!-- CONTROLS & FILTERS -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+        
+        <!-- Search & Filter Bar -->
+        <div class="flex flex-col md:flex-row gap-4 items-center justify-between bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
+            <!-- Categories -->
+            <div class="flex flex-wrap gap-2 w-full md:w-auto" id="categoryFilters">
+                <button onclick="filterCategory('all')" class="cat-btn px-4 py-2 rounded-xl text-sm font-bold bg-brandDarkBlue text-white transition shadow-sm">All Releases</button>
+                <button onclick="filterCategory('books')" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Books & Zines</button>
+                <button onclick="filterCategory('music')" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Music & Audio</button>
+                <button onclick="filterCategory('games')" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Games</button>
+                <button onclick="filterCategory('apps')" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Apps & Tools</button>
+            </div>
+            <!-- Search Input -->
+            <div class="relative w-full md:w-72">
+                <i data-lucide="search" class="absolute left-3.5 top-3 w-4 h-4 text-slate-400"></i>
+                <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Search title, creator..." class="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brandBlue transition">
+            </div>
+        </div>
+
+        <!-- PRODUCTS GRID -->
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Dynamically populated -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="hidden text-center py-16 space-y-3">
+            <div class="w-16 h-16 bg-blue-100 text-brandBlue rounded-full flex items-center justify-center mx-auto">
+                <i data-lucide="folder-search" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-lg font-bold text-brandDarkBlue">No releases found</h3>
+            <p class="text-sm text-slate-500">Try adjusting your search terms or category filter.</p>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-brandDarkBlue text-blue-200 border-t border-blue-900 py-10 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded bg-brandYellow text-brandDarkBlue font-bold flex items-center justify-center text-sm">b&w</div>
+                <span class="text-sm font-medium">© 2026 Blacksmith & Witches House Platform. Powered by Supabase.</span>
+            </div>
+            <div class="flex space-x-6 text-sm">
+                <a href="https://app.blacksmithandwitches.com" class="hover:text-brandYellow transition">Main Dashboard</a>
+                <a href="https://blacksmithandwitches.com" class="hover:text-brandYellow transition">House Site</a>
+                <a href="https://wallet.blacksmithandwitches.com" class="hover:text-brandYellow transition">BlacksmithPay</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SUBMIT WORK MODAL -->
+    <div id="submitModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 space-y-6 max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <div class="flex items-center justify-between border-b pb-4">
+                <div>
+                    <h3 class="text-lg font-bold text-brandDarkBlue">Publish to The Catalogue</h3>
+                    <p class="text-xs text-slate-500">Submit your book, album, game, or tool to the live storefront.</p>
+                </div>
+                <button onclick="closeSubmitModal()" class="text-slate-400 hover:text-slate-600 p-1 rounded-lg">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <form id="submitForm" onsubmit="handleProductSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Title</label>
+                    <input type="text" id="subTitle" required placeholder="e.g. Paul of Teraura (Book One)" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Creator / Author</label>
+                        <input type="text" id="subCreator" required placeholder="e.g. Dima Grossman" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Category</label>
+                        <select id="subCategory" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                            <option value="books">Books & Zines</option>
+                            <option value="music">Music & Audio</option>
+                            <option value="games">Games</option>
+                            <option value="apps">Apps & Tools</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Price ($ USD)</label>
+                        <input type="number" step="0.01" id="subPrice" required value="9.99" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Formats (Comma separated)</label>
+                        <input type="text" id="subFormats" value="EPUB, PDF, WEB" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Short Excerpt / Tagline</label>
+                    <input type="text" id="subExcerpt" placeholder="The flagship sci-fi novel launching the b&w universe." class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Full Description</label>
+                    <textarea id="subDesc" rows="3" required placeholder="Detailed summary of your publication..." class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none"></textarea>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Download / Access URL</label>
+                    <input type="url" id="subUrl" placeholder="https://..." class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                </div>
+
+                <div class="pt-2 flex justify-end space-x-3">
+                    <button type="button" onclick="closeSubmitModal()" class="px-4 py-2 bg-slate-100 text-slate-700 font-semibold rounded-xl text-sm hover:bg-slate-200 transition">Cancel</button>
+                    <button type="submit" id="submitBtn" class="px-5 py-2 bg-brandDarkBlue hover:bg-brandBlue text-white font-bold rounded-xl text-sm shadow transition">Publish to Store</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- SUPABASE CONFIG MODAL -->
+    <div id="dbModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 space-y-4">
+            <div class="flex items-center justify-between border-b pb-3">
+                <h3 class="font-bold text-brandDarkBlue">Supabase Connection Settings</h3>
+                <button onclick="closeDbModal()" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            <p class="text-xs text-slate-500">Paste your Supabase project credentials below to connect your live database. If left blank, demo data is shown locally.</p>
+            <div class="space-y-3">
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 mb-1">Project URL</label>
+                    <input type="text" id="cfgUrl" placeholder="https://xyz.supabase.co" class="w-full px-3 py-2 bg-slate-50 border rounded-xl text-xs font-mono">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 mb-1">Anon / Publishable Key</label>
+                    <input type="password" id="cfgKey" placeholder="eyJhbGciOi..." class="w-full px-3 py-2 bg-slate-50 border rounded-xl text-xs font-mono">
+                </div>
+            </div>
+            <div class="pt-2 flex justify-end space-x-2">
+                <button onclick="saveDbConfig()" class="w-full py-2.5 bg-brandDarkBlue text-white font-bold rounded-xl text-sm hover:bg-brandBlue transition">Save & Connect</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CART / SATCHEL DRAWER -->
+    <div id="cartDrawer" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 hidden justify-end">
+        <div class="bg-white w-full max-w-md h-full shadow-2xl flex flex-col p-6 animate-in slide-in-from-right duration-200">
+            <div class="flex items-center justify-between border-b pb-4">
+                <div class="flex items-center space-x-2">
+                    <i data-lucide="shopping-bag" class="w-5 h-5 text-brandDarkBlue"></i>
+                    <h3 class="font-bold text-brandDarkBlue text-lg">Your Satchel</h3>
+                </div>
+                <button onclick="toggleCart()" class="text-slate-400 hover:text-slate-600 p-1"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            <div id="cartItemsList" class="flex-grow overflow-y-auto py-4 space-y-3 custom-scrollbar">
+                <!-- Cart items inserted here -->
+            </div>
+            <div class="border-t pt-4 space-y-4">
+                <div class="flex justify-between items-center font-bold text-lg">
+                    <span>Total:</span>
+                    <span id="cartTotalPrice" class="text-brandDarkBlue">$0.00</span>
+                </div>
+                <button onclick="checkoutBlacksmithPay()" class="w-full py-3 bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-black rounded-xl text-base shadow transition flex items-center justify-center space-x-2">
+                    <i data-lucide="shield-check" class="w-5 h-5"></i>
+                    <span>Checkout with BlacksmithPay</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT LOGIC -->
+    <script>
+        // Default Mock Database fallback if no Supabase keys entered yet
+        let DEFAULT_SUPABASE_URL = "YOUR_SUPABASE_URL";
+        let DEFAULT_SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+
+        let supabaseClient = null;
+        let products = [
+            {
+                id: '1',
+                title: 'Paul of Teraura (Book One)',
+                creator: 'Dima Grossman',
+                category: 'books',
+                price: 9.99,
+                formats: ['EPUB', 'PDF', 'WEB'],
+                rating: 4.9,
+                featured: true,
+                badge: 'Flagship Edition',
+                excerpt: 'The flagship dark sci-fi novel launching the b&w universe.',
+                description: 'Dive deep into the sprawling dark sci-fi epic that started the house. Complete with world maps and prologue chapters.',
+                download_url: 'https://books.blacksmithandwitches.com'
+            },
+            {
+                id: '2',
+                title: 'Teraura Ambient Soundscapes Vol. 1',
+                creator: 'b&w Audio Labs',
+                category: 'music',
+                price: 5.99,
+                formats: ['FLAC', 'MP3'],
+                rating: 4.8,
+                featured: false,
+                badge: 'Audio Pack',
+                excerpt: 'Immersive atmospheric soundtracks and background themes.',
+                description: 'High-fidelity audio compositions accompanying the planetary sectors of Teraura.',
+                download_url: '#'
+            },
+            {
+                id: '3',
+                title: 'Operation: Blacksmith (Demo)',
+                creator: 'Studio Vane',
+                category: 'games',
+                price: 0.00,
+                formats: ['WEB', 'Windows'],
+                rating: 4.7,
+                featured: false,
+                badge: 'Free Play',
+                excerpt: 'Tactical sci-fi strategy mini-game set in the orbital foundries.',
+                description: 'Manage energy grids, defend forge nodes, and outmaneuver rival factions.',
+                download_url: '#'
+            },
+            {
+                id: '4',
+                title: 'Muse AI Prompt Deck & Workflow Tool',
+                creator: 'Blacksmith & Witches',
+                category: 'apps',
+                price: 14.99,
+                formats: ['JSON', 'Web App'],
+                rating: 5.0,
+                featured: true,
+                badge: 'Creator Utility',
+                excerpt: 'Curated prompt engineering suite for worldbuilders and writers.',
+                description: 'Streamline your narrative development pipelines with modular structural templates.',
+                download_url: '#'
+            }
+        ];
+
+        let currentCategory = 'all';
+        let searchQuery = '';
+        let cart = [];
+
+        // Initialize Supabase if keys exist
+        function initSupabase() {
+            const savedUrl = localStorage.getItem('bw_sb_url') || DEFAULT_SUPABASE_URL;
+            const savedKey = localStorage.getItem('bw_sb_key') || DEFAULT_SUPABASE_ANON_KEY;
+
+            if (savedUrl && savedKey && savedUrl !== "YOUR_SUPABASE_URL") {
+                try {
+                    supabaseClient = window.supabase.createClient(savedUrl, savedKey);
+                    document.getElementById('dbStatusText').innerText = "Connected DB";
+                    fetchProductsFromSupabase();
+                } catch (e) {
+                    console.error("Supabase init error:", e);
+                }
+            }
+        }
+
+        async function fetchProductsFromSupabase() {
+            if (!supabaseClient) return;
+            try {
+                const { data, error } = await supabaseClient.from('products').select('*').order('created_at', { ascending: false });
+                if (data && data.length > 0) {
+                    products = data;
+                    renderProducts();
+                }
+            } catch (err) {
+                console.log("Using local fallback products due to fetch error:", err);
+            }
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            const empty = document.getElementById('emptyState');
+            grid.innerHTML = '';
+
+            const filtered = products.filter(p => {
+                const matchesCat = currentCategory === 'all' || p.category === currentCategory;
+                const matchesSearch = p.title.toLowerCase().includes(searchQuery.toLowerCase()) || p.creator.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesCat && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                empty.classList.remove('hidden');
+                return;
+            } else {
+                empty.classList.add('hidden');
+            }
+
+            filtered.forEach(p => {
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col overflow-hidden";
+                
+                let badgeHtml = p.badge ? `<span class="bg-brandYellow/90 text-brandDarkBlue text-xs font-black px-2.5 py-1 rounded-full">${p.badge}</span>` : '';
+                let priceDisplay = Number(p.price) === 0 ? 'Free' : `$${Number(p.price).toFixed(2)}`;
+                let formatsStr = Array.isArray(p.formats) ? p.formats.join(' • ') : p.formats;
+
+                card.innerHTML = `
+                    <div class="p-6 flex-grow space-y-3">
+                        <div class="flex justify-between items-start">
+                            <span class="text-xs font-bold uppercase tracking-wider text-brandBlue bg-blue-50 px-2.5 py-1 rounded-lg">${p.category}</span>
+                            ${badgeHtml}
+                        </div>
+                        <h3 class="text-lg font-bold text-brandDarkBlue">${p.title}</h3>
+                        <p class="text-xs text-slate-500">By ${p.creator}</p>
+                        <p class="text-sm text-slate-600 line-clamp-2">${p.excerpt || p.description}</p>
+                        <div class="text-xs text-slate-400 font-medium pt-2">Formats: ${formatsStr}</div>
+                    </div>
+                    <div class="bg-slate-50 px-6 py-4 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-lg font-black text-brandDarkBlue">${priceDisplay}</span>
+                        <div class="space-x-2">
+                            <button onclick="addToCart('${p.id}')" class="bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-4 py-2 rounded-xl text-xs transition shadow">Add to Satchel</button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+            lucide.createIcons();
+        }
+
+        function filterCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.className = "cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition";
+            });
+            event.target.className = "cat-btn px-4 py-2 rounded-xl text-sm font-bold bg-brandDarkBlue text-white transition shadow-sm";
+            renderProducts();
+        }
+
+        function handleSearch() {
+            searchQuery = document.getElementById('searchInput').value;
+            renderProducts();
+        }
+
+        // Cart Actions
+        function addToCart(id) {
+            const item = products.find(p => p.id == id);
+            if (!item) return;
+            cart.push(item);
+            updateCartUI();
+            toggleCart();
+        }
+
+        function updateCartUI() {
+            document.getElementById('cartCount').innerText = cart.length;
+            const list = document.getElementById('cartItemsList');
+            list.innerHTML = '';
+            let total = 0;
+
+            if (cart.length === 0) {
+                list.innerHTML = `<p class="text-sm text-slate-400 text-center py-8">Your satchel is empty.</p>`;
+            } else {
+                cart.forEach((ci, idx) => {
+                    total += Number(ci.price);
+                    const div = document.createElement('div');
+                    div.className = "flex justify-between items-center bg-slate-50 p-3 rounded-xl border border-slate-100";
+                    div.innerHTML = `
+                        <div>
+                            <h4 class="text-sm font-bold text-brandDarkBlue">${ci.title}</h4>
+                            <span class="text-xs text-slate-500">$${Number(ci.price).toFixed(2)}</span>
+                        </div>
+                        <button onclick="removeFromCart(${idx})" class="text-red-400 hover:text-red-600 text-xs font-bold">Remove</button>
+                    `;
+                    list.appendChild(div);
+                });
+            }
+            document.getElementById('cartTotalPrice').innerText = `$${total.toFixed(2)}`;
+        }
+
+        function removeFromCart(idx) {
+            cart.splice(idx, 1);
+            updateCartUI();
+        }
+
+        function toggleCart() {
+            const drawer = document.getElementById('cartDrawer');
+            drawer.classList.toggle('hidden');
+            drawer.classList.toggle('flex');
+        }
+
+        function checkoutBlacksmithPay() {
+            if (cart.length === 0) {
+                alert('Your satchel is empty.');
+                return;
+            }
+            alert('BlacksmithPay simulation successful! Your digital download links are now unlocked.');
+            cart = [];
+            updateCartUI();
+            toggleCart();
+        }
+
+        // Submit Product Modal
+        function openSubmitModal() { document.getElementById('submitModal').classList.remove('hidden'); }
+        function closeSubmitModal() { document.getElementById('submitModal').classList.add('hidden'); }
+
+        async function handleProductSubmit(e) {
+            e.preventDefault();
+            const newProd = {
+                title: document.getElementById('subTitle').value,
+                creator: document.getElementById('subCreator').value,
+                category: document.getElementById('subCategory').value,
+                price: parseFloat(document.getElementById('subPrice').value),
+                formats: document.getElementById('subFormats').value.split(',').map(s => s.trim()),
+                rating: 5.0,
+                featured: false,
+                badge: 'New Release',
+                excerpt: document.getElementById('subExcerpt').value,
+                description: document.getElementById('subDesc').value,
+                download_url: document.getElementById('subUrl').value || '#'
+            };
+
+            if (supabaseClient) {
+                try {
+                    const { data, error } = await supabaseClient.from('products').insert([newProd]).select();
+                    if (error) throw error;
+                    if (data) products.unshift(data[0]);
+                } catch (err) {
+                    alert('Error saving to Supabase: ' + err.message);
+                    return;
+                }
+            } else {
+                newProd.id = 'local_' + Date.now();
+                products.unshift(newProd);
+            }
+
+            renderProducts();
+            closeSubmitModal();
+            document.getElementById('submitForm').reset();
+            alert('Publication successfully added to The Catalogue!');
+        }
+
+        // DB Config Modal
+        function openDbModal() { document.getElementById('dbModal').classList.remove('hidden'); }
+        function closeDbModal() { document.getElementById('dbModal').classList.add('hidden'); }
+        function saveDbConfig() {
+            const url = document.getElementById('cfgUrl').value.trim();
+            const key = document.getElementById('cfgKey').value.trim();
+            if (url && key) {
+                localStorage.setItem('bw_sb_url', url);
+                localStorage.setItem('bw_sb_key', key);
+                alert('Saved! Reloading connection...');
+                location.reload();
+            }
+        }
+
+        // Run on load
+        window.onload = () => {
+            initSupabase();
+            renderProducts();
+            lucide.createIcons();
+        };
+    </script>
+</body>
+</html>
