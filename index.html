@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blacksmith & Witches (b&w) — The Catalogue</title>
-    <!-- Tailwind CSS for styling -->
+    <title>Blacksmith & Witches (b&w) — The Marketplace</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -24,9 +23,7 @@
             }
         }
     </script>
-    <!-- Supabase JS Client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         .custom-scrollbar::-webkit-scrollbar { width: 6px; }
@@ -48,19 +45,33 @@
                 </div>
             </div>
 
-            <div class="flex items-center space-x-4">
-                <button onclick="openDbModal()" class="hidden sm:flex items-center space-x-1.5 text-xs bg-blue-900/80 hover:bg-blue-900 text-blue-100 px-3 py-1.5 rounded-full border border-blue-700 transition">
+            <div class="flex items-center space-x-3">
+                <button onclick="openDbModal()" class="hidden md:flex items-center space-x-1.5 text-xs bg-blue-900/80 hover:bg-blue-900 text-blue-100 px-3 py-1.5 rounded-full border border-blue-700 transition">
                     <i data-lucide="database" class="w-3.5 h-3.5 text-brandYellow"></i>
                     <span id="dbStatusText">Configure DB</span>
                 </button>
-                <button onclick="openSubmitModal()" class="bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-4 py-2 rounded-lg text-sm transition shadow flex items-center space-x-1.5">
-                    <i data-lucide="plus-circle" class="w-4 h-4"></i>
-                    <span>Publish Work</span>
-                </button>
-                <button onclick="toggleCart()" class="relative bg-blue-900/60 hover:bg-blue-900 text-white p-2.5 rounded-lg transition border border-blue-700/60">
-                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-                    <span id="cartCount" class="absolute -top-1.5 -right-1.5 bg-brandYellow text-brandDarkBlue text-xs font-black w-5 h-5 rounded-full flex items-center justify-center shadow">0</span>
-                </button>
+
+                <!-- Auth Controls -->
+                <div id="authLoggedOut">
+                    <button onclick="openAuthModal()" class="bg-blue-900/80 hover:bg-blue-800 text-white border border-blue-700 font-semibold px-3.5 py-2 rounded-lg text-sm transition flex items-center space-x-1.5">
+                        <i data-lucide="key-round" class="w-4 h-4 text-brandYellow"></i>
+                        <span>Creator Sign In</span>
+                    </button>
+                </div>
+
+                <div id="authLoggedIn" class="hidden flex items-center space-x-2">
+                    <button onclick="toggleMyWorksView()" id="myWorksBtn" class="bg-blue-900/80 hover:bg-blue-800 text-blue-100 border border-blue-700 font-semibold px-3 py-2 rounded-lg text-xs transition flex items-center space-x-1.5">
+                        <i data-lucide="folder-kanban" class="w-3.5 h-3.5 text-brandYellow"></i>
+                        <span>My Works</span>
+                    </button>
+                    <button onclick="openSubmitModal()" class="bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-3.5 py-2 rounded-lg text-sm transition shadow flex items-center space-x-1.5">
+                        <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                        <span>Publish Work</span>
+                    </button>
+                    <button onclick="signOutCreator()" title="Sign Out" class="text-blue-200 hover:text-white p-2 rounded-lg hover:bg-blue-900/60 transition">
+                        <i data-lucide="log-out" class="w-4 h-4"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </header>
@@ -71,13 +82,13 @@
             <img src="https://blacksmithandwitches.com/images/bw-emblem.webp" alt="Blacksmith & Witches emblem" class="h-16 sm:h-20 w-auto mx-auto">
             <div class="inline-flex items-center space-x-2 bg-white/10 text-brandYellow px-3.5 py-1 rounded-full text-xs font-semibold tracking-wide border border-white/10">
                 <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
-                <span>House Publications & Creator Marketplace</span>
+                <span>Zero-Fee House Publications & Creator Marketplace</span>
             </div>
             <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-white">
                 Independent Digital Editions & Media
             </h1>
             <p class="text-blue-100 text-sm sm:text-base max-w-2xl mx-auto font-light">
-                Explore flagship dark sci-fi series, zines, audio releases, games, and independent apps published by the b&w house and guest creators.
+                Explore flagship dark sci-fi series, zines, audio releases, games, and independent apps. Direct downloads or straight to the creator's checkout—house takes nothing.
             </p>
         </div>
     </section>
@@ -165,17 +176,26 @@
     <!-- CONTROLS & FILTERS -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         
+        <!-- Creator Mode Banner (Visible when viewing My Works) -->
+        <div id="myWorksBanner" class="hidden bg-brandDarkBlue text-white px-5 py-4 rounded-2xl flex items-center justify-between shadow-md">
+            <div class="flex items-center space-x-3">
+                <span class="bg-brandYellow text-brandDarkBlue text-xs font-black px-2.5 py-1 rounded-md uppercase">Creator Studio</span>
+                <span class="text-sm font-medium" id="creatorEmailDisplay">Managing your submissions</span>
+            </div>
+            <button onclick="toggleMyWorksView()" class="text-xs bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-lg font-semibold transition">
+                Back to Public Storefront
+            </button>
+        </div>
+
         <!-- Search & Filter Bar -->
         <div class="flex flex-col md:flex-row gap-4 items-center justify-between bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
-            <!-- Categories -->
             <div class="flex flex-wrap gap-2 w-full md:w-auto" id="categoryFilters">
-                <button onclick="filterCategory('all')" class="cat-btn px-4 py-2 rounded-xl text-sm font-bold bg-brandDarkBlue text-white transition shadow-sm">All Releases</button>
-                <button onclick="filterCategory('books')" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Books & Zines</button>
-                <button onclick="filterCategory('music')" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Music & Audio</button>
-                <button onclick="filterCategory('games')" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Games</button>
-                <button onclick="filterCategory('apps')" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Apps & Tools</button>
+                <button onclick="filterCategory('all', this)" class="cat-btn px-4 py-2 rounded-xl text-sm font-bold bg-brandDarkBlue text-white transition shadow-sm">All Releases</button>
+                <button onclick="filterCategory('books', this)" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Books & Zines</button>
+                <button onclick="filterCategory('music', this)" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Music & Audio</button>
+                <button onclick="filterCategory('games', this)" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Games</button>
+                <button onclick="filterCategory('apps', this)" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Apps & Tools</button>
             </div>
-            <!-- Search Input -->
             <div class="relative w-full md:w-72">
                 <i data-lucide="search" class="absolute left-3.5 top-3 w-4 h-4 text-slate-400"></i>
                 <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Search title, creator..." class="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brandBlue transition">
@@ -183,9 +203,7 @@
         </div>
 
         <!-- PRODUCTS GRID -->
-        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Dynamically populated -->
-        </div>
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
 
         <!-- Empty State -->
         <div id="emptyState" class="hidden text-center py-16 space-y-3">
@@ -213,13 +231,39 @@
         </div>
     </footer>
 
-    <!-- SUBMIT WORK MODAL -->
+    <!-- MAGIC LINK AUTH MODAL -->
+    <div id="authModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 space-y-5">
+            <div class="flex items-center justify-between border-b pb-3">
+                <div class="flex items-center space-x-2">
+                    <div class="w-7 h-7 rounded bg-brandYellow text-brandDarkBlue font-black flex items-center justify-center text-xs">b&w</div>
+                    <h3 class="font-bold text-brandDarkBlue">Creator Magic-Link Sign In</h3>
+                </div>
+                <button onclick="closeAuthModal()" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+                Enter your creator email below. We'll send a one-click sign-in link—no password required. Once signed in, you can upload files and manage your own catalogue releases.
+            </p>
+            <form onsubmit="handleMagicLinkLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Creator Email</label>
+                    <input type="email" id="authEmail" required placeholder="you@domain.com" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                </div>
+                <button type="submit" id="authSubmitBtn" class="w-full py-2.5 bg-brandDarkBlue hover:bg-brandBlue text-white font-bold rounded-xl text-sm shadow transition">
+                    Send Magic Sign-In Link
+                </button>
+            </form>
+            <div id="authFeedback" class="hidden text-xs p-3 rounded-xl bg-blue-50 text-brandDarkBlue border border-blue-200 font-medium"></div>
+        </div>
+    </div>
+
+    <!-- SUBMIT WORK MODAL (WITH STORAGE UPLOAD) -->
     <div id="submitModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 space-y-6 max-h-[90vh] overflow-y-auto custom-scrollbar">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 space-y-5 max-h-[90vh] overflow-y-auto custom-scrollbar">
             <div class="flex items-center justify-between border-b pb-4">
                 <div>
-                    <h3 class="text-lg font-bold text-brandDarkBlue">Publish to The Catalogue</h3>
-                    <p class="text-xs text-slate-500">Submit your book, album, game, or tool to the live storefront.</p>
+                    <h3 class="text-lg font-bold text-brandDarkBlue">Publish to The Marketplace</h3>
+                    <p class="text-xs text-slate-500">New submissions enter review as <strong>pending</strong> before going public.</p>
                 </div>
                 <button onclick="closeSubmitModal()" class="text-slate-400 hover:text-slate-600 p-1 rounded-lg">
                     <i data-lucide="x" class="w-5 h-5"></i>
@@ -229,7 +273,7 @@
             <form id="submitForm" onsubmit="handleProductSubmit(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Title</label>
-                    <input type="text" id="subTitle" required placeholder="e.g. Paul of Teraura (Book One)" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                    <input type="text" id="subTitle" required placeholder="e.g. Paul of Teraura" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
                 </div>
                 <div class="grid grid-cols-2 gap-4">
                     <div>
@@ -248,30 +292,42 @@
                 </div>
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Price ($ USD)</label>
-                        <input type="number" step="0.01" id="subPrice" required value="9.99" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Price ($ USD — 0 for Free)</label>
+                        <input type="number" step="0.01" min="0" id="subPrice" required value="0.00" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Formats (Comma separated)</label>
-                        <input type="text" id="subFormats" value="EPUB, PDF, WEB" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Formats</label>
+                        <input type="text" id="subFormats" value="EPUB, PDF" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
                     </div>
                 </div>
-                <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Short Excerpt / Tagline</label>
-                    <input type="text" id="subExcerpt" placeholder="The flagship sci-fi novel launching the b&w universe." class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+
+                <!-- File Upload to Supabase Storage -->
+                <div class="bg-blue-50/70 border border-blue-200 rounded-xl p-3.5 space-y-2.5">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-brandDarkBlue">
+                        Upload Release File (PDF, EPUB, Audio, ZIP)
+                    </label>
+                    <input type="file" id="subFileUpload" accept=".pdf,.epub,.mp3,.flac,.wav,.zip" class="block w-full text-xs text-slate-600 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-brandDarkBlue file:text-white hover:file:bg-brandBlue cursor-pointer">
+                    <p class="text-[11px] text-slate-500">Uploads directly to Supabase Storage, OR leave empty and paste your own external seller checkout/download link below.</p>
                 </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">External Checkout / Download URL</label>
+                    <input type="url" id="subUrl" placeholder="https://your-checkout-or-link.com" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Short Tagline</label>
+                    <input type="text" id="subExcerpt" placeholder="A brief one-line hook for your release." class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                </div>
+
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Full Description</label>
                     <textarea id="subDesc" rows="3" required placeholder="Detailed summary of your publication..." class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none"></textarea>
                 </div>
-                <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Download / Access URL</label>
-                    <input type="url" id="subUrl" placeholder="https://..." class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
-                </div>
 
                 <div class="pt-2 flex justify-end space-x-3">
                     <button type="button" onclick="closeSubmitModal()" class="px-4 py-2 bg-slate-100 text-slate-700 font-semibold rounded-xl text-sm hover:bg-slate-200 transition">Cancel</button>
-                    <button type="submit" id="submitBtn" class="px-5 py-2 bg-brandDarkBlue hover:bg-brandBlue text-white font-bold rounded-xl text-sm shadow transition">Publish to Store</button>
+                    <button type="submit" id="submitBtn" class="px-5 py-2 bg-brandDarkBlue hover:bg-brandBlue text-white font-bold rounded-xl text-sm shadow transition">Submit for Review</button>
                 </div>
             </form>
         </div>
@@ -284,7 +340,7 @@
                 <h3 class="font-bold text-brandDarkBlue">Supabase Connection Settings</h3>
                 <button onclick="closeDbModal()" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
             </div>
-            <p class="text-xs text-slate-500">Paste your Supabase project credentials below to connect your live database. If left blank, demo data is shown locally.</p>
+            <p class="text-xs text-slate-500">Paste your Supabase project credentials below to connect your live database, Auth, and Storage.</p>
             <div class="space-y-3">
                 <div>
                     <label class="block text-xs font-bold text-slate-600 mb-1">Project URL</label>
@@ -301,104 +357,152 @@
         </div>
     </div>
 
-    <!-- CART / SATCHEL DRAWER -->
-    <div id="cartDrawer" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 hidden justify-end">
-        <div class="bg-white w-full max-w-md h-full shadow-2xl flex flex-col p-6 animate-in slide-in-from-right duration-200">
-            <div class="flex items-center justify-between border-b pb-4">
-                <div class="flex items-center space-x-2">
-                    <i data-lucide="shopping-bag" class="w-5 h-5 text-brandDarkBlue"></i>
-                    <h3 class="font-bold text-brandDarkBlue text-lg">Your Satchel</h3>
-                </div>
-                <button onclick="toggleCart()" class="text-slate-400 hover:text-slate-600 p-1"><i data-lucide="x" class="w-5 h-5"></i></button>
-            </div>
-            <div id="cartItemsList" class="flex-grow overflow-y-auto py-4 space-y-3 custom-scrollbar">
-                <!-- Cart items inserted here -->
-            </div>
-            <div class="border-t pt-4 space-y-4">
-                <div class="flex justify-between items-center font-bold text-lg">
-                    <span>Total:</span>
-                    <span id="cartTotalPrice" class="text-brandDarkBlue">$0.00</span>
-                </div>
-                <button onclick="checkoutBlacksmithPay()" class="w-full py-3 bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-black rounded-xl text-base shadow transition flex items-center justify-center space-x-2">
-                    <i data-lucide="shield-check" class="w-5 h-5"></i>
-                    <span>Checkout with BlacksmithPay</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
     <!-- SCRIPT LOGIC -->
     <script>
-        // Default Mock Database fallback if no Supabase keys entered yet
         let DEFAULT_SUPABASE_URL = "https://qmamsagrouzkldylxrqk.supabase.co";
         let DEFAULT_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFtYW1zYWdyb3V6a2xkeWx4cnFrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ0MzMxNDgsImV4cCI6MjExMDAwOTE0OH0.YJKjJbRvJ5XkVAMWuB-1_CAKmNn47smSVy4_I4foj2I";
 
         let supabaseClient = null;
+        let currentUser = null;
+        let showOnlyMyWorks = false;
+
         let products = [
             {
                 id: '1',
-                title: 'Paul of Teraura (Book One)',
+                title: 'Paul of Teraura',
                 creator: 'Dima Grossman',
                 category: 'books',
-                price: 9.99,
-                formats: ['EPUB', 'PDF', 'WEB'],
-                rating: 4.9,
-                featured: true,
-                badge: 'Flagship Edition',
-                excerpt: 'The flagship dark sci-fi novel launching the b&w universe.',
-                description: 'Dive deep into the sprawling dark sci-fi epic that started the house. Complete with world maps and prologue chapters.',
-                download_url: 'https://books.blacksmithandwitches.com'
+                price: 2.99,
+                formats: ['EPUB'],
+                status: 'approved',
+                badge: 'The Teraura Saga - Book One',
+                excerpt: 'Book One of the Teraura Saga. An invasion, a resistance, and a young man whose mind the invaders cannot take.',
+                description: 'Book One of the Teraura Saga. An invasion, a resistance, and a young man whose mind the invaders cannot take.',
+                download_url: 'https://www.kobo.com/ca/en/ebook/paul-of-teraura'
             },
             {
                 id: '2',
-                title: 'Teraura Ambient Soundscapes Vol. 1',
-                creator: 'b&w Audio Labs',
-                category: 'music',
-                price: 5.99,
-                formats: ['FLAC', 'MP3'],
-                rating: 4.8,
-                featured: false,
-                badge: 'Audio Pack',
-                excerpt: 'Immersive atmospheric soundtracks and background themes.',
-                description: 'High-fidelity audio compositions accompanying the planetary sectors of Teraura.',
-                download_url: '#'
+                title: 'Paul von Teraura',
+                creator: 'Dima Grossman',
+                category: 'books',
+                price: 2.99,
+                formats: ['EPUB'],
+                status: 'approved',
+                badge: 'German Edition',
+                excerpt: 'Paul of Teraura in German. Book One of the Teraura Saga.',
+                description: 'Paul of Teraura in German. Book One of the Teraura Saga.',
+                download_url: 'https://www.kobo.com/ca/en/ebook/paul-von-teraura'
             },
             {
                 id: '3',
-                title: 'Operation: Blacksmith (Demo)',
-                creator: 'Studio Vane',
-                category: 'games',
-                price: 0.00,
-                formats: ['WEB', 'Windows'],
-                rating: 4.7,
-                featured: false,
-                badge: 'Free Play',
-                excerpt: 'Tactical sci-fi strategy mini-game set in the orbital foundries.',
-                description: 'Manage energy grids, defend forge nodes, and outmaneuver rival factions.',
-                download_url: '#'
+                title: 'Пол з Тераури (Paul of Teraura)',
+                creator: 'Dima Grossman',
+                category: 'books',
+                price: 2.99,
+                formats: ['EPUB'],
+                status: 'approved',
+                badge: 'Ukrainian Edition',
+                excerpt: 'Paul of Teraura in Ukrainian. Book One of the Teraura Saga.',
+                description: 'Paul of Teraura in Ukrainian. Book One of the Teraura Saga.',
+                download_url: 'https://www.kobo.com/ca/en/ebook/nobKybar_zyoUwg4tn5JGg'
             },
             {
                 id: '4',
-                title: 'Muse AI Prompt Deck & Workflow Tool',
-                creator: 'Blacksmith & Witches',
-                category: 'apps',
-                price: 14.99,
-                formats: ['JSON', 'Web App'],
-                rating: 5.0,
-                featured: true,
-                badge: 'Creator Utility',
-                excerpt: 'Curated prompt engineering suite for worldbuilders and writers.',
-                description: 'Streamline your narrative development pipelines with modular structural templates.',
-                download_url: '#'
+                title: 'Пол с Терауры (Paul of Teraura)',
+                creator: 'Dima Grossman',
+                category: 'books',
+                price: 2.99,
+                formats: ['EPUB'],
+                status: 'approved',
+                badge: 'Russian Edition',
+                excerpt: 'Paul of Teraura in Russian. Book One of the Teraura Saga.',
+                description: 'Paul of Teraura in Russian. Book One of the Teraura Saga.',
+                download_url: 'https://www.kobo.com/ca/en/ebook/2F8u6bVGkDa8-BQLEblDNA'
+            },
+            {
+                id: '5',
+                title: 'Paul de Teraura',
+                creator: 'Dima Grossman',
+                category: 'books',
+                price: 2.99,
+                formats: ['EPUB'],
+                status: 'approved',
+                badge: 'French Edition',
+                excerpt: 'Paul of Teraura in French. Book One of the Teraura Saga.',
+                description: 'Paul of Teraura in French. Book One of the Teraura Saga.',
+                download_url: 'https://www.lulu.com/shop/dima-grossman/paul-de-teraura/ebook/product-e7v597d.html'
+            },
+            {
+                id: '6',
+                title: 'Selected Stories (Annotated)',
+                creator: 'Anton Chekhov',
+                category: 'books',
+                price: 2.99,
+                formats: ['EPUB', 'Paperback'],
+                status: 'approved',
+                badge: 'Blacksmith & Witches Classics',
+                excerpt: 'Ten essential stories in Constance Garnett translations, with notes and a reading guide by Dima Grossman.',
+                description: 'Ten essential stories in Constance Garnett translations, with notes and a reading guide by Dima Grossman.',
+                download_url: 'https://www.lulu.com/shop/anton-chekhov-and-dima-grossman-and-constance-garnett/selected-stories-annotated/ebook/product-7dzvpg5.html'
+            },
+            {
+                id: '7',
+                title: 'Meditations (Annotated)',
+                creator: 'Marcus Aurelius',
+                category: 'books',
+                price: 2.99,
+                formats: ['EPUB', 'Paperback'],
+                status: 'approved',
+                badge: 'Blacksmith & Witches Classics',
+                excerpt: 'The twelve books in George Long 1862 translation, with notes and a reading guide by Dima Grossman.',
+                description: 'The twelve books in George Long 1862 translation, with notes and a reading guide by Dima Grossman.',
+                download_url: 'https://www.lulu.com/shop/marcus-aurelius-and-dima-grossman-and-george-long/meditations-annotated/ebook/product-kvykze6.html'
+            },
+            {
+                id: '8',
+                title: 'Tao Te Ching (Annotated) - Bilingual',
+                creator: 'Laozi',
+                category: 'books',
+                price: 2.99,
+                formats: ['EPUB', 'Paperback'],
+                status: 'approved',
+                badge: 'Blacksmith & Witches Classics',
+                excerpt: 'The eighty-one chapters in Chinese and English (James Legge, 1891), with notes and a reading guide by Dima Grossman.',
+                description: 'The eighty-one chapters in Chinese and English (James Legge, 1891), with notes and a reading guide by Dima Grossman.',
+                download_url: 'https://www.lulu.com/shop/laozi-and-dima-grossman-and-james-legge/tao-te-ching-annotated/ebook/product-nvezpyy.html'
+            },
+            {
+                id: '9',
+                title: 'The Last Days of Socrates (Annotated)',
+                creator: 'Plato',
+                category: 'books',
+                price: 2.99,
+                formats: ['EPUB', 'Paperback'],
+                status: 'approved',
+                badge: 'Blacksmith & Witches Classics',
+                excerpt: 'Euthyphro, Apology, Crito and Phaedo in Benjamin Jowett translations, with notes and a reading guide by Dima Grossman.',
+                description: 'Euthyphro, Apology, Crito and Phaedo in Benjamin Jowett translations, with notes and a reading guide by Dima Grossman.',
+                download_url: 'https://www.lulu.com/shop/plato-and-dima-grossman-and-benjamin-jowett/the-last-days-of-socrates-annotated/ebook/product-kv25vpz.html'
+            },
+            {
+                id: '10',
+                title: 'The Prince (Annotated)',
+                creator: 'Niccolò Machiavelli',
+                category: 'books',
+                price: 2.99,
+                formats: ['EPUB'],
+                status: 'approved',
+                badge: 'Blacksmith & Witches Classics',
+                excerpt: 'The complete treatise in W. K. Marriott 1908 translation, with notes and a reading guide by Dima Grossman.',
+                description: 'The complete treatise in W. K. Marriott 1908 translation, with notes and a reading guide by Dima Grossman.',
+                download_url: 'https://www.lulu.com/shop/niccol%C3%B2-machiavelli-and-dima-grossman-and-w-k-marriott/the-prince-annotated/ebook/product-yv6yy4q.html'
             }
         ];
 
         let currentCategory = 'all';
         let searchQuery = '';
-        let cart = [];
 
-        // Initialize Supabase if keys exist
-        function initSupabase() {
+        async function initSupabase() {
             const savedUrl = localStorage.getItem('bw_sb_url') || DEFAULT_SUPABASE_URL;
             const savedKey = localStorage.getItem('bw_sb_key') || DEFAULT_SUPABASE_ANON_KEY;
 
@@ -406,24 +510,65 @@
                 try {
                     supabaseClient = window.supabase.createClient(savedUrl, savedKey);
                     document.getElementById('dbStatusText').innerText = "Connected DB";
-                    fetchProductsFromSupabase();
+
+                    // Listen for Magic Link Auth state
+                    const { data: { session } } = await supabaseClient.auth.getSession();
+                    updateAuthState(session?.user || null);
+
+                    supabaseClient.auth.onAuthStateChange((_event, session) => {
+                        updateAuthState(session?.user || null);
+                        fetchProductsFromSupabase();
+                    });
+
+                    await fetchProductsFromSupabase();
                 } catch (e) {
                     console.error("Supabase init error:", e);
                 }
             }
         }
 
+        function updateAuthState(user) {
+            currentUser = user;
+            const outEl = document.getElementById('authLoggedOut');
+            const inEl = document.getElementById('authLoggedIn');
+            if (user) {
+                outEl.classList.add('hidden');
+                inEl.classList.remove('hidden');
+                document.getElementById('creatorEmailDisplay').innerText = `Signed in as ${user.email}`;
+            } else {
+                outEl.classList.remove('hidden');
+                inEl.classList.add('hidden');
+                showOnlyMyWorks = false;
+                document.getElementById('myWorksBanner').classList.add('hidden');
+            }
+            renderProducts();
+        }
+
         async function fetchProductsFromSupabase() {
             if (!supabaseClient) return;
             try {
-                const { data, error } = await supabaseClient.from('products').select('*').order('created_at', { ascending: false });
+                const { data, error } = await supabaseClient
+                    .from('products')
+                    .select('*')
+                    .order('created_at', { ascending: false });
                 if (data && data.length > 0) {
                     products = data;
                     renderProducts();
                 }
             } catch (err) {
-                console.log("Using local fallback products due to fetch error:", err);
+                console.log("Using local fallback products:", err);
             }
+        }
+
+        function toggleMyWorksView() {
+            showOnlyMyWorks = !showOnlyMyWorks;
+            const banner = document.getElementById('myWorksBanner');
+            if (showOnlyMyWorks) {
+                banner.classList.remove('hidden');
+            } else {
+                banner.classList.add('hidden');
+            }
+            renderProducts();
         }
 
         function renderProducts() {
@@ -432,8 +577,19 @@
             grid.innerHTML = '';
 
             const filtered = products.filter(p => {
+                // In My Works mode, show only current user's items (both pending & approved)
+                if (showOnlyMyWorks && currentUser) {
+                    if (p.user_id !== currentUser.id) return false;
+                } else {
+                    // Public view: show approved items (or user's own pending items)
+                    const isApproved = p.status === 'approved' || !p.status;
+                    const isMine = currentUser && p.user_id === currentUser.id;
+                    if (!isApproved && !isMine) return false;
+                }
+
                 const matchesCat = currentCategory === 'all' || p.category === currentCategory;
-                const matchesSearch = p.title.toLowerCase().includes(searchQuery.toLowerCase()) || p.creator.toLowerCase().includes(searchQuery.toLowerCase());
+                const matchesSearch = p.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                                      p.creator.toLowerCase().includes(searchQuery.toLowerCase());
                 return matchesCat && matchesSearch;
             });
 
@@ -448,15 +604,22 @@
                 const card = document.createElement('div');
                 card.className = "bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col overflow-hidden";
                 
-                let badgeHtml = p.badge ? `<span class="bg-brandYellow/90 text-brandDarkBlue text-xs font-black px-2.5 py-1 rounded-full">${p.badge}</span>` : '';
-                let priceDisplay = Number(p.price) === 0 ? 'Free' : `$${Number(p.price).toFixed(2)}`;
-                let formatsStr = Array.isArray(p.formats) ? p.formats.join(' • ') : p.formats;
+                const isPending = p.status === 'pending';
+                let statusBadge = isPending 
+                    ? `<span class="bg-amber-100 text-amber-800 border border-amber-300 text-xs font-bold px-2.5 py-1 rounded-full">Pending Review</span>`
+                    : (p.badge ? `<span class="bg-brandYellow/90 text-brandDarkBlue text-xs font-black px-2.5 py-1 rounded-full">${p.badge}</span>` : '');
+
+                const isFree = Number(p.price) === 0;
+                const priceDisplay = isFree ? 'Free' : `$${Number(p.price).toFixed(2)}`;
+                const formatsStr = Array.isArray(p.formats) ? p.formats.join(' • ') : (p.formats || 'Digital');
+                const actionLabel = isFree ? 'Get Release' : 'Seller Checkout';
+                const isOwner = currentUser && p.user_id === currentUser.id;
 
                 card.innerHTML = `
                     <div class="p-6 flex-grow space-y-3">
-                        <div class="flex justify-between items-start">
+                        <div class="flex justify-between items-start gap-2">
                             <span class="text-xs font-bold uppercase tracking-wider text-brandBlue bg-blue-50 px-2.5 py-1 rounded-lg">${p.category}</span>
-                            ${badgeHtml}
+                            ${statusBadge}
                         </div>
                         <h3 class="text-lg font-bold text-brandDarkBlue">${p.title}</h3>
                         <p class="text-xs text-slate-500">By ${p.creator}</p>
@@ -465,8 +628,12 @@
                     </div>
                     <div class="bg-slate-50 px-6 py-4 border-t border-slate-100 flex items-center justify-between">
                         <span class="text-lg font-black text-brandDarkBlue">${priceDisplay}</span>
-                        <div class="space-x-2">
-                            <button onclick="addToCart('${p.id}')" class="bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-4 py-2 rounded-xl text-xs transition shadow">Add to Satchel</button>
+                        <div class="flex items-center space-x-2">
+                            ${isOwner ? `<button onclick="deleteProduct('${p.id}')" class="text-xs text-red-500 hover:text-red-700 font-semibold px-2 py-1.5">Delete</button>` : ''}
+                            <a href="${p.download_url || '#'}" target="_blank" rel="noopener noreferrer" class="bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-4 py-2 rounded-xl text-xs transition shadow inline-flex items-center space-x-1">
+                                <span>${actionLabel}</span>
+                                <i data-lucide="external-link" class="w-3 h-3"></i>
+                            </a>
                         </div>
                     </div>
                 `;
@@ -475,12 +642,12 @@
             lucide.createIcons();
         }
 
-        function filterCategory(cat) {
+        function filterCategory(cat, btnEl) {
             currentCategory = cat;
             document.querySelectorAll('.cat-btn').forEach(btn => {
                 btn.className = "cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition";
             });
-            event.target.className = "cat-btn px-4 py-2 rounded-xl text-sm font-bold bg-brandDarkBlue text-white transition shadow-sm";
+            btnEl.className = "cat-btn px-4 py-2 rounded-xl text-sm font-bold bg-brandDarkBlue text-white transition shadow-sm";
             renderProducts();
         }
 
@@ -489,101 +656,129 @@
             renderProducts();
         }
 
-        // Cart Actions
-        function addToCart(id) {
-            const item = products.find(p => p.id == id);
-            if (!item) return;
-            cart.push(item);
-            updateCartUI();
-            toggleCart();
-        }
+        // Magic Link Auth Handlers
+        function openAuthModal() { document.getElementById('authModal').classList.remove('hidden'); }
+        function closeAuthModal() { document.getElementById('authModal').classList.add('hidden'); }
 
-        function updateCartUI() {
-            document.getElementById('cartCount').innerText = cart.length;
-            const list = document.getElementById('cartItemsList');
-            list.innerHTML = '';
-            let total = 0;
-
-            if (cart.length === 0) {
-                list.innerHTML = `<p class="text-sm text-slate-400 text-center py-8">Your satchel is empty.</p>`;
-            } else {
-                cart.forEach((ci, idx) => {
-                    total += Number(ci.price);
-                    const div = document.createElement('div');
-                    div.className = "flex justify-between items-center bg-slate-50 p-3 rounded-xl border border-slate-100";
-                    div.innerHTML = `
-                        <div>
-                            <h4 class="text-sm font-bold text-brandDarkBlue">${ci.title}</h4>
-                            <span class="text-xs text-slate-500">$${Number(ci.price).toFixed(2)}</span>
-                        </div>
-                        <button onclick="removeFromCart(${idx})" class="text-red-400 hover:text-red-600 text-xs font-bold">Remove</button>
-                    `;
-                    list.appendChild(div);
-                });
-            }
-            document.getElementById('cartTotalPrice').innerText = `$${total.toFixed(2)}`;
-        }
-
-        function removeFromCart(idx) {
-            cart.splice(idx, 1);
-            updateCartUI();
-        }
-
-        function toggleCart() {
-            const drawer = document.getElementById('cartDrawer');
-            drawer.classList.toggle('hidden');
-            drawer.classList.toggle('flex');
-        }
-
-        function checkoutBlacksmithPay() {
-            if (cart.length === 0) {
-                alert('Your satchel is empty.');
+        async function handleMagicLinkLogin(e) {
+            e.preventDefault();
+            if (!supabaseClient) {
+                alert("Please configure your Supabase URL & Anon Key first via 'Configure DB'.");
                 return;
             }
-            alert('BlacksmithPay simulation successful! Your digital download links are now unlocked.');
-            cart = [];
-            updateCartUI();
-            toggleCart();
+            const email = document.getElementById('authEmail').value.trim();
+            const btn = document.getElementById('authSubmitBtn');
+            const feedback = document.getElementById('authFeedback');
+
+            btn.disabled = true;
+            btn.innerText = "Sending Magic Link...";
+
+            const { error } = await supabaseClient.auth.signInWithOtp({
+                email,
+                options: { emailRedirectTo: window.location.origin }
+            });
+
+            btn.disabled = false;
+            btn.innerText = "Send Magic Sign-In Link";
+            feedback.classList.remove('hidden');
+
+            if (error) {
+                feedback.innerText = "Error: " + error.message;
+            } else {
+                feedback.innerText = `Magic link sent to ${email}! Check your inbox and click the link to sign in.`;
+            }
         }
 
-        // Submit Product Modal
-        function openSubmitModal() { document.getElementById('submitModal').classList.remove('hidden'); }
+        async function signOutCreator() {
+            if (supabaseClient) await supabaseClient.auth.signOut();
+            updateAuthState(null);
+        }
+
+        // Submit Product + Storage Upload
+        function openSubmitModal() {
+            if (!currentUser && supabaseClient) {
+                openAuthModal();
+                return;
+            }
+            document.getElementById('submitModal').classList.remove('hidden');
+        }
         function closeSubmitModal() { document.getElementById('submitModal').classList.add('hidden'); }
 
         async function handleProductSubmit(e) {
             e.preventDefault();
-            const newProd = {
-                title: document.getElementById('subTitle').value,
-                creator: document.getElementById('subCreator').value,
-                category: document.getElementById('subCategory').value,
-                price: parseFloat(document.getElementById('subPrice').value),
-                formats: document.getElementById('subFormats').value.split(',').map(s => s.trim()),
-                rating: 5.0,
-                featured: false,
-                badge: 'New Release',
-                excerpt: document.getElementById('subExcerpt').value,
-                description: document.getElementById('subDesc').value,
-                download_url: document.getElementById('subUrl').value || '#'
-            };
-
-            if (supabaseClient) {
-                try {
-                    const { data, error } = await supabaseClient.from('products').insert([newProd]).select();
-                    if (error) throw error;
-                    if (data) products.unshift(data[0]);
-                } catch (err) {
-                    alert('Error saving to Supabase: ' + err.message);
-                    return;
-                }
-            } else {
-                newProd.id = 'local_' + Date.now();
-                products.unshift(newProd);
+            if (!supabaseClient || !currentUser) {
+                alert("You must be signed in with a connected Supabase project to publish.");
+                return;
             }
 
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.innerText = "Uploading & Saving...";
+
+            try {
+                let finalUrl = document.getElementById('subUrl').value.trim();
+                const fileInput = document.getElementById('subFileUpload');
+
+                // Upload file to Supabase Storage if selected
+                if (fileInput.files && fileInput.files.length > 0) {
+                    const file = fileInput.files[0];
+                    const cleanName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+                    const filePath = `${currentUser.id}/${Date.now()}_${cleanName}`;
+
+                    const { error: uploadErr } = await supabaseClient.storage
+                        .from('catalogue-files')
+                        .upload(filePath, file);
+
+                    if (uploadErr) throw uploadErr;
+
+                    const { data: publicUrlData } = supabaseClient.storage
+                        .from('catalogue-files')
+                        .getPublicUrl(filePath);
+
+                    finalUrl = publicUrlData.publicUrl;
+                }
+
+                const newProd = {
+                    user_id: currentUser.id,
+                    title: document.getElementById('subTitle').value,
+                    creator: document.getElementById('subCreator').value,
+                    category: document.getElementById('subCategory').value,
+                    price: parseFloat(document.getElementById('subPrice').value) || 0,
+                    formats: document.getElementById('subFormats').value.split(',').map(s => s.trim()),
+                    status: 'pending',
+                    badge: 'New Release',
+                    excerpt: document.getElementById('subExcerpt').value,
+                    description: document.getElementById('subDesc').value,
+                    download_url: finalUrl || '#'
+                };
+
+                const { data, error } = await supabaseClient.from('products').insert([newProd]).select();
+                if (error) throw error;
+                if (data) products.unshift(data[0]);
+
+                renderProducts();
+                closeSubmitModal();
+                document.getElementById('submitForm').reset();
+                alert('Submitted! Your release is now listed as Pending Review in your My Works tab.');
+            } catch (err) {
+                alert('Submission error: ' + err.message);
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Submit for Review";
+            }
+        }
+
+        async function deleteProduct(id) {
+            if (!confirm("Delete this release permanently?")) return;
+            if (supabaseClient) {
+                const { error } = await supabaseClient.from('products').delete().eq('id', id);
+                if (error) {
+                    alert("Error deleting: " + error.message);
+                    return;
+                }
+            }
+            products = products.filter(p => p.id !== id);
             renderProducts();
-            closeSubmitModal();
-            document.getElementById('submitForm').reset();
-            alert('Publication successfully added to The Catalogue!');
         }
 
         // DB Config Modal
@@ -595,12 +790,10 @@
             if (url && key) {
                 localStorage.setItem('bw_sb_url', url);
                 localStorage.setItem('bw_sb_key', key);
-                alert('Saved! Reloading connection...');
                 location.reload();
             }
         }
 
-        // Run on load
         window.onload = () => {
             initSupabase();
             renderProducts();
