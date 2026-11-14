@@ -63,10 +63,19 @@
                 </a>
                 <div>
                     <a href="https://store.blacksmithandwitches.com/" class="font-bold text-lg tracking-tight hover:text-brandYellow transition">Blacksmith &amp; Witches</a>
-                    <span class="text-xs block text-blue-200 uppercase tracking-widest">The Marketplace</span>
+                    <span class="text-xs block text-blue-200 uppercase tracking-widest" data-i18n="marketplace">The Marketplace</span>
                 </div>
             </div>
-            <a href="https://store.blacksmithandwitches.com/" class="text-xs sm:text-sm font-semibold text-blue-100 hover:text-brandYellow transition">&larr; Back to the store</a>
+            <div class="flex items-center gap-2 sm:gap-3">
+                <div class="flex items-center gap-1" role="group" aria-label="Language">
+                    <button type="button" data-lang-btn="en" onclick="setLang('en')" class="text-[11px] sm:text-xs font-bold px-1.5 sm:px-2 py-1 rounded-md transition">EN</button>
+                    <button type="button" data-lang-btn="de" onclick="setLang('de')" class="text-[11px] sm:text-xs font-bold px-1.5 sm:px-2 py-1 rounded-md transition">DE</button>
+                    <button type="button" data-lang-btn="fr" onclick="setLang('fr')" class="text-[11px] sm:text-xs font-bold px-1.5 sm:px-2 py-1 rounded-md transition">FR</button>
+                    <button type="button" data-lang-btn="uk" onclick="setLang('uk')" class="text-[11px] sm:text-xs font-bold px-1.5 sm:px-2 py-1 rounded-md transition">UK</button>
+                    <button type="button" data-lang-btn="ru" onclick="setLang('ru')" class="text-[11px] sm:text-xs font-bold px-1.5 sm:px-2 py-1 rounded-md transition">RU</button>
+                </div>
+                <a href="https://store.blacksmithandwitches.com/" class="text-xs sm:text-sm font-semibold text-blue-100 hover:text-brandYellow transition whitespace-nowrap" data-i18n="backToStore">&larr; Back to the store</a>
+            </div>
         </div>
     </header>
 
@@ -75,12 +84,12 @@
         <div class="max-w-4xl mx-auto text-center space-y-4">
             <div class="inline-flex items-center space-x-2 bg-white/10 text-brandYellow px-3.5 py-1 rounded-full text-xs font-semibold tracking-wide border border-white/10">
                 <i data-lucide="user" class="w-3.5 h-3.5"></i>
-                <span>Creator account</span>
+                <span data-i18n="creatorAccount">Creator account</span>
             </div>
-            <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-white">
+            <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-white" data-i18n="heroTitle">
                 Your account
             </h1>
-            <p class="text-blue-100 text-sm sm:text-base max-w-2xl mx-auto font-light">
+            <p class="text-blue-100 text-sm sm:text-base max-w-2xl mx-auto font-light" data-i18n="heroText">
                 Add your work to the Marketplace, follow its review, and promote it once it is live — all from one page.
             </p>
         </div>
@@ -94,36 +103,36 @@
                 <span class="w-10 h-10 rounded-xl bg-brandBlue text-white flex items-center justify-center">
                     <i data-lucide="key-round" class="w-5 h-5"></i>
                 </span>
-                <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue">Sign up / Sign in</h2>
+                <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue" data-i18n="signUpIn">Sign up / Sign in</h2>
             </div>
-            <p class="text-sm text-slate-600 max-w-2xl">
+            <p class="text-sm text-slate-600 max-w-2xl" data-i18n="authIntro">
                 Creators sign in with a magic link — the link verifies your email. New here? The same link starts your account; you then complete it with your creator name, your classification, and a password for next time.
             </p>
             <form onsubmit="handleMagicLinkLogin(event)" class="space-y-4 max-w-md">
                 <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="authEmail">Creator Email</label>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="authEmail" data-i18n="creatorEmail">Creator Email</label>
                     <input type="email" id="authEmail" required placeholder="you@domain.com" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
                 </div>
-                <button type="submit" id="authSubmitBtn" class="w-full py-2.5 bg-brandDarkBlue hover:bg-brandBlue text-white font-bold rounded-xl text-sm shadow transition">
+                <button type="submit" id="authSubmitBtn" class="w-full py-2.5 bg-brandDarkBlue hover:bg-brandBlue text-white font-bold rounded-xl text-sm shadow transition" data-i18n="sendMagicLink">
                     Send Magic Sign-In Link
                 </button>
             </form>
-            <p class="text-[11px] text-slate-500 leading-relaxed max-w-md">One sign-in email per person at a time — if no email arrives within a few minutes, wait a little and try again.</p>
+            <p class="text-[11px] text-slate-500 leading-relaxed max-w-md" data-i18n="authNote">One sign-in email per person at a time — if no email arrives within a few minutes, wait a little and try again.</p>
             <div id="authFeedback" class="hidden text-xs p-3 rounded-xl bg-blue-50 text-brandDarkBlue border border-blue-200 font-medium max-w-md"></div>
 
             <div class="border-t border-slate-100 pt-5 space-y-3">
-                <h3 class="text-base font-black tracking-tight text-brandDarkBlue">Already set a password?</h3>
-                <p class="text-sm text-slate-600 max-w-md">If you completed your account and created a password, sign in with email + password — no email link needed.</p>
+                <h3 class="text-base font-black tracking-tight text-brandDarkBlue" data-i18n="alreadyPassword">Already set a password?</h3>
+                <p class="text-sm text-slate-600 max-w-md" data-i18n="passwordIntro">If you completed your account and created a password, sign in with email + password — no email link needed.</p>
                 <form onsubmit="handlePasswordLogin(event)" class="space-y-3 max-w-md">
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="pwEmail">Email</label>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="pwEmail" data-i18n="emailLabel">Email</label>
                         <input type="email" id="pwEmail" required placeholder="you@domain.com" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="pwPassword">Password</label>
-                        <input type="password" id="pwPassword" required placeholder="Your password" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="pwPassword" data-i18n="passwordLabel">Password</label>
+                        <input type="password" id="pwPassword" required placeholder="Your password" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none" data-i18n-ph="passwordPh">
                     </div>
-                    <button type="submit" id="pwSubmitBtn" class="w-full py-2.5 bg-brandBlue hover:bg-brandDarkBlue text-white font-bold rounded-xl text-sm shadow transition">Sign in with password</button>
+                    <button type="submit" id="pwSubmitBtn" class="w-full py-2.5 bg-brandBlue hover:bg-brandDarkBlue text-white font-bold rounded-xl text-sm shadow transition" data-i18n="signInPassword">Sign in with password</button>
                 </form>
                 <div id="pwFeedback" class="hidden text-xs p-3 rounded-xl bg-blue-50 text-brandDarkBlue border border-blue-200 font-medium max-w-md"></div>
             </div>
@@ -138,35 +147,35 @@
                     <span class="w-10 h-10 rounded-xl bg-brandYellow text-brandDarkBlue flex items-center justify-center">
                         <i data-lucide="user-plus" class="w-5 h-5"></i>
                     </span>
-                    <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue">Complete your account</h2>
+                    <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue" data-i18n="completeAccount">Complete your account</h2>
                 </div>
                 <p class="text-sm text-slate-600 max-w-2xl">
-                    You are signed in as <strong id="setupAccountEmail"></strong>. One short form finishes your creator account — your name, your classification, and a password, so next time you can sign in directly without waiting for an email.
+                    <span data-i18n="setupIntroA">You are signed in as</span> <strong id="setupAccountEmail"></strong><span data-i18n="setupIntroB">. One short form finishes your creator account — your name, your classification, and a password, so next time you can sign in directly without waiting for an email.</span>
                 </p>
                 <form onsubmit="handleProfileSetup(event)" class="space-y-4 max-w-md">
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="setupName">Creator / Pen Name</label>
-                        <input type="text" id="setupName" required placeholder="e.g. Dima Grossman" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="setupName" data-i18n="penName">Creator / Pen Name</label>
+                        <input type="text" id="setupName" required placeholder="e.g. Dima Grossman" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none" data-i18n-ph="penNamePh">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="setupRole">Classification</label>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="setupRole" data-i18n="classification">Classification</label>
                         <select id="setupRole" required class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
-                            <option value="">Select your craft...</option>
-                            <option value="Artist">Artist</option>
-                            <option value="Writer">Writer</option>
-                            <option value="Musician">Musician</option>
-                            <option value="Film Creator">Film Creator</option>
+                            <option value="" data-i18n="selectCraft">Select your craft...</option>
+                            <option value="Artist" data-i18n="roleArtist">Artist</option>
+                            <option value="Writer" data-i18n="roleWriter">Writer</option>
+                            <option value="Musician" data-i18n="roleMusician">Musician</option>
+                            <option value="Film Creator" data-i18n="roleFilmCreator">Film Creator</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="setupBio">Bio <span class="normal-case font-semibold text-slate-400">(optional)</span></label>
-                        <textarea id="setupBio" rows="2" placeholder="A line or two about you and your work." class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none"></textarea>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="setupBio"><span data-i18n="bioLabel">Bio</span> <span class="normal-case font-semibold text-slate-400" data-i18n="optional">(optional)</span></label>
+                        <textarea id="setupBio" rows="2" placeholder="A line or two about you and your work." class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none" data-i18n-ph="bioPh"></textarea>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="setupPassword">Create Password</label>
-                        <input type="password" id="setupPassword" required minlength="8" placeholder="Minimum 8 characters" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="setupPassword" data-i18n="createPassword">Create Password</label>
+                        <input type="password" id="setupPassword" required minlength="8" placeholder="Minimum 8 characters" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none" data-i18n-ph="passwordMinPh">
                     </div>
-                    <button type="submit" id="setupSubmitBtn" class="w-full py-2.5 bg-brandDarkBlue hover:bg-brandBlue text-white font-bold rounded-xl text-sm shadow transition">Save &amp; finish my account</button>
+                    <button type="submit" id="setupSubmitBtn" class="w-full py-2.5 bg-brandDarkBlue hover:bg-brandBlue text-white font-bold rounded-xl text-sm shadow transition" data-i18n="saveFinish">Save &amp; finish my account</button>
                     <div id="setupFeedback" class="hidden text-xs p-3 rounded-xl bg-blue-50 text-brandDarkBlue border border-blue-200 font-medium"></div>
                 </form>
             </section>
@@ -175,17 +184,17 @@
             <section class="profile-gated bg-white border-2 border-brandBlue rounded-2xl shadow-sm p-6 sm:p-8">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
-                        <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue">Your account — <span id="accountEmail"></span><span id="accountRoleBadge" class="hidden align-middle ml-2 bg-brandYellow text-brandDarkBlue text-xs font-black px-2.5 py-1 rounded-full uppercase tracking-wide"></span></h2>
-                        <p class="text-sm text-slate-600 mt-1">Everything you have submitted to the Marketplace lives on this page.</p>
+                        <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue"><span data-i18n="accountDash">Your account —</span> <span id="accountEmail"></span><span id="accountRoleBadge" class="hidden align-middle ml-2 bg-brandYellow text-brandDarkBlue text-xs font-black px-2.5 py-1 rounded-full uppercase tracking-wide"></span></h2>
+                        <p class="text-sm text-slate-600 mt-1" data-i18n="accountSub">Everything you have submitted to the Marketplace lives on this page.</p>
                     </div>
                     <div class="flex items-center gap-2.5 shrink-0">
                         <a id="adminLink" href="admin.html" class="hidden bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-4 py-2.5 rounded-xl text-sm shadow transition items-center space-x-1.5">
                             <i data-lucide="shield-check" class="w-4 h-4"></i>
-                            <span>Admin</span>
+                            <span data-i18n="admin">Admin</span>
                         </a>
                         <button onclick="signOutCreator()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-4 py-2.5 rounded-xl text-sm transition flex items-center space-x-1.5">
                             <i data-lucide="log-out" class="w-4 h-4"></i>
-                            <span>Sign out</span>
+                            <span data-i18n="signOut">Sign out</span>
                         </button>
                     </div>
                 </div>
@@ -197,12 +206,12 @@
                     <span class="w-10 h-10 rounded-xl bg-brandYellow text-brandDarkBlue flex items-center justify-center">
                         <i data-lucide="plus-circle" class="w-5 h-5"></i>
                     </span>
-                    <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue">Add your work</h2>
+                    <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue" data-i18n="addYourWork">Add your work</h2>
                 </div>
-                <p class="text-sm text-slate-600 max-w-2xl">
+                <p class="text-sm text-slate-600 max-w-2xl" data-i18n-html="addIntro">
                     Listing is free. New submissions enter review as <strong>pending</strong> before going public — every submission is reviewed before it appears in the store.
                 </p>
-                <button id="addWorkBtn" onclick="toggleAddWorkForm()" class="w-full sm:w-auto bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-black text-lg px-8 py-4 rounded-2xl shadow transition">
+                <button id="addWorkBtn" onclick="toggleAddWorkForm()" class="w-full sm:w-auto bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-black text-lg px-8 py-4 rounded-2xl shadow transition" data-i18n="addWorkBtn">
                     ＋ Add your work
                 </button>
                 <div id="submitSuccess" class="hidden text-sm p-4 rounded-xl bg-green-50 text-green-800 border border-green-200 font-medium max-w-2xl">
@@ -212,72 +221,72 @@
                 <div id="addWorkPanel" class="hidden border-t border-slate-100 pt-6">
                     <form id="submitForm" onsubmit="handleProductSubmit(event)" class="space-y-4 max-w-2xl">
                         <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Title</label>
-                            <input type="text" id="subTitle" required placeholder="e.g. Paul of Teraura" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="fTitle">Title</label>
+                            <input type="text" id="subTitle" required placeholder="e.g. Paul of Teraura" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none" data-i18n-ph="fTitlePh">
                         </div>
                         <div class="grid grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Creator / Author</label>
-                                <input type="text" id="subCreator" required placeholder="e.g. Dima Grossman" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="fCreator">Creator / Author</label>
+                                <input type="text" id="subCreator" required placeholder="e.g. Dima Grossman" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none" data-i18n-ph="fCreatorPh">
                             </div>
                             <div>
-                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Category</label>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="fCategory">Category</label>
                                 <select id="subCategory" onchange="onSubCategoryChange()" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
-                                    <option value="books">Books &amp; Zines</option>
-                                    <option value="music">Music &amp; Audio</option>
-                                    <option value="games">Games</option>
-                                    <option value="apps">Apps &amp; Tools</option>
-                                    <option value="video">Video</option>
+                                    <option value="books" data-i18n="cat_books">Books &amp; Zines</option>
+                                    <option value="music" data-i18n="cat_music">Music &amp; Audio</option>
+                                    <option value="games" data-i18n="cat_games">Games</option>
+                                    <option value="apps" data-i18n="cat_apps">Apps &amp; Tools</option>
+                                    <option value="video" data-i18n="cat_video">Video</option>
                                 </select>
                             </div>
                         </div>
                         <div class="grid grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Price ($ USD — 0 for Free)</label>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="fPrice">Price ($ USD — 0 for Free)</label>
                                 <input type="number" step="0.01" min="0" id="subPrice" required value="0.00" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
                             </div>
                             <div>
-                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Formats</label>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="fFormats">Formats</label>
                                 <input type="text" id="subFormats" value="EPUB, PDF" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
                             </div>
                         </div>
 
                         <!-- Video link fields (shown only when Category = Video) -->
                         <div id="videoFields" class="hidden bg-blue-50/70 border border-blue-200 rounded-xl p-3.5 space-y-2.5">
-                            <label class="block text-xs font-bold uppercase tracking-wider text-brandDarkBlue">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-brandDarkBlue" data-i18n="videoUrlLabel">
                                 Video URL (YouTube, TikTok, Vimeo or direct video file link)
                             </label>
                             <input type="url" id="subVideoUrl" placeholder="https://www.youtube.com/watch?v=..." class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
-                            <p class="text-[11px] text-slate-500"><strong>Submit your video — free listing.</strong> We store the link, not the file, so keep the video on your own channel. Set Price to 0 for free viewing. Videos are reviewed before they appear — nothing goes public automatically.</p>
+                            <p class="text-[11px] text-slate-500" data-i18n-html="videoNote"><strong>Submit your video — free listing.</strong> We store the link, not the file, so keep the video on your own channel. Set Price to 0 for free viewing. Videos are reviewed before they appear — nothing goes public automatically.</p>
                         </div>
 
                         <!-- File Upload to Supabase Storage -->
                         <div id="fileUploadBlock" class="bg-blue-50/70 border border-blue-200 rounded-xl p-3.5 space-y-2.5">
-                            <label class="block text-xs font-bold uppercase tracking-wider text-brandDarkBlue">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-brandDarkBlue" data-i18n="uploadLabel">
                                 Upload Release File (PDF, EPUB, Audio, Images, ZIP)
                             </label>
                             <input type="file" id="subFileUpload" accept=".pdf,.epub,.mp3,.flac,.wav,.zip,.jpg,.jpeg,.png,.webp,.gif" class="block w-full text-xs text-slate-600 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-brandDarkBlue file:text-white hover:file:bg-brandBlue cursor-pointer">
-                            <p class="text-[11px] text-slate-500">Uploads directly to Supabase Storage, OR leave empty and paste your own external seller checkout/download link below. Images (JPG, PNG, WEBP, GIF) are accepted too — artwork, covers, photos.</p>
+                            <p class="text-[11px] text-slate-500" data-i18n="uploadHint">Uploads directly to Supabase Storage, OR leave empty and paste your own external seller checkout/download link below. Images (JPG, PNG, WEBP, GIF) are accepted too — artwork, covers, photos.</p>
                         </div>
 
                         <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">External Checkout / Download URL</label>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="fExternalUrl">External Checkout / Download URL</label>
                             <input type="url" id="subUrl" placeholder="https://your-checkout-or-link.com" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
                         </div>
 
                         <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Short Tagline</label>
-                            <input type="text" id="subExcerpt" placeholder="A brief one-line hook for your release." class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="fTagline">Short Tagline</label>
+                            <input type="text" id="subExcerpt" placeholder="A brief one-line hook for your release." class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none" data-i18n-ph="fTaglinePh">
                         </div>
 
                         <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Full Description</label>
-                            <textarea id="subDesc" rows="3" required placeholder="Detailed summary of your publication..." class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none"></textarea>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="fDesc">Full Description</label>
+                            <textarea id="subDesc" rows="3" required placeholder="Detailed summary of your publication..." class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none" data-i18n-ph="fDescPh"></textarea>
                         </div>
 
                         <div class="pt-2 flex justify-end space-x-3">
-                            <button type="button" onclick="toggleAddWorkForm(true)" class="px-4 py-2 bg-slate-100 text-slate-700 font-semibold rounded-xl text-sm hover:bg-slate-200 transition">Cancel</button>
-                            <button type="submit" id="submitBtn" class="px-5 py-2 bg-brandDarkBlue hover:bg-brandBlue text-white font-bold rounded-xl text-sm shadow transition">Submit for Review</button>
+                            <button type="button" onclick="toggleAddWorkForm(true)" class="px-4 py-2 bg-slate-100 text-slate-700 font-semibold rounded-xl text-sm hover:bg-slate-200 transition" data-i18n="cancel">Cancel</button>
+                            <button type="submit" id="submitBtn" class="px-5 py-2 bg-brandDarkBlue hover:bg-brandBlue text-white font-bold rounded-xl text-sm shadow transition" data-i18n="submitReview">Submit for Review</button>
                         </div>
                     </form>
                 </div>
@@ -289,7 +298,7 @@
                     <span class="w-10 h-10 rounded-xl bg-blue-50 text-brandBlue flex items-center justify-center">
                         <i data-lucide="folder-kanban" class="w-5 h-5"></i>
                     </span>
-                    <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue">My work</h2>
+                    <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue" data-i18n="myWork">My work</h2>
                 </div>
                 <p id="myWorkStatus" class="text-sm text-slate-500"></p>
                 <div id="myWorkList" class="divide-y divide-slate-100"></div>
@@ -301,13 +310,13 @@
                     <span class="w-10 h-10 rounded-xl bg-brandYellow text-brandDarkBlue flex items-center justify-center">
                         <i data-lucide="megaphone" class="w-5 h-5"></i>
                     </span>
-                    <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue">My promotions</h2>
+                    <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue" data-i18n="myPromotions">My promotions</h2>
                 </div>
-                <p class="text-sm text-slate-600 max-w-2xl">
+                <p class="text-sm text-slate-600 max-w-2xl" data-i18n="promoIntro">
                     Promotion is paid placement — see the packages on the Promote page.
                 </p>
                 <div id="myPromoList" class="divide-y divide-slate-100"></div>
-                <a href="promote.html" class="inline-block text-sm font-bold text-brandBlue hover:text-brandDarkBlue underline underline-offset-4 decoration-brandYellow decoration-2 transition">Open the Promote page &rarr;</a>
+                <a href="promote.html" class="inline-block text-sm font-bold text-brandBlue hover:text-brandDarkBlue underline underline-offset-4 decoration-brandYellow decoration-2 transition" data-i18n="openPromote">Open the Promote page &rarr;</a>
             </section>
         </div>
     </main>
@@ -320,15 +329,586 @@
                 <span class="text-sm font-medium">© 2026 Blacksmith &amp; Witches House Platform. Powered by Supabase.</span>
             </div>
             <div class="flex space-x-6 text-sm">
-                <a href="https://blacksmithandwitches.com/account.html" class="hover:text-brandYellow transition">Upload your work</a>
-                <a href="https://home.blacksmithandwitches.com" class="hover:text-brandYellow transition">House Site</a>
-                <a href="https://t.me/StoreofBnW" class="hover:text-brandYellow transition">Telegram Store</a>
+                <a href="https://blacksmithandwitches.com/account.html" class="hover:text-brandYellow transition" data-i18n="footerUpload">Upload your work</a>
+                <a href="https://home.blacksmithandwitches.com" class="hover:text-brandYellow transition" data-i18n="footerHouse">House Site</a>
+                <a href="https://t.me/StoreofBnW" class="hover:text-brandYellow transition" data-i18n="footerTelegram">Telegram Store</a>
                 <a href="https://wallet.blacksmithandwitches.com" class="hover:text-brandYellow transition">BlacksmithPay</a>
             </div>
         </div>
     </footer>
 
     <script>
+        // --- Interface languages (EN · DE · FR · UK · RU) ---
+        // Dmitri's order, Nov 14 2026: the uploads page speaks all five
+        // house languages, switcher in the top-right corner of the header.
+        // Display only: database values (status, creator_role, category)
+        // stay English; only the labels a visitor reads are translated.
+        // The choice persists in localStorage ('bw_lang'), default EN.
+        let lastMyWorkRows = null;
+        const I18N = {
+            en: {
+                docTitle: "Your account — Blacksmith & Witches Marketplace",
+                marketplace: "The Marketplace",
+                backToStore: "← Back to the store",
+                creatorAccount: "Creator account",
+                heroTitle: "Your account",
+                heroText: "Add your work to the Marketplace, follow its review, and promote it once it is live — all from one page.",
+                signUpIn: "Sign up / Sign in",
+                authIntro: "Creators sign in with a magic link — the link verifies your email. New here? The same link starts your account; you then complete it with your creator name, your classification, and a password for next time.",
+                creatorEmail: "Creator Email",
+                sendMagicLink: "Send Magic Sign-In Link",
+                authNote: "One sign-in email per person at a time — if no email arrives within a few minutes, wait a little and try again.",
+                alreadyPassword: "Already set a password?",
+                passwordIntro: "If you completed your account and created a password, sign in with email + password — no email link needed.",
+                emailLabel: "Email",
+                passwordLabel: "Password",
+                passwordPh: "Your password",
+                signInPassword: "Sign in with password",
+                completeAccount: "Complete your account",
+                setupIntroA: "You are signed in as",
+                setupIntroB: ". One short form finishes your creator account — your name, your classification, and a password, so next time you can sign in directly without waiting for an email.",
+                penName: "Creator / Pen Name",
+                penNamePh: "e.g. Dima Grossman",
+                classification: "Classification",
+                selectCraft: "Select your craft...",
+                roleArtist: "Artist",
+                roleWriter: "Writer",
+                roleMusician: "Musician",
+                roleFilmCreator: "Film Creator",
+                bioLabel: "Bio",
+                optional: "(optional)",
+                bioPh: "A line or two about you and your work.",
+                createPassword: "Create Password",
+                passwordMinPh: "Minimum 8 characters",
+                saveFinish: "Save & finish my account",
+                accountDash: "Your account —",
+                accountSub: "Everything you have submitted to the Marketplace lives on this page.",
+                admin: "Admin",
+                signOut: "Sign out",
+                addYourWork: "Add your work",
+                addIntro: "Listing is free. New submissions enter review as <strong>pending</strong> before going public — every submission is reviewed before it appears in the store.",
+                addWorkBtn: "＋ Add your work",
+                fTitle: "Title",
+                fTitlePh: "e.g. Paul of Teraura",
+                fCreator: "Creator / Author",
+                fCreatorPh: "e.g. Dima Grossman",
+                fCategory: "Category",
+                cat_books: "Books & Zines",
+                cat_music: "Music & Audio",
+                cat_games: "Games",
+                cat_apps: "Apps & Tools",
+                cat_video: "Video",
+                fPrice: "Price ($ USD — 0 for Free)",
+                fFormats: "Formats",
+                videoUrlLabel: "Video URL (YouTube, TikTok, Vimeo or direct video file link)",
+                videoNote: "<strong>Submit your video — free listing.</strong> We store the link, not the file, so keep the video on your own channel. Set Price to 0 for free viewing. Videos are reviewed before they appear — nothing goes public automatically.",
+                uploadLabel: "Upload Release File (PDF, EPUB, Audio, Images, ZIP)",
+                uploadHint: "Uploads directly to Supabase Storage, OR leave empty and paste your own external seller checkout/download link below. Images (JPG, PNG, WEBP, GIF) are accepted too — artwork, covers, photos.",
+                fExternalUrl: "External Checkout / Download URL",
+                fTagline: "Short Tagline",
+                fTaglinePh: "A brief one-line hook for your release.",
+                fDesc: "Full Description",
+                fDescPh: "Detailed summary of your publication...",
+                cancel: "Cancel",
+                submitReview: "Submit for Review",
+                myWork: "My work",
+                myPromotions: "My promotions",
+                promoIntro: "Promotion is paid placement — see the packages on the Promote page.",
+                openPromote: "Open the Promote page →",
+                footerUpload: "Upload your work",
+                footerHouse: "House Site",
+                footerTelegram: "Telegram Store",
+                signInUnavailable: "Sign-in is unavailable right now — please try again in a moment.",
+                sendingLink: "Sending Secure Link...",
+                connecting: "Connecting to auth service...",
+                magicSent: "Success! Magic link sent to {email}. Check your inbox (and spam folder) to sign in instantly.",
+                signInError: "Sign-in error: ",
+                signingIn: "Signing in...",
+                signedInWelcome: "Signed in — welcome back.",
+                errName: "Please enter your creator / pen name.",
+                errRole: "Please choose your classification.",
+                errPassword: "Please choose a password of at least 8 characters.",
+                errPasswordPrefix: "Password: ",
+                errProfilePrefix: "Profile: ",
+                errFinish: "Could not finish your account: ",
+                saving: "Saving...",
+                mustSignIn: "You must be signed in with a connected Supabase project to publish.",
+                videoLinkAlert: "Please paste your video link (YouTube, TikTok, Vimeo or a direct video file URL) — video submissions are link-based.",
+                uploadingSaving: "Uploading & Saving...",
+                submitSuccess: "Submitted for review — your work appears on the storefront once a house admin approves it. “{title}” is listed below as Pending Review meanwhile.",
+                submissionError: "Submission error: ",
+                free: "Free",
+                loadingWork: "Loading your work…",
+                loadWorkError: "Could not load your work: ",
+                noWorkYet: "Nothing here yet — add your first work above.",
+                chipLive: "Live",
+                chipPending: "Pending review",
+                chipRejected: "Not approved",
+                viewInStore: "View in the store",
+                byWord: "by",
+                noLiveYet: "Nothing live yet — once a submission is approved, you can promote it from here.",
+                promote: "Promote"
+            },
+            de: {
+                docTitle: "Ihr Konto — Blacksmith & Witches Marketplace",
+                marketplace: "Der Marketplace",
+                backToStore: "← Zurück zum Shop",
+                creatorAccount: "Creator-Konto",
+                heroTitle: "Ihr Konto",
+                heroText: "Fügen Sie Ihr Werk zum Marketplace hinzu, verfolgen Sie seine Prüfung und bewerben Sie es, sobald es live ist — alles auf einer Seite.",
+                signUpIn: "Registrieren / Anmelden",
+                authIntro: "Creators melden sich mit einem Magic Link an — der Link bestätigt Ihre E-Mail. Neu hier? Derselbe Link startet Ihr Konto; danach vervollständigen Sie es mit Ihrem Creator-Namen, Ihrer Einstufung und einem Passwort für das nächste Mal.",
+                creatorEmail: "Creator-E-Mail",
+                sendMagicLink: "Magic Link zur Anmeldung senden",
+                authNote: "Pro Person ist jeweils eine Anmelde-E-Mail möglich — falls innerhalb weniger Minuten keine E-Mail ankommt, warten Sie kurz und versuchen Sie es erneut.",
+                alreadyPassword: "Passwort bereits festgelegt?",
+                passwordIntro: "Wenn Sie Ihr Konto vervollständigt und ein Passwort erstellt haben, melden Sie sich mit E-Mail + Passwort an — ganz ohne E-Mail-Link.",
+                emailLabel: "E-Mail",
+                passwordLabel: "Passwort",
+                passwordPh: "Ihr Passwort",
+                signInPassword: "Mit Passwort anmelden",
+                completeAccount: "Vervollständigen Sie Ihr Konto",
+                setupIntroA: "Sie sind angemeldet als",
+                setupIntroB: ". Ein kurzes Formular schließt Ihr Creator-Konto ab — Ihr Name, Ihre Einstufung und ein Passwort, damit Sie sich beim nächsten Mal direkt und ohne Warten auf eine E-Mail anmelden können.",
+                penName: "Creator- / Künstlername",
+                penNamePh: "z. B. Dima Grossman",
+                classification: "Einstufung",
+                selectCraft: "Wählen Sie Ihre Sparte...",
+                roleArtist: "Künstler",
+                roleWriter: "Autor",
+                roleMusician: "Musiker",
+                roleFilmCreator: "Filmemacher",
+                bioLabel: "Bio",
+                optional: "(freiwillig)",
+                bioPh: "Ein oder zwei Zeilen über Sie und Ihre Arbeit.",
+                createPassword: "Passwort erstellen",
+                passwordMinPh: "Mindestens 8 Zeichen",
+                saveFinish: "Speichern & Konto fertigstellen",
+                accountDash: "Ihr Konto —",
+                accountSub: "Alles, was Sie beim Marketplace eingereicht haben, finden Sie auf dieser Seite.",
+                admin: "Admin",
+                signOut: "Abmelden",
+                addYourWork: "Ihr Werk hinzufügen",
+                addIntro: "Das Einstellen ist kostenlos. Neue Einreichungen durchlaufen zunächst eine Prüfung als <strong>ausstehend</strong>, bevor sie veröffentlicht werden — jede Einreichung wird geprüft, bevor sie im Shop erscheint.",
+                addWorkBtn: "＋ Werk hinzufügen",
+                fTitle: "Titel",
+                fTitlePh: "z. B. Paul of Teraura",
+                fCreator: "Creator / Autor",
+                fCreatorPh: "z. B. Dima Grossman",
+                fCategory: "Kategorie",
+                cat_books: "Bücher & Zines",
+                cat_music: "Musik & Audio",
+                cat_games: "Spiele",
+                cat_apps: "Apps & Tools",
+                cat_video: "Video",
+                fPrice: "Preis ($ USD — 0 für kostenlos)",
+                fFormats: "Formate",
+                videoUrlLabel: "Video-URL (YouTube, TikTok, Vimeo oder direkter Videodatei-Link)",
+                videoNote: "<strong>Reichen Sie Ihr Video ein — kostenloser Eintrag.</strong> Wir speichern den Link, nicht die Datei — Ihr Video bleibt also auf Ihrem eigenen Kanal. Setzen Sie den Preis für kostenlose Wiedergabe auf 0. Videos werden vor der Veröffentlichung geprüft — nichts geht automatisch online.",
+                uploadLabel: "Release-Datei hochladen (PDF, EPUB, Audio, Bilder, ZIP)",
+                uploadHint: "Lädt direkt in den Supabase Storage hoch — ODER lassen Sie das Feld leer und fügen Sie unten Ihren eigenen externen Verkaufs-/Download-Link ein. Bilder (JPG, PNG, WEBP, GIF) sind ebenfalls möglich — Artwork, Cover, Fotos.",
+                fExternalUrl: "Externe Kauf- / Download-URL",
+                fTagline: "Kurzer Slogan",
+                fTaglinePh: "Ein kurzer Satz, der Ihr Werk vorstellt.",
+                fDesc: "Ausführliche Beschreibung",
+                fDescPh: "Detaillierte Zusammenfassung Ihrer Veröffentlichung...",
+                cancel: "Abbrechen",
+                submitReview: "Zur Prüfung einreichen",
+                myWork: "Meine Werke",
+                myPromotions: "Meine Werbung",
+                promoIntro: "Promotion ist bezahlte Platzierung — die Pakete finden Sie auf der Promote-Seite.",
+                openPromote: "Promote-Seite öffnen →",
+                footerUpload: "Ihr Werk hochladen",
+                footerHouse: "Hausseite",
+                footerTelegram: "Telegram-Shop",
+                signInUnavailable: "Die Anmeldung ist im Moment nicht verfügbar — bitte versuchen Sie es gleich noch einmal.",
+                sendingLink: "Sicherer Link wird gesendet...",
+                connecting: "Verbindung zum Anmeldedienst...",
+                magicSent: "Erledigt! Magic Link an {email} gesendet. Prüfen Sie Ihr Postfach (und den Spam-Ordner), um sich sofort anzumelden.",
+                signInError: "Anmeldefehler: ",
+                signingIn: "Anmeldung läuft...",
+                signedInWelcome: "Angemeldet — willkommen zurück.",
+                errName: "Bitte geben Sie Ihren Creator- / Künstlernamen ein.",
+                errRole: "Bitte wählen Sie Ihre Einstufung.",
+                errPassword: "Bitte wählen Sie ein Passwort mit mindestens 8 Zeichen.",
+                errPasswordPrefix: "Passwort: ",
+                errProfilePrefix: "Profil: ",
+                errFinish: "Ihr Konto konnte nicht fertiggestellt werden: ",
+                saving: "Wird gespeichert...",
+                mustSignIn: "Sie müssen mit einem verbundenen Supabase-Projekt angemeldet sein, um zu veröffentlichen.",
+                videoLinkAlert: "Bitte fügen Sie Ihren Video-Link ein (YouTube, TikTok, Vimeo oder eine direkte Videodatei-URL) — Video-Einreichungen sind linkbasiert.",
+                uploadingSaving: "Wird hochgeladen & gespeichert...",
+                submitSuccess: "Zur Prüfung eingereicht — Ihr Werk erscheint im Shop, sobald ein Haus-Admin es freigegeben hat. „{title}“ ist unten vorerst als ausstehende Prüfung aufgeführt.",
+                submissionError: "Fehler bei der Einreichung: ",
+                free: "Kostenlos",
+                loadingWork: "Ihre Werke werden geladen…",
+                loadWorkError: "Ihre Werke konnten nicht geladen werden: ",
+                noWorkYet: "Noch nichts hier — fügen Sie oben Ihr erstes Werk hinzu.",
+                chipLive: "Live",
+                chipPending: "Prüfung ausstehend",
+                chipRejected: "Nicht freigegeben",
+                viewInStore: "Im Shop ansehen",
+                byWord: "von",
+                noLiveYet: "Noch nichts live — sobald eine Einreichung freigegeben ist, können Sie sie von hier aus bewerben.",
+                promote: "Bewerben"
+            },
+            fr: {
+                docTitle: "Votre compte — Blacksmith & Witches Marketplace",
+                marketplace: "La place de marché",
+                backToStore: "← Retour à la boutique",
+                creatorAccount: "Compte créateur",
+                heroTitle: "Votre compte",
+                heroText: "Ajoutez votre œuvre à la Marketplace, suivez son examen et faites-en la promotion une fois en ligne — le tout depuis une seule page.",
+                signUpIn: "Inscription / Connexion",
+                authIntro: "Les créateurs se connectent avec un lien magique — le lien vérifie votre e-mail. Nouveau ici ? Le même lien crée votre compte ; vous le complétez ensuite avec votre nom de créateur, votre classification et un mot de passe pour la prochaine fois.",
+                creatorEmail: "E-mail du créateur",
+                sendMagicLink: "Envoyer le lien de connexion magique",
+                authNote: "Un seul e-mail de connexion par personne à la fois — si aucun e-mail n'arrive au bout de quelques minutes, patientez un peu et réessayez.",
+                alreadyPassword: "Vous avez déjà défini un mot de passe ?",
+                passwordIntro: "Si vous avez complété votre compte et créé un mot de passe, connectez-vous avec e-mail + mot de passe — aucun lien par e-mail n'est nécessaire.",
+                emailLabel: "E-mail",
+                passwordLabel: "Mot de passe",
+                passwordPh: "Votre mot de passe",
+                signInPassword: "Se connecter avec un mot de passe",
+                completeAccount: "Complétez votre compte",
+                setupIntroA: "Vous êtes connecté en tant que",
+                setupIntroB: ". Un court formulaire termine votre compte créateur — votre nom, votre classification et un mot de passe, pour vous connecter directement la prochaine fois sans attendre un e-mail.",
+                penName: "Nom de créateur / nom de plume",
+                penNamePh: "ex. Dima Grossman",
+                classification: "Classification",
+                selectCraft: "Sélectionnez votre domaine...",
+                roleArtist: "Artiste",
+                roleWriter: "Écrivain",
+                roleMusician: "Musicien",
+                roleFilmCreator: "Créateur de films",
+                bioLabel: "Bio",
+                optional: "(facultatif)",
+                bioPh: "Une ligne ou deux sur vous et votre travail.",
+                createPassword: "Créer un mot de passe",
+                passwordMinPh: "8 caractères minimum",
+                saveFinish: "Enregistrer et terminer mon compte",
+                accountDash: "Votre compte —",
+                accountSub: "Tout ce que vous avez soumis à la Marketplace se trouve sur cette page.",
+                admin: "Admin",
+                signOut: "Se déconnecter",
+                addYourWork: "Ajoutez votre œuvre",
+                addIntro: "La publication est gratuite. Les nouvelles soumissions entrent en examen comme <strong>en attente</strong> avant d'être publiques — chaque soumission est examinée avant d'apparaître dans la boutique.",
+                addWorkBtn: "＋ Ajouter votre œuvre",
+                fTitle: "Titre",
+                fTitlePh: "ex. Paul of Teraura",
+                fCreator: "Créateur / Auteur",
+                fCreatorPh: "ex. Dima Grossman",
+                fCategory: "Catégorie",
+                cat_books: "Livres & fanzines",
+                cat_music: "Musique & audio",
+                cat_games: "Jeux",
+                cat_apps: "Applications & outils",
+                cat_video: "Vidéo",
+                fPrice: "Prix ($ USD — 0 pour gratuit)",
+                fFormats: "Formats",
+                videoUrlLabel: "URL de la vidéo (YouTube, TikTok, Vimeo ou lien direct vers le fichier vidéo)",
+                videoNote: "<strong>Soumettez votre vidéo — annonce gratuite.</strong> Nous conservons le lien, pas le fichier : gardez donc la vidéo sur votre propre chaîne. Mettez le prix à 0 pour un visionnage gratuit. Les vidéos sont examinées avant d'apparaître — rien n'est publié automatiquement.",
+                uploadLabel: "Téléverser le fichier de publication (PDF, EPUB, audio, images, ZIP)",
+                uploadHint: "Téléversement direct vers Supabase Storage, OU laissez vide et collez ci-dessous votre propre lien externe de paiement/téléchargement. Les images (JPG, PNG, WEBP, GIF) sont aussi acceptées — illustrations, couvertures, photos.",
+                fExternalUrl: "URL externe de paiement / téléchargement",
+                fTagline: "Accroche courte",
+                fTaglinePh: "Une phrase brève qui présente votre œuvre.",
+                fDesc: "Description complète",
+                fDescPh: "Résumé détaillé de votre publication...",
+                cancel: "Annuler",
+                submitReview: "Soumettre pour examen",
+                myWork: "Mes œuvres",
+                myPromotions: "Mes promotions",
+                promoIntro: "La promotion est un placement payant — voir les formules sur la page Promote.",
+                openPromote: "Ouvrir la page Promote →",
+                footerUpload: "Publiez votre œuvre",
+                footerHouse: "Site de la maison",
+                footerTelegram: "Boutique Telegram",
+                signInUnavailable: "La connexion est indisponible pour le moment — veuillez réessayer dans un instant.",
+                sendingLink: "Envoi du lien sécurisé...",
+                connecting: "Connexion au service d'authentification...",
+                magicSent: "C'est fait ! Lien magique envoyé à {email}. Vérifiez votre boîte de réception (et le dossier spam) pour vous connecter aussitôt.",
+                signInError: "Erreur de connexion : ",
+                signingIn: "Connexion en cours...",
+                signedInWelcome: "Connecté — bon retour.",
+                errName: "Veuillez saisir votre nom de créateur / nom de plume.",
+                errRole: "Veuillez choisir votre classification.",
+                errPassword: "Veuillez choisir un mot de passe d'au moins 8 caractères.",
+                errPasswordPrefix: "Mot de passe : ",
+                errProfilePrefix: "Profil : ",
+                errFinish: "Impossible de terminer votre compte : ",
+                saving: "Enregistrement...",
+                mustSignIn: "Vous devez être connecté avec un projet Supabase connecté pour publier.",
+                videoLinkAlert: "Veuillez coller le lien de votre vidéo (YouTube, TikTok, Vimeo ou URL directe d'un fichier vidéo) — les soumissions vidéo sont basées sur les liens.",
+                uploadingSaving: "Téléversement et enregistrement...",
+                submitSuccess: "Soumis pour examen — votre œuvre apparaîtra dans la boutique dès qu'un administrateur de la maison l'aura approuvée. « {title} » est listé ci-dessous comme en attente d'examen en attendant.",
+                submissionError: "Erreur de soumission : ",
+                free: "Gratuit",
+                loadingWork: "Chargement de vos œuvres…",
+                loadWorkError: "Impossible de charger vos œuvres : ",
+                noWorkYet: "Rien ici pour le moment — ajoutez votre première œuvre ci-dessus.",
+                chipLive: "En ligne",
+                chipPending: "En attente d'examen",
+                chipRejected: "Non approuvé",
+                viewInStore: "Voir dans la boutique",
+                byWord: "par",
+                noLiveYet: "Rien en ligne pour le moment — dès qu'une soumission est approuvée, vous pouvez la promouvoir depuis cette page.",
+                promote: "Promouvoir"
+            },
+            uk: {
+                docTitle: "Ваш обліковий запис — Blacksmith & Witches Marketplace",
+                marketplace: "Маркетплейс",
+                backToStore: "← Назад до магазину",
+                creatorAccount: "Обліковий запис автора",
+                heroTitle: "Ваш обліковий запис",
+                heroText: "Додайте свою роботу до Маркетплейсу, стежте за її перевіркою та просувайте, щойно вона з'явиться, — усе на одній сторінці.",
+                signUpIn: "Реєстрація / Вхід",
+                authIntro: "Автори входять за магічним посиланням — воно підтверджує вашу електронну пошту. Ви тут уперше? Те саме посилання створить ваш обліковий запис; далі ви доповните його іменем автора, класифікацією та паролем на наступний раз.",
+                creatorEmail: "Електронна пошта автора",
+                sendMagicLink: "Надіслати магічне посилання для входу",
+                authNote: "Один лист для входу на людину за раз — якщо лист не надійшов протягом кількох хвилин, зачекайте трохи й спробуйте ще раз.",
+                alreadyPassword: "Вже встановили пароль?",
+                passwordIntro: "Якщо ви завершили обліковий запис і створили пароль, входьте за електронною поштою та паролем — лист із посиланням не потрібен.",
+                emailLabel: "Електронна пошта",
+                passwordLabel: "Пароль",
+                passwordPh: "Ваш пароль",
+                signInPassword: "Увійти за паролем",
+                completeAccount: "Завершіть свій обліковий запис",
+                setupIntroA: "Ви увійшли як",
+                setupIntroB: ". Коротка форма завершить ваш обліковий запис автора — ваше ім'я, ваша класифікація та пароль, щоб наступного разу ви могли входити напряму, не чекаючи листа.",
+                penName: "Ім'я автора / псевдонім",
+                penNamePh: "напр., Dima Grossman",
+                classification: "Класифікація",
+                selectCraft: "Оберіть своє ремесло...",
+                roleArtist: "Художник",
+                roleWriter: "Письменник",
+                roleMusician: "Музикант",
+                roleFilmCreator: "Творець фільмів",
+                bioLabel: "Про себе",
+                optional: "(необов'язково)",
+                bioPh: "Рядок чи два про вас і вашу роботу.",
+                createPassword: "Створіть пароль",
+                passwordMinPh: "Мінімум 8 символів",
+                saveFinish: "Зберегти й завершити обліковий запис",
+                accountDash: "Ваш обліковий запис —",
+                accountSub: "Усе, що ви надіслали до Маркетплейсу, живе на цій сторінці.",
+                admin: "Адмін",
+                signOut: "Вийти",
+                addYourWork: "Додайте свою роботу",
+                addIntro: "Розміщення безкоштовне. Нові подання спершу проходять перевірку у статусі <strong>очікування</strong>, перш ніж стати публічними, — кожне подання перевіряється, перш ніж з'явитися в магазині.",
+                addWorkBtn: "＋ Додати роботу",
+                fTitle: "Назва",
+                fTitlePh: "напр., Paul of Teraura",
+                fCreator: "Автор / творець",
+                fCreatorPh: "напр., Dima Grossman",
+                fCategory: "Категорія",
+                cat_books: "Книги та зіни",
+                cat_music: "Музика та аудіо",
+                cat_games: "Ігри",
+                cat_apps: "Застосунки та інструменти",
+                cat_video: "Відео",
+                fPrice: "Ціна ($ USD — 0 для безкоштовного)",
+                fFormats: "Формати",
+                videoUrlLabel: "URL відео (YouTube, TikTok, Vimeo або пряме посилання на відеофайл)",
+                videoNote: "<strong>Надішліть своє відео — безкоштовне розміщення.</strong> Ми зберігаємо посилання, а не файл, тож тримайте відео на власному каналі. Встановіть ціну 0 для безкоштовного перегляду. Відео перевіряються перед появою — нічого не публікується автоматично.",
+                uploadLabel: "Завантажити файл релізу (PDF, EPUB, аудіо, зображення, ZIP)",
+                uploadHint: "Завантажується напряму до Supabase Storage, АБО залиште порожнім і вставте нижче власне зовнішнє посилання на оплату/завантаження. Зображення (JPG, PNG, WEBP, GIF) також приймаються — арт, обкладинки, фото.",
+                fExternalUrl: "Зовнішня URL оплати / завантаження",
+                fTagline: "Короткий слоган",
+                fTaglinePh: "Короткий рядок-гачок для вашого релізу.",
+                fDesc: "Повний опис",
+                fDescPh: "Детальний опис вашої публікації...",
+                cancel: "Скасувати",
+                submitReview: "Надіслати на перевірку",
+                myWork: "Мої роботи",
+                myPromotions: "Мої просування",
+                promoIntro: "Просування — це платне розміщення: пакети дивіться на сторінці Promote.",
+                openPromote: "Відкрити сторінку Promote →",
+                footerUpload: "Завантажити свою роботу",
+                footerHouse: "Головний сайт",
+                footerTelegram: "Магазин у Telegram",
+                signInUnavailable: "Вхід наразі недоступний — спробуйте ще раз за хвилину.",
+                sendingLink: "Надсилаємо безпечне посилання...",
+                connecting: "Підключення до служби входу...",
+                magicSent: "Готово! Магічне посилання надіслано на {email}. Перевірте вхідні (і папку спаму), щоб увійти одразу.",
+                signInError: "Помилка входу: ",
+                signingIn: "Вхід...",
+                signedInWelcome: "Ви увійшли — з поверненням.",
+                errName: "Вкажіть своє ім'я автора / псевдонім.",
+                errRole: "Оберіть свою класифікацію.",
+                errPassword: "Оберіть пароль щонайменше з 8 символів.",
+                errPasswordPrefix: "Пароль: ",
+                errProfilePrefix: "Профіль: ",
+                errFinish: "Не вдалося завершити обліковий запис: ",
+                saving: "Збереження...",
+                mustSignIn: "Ви маєте увійти з підключеним проєктом Supabase, щоб публікувати.",
+                videoLinkAlert: "Вставте посилання на своє відео (YouTube, TikTok, Vimeo або пряму URL відеофайлу) — відеоподання працюють через посилання.",
+                uploadingSaving: "Завантаження та збереження...",
+                submitSuccess: "Надіслано на перевірку — ваша робота з'явиться у вітрині, щойно адміністратор дому її схвалить. «{title}» тим часом нижче позначено як «На перевірці».",
+                submissionError: "Помилка подання: ",
+                free: "Безкоштовно",
+                loadingWork: "Завантажуємо ваші роботи…",
+                loadWorkError: "Не вдалося завантажити ваші роботи: ",
+                noWorkYet: "Тут ще порожньо — додайте свою першу роботу вище.",
+                chipLive: "Опубліковано",
+                chipPending: "На перевірці",
+                chipRejected: "Не схвалено",
+                viewInStore: "Дивитися в магазині",
+                byWord: "автор:",
+                noLiveYet: "Ще нічого не опубліковано — щойно подання схвалять, ви зможете просувати його звідси.",
+                promote: "Просувати"
+            },
+            ru: {
+                docTitle: "Ваш аккаунт — Blacksmith & Witches Marketplace",
+                marketplace: "Маркетплейс",
+                backToStore: "← Назад в магазин",
+                creatorAccount: "Аккаунт автора",
+                heroTitle: "Ваш аккаунт",
+                heroText: "Добавляйте свою работу в Маркетплейс, следите за её проверкой и продвигайте, когда она появится, — всё на одной странице.",
+                signUpIn: "Регистрация / Вход",
+                authIntro: "Авторы входят по магической ссылке — она подтверждает вашу электронную почту. Вы здесь впервые? Та же ссылка создаст ваш аккаунт; дальше вы дополните его именем автора, классификацией и паролем на следующий раз.",
+                creatorEmail: "Электронная почта автора",
+                sendMagicLink: "Отправить магическую ссылку для входа",
+                authNote: "Одно письмо для входа на человека за раз — если письмо не пришло в течение нескольких минут, подождите немного и попробуйте ещё раз.",
+                alreadyPassword: "Уже установили пароль?",
+                passwordIntro: "Если вы завершили аккаунт и создали пароль, входите по электронной почте и паролю — письмо со ссылкой не нужно.",
+                emailLabel: "Электронная почта",
+                passwordLabel: "Пароль",
+                passwordPh: "Ваш пароль",
+                signInPassword: "Войти по паролю",
+                completeAccount: "Завершите свой аккаунт",
+                setupIntroA: "Вы вошли как",
+                setupIntroB: ". Короткая форма завершит ваш аккаунт автора — ваше имя, ваша классификация и пароль, чтобы в следующий раз вы могли входить напрямую, не дожидаясь письма.",
+                penName: "Имя автора / псевдоним",
+                penNamePh: "напр., Dima Grossman",
+                classification: "Классификация",
+                selectCraft: "Выберите своё ремесло...",
+                roleArtist: "Художник",
+                roleWriter: "Писатель",
+                roleMusician: "Музыкант",
+                roleFilmCreator: "Создатель фильмов",
+                bioLabel: "О себе",
+                optional: "(необязательно)",
+                bioPh: "Строка-другая о вас и вашей работе.",
+                createPassword: "Создайте пароль",
+                passwordMinPh: "Минимум 8 символов",
+                saveFinish: "Сохранить и завершить аккаунт",
+                accountDash: "Ваш аккаунт —",
+                accountSub: "Всё, что вы отправили в Маркетплейс, находится на этой странице.",
+                admin: "Админ",
+                signOut: "Выйти",
+                addYourWork: "Добавьте свою работу",
+                addIntro: "Размещение бесплатное. Новые отправки сначала проходят проверку в статусе <strong>ожидания</strong>, прежде чем стать публичными, — каждая отправка проверяется, прежде чем появиться в магазине.",
+                addWorkBtn: "＋ Добавить работу",
+                fTitle: "Название",
+                fTitlePh: "напр., Paul of Teraura",
+                fCreator: "Автор / создатель",
+                fCreatorPh: "напр., Dima Grossman",
+                fCategory: "Категория",
+                cat_books: "Книги и зины",
+                cat_music: "Музыка и аудио",
+                cat_games: "Игры",
+                cat_apps: "Приложения и инструменты",
+                cat_video: "Видео",
+                fPrice: "Цена ($ USD — 0 для бесплатного)",
+                fFormats: "Форматы",
+                videoUrlLabel: "URL видео (YouTube, TikTok, Vimeo или прямая ссылка на видеофайл)",
+                videoNote: "<strong>Отправьте своё видео — бесплатное размещение.</strong> Мы храним ссылку, а не файл, поэтому держите видео на собственном канале. Установите цену 0 для бесплатного просмотра. Видео проверяются перед появлением — ничего не публикуется автоматически.",
+                uploadLabel: "Загрузить файл релиза (PDF, EPUB, аудио, изображения, ZIP)",
+                uploadHint: "Загружается напрямую в Supabase Storage, ИЛИ оставьте пустым и вставьте ниже собственную внешнюю ссылку на оплату/скачивание. Изображения (JPG, PNG, WEBP, GIF) тоже принимаются — арт, обложки, фото.",
+                fExternalUrl: "Внешняя URL оплаты / скачивания",
+                fTagline: "Короткий слоган",
+                fTaglinePh: "Короткая строка-крючок для вашего релиза.",
+                fDesc: "Полное описание",
+                fDescPh: "Подробное описание вашей публикации...",
+                cancel: "Отмена",
+                submitReview: "Отправить на проверку",
+                myWork: "Мои работы",
+                myPromotions: "Мои продвижения",
+                promoIntro: "Продвижение — это платное размещение: пакеты смотрите на странице Promote.",
+                openPromote: "Открыть страницу Promote →",
+                footerUpload: "Загрузить свою работу",
+                footerHouse: "Главный сайт",
+                footerTelegram: "Магазин в Telegram",
+                signInUnavailable: "Вход сейчас недоступен — попробуйте ещё раз через минуту.",
+                sendingLink: "Отправляем безопасную ссылку...",
+                connecting: "Подключение к службе входа...",
+                magicSent: "Готово! Магическая ссылка отправлена на {email}. Проверьте входящие (и папку спама), чтобы войти сразу.",
+                signInError: "Ошибка входа: ",
+                signingIn: "Вход...",
+                signedInWelcome: "Вы вошли — с возвращением.",
+                errName: "Укажите своё имя автора / псевдоним.",
+                errRole: "Выберите свою классификацию.",
+                errPassword: "Выберите пароль не короче 8 символов.",
+                errPasswordPrefix: "Пароль: ",
+                errProfilePrefix: "Профиль: ",
+                errFinish: "Не удалось завершить аккаунт: ",
+                saving: "Сохранение...",
+                mustSignIn: "Чтобы публиковать, вы должны войти с подключённым проектом Supabase.",
+                videoLinkAlert: "Вставьте ссылку на своё видео (YouTube, TikTok, Vimeo или прямую URL видеофайла) — отправка видео работает через ссылки.",
+                uploadingSaving: "Загрузка и сохранение...",
+                submitSuccess: "Отправлено на проверку — ваша работа появится в витрине, как только администратор дома её одобрит. «{title}» тем временем ниже отмечена как «На проверке».",
+                submissionError: "Ошибка отправки: ",
+                free: "Бесплатно",
+                loadingWork: "Загружаем ваши работы…",
+                loadWorkError: "Не удалось загрузить ваши работы: ",
+                noWorkYet: "Здесь пока пусто — добавьте свою первую работу выше.",
+                chipLive: "Опубликовано",
+                chipPending: "На проверке",
+                chipRejected: "Не одобрено",
+                viewInStore: "Смотреть в магазине",
+                byWord: "автор:",
+                noLiveYet: "Ещё ничего не опубликовано — как только отправку одобрят, вы сможете продвигать её отсюда.",
+                promote: "Продвигать"
+            }
+        };
+        let curLang = 'en';
+        try {
+            const savedLang = localStorage.getItem('bw_lang');
+            if (savedLang && I18N[savedLang]) curLang = savedLang;
+        } catch (e) { /* storage unavailable — stay on English */ }
+        function t(k) {
+            const d = I18N[curLang];
+            if (d && d[k] != null) return d[k];
+            if (I18N.en[k] != null) return I18N.en[k];
+            return k;
+        }
+        function roleLabel(v) {
+            if (!v) return '';
+            const k = 'role' + String(v).replace(/\s+/g, '');
+            const d = I18N[curLang];
+            return (d && d[k]) || I18N.en[k] || v;
+        }
+        function catLabel(v) {
+            if (!v) return '';
+            const k = 'cat_' + v;
+            const d = I18N[curLang];
+            return (d && d[k]) || CATEGORY_NAMES[v] || v;
+        }
+        function applyLang(lang) {
+            document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.getAttribute('data-i18n')); });
+            document.querySelectorAll('[data-i18n-html]').forEach(el => { el.innerHTML = t(el.getAttribute('data-i18n-html')); });
+            document.querySelectorAll('[data-i18n-ph]').forEach(el => { el.setAttribute('placeholder', t(el.getAttribute('data-i18n-ph'))); });
+            document.documentElement.lang = lang;
+            document.title = t('docTitle');
+            document.querySelectorAll('[data-lang-btn]').forEach(b => {
+                const active = b.getAttribute('data-lang-btn') === lang;
+                b.className = 'text-[11px] sm:text-xs px-1.5 sm:px-2 py-1 rounded-md transition ' + (active ? 'bg-brandYellow text-brandDarkBlue font-black shadow' : 'text-blue-100 font-bold hover:text-brandYellow');
+            });
+        }
+        function setLang(lang) {
+            if (!I18N[lang]) lang = 'en';
+            curLang = lang;
+            try { localStorage.setItem('bw_lang', lang); } catch (e) { /* ignore */ }
+            applyLang(lang);
+            if (lastMyWorkRows) { renderMyWork(lastMyWorkRows); renderMyPromotions(lastMyWorkRows); }
+            if (currentProfile && currentProfile.creator_role) {
+                const badge = document.getElementById('accountRoleBadge');
+                if (badge) badge.textContent = roleLabel(currentProfile.creator_role);
+            }
+        }
+        applyLang(curLang);
+
         // --- Creator account (Supabase magic link) ---
         // Same project as the store and the Promote page (anon key is
         // public by design). One magic link both signs in existing
@@ -390,7 +970,7 @@
         async function handleMagicLinkLogin(e) {
             e.preventDefault();
             if (!supabaseClient) {
-                alert("Sign-in is unavailable right now — please try again in a moment.");
+                alert(t('signInUnavailable'));
                 return;
             }
             const email = document.getElementById('authEmail').value.trim();
@@ -398,9 +978,9 @@
             const feedback = document.getElementById('authFeedback');
 
             btn.disabled = true;
-            btn.innerText = "Sending Secure Link...";
+            btn.innerText = t('sendingLink');
             feedback.className = "text-xs p-3 rounded-xl bg-blue-50 text-brandDarkBlue border border-blue-200 font-medium max-w-md";
-            feedback.innerText = "Connecting to auth service...";
+            feedback.innerText = t('connecting');
             feedback.classList.remove('hidden');
 
             try {
@@ -411,20 +991,20 @@
 
                 if (error) throw error;
 
-                feedback.innerText = `Success! Magic link sent to ${email}. Check your inbox (and spam folder) to sign in instantly.`;
+                feedback.innerText = t('magicSent').replace('{email}', email);
             } catch (err) {
                 feedback.className = "text-xs p-3 rounded-xl bg-red-50 text-red-700 border border-red-200 font-medium max-w-md";
-                feedback.innerText = "Sign-in error: " + err.message;
+                feedback.innerText = t('signInError') + err.message;
             } finally {
                 btn.disabled = false;
-                btn.innerText = "Send Magic Sign-In Link";
+                btn.innerText = t('sendMagicLink');
             }
         }
 
         async function handlePasswordLogin(e) {
             e.preventDefault();
             if (!supabaseClient) {
-                alert("Sign-in is unavailable right now — please try again in a moment.");
+                alert(t('signInUnavailable'));
                 return;
             }
             const email = document.getElementById('pwEmail').value.trim();
@@ -433,22 +1013,22 @@
             const feedback = document.getElementById('pwFeedback');
 
             btn.disabled = true;
-            btn.innerText = "Signing in...";
+            btn.innerText = t('signingIn');
             feedback.className = "text-xs p-3 rounded-xl bg-blue-50 text-brandDarkBlue border border-blue-200 font-medium max-w-md";
-            feedback.innerText = "Connecting to auth service...";
+            feedback.innerText = t('connecting');
             feedback.classList.remove('hidden');
 
             try {
                 const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
                 if (error) throw error;
-                feedback.innerText = "Signed in — welcome back.";
+                feedback.innerText = t('signedInWelcome');
                 // onAuthStateChange refreshes the view into the account.
             } catch (err) {
                 feedback.className = "text-xs p-3 rounded-xl bg-red-50 text-red-700 border border-red-200 font-medium max-w-md";
-                feedback.innerText = "Sign-in error: " + err.message;
+                feedback.innerText = t('signInError') + err.message;
             } finally {
                 btn.disabled = false;
-                btn.innerText = "Sign in with password";
+                btn.innerText = t('signInPassword');
             }
         }
 
@@ -485,26 +1065,26 @@
                 feedback.classList.remove('hidden');
             };
 
-            if (!name) { showError('Please enter your creator / pen name.'); return; }
-            if (!role) { showError('Please choose your classification.'); return; }
-            if (!password || password.length < 8) { showError('Please choose a password of at least 8 characters.'); return; }
+            if (!name) { showError(t('errName')); return; }
+            if (!role) { showError(t('errRole')); return; }
+            if (!password || password.length < 8) { showError(t('errPassword')); return; }
 
             btn.disabled = true;
-            btn.innerText = "Saving...";
+            btn.innerText = t('saving');
             try {
                 const { error: pwErr } = await supabaseClient.auth.updateUser({ password });
-                if (pwErr) throw new Error('Password: ' + pwErr.message);
+                if (pwErr) throw new Error(t('errPasswordPrefix') + pwErr.message);
                 const { error: insErr } = await supabaseClient
                     .from('profiles')
                     .insert([{ id: currentUser.id, display_name: name, creator_role: role, bio: bio || null }]);
-                if (insErr) throw new Error('Profile: ' + insErr.message);
+                if (insErr) throw new Error(t('errProfilePrefix') + insErr.message);
                 profileLoadedForId = null; // force a fresh profile read
                 await refreshAccountView();
             } catch (err) {
-                showError('Could not finish your account: ' + err.message);
+                showError(t('errFinish') + err.message);
             } finally {
                 btn.disabled = false;
-                btn.innerText = "Save & finish my account";
+                btn.innerText = t('saveFinish');
             }
         }
 
@@ -529,7 +1109,7 @@
                         adminLink.classList.toggle('flex', profile.is_admin === true);
                         document.getElementById('accountEmail').textContent = profile.display_name || user.email || '';
                         const badge = document.getElementById('accountRoleBadge');
-                        badge.textContent = profile.creator_role || '';
+                        badge.textContent = profile.creator_role ? roleLabel(profile.creator_role) : '';
                         badge.classList.toggle('hidden', !profile.creator_role);
                         const creatorInput = document.getElementById('subCreator');
                         if (creatorInput && !creatorInput.value) creatorInput.value = profile.display_name || '';
@@ -600,19 +1180,19 @@
         async function handleProductSubmit(e) {
             e.preventDefault();
             if (!supabaseClient || !currentUser) {
-                alert("You must be signed in with a connected Supabase project to publish.");
+                alert(t('mustSignIn'));
                 return;
             }
 
             const isVideo = document.getElementById('subCategory').value === 'video';
             if (isVideo && !document.getElementById('subVideoUrl').value.trim()) {
-                alert('Please paste your video link (YouTube, TikTok, Vimeo or a direct video file URL) — video submissions are link-based.');
+                alert(t('videoLinkAlert'));
                 return;
             }
 
             const btn = document.getElementById('submitBtn');
             btn.disabled = true;
-            btn.innerText = "Uploading & Saving...";
+            btn.innerText = t('uploadingSaving');
 
             try {
                 let finalUrl = isVideo
@@ -669,15 +1249,15 @@
                 toggleAddWorkForm(true);
                 const successBox = document.getElementById('submitSuccess');
                 document.getElementById('submitSuccessText').textContent =
-                    'Submitted for review — your work appears on the storefront once a house admin approves it. “' + submittedTitle + '” is listed below as Pending Review meanwhile.';
+                    t('submitSuccess').replace('{title}', submittedTitle);
                 successBox.classList.remove('hidden');
                 await loadMyWork();
                 successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
             } catch (err) {
-                alert('Submission error: ' + err.message);
+                alert(t('submissionError') + err.message);
             } finally {
                 btn.disabled = false;
-                btn.innerText = "Submit for Review";
+                btn.innerText = t('submitReview');
             }
         }
 
@@ -693,7 +1273,7 @@
             return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
         }
         function priceLabel(p) {
-            return Number(p.price) === 0 ? 'Free' : '$' + Number(p.price).toFixed(2);
+            return Number(p.price) === 0 ? t('free') : '$' + Number(p.price).toFixed(2);
         }
         function isLive(p) {
             return p.status === 'approved' || !p.status;
@@ -704,7 +1284,7 @@
             const statusEl = document.getElementById('myWorkStatus');
             const listEl = document.getElementById('myWorkList');
             const promoEl = document.getElementById('myPromoList');
-            statusEl.textContent = 'Loading your work…';
+            statusEl.textContent = t('loadingWork');
             try {
                 const { data, error } = await supabaseClient
                     .from('products')
@@ -713,11 +1293,12 @@
                     .order('created_at', { ascending: false });
                 if (error) throw error;
                 const rows = data || [];
+                lastMyWorkRows = rows;
                 statusEl.textContent = '';
                 renderMyWork(rows);
                 renderMyPromotions(rows);
             } catch (err) {
-                statusEl.textContent = 'Could not load your work: ' + err.message;
+                statusEl.textContent = t('loadWorkError') + err.message;
                 listEl.innerHTML = '';
                 promoEl.innerHTML = '';
             }
@@ -726,24 +1307,24 @@
         function renderMyWork(rows) {
             const listEl = document.getElementById('myWorkList');
             if (!rows || rows.length === 0) {
-                listEl.innerHTML = '<p class="text-sm text-slate-500 py-4">Nothing here yet — add your first work above.</p>';
+                listEl.innerHTML = '<p class="text-sm text-slate-500 py-4">' + t('noWorkYet') + '</p>';
                 return;
             }
             listEl.innerHTML = rows.map(p => {
                 const chip = p.status === 'rejected'
-                    ? '<span class="bg-red-100 text-red-800 border border-red-300 text-xs font-bold px-2.5 py-1 rounded-full">Not approved</span>'
+                    ? '<span class="bg-red-100 text-red-800 border border-red-300 text-xs font-bold px-2.5 py-1 rounded-full">' + t('chipRejected') + '</span>'
                     : isLive(p)
-                    ? '<span class="bg-green-100 text-green-800 border border-green-300 text-xs font-bold px-2.5 py-1 rounded-full">Live</span>'
-                    : '<span class="bg-amber-100 text-amber-800 border border-amber-300 text-xs font-bold px-2.5 py-1 rounded-full">Pending review</span>';
+                    ? '<span class="bg-green-100 text-green-800 border border-green-300 text-xs font-bold px-2.5 py-1 rounded-full">' + t('chipLive') + '</span>'
+                    : '<span class="bg-amber-100 text-amber-800 border border-amber-300 text-xs font-bold px-2.5 py-1 rounded-full">' + t('chipPending') + '</span>';
                 const storeLink = isLive(p)
-                    ? '<a href="https://store.blacksmithandwitches.com/" class="text-xs font-bold text-brandBlue hover:text-brandDarkBlue underline underline-offset-4 decoration-brandYellow decoration-2 transition">View in the store</a>'
+                    ? '<a href="https://store.blacksmithandwitches.com/" class="text-xs font-bold text-brandBlue hover:text-brandDarkBlue underline underline-offset-4 decoration-brandYellow decoration-2 transition">' + t('viewInStore') + '</a>'
                     : '';
-                const catName = CATEGORY_NAMES[p.category] || p.category || '';
+                const catName = catLabel(p.category);
                 return `
                 <div class="py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
                         <p class="font-bold text-brandDarkBlue">${escapeHtml(p.title)}</p>
-                        <p class="text-xs text-slate-500 mt-0.5">${escapeHtml(catName)} · ${priceLabel(p)} · by ${escapeHtml(p.creator)}</p>
+                        <p class="text-xs text-slate-500 mt-0.5">${escapeHtml(catName)} · ${priceLabel(p)} · ${escapeHtml(t('byWord'))} ${escapeHtml(p.creator)}</p>
                     </div>
                     <div class="flex items-center gap-3 shrink-0">
                         ${chip}
@@ -757,13 +1338,13 @@
             const promoEl = document.getElementById('myPromoList');
             const live = (rows || []).filter(isLive);
             if (live.length === 0) {
-                promoEl.innerHTML = '<p class="text-sm text-slate-500 py-4">Nothing live yet — once a submission is approved, you can promote it from here.</p>';
+                promoEl.innerHTML = '<p class="text-sm text-slate-500 py-4">' + t('noLiveYet') + '</p>';
                 return;
             }
             promoEl.innerHTML = live.map(p => `
                 <div class="py-4 flex items-center justify-between gap-3">
                     <p class="font-bold text-brandDarkBlue">${escapeHtml(p.title)}</p>
-                    <a href="promote.html" class="shrink-0 bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-4 py-2 rounded-xl text-xs shadow transition">Promote</a>
+                    <a href="promote.html" class="shrink-0 bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-4 py-2 rounded-xl text-xs shadow transition">${t('promote')}</a>
                 </div>`).join('');
         }
 
