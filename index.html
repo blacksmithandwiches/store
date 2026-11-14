@@ -923,8 +923,10 @@
         }
 
         // House news: approved posts from the public.news table, newest
-        // first, at most five. If the table is empty or unreachable the
-        // section stays hidden — no error text on the public page.
+        // first, at most six — the grid is three columns on desktop, so
+        // the section always shows a balanced multiple of three (3 or 6).
+        // If the table is empty or unreachable the section stays hidden —
+        // no error text on the public page.
         async function loadHouseNews() {
             if (!supabaseClient) return;
             try {
@@ -933,7 +935,7 @@
                     .select('*')
                     .eq('status', 'approved')
                     .order('created_at', { ascending: false })
-                    .limit(5);
+                    .limit(6);
                 if (error) throw error;
                 if (!data || data.length === 0) return;
                 const listEl = document.getElementById('houseNewsList');
