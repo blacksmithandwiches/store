@@ -1168,7 +1168,10 @@
                 card.className = "bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col overflow-hidden";
                 
                 const isPending = p.status === 'pending';
-                let statusBadge = isPending 
+                const isRejected = p.status === 'rejected';
+                let statusBadge = isRejected
+                    ? `<span class="bg-red-100 text-red-800 border border-red-300 text-xs font-bold px-2.5 py-1 rounded-full">Not Approved</span>`
+                    : isPending
                     ? `<span class="bg-amber-100 text-amber-800 border border-amber-300 text-xs font-bold px-2.5 py-1 rounded-full">Pending Review</span>`
                     : (p.badge ? `<span class="bg-brandYellow/90 text-brandDarkBlue text-xs font-black px-2.5 py-1 rounded-full">${p.badge}</span>` : '');
 
