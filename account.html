@@ -280,7 +280,51 @@
         let supabaseClient = null;
         let currentUser = null;
         let loadedForUserId = null;
-        try { supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY); } catch (e) { supabaseClient = null; }
+        try { supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth: { flowType: 'implicit', detectSessionInUrl: true, persistSession: true, autoRefreshToken: true } }); } catch (e) { supabaseClient = null; }
+
+        // Session recovery for magic-link returns (same pattern as the
+        // store): email links are usually tapped inside a mail app, which
+        // can open a different browser than the one that requested the
+        // link — with the library default (PKCE in current supabase-js v2)
+        // the code verifier stays stranded in the requesting browser, the
+        // automatic exchange silently fails, and the page renders
+        // signed-out. The client above therefore uses the implicit flow
+        // for email links (the tokens travel in the link itself), and on
+        // load we explicitly try every return form — stored session,
+        // ?code= exchange, #access_token hash — before deciding the
+        // visitor is signed out.
+        async function recoverSession() {
+            if (!supabaseClient) return null;
+            try {
+                const { data: { session } } = await supabaseClient.auth.getSession();
+                if (session) return session;
+            } catch (e) { /* keep trying the URL forms */ }
+            try {
+                const code = new URLSearchParams(window.location.search).get('code');
+                if (code) {
+                    const { data } = await supabaseClient.auth.exchangeCodeForSession(code);
+                    if (data && data.session) {
+                        window.history.replaceState({}, document.title, window.location.pathname + window.location.hash);
+                        return data.session;
+                    }
+                }
+            } catch (e) { /* fall through to the hash form */ }
+            try {
+                if (window.location.hash && window.location.hash.indexOf('access_token') !== -1) {
+                    const hp = new URLSearchParams(window.location.hash.substring(1));
+                    const access_token = hp.get('access_token');
+                    const refresh_token = hp.get('refresh_token');
+                    if (access_token && refresh_token) {
+                        const { data } = await supabaseClient.auth.setSession({ access_token, refresh_token });
+                        if (data && data.session) {
+                            window.history.replaceState({}, document.title, window.location.pathname + window.location.search);
+                            return data.session;
+                        }
+                    }
+                }
+            } catch (e) { /* no recoverable session in the URL */ }
+            return null;
+        }
 
         async function handleMagicLinkLogin(e) {
             e.preventDefault();
@@ -301,7 +345,7 @@
             try {
                 const { error } = await supabaseClient.auth.signInWithOtp({
                     email,
-                    options: { emailRedirectTo: window.location.origin }
+                    options: { emailRedirectTo: window.location.origin + window.location.pathname }
                 });
 
                 if (error) throw error;
@@ -319,7 +363,7 @@
         async function refreshAccountView() {
             if (!supabaseClient) return;
             try {
-                const { data: { session } } = await supabaseClient.auth.getSession();
+                const session = await recoverSession();
                 const user = session && session.user ? session.user : null;
                 currentUser = user;
                 document.getElementById('authSection').classList.toggle('hidden', !!user);
