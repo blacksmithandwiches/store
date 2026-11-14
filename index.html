@@ -255,11 +255,49 @@
                 <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue">Promote your work</h2>
             </div>
             <p class="text-sm text-slate-600 max-w-2xl">
-                <strong class="text-brandDarkBlue">Featured placement</strong> — your listing moves to the top of the store and BW Stage for 7 days.
-                Launch price <strong class="text-brandDarkBlue">CAD $5</strong>. (Checkout currently runs in TEST mode — no real charge.)
+                <strong class="text-brandDarkBlue">Featured placement</strong> — pick a package and your listing takes the top of the store with a Promoted badge.
+                Bigger packages add a BW Stage feed slot and a post on the house Telegram channel.
+                (Checkout currently runs in TEST mode — no real charge.)
             </p>
-            <div class="flex flex-col sm:flex-row gap-3 max-w-2xl">
-                <input type="text" id="promoteTitle" placeholder="Your listing title — exactly as it appears in the store" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brandBlue transition">
+            <div class="max-w-2xl">
+                <label for="promoteTitle" class="block text-xs font-bold uppercase tracking-wider text-brandDarkBlue mb-1.5">1 · Your listing</label>
+                <input type="text" id="promoteTitle" oninput="updatePromoteReview()" placeholder="Listing title — exactly as it appears in the store" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brandBlue transition">
+            </div>
+            <div>
+                <p class="text-xs font-bold uppercase tracking-wider text-brandDarkBlue mb-2">2 · Pick a package</p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-3xl">
+                    <label class="promote-pkg block cursor-pointer border-2 rounded-2xl p-4 transition bg-slate-50 border-slate-200">
+                        <input type="radio" name="promotePkg" value="starter" class="sr-only" onchange="updatePromoteReview()">
+                        <span class="flex items-center justify-between">
+                            <span class="font-black text-brandDarkBlue">Starter</span>
+                            <span class="text-lg font-black text-brandDarkBlue">$3</span>
+                        </span>
+                        <span class="block text-xs font-bold text-brandBlue mt-0.5">CAD · 3 days</span>
+                        <span class="block text-xs text-slate-600 mt-2">Top of the store + &ldquo;Promoted&rdquo; badge.</span>
+                    </label>
+                    <label class="promote-pkg block cursor-pointer border-2 rounded-2xl p-4 transition bg-slate-50 border-slate-200">
+                        <input type="radio" name="promotePkg" value="featured" class="sr-only" onchange="updatePromoteReview()" checked>
+                        <span class="flex items-center justify-between">
+                            <span class="font-black text-brandDarkBlue">Featured</span>
+                            <span class="text-lg font-black text-brandDarkBlue">$5</span>
+                        </span>
+                        <span class="block text-xs font-bold text-brandBlue mt-0.5">CAD · 7 days</span>
+                        <span class="inline-block bg-brandYellow text-brandDarkBlue text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wide mt-1.5">Standard pick</span>
+                        <span class="block text-xs text-slate-600 mt-2">Top of the store + badge + a BW Stage feed slot.</span>
+                    </label>
+                    <label class="promote-pkg block cursor-pointer border-2 rounded-2xl p-4 transition bg-slate-50 border-slate-200">
+                        <input type="radio" name="promotePkg" value="spotlight" class="sr-only" onchange="updatePromoteReview()">
+                        <span class="flex items-center justify-between">
+                            <span class="font-black text-brandDarkBlue">Spotlight</span>
+                            <span class="text-lg font-black text-brandDarkBlue">$9</span>
+                        </span>
+                        <span class="block text-xs font-bold text-brandBlue mt-0.5">CAD · 14 days</span>
+                        <span class="block text-xs text-slate-600 mt-2">Everything in Featured for 14 days + one Telegram channel post.</span>
+                    </label>
+                </div>
+            </div>
+            <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+                <p id="promoteReview" class="text-sm font-semibold text-brandDarkBlue"></p>
                 <button onclick="startPromoteCheckout()" class="shrink-0 bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-5 py-2.5 rounded-xl text-sm shadow transition">Promote a listing</button>
             </div>
             <p id="promoteMsg" class="hidden text-sm font-medium"></p>
@@ -780,14 +818,39 @@
         }
 
         // --- Promote a listing (TEST MODE) ---
-        // TikTok-style paid promotion, v1: a flat CAD $5.00 checkout for
-        // "Featured placement — 7 days (TEST)" through the same Connect test
-        // service, with the listing title carried in the product name so the
-        // house can identify it. Fulfilment is manual in v1: on a completed
-        // test checkout the house sets featured=true and badge='Promoted' on
-        // the listing for 7 days (see PROMOTE-RUNBOOK.md). No real money in
-        // test mode. While the Stripe test key is not configured the service
-        // answers 503 — say so plainly instead of failing silently.
+        // TikTok-style paid promotion, v1: three packages (Dmitri's ruling,
+        // Nov 14, 2026) sold through the same Connect test service, with the
+        // package and the listing title carried in the product name so the
+        // house can identify the order. Fulfilment is manual in v1: on a
+        // completed test checkout the house sets featured=true and
+        // badge='Promoted' on the listing for the package's days, adds a BW
+        // Stage feed slot (Featured/Spotlight) and a Telegram channel post
+        // (Spotlight) — see PROMOTE-RUNBOOK.md. No real money in test mode.
+        // While the Stripe test key is not configured the service answers
+        // 503 — say so plainly instead of failing silently.
+        const PROMOTE_PACKAGES = {
+            starter:   { name: 'Starter',   days: 3,  amountCents: 300 },
+            featured:  { name: 'Featured',  days: 7,  amountCents: 500 },
+            spotlight: { name: 'Spotlight', days: 14, amountCents: 900 }
+        };
+        function selectedPromotePackage() {
+            const el = document.querySelector('input[name="promotePkg"]:checked');
+            return PROMOTE_PACKAGES[el ? el.value : 'featured'];
+        }
+        function updatePromoteReview() {
+            document.querySelectorAll('.promote-pkg').forEach(card => {
+                const on = card.querySelector('input[name="promotePkg"]').checked;
+                card.classList.toggle('border-brandYellow', on);
+                card.classList.toggle('bg-yellow-50', on);
+                card.classList.toggle('border-slate-200', !on);
+                card.classList.toggle('bg-slate-50', !on);
+            });
+            const pkg = selectedPromotePackage();
+            const title = (document.getElementById('promoteTitle').value || '').trim();
+            document.getElementById('promoteReview').textContent =
+                '3 · Review: ' + (title ? '“' + title + '”' : 'your listing') + ' — ' + pkg.name + ' package, ' +
+                pkg.days + ' days — total CAD $' + (pkg.amountCents / 100).toFixed(2) + ' (TEST mode — no real charge)';
+        }
         async function startPromoteCheckout() {
             const input = document.getElementById('promoteTitle');
             const msg = document.getElementById('promoteMsg');
@@ -801,14 +864,15 @@
                 input.focus();
                 return;
             }
+            const pkg = selectedPromotePackage();
             try {
                 const res = await fetch(CONNECT_API + '/api/checkout', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         accountId: TEST_DESTINATION,
-                        amountCents: 500,
-                        label: 'Featured placement — 7 days (TEST) — ' + title
+                        amountCents: pkg.amountCents,
+                        label: 'Featured placement — ' + pkg.name + ' ' + pkg.days + ' days (TEST) — ' + title
                     })
                 });
                 const data = await res.json().catch(() => ({}));
@@ -822,6 +886,7 @@
                 show('Promotion checkout unavailable: ' + e.message);
             }
         }
+        updatePromoteReview();
 
         function renderProducts() {
             const grid = document.getElementById('productGrid');
