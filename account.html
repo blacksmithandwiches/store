@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your account — Blacksmith &amp; Witches Marketplace</title>
+<meta name="keywords" content="creator account, sell your ebook, creator marketplace, indie authors, Blacksmith & Witches, Dima Grossman">
+<meta name="robots" content="index,follow">
+<meta name="author" content="Dima Grossman">
+<link rel="canonical" href="https://store.blacksmithandwitches.com/account.html">
+<meta property="og:title" content="Your account — Blacksmith &amp; Witches Marketplace">
+<meta property="og:description" content="Your creator account at the Blacksmith &amp; Witches Marketplace: add your work, follow its review, and promote it once it is live. Sign in with a magic link — no password.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://store.blacksmithandwitches.com/account.html">
+<meta property="og:image" content="https://blacksmithandwitches.com/pwa-icons/icon-512.png">
+<meta property="og:site_name" content="Blacksmith &amp; Witches">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Your account — Blacksmith &amp; Witches Marketplace">
+<meta name="twitter:description" content="Your creator account at the Blacksmith &amp; Witches Marketplace: add your work, follow its review, and promote it once it is live. Sign in with a magic link — no password.">
+<meta name="twitter:image" content="https://blacksmithandwitches.com/pwa-icons/icon-512.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"Your account — Blacksmith & Witches Marketplace","url":"https://store.blacksmithandwitches.com/account.html","isPartOf":{"@type":"WebSite","name":"Blacksmith & Witches — The Marketplace","url":"https://store.blacksmithandwitches.com/"}}
+</script>
+<meta name="description" content="Your creator account at the Blacksmith &amp; Witches Marketplace: add your work, follow its review, and promote it once it is live. Sign in with a magic link — no password, no form.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandBlue: '#0F3D91',
+                        brandDarkBlue: '#0A2458',
+                        brandYellow: '#FFD000',
+                        brandYellowHover: '#E5BA00',
+                        brandBg: '#F4F8FF',
+                        brandCard: '#FFFFFF',
+                        brandText: '#1E293B',
+                        brandMuted: '#64748B'
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
+    </style>
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#005BBB">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+</head>
+<body class="bg-brandBg text-brandText min-h-screen flex flex-col font-sans selection:bg-brandYellow selection:text-brandDarkBlue">
+
+    <!-- TOP BAR NAVIGATION -->
+    <header class="bg-brandDarkBlue text-white border-b border-blue-900 sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <a href="https://store.blacksmithandwitches.com/" class="w-10 h-10 rounded-lg bg-brandYellow flex items-center justify-center font-black text-brandDarkBlue text-xl shadow">
+                    b&amp;w
+                </a>
+                <div>
+                    <a href="https://store.blacksmithandwitches.com/" class="font-bold text-lg tracking-tight hover:text-brandYellow transition">Blacksmith &amp; Witches</a>
+                    <span class="text-xs block text-blue-200 uppercase tracking-widest">The Marketplace</span>
+                </div>
+            </div>
+            <a href="https://store.blacksmithandwitches.com/" class="text-xs sm:text-sm font-semibold text-blue-100 hover:text-brandYellow transition">&larr; Back to the store</a>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="bg-gradient-to-b from-brandDarkBlue to-brandBlue text-white py-12 px-4 sm:px-6 shadow-inner">
+        <div class="max-w-4xl mx-auto text-center space-y-4">
+            <div class="inline-flex items-center space-x-2 bg-white/10 text-brandYellow px-3.5 py-1 rounded-full text-xs font-semibold tracking-wide border border-white/10">
+                <i data-lucide="user" class="w-3.5 h-3.5"></i>
+                <span>Creator account</span>
+            </div>
+            <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-white">
+                Your account
+            </h1>
+            <p class="text-blue-100 text-sm sm:text-base max-w-2xl mx-auto font-light">
+                Add your work to the Marketplace, follow its review, and promote it once it is live — all from one page.
+            </p>
+        </div>
+    </section>
+
+    <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10 flex-1">
+
+        <!-- SIGN UP / SIGN IN (signed-out view) -->
+        <section id="authSection" class="bg-white border-2 border-brandBlue rounded-2xl shadow-sm p-6 sm:p-8 space-y-4">
+            <div class="flex items-center space-x-3">
+                <span class="w-10 h-10 rounded-xl bg-brandBlue text-white flex items-center justify-center">
+                    <i data-lucide="key-round" class="w-5 h-5"></i>
+                </span>
+                <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue">Sign up / Sign in</h2>
+            </div>
+            <p class="text-sm text-slate-600 max-w-2xl">
+                Creators sign in with a magic link — no password. New here? The same link creates your account.
+            </p>
+            <p class="text-sm font-semibold text-brandDarkBlue max-w-2xl">
+                Your account is created by the link itself — no password, no form.
+            </p>
+            <form onsubmit="handleMagicLinkLogin(event)" class="space-y-4 max-w-md">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="authEmail">Creator Email</label>
+                    <input type="email" id="authEmail" required placeholder="you@domain.com" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                </div>
+                <button type="submit" id="authSubmitBtn" class="w-full py-2.5 bg-brandDarkBlue hover:bg-brandBlue text-white font-bold rounded-xl text-sm shadow transition">
+                    Send Magic Sign-In Link
+                </button>
+            </form>
+            <p class="text-[11px] text-slate-500 leading-relaxed max-w-md">One sign-in email per person at a time — if no email arrives within a few minutes, wait a little and try again.</p>
+            <div id="authFeedback" class="hidden text-xs p-3 rounded-xl bg-blue-50 text-brandDarkBlue border border-blue-200 font-medium max-w-md"></div>
+        </section>
+
+        <!-- SIGNED-IN VIEW -->
+        <div id="accountSection" class="hidden space-y-10">
+
+            <!-- ACCOUNT HEADER -->
+            <section class="bg-white border-2 border-brandBlue rounded-2xl shadow-sm p-6 sm:p-8">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue">Your account — <span id="accountEmail"></span></h2>
+                        <p class="text-sm text-slate-600 mt-1">Everything you have submitted to the Marketplace lives on this page.</p>
+                    </div>
+                    <button onclick="signOutCreator()" class="shrink-0 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-4 py-2.5 rounded-xl text-sm transition flex items-center space-x-1.5">
+                        <i data-lucide="log-out" class="w-4 h-4"></i>
+                        <span>Sign out</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- ADD YOUR WORK -->
+            <section class="bg-white border-2 border-brandYellow rounded-2xl shadow-sm p-6 sm:p-8 space-y-5">
+                <div class="flex items-center space-x-3">
+                    <span class="w-10 h-10 rounded-xl bg-brandYellow text-brandDarkBlue flex items-center justify-center">
+                        <i data-lucide="plus-circle" class="w-5 h-5"></i>
+                    </span>
+                    <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue">Add your work</h2>
+                </div>
+                <p class="text-sm text-slate-600 max-w-2xl">
+                    Listing is free. New submissions enter review as <strong>pending</strong> before going public — every submission is reviewed before it appears in the store.
+                </p>
+                <button id="addWorkBtn" onclick="toggleAddWorkForm()" class="w-full sm:w-auto bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-black text-lg px-8 py-4 rounded-2xl shadow transition">
+                    ＋ Add your work
+                </button>
+                <div id="submitSuccess" class="hidden text-sm p-4 rounded-xl bg-green-50 text-green-800 border border-green-200 font-medium max-w-2xl">
+                    <span id="submitSuccessText"></span>
+                </div>
+
+                <div id="addWorkPanel" class="hidden border-t border-slate-100 pt-6">
+                    <form id="submitForm" onsubmit="handleProductSubmit(event)" class="space-y-4 max-w-2xl">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Title</label>
+                            <input type="text" id="subTitle" required placeholder="e.g. Paul of Teraura" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Creator / Author</label>
+                                <input type="text" id="subCreator" required placeholder="e.g. Dima Grossman" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Category</label>
+                                <select id="subCategory" onchange="onSubCategoryChange()" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                                    <option value="books">Books &amp; Zines</option>
+                                    <option value="music">Music &amp; Audio</option>
+                                    <option value="games">Games</option>
+                                    <option value="apps">Apps &amp; Tools</option>
+                                    <option value="video">Video</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Price ($ USD — 0 for Free)</label>
+                                <input type="number" step="0.01" min="0" id="subPrice" required value="0.00" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Formats</label>
+                                <input type="text" id="subFormats" value="EPUB, PDF" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                            </div>
+                        </div>
+
+                        <!-- Video link fields (shown only when Category = Video) -->
+                        <div id="videoFields" class="hidden bg-blue-50/70 border border-blue-200 rounded-xl p-3.5 space-y-2.5">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-brandDarkBlue">
+                                Video URL (YouTube, TikTok, Vimeo or direct video file link)
+                            </label>
+                            <input type="url" id="subVideoUrl" placeholder="https://www.youtube.com/watch?v=..." class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                            <p class="text-[11px] text-slate-500"><strong>Submit your video — free listing.</strong> We store the link, not the file, so keep the video on your own channel. Set Price to 0 for free viewing. Videos are reviewed before they appear — nothing goes public automatically.</p>
+                        </div>
+
+                        <!-- File Upload to Supabase Storage -->
+                        <div id="fileUploadBlock" class="bg-blue-50/70 border border-blue-200 rounded-xl p-3.5 space-y-2.5">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-brandDarkBlue">
+                                Upload Release File (PDF, EPUB, Audio, Images, ZIP)
+                            </label>
+                            <input type="file" id="subFileUpload" accept=".pdf,.epub,.mp3,.flac,.wav,.zip,.jpg,.jpeg,.png,.webp,.gif" class="block w-full text-xs text-slate-600 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-brandDarkBlue file:text-white hover:file:bg-brandBlue cursor-pointer">
+                            <p class="text-[11px] text-slate-500">Uploads directly to Supabase Storage, OR leave empty and paste your own external seller checkout/download link below. Images (JPG, PNG, WEBP, GIF) are accepted too — artwork, covers, photos.</p>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">External Checkout / Download URL</label>
+                            <input type="url" id="subUrl" placeholder="https://your-checkout-or-link.com" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Short Tagline</label>
+                            <input type="text" id="subExcerpt" placeholder="A brief one-line hook for your release." class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Full Description</label>
+                            <textarea id="subDesc" rows="3" required placeholder="Detailed summary of your publication..." class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none"></textarea>
+                        </div>
+
+                        <div class="pt-2 flex justify-end space-x-3">
+                            <button type="button" onclick="toggleAddWorkForm(true)" class="px-4 py-2 bg-slate-100 text-slate-700 font-semibold rounded-xl text-sm hover:bg-slate-200 transition">Cancel</button>
+                            <button type="submit" id="submitBtn" class="px-5 py-2 bg-brandDarkBlue hover:bg-brandBlue text-white font-bold rounded-xl text-sm shadow transition">Submit for Review</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- MY WORK -->
+            <section class="bg-white border border-slate-200 rounded-2xl shadow-sm p-6 sm:p-8 space-y-4">
+                <div class="flex items-center space-x-3">
+                    <span class="w-10 h-10 rounded-xl bg-blue-50 text-brandBlue flex items-center justify-center">
+                        <i data-lucide="folder-kanban" class="w-5 h-5"></i>
+                    </span>
+                    <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue">My work</h2>
+                </div>
+                <p id="myWorkStatus" class="text-sm text-slate-500"></p>
+                <div id="myWorkList" class="divide-y divide-slate-100"></div>
+            </section>
+
+            <!-- MY PROMOTIONS -->
+            <section class="bg-white border border-slate-200 rounded-2xl shadow-sm p-6 sm:p-8 space-y-4">
+                <div class="flex items-center space-x-3">
+                    <span class="w-10 h-10 rounded-xl bg-brandYellow text-brandDarkBlue flex items-center justify-center">
+                        <i data-lucide="megaphone" class="w-5 h-5"></i>
+                    </span>
+                    <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue">My promotions</h2>
+                </div>
+                <p class="text-sm text-slate-600 max-w-2xl">
+                    Promotion is paid placement — see the packages on the Promote page.
+                </p>
+                <div id="myPromoList" class="divide-y divide-slate-100"></div>
+                <a href="promote.html" class="inline-block text-sm font-bold text-brandBlue hover:text-brandDarkBlue underline underline-offset-4 decoration-brandYellow decoration-2 transition">Open the Promote page &rarr;</a>
+            </section>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-brandDarkBlue text-blue-200 border-t border-blue-900 py-10 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+            <div class="flex items-center space-x-3">
+                <img src="https://blacksmithandwitches.com/images/bw-monogram.png" alt="Blacksmith & Witches monogram" class="w-8 h-8 rounded">
+                <span class="text-sm font-medium">© 2026 Blacksmith &amp; Witches House Platform. Powered by Supabase.</span>
+            </div>
+            <div class="flex space-x-6 text-sm">
+                <a href="https://app.blacksmithandwitches.com" class="hover:text-brandYellow transition">Main Dashboard</a>
+                <a href="https://blacksmithandwitches.com" class="hover:text-brandYellow transition">House Site</a>
+                <a href="https://t.me/StoreofBnW" class="hover:text-brandYellow transition">Telegram Store</a>
+                <a href="https://wallet.blacksmithandwitches.com" class="hover:text-brandYellow transition">BlacksmithPay</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- Creator account (Supabase magic link) ---
+        // Same project as the store and the Promote page (anon key is
+        // public by design). One magic link both signs in existing
+        // creators and creates accounts for new ones. Sessions are
+        // shared with the store (same origin).
+        const SUPABASE_URL = "https://qmamsagrouzkldylxrqk.supabase.co";
+        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFtYW1zYWdyb3V6a2xkeWx4cnFrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ0MzMxNDgsImV4cCI6MjExMDAwOTE0OH0.YJKjJbRvJ5XkVAMWuB-1_CAKmNn47smSVy4_I4foj2I";
+        let supabaseClient = null;
+        let currentUser = null;
+        let loadedForUserId = null;
+        try { supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY); } catch (e) { supabaseClient = null; }
+
+        async function handleMagicLinkLogin(e) {
+            e.preventDefault();
+            if (!supabaseClient) {
+                alert("Sign-in is unavailable right now — please try again in a moment.");
+                return;
+            }
+            const email = document.getElementById('authEmail').value.trim();
+            const btn = document.getElementById('authSubmitBtn');
+            const feedback = document.getElementById('authFeedback');
+
+            btn.disabled = true;
+            btn.innerText = "Sending Secure Link...";
+            feedback.className = "text-xs p-3 rounded-xl bg-blue-50 text-brandDarkBlue border border-blue-200 font-medium max-w-md";
+            feedback.innerText = "Connecting to auth service...";
+            feedback.classList.remove('hidden');
+
+            try {
+                const { error } = await supabaseClient.auth.signInWithOtp({
+                    email,
+                    options: { emailRedirectTo: window.location.origin }
+                });
+
+                if (error) throw error;
+
+                feedback.innerText = `Success! Magic link sent to ${email}. Check your inbox (and spam folder) to sign in instantly.`;
+            } catch (err) {
+                feedback.className = "text-xs p-3 rounded-xl bg-red-50 text-red-700 border border-red-200 font-medium max-w-md";
+                feedback.innerText = "Sign-in error: " + err.message;
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Send Magic Sign-In Link";
+            }
+        }
+
+        async function refreshAccountView() {
+            if (!supabaseClient) return;
+            try {
+                const { data: { session } } = await supabaseClient.auth.getSession();
+                const user = session && session.user ? session.user : null;
+                currentUser = user;
+                document.getElementById('authSection').classList.toggle('hidden', !!user);
+                document.getElementById('accountSection').classList.toggle('hidden', !user);
+                if (user) {
+                    document.getElementById('accountEmail').textContent = user.email || '';
+                    if (loadedForUserId !== user.id) {
+                        loadedForUserId = user.id;
+                        loadMyWork();
+                    }
+                } else {
+                    loadedForUserId = null;
+                }
+            } catch (e) { /* leave the sign-in form visible */ }
+        }
+        if (supabaseClient) {
+            supabaseClient.auth.onAuthStateChange(() => refreshAccountView());
+        }
+        refreshAccountView();
+
+        async function signOutCreator() {
+            if (supabaseClient) await supabaseClient.auth.signOut();
+            currentUser = null;
+            loadedForUserId = null;
+            refreshAccountView();
+        }
+
+        // --- Add your work (same submission flow as the store modal) ---
+        function toggleAddWorkForm(forceHide) {
+            const panel = document.getElementById('addWorkPanel');
+            const hide = forceHide === true || !panel.classList.contains('hidden');
+            panel.classList.toggle('hidden', hide);
+            if (!hide) onSubCategoryChange();
+        }
+
+        // Video submissions are link-based: show the video URL field, hide the file upload.
+        function onSubCategoryChange() {
+            const isVideo = document.getElementById('subCategory').value === 'video';
+            document.getElementById('videoFields').classList.toggle('hidden', !isVideo);
+            document.getElementById('fileUploadBlock').classList.toggle('hidden', isVideo);
+            const formatsInput = document.getElementById('subFormats');
+            if (isVideo) formatsInput.value = 'Video';
+            else if (formatsInput.value === 'Video') formatsInput.value = 'EPUB, PDF';
+        }
+
+        async function handleProductSubmit(e) {
+            e.preventDefault();
+            if (!supabaseClient || !currentUser) {
+                alert("You must be signed in with a connected Supabase project to publish.");
+                return;
+            }
+
+            const isVideo = document.getElementById('subCategory').value === 'video';
+            if (isVideo && !document.getElementById('subVideoUrl').value.trim()) {
+                alert('Please paste your video link (YouTube, TikTok, Vimeo or a direct video file URL) — video submissions are link-based.');
+                return;
+            }
+
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.innerText = "Uploading & Saving...";
+
+            try {
+                let finalUrl = isVideo
+                    ? document.getElementById('subVideoUrl').value.trim()
+                    : document.getElementById('subUrl').value.trim();
+                const fileInput = document.getElementById('subFileUpload');
+
+                // Upload file to Supabase Storage if selected (skipped for video — link-based)
+                if (!isVideo && fileInput.files && fileInput.files.length > 0) {
+                    const file = fileInput.files[0];
+                    const cleanName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+                    const filePath = `${currentUser.id}/${Date.now()}_${cleanName}`;
+
+                    const { error: uploadErr } = await supabaseClient.storage
+                        .from('catalogue-files')
+                        .upload(filePath, file);
+
+                    if (uploadErr) throw uploadErr;
+
+                    const { data: publicUrlData } = supabaseClient.storage
+                        .from('catalogue-files')
+                        .getPublicUrl(filePath);
+
+                    finalUrl = publicUrlData.publicUrl;
+                }
+
+                const submittedTitle = document.getElementById('subTitle').value;
+                const newProd = {
+                    user_id: currentUser.id,
+                    title: submittedTitle,
+                    creator: document.getElementById('subCreator').value,
+                    category: document.getElementById('subCategory').value,
+                    price: parseFloat(document.getElementById('subPrice').value) || 0,
+                    formats: document.getElementById('subFormats').value.split(',').map(s => s.trim()),
+                    status: 'pending',
+                    badge: 'New Release',
+                    excerpt: document.getElementById('subExcerpt').value,
+                    description: document.getElementById('subDesc').value,
+                    download_url: finalUrl || '#'
+                };
+
+                const { error } = await supabaseClient.from('products').insert([newProd]).select();
+                if (error) throw error;
+
+                document.getElementById('submitForm').reset();
+                onSubCategoryChange();
+                toggleAddWorkForm(true);
+                const successBox = document.getElementById('submitSuccess');
+                document.getElementById('submitSuccessText').textContent =
+                    'Submitted! “' + submittedTitle + '” is now listed below as Pending Review — it appears in the store once it is approved.';
+                successBox.classList.remove('hidden');
+                await loadMyWork();
+                successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } catch (err) {
+                alert('Submission error: ' + err.message);
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Submit for Review";
+            }
+        }
+
+        // --- My work / My promotions ---
+        const CATEGORY_NAMES = {
+            books: 'Books & Zines',
+            music: 'Music & Audio',
+            games: 'Games',
+            apps: 'Apps & Tools',
+            video: 'Video'
+        };
+        function escapeHtml(s) {
+            return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+        function priceLabel(p) {
+            return Number(p.price) === 0 ? 'Free' : '$' + Number(p.price).toFixed(2);
+        }
+        function isLive(p) {
+            return p.status === 'approved' || !p.status;
+        }
+
+        async function loadMyWork() {
+            if (!supabaseClient || !currentUser) return;
+            const statusEl = document.getElementById('myWorkStatus');
+            const listEl = document.getElementById('myWorkList');
+            const promoEl = document.getElementById('myPromoList');
+            statusEl.textContent = 'Loading your work…';
+            try {
+                const { data, error } = await supabaseClient
+                    .from('products')
+                    .select('*')
+                    .eq('user_id', currentUser.id)
+                    .order('created_at', { ascending: false });
+                if (error) throw error;
+                const rows = data || [];
+                statusEl.textContent = '';
+                renderMyWork(rows);
+                renderMyPromotions(rows);
+            } catch (err) {
+                statusEl.textContent = 'Could not load your work: ' + err.message;
+                listEl.innerHTML = '';
+                promoEl.innerHTML = '';
+            }
+        }
+
+        function renderMyWork(rows) {
+            const listEl = document.getElementById('myWorkList');
+            if (!rows || rows.length === 0) {
+                listEl.innerHTML = '<p class="text-sm text-slate-500 py-4">Nothing here yet — add your first work above.</p>';
+                return;
+            }
+            listEl.innerHTML = rows.map(p => {
+                const chip = isLive(p)
+                    ? '<span class="bg-green-100 text-green-800 border border-green-300 text-xs font-bold px-2.5 py-1 rounded-full">Live</span>'
+                    : '<span class="bg-amber-100 text-amber-800 border border-amber-300 text-xs font-bold px-2.5 py-1 rounded-full">Pending review</span>';
+                const storeLink = isLive(p)
+                    ? '<a href="https://store.blacksmithandwitches.com/" class="text-xs font-bold text-brandBlue hover:text-brandDarkBlue underline underline-offset-4 decoration-brandYellow decoration-2 transition">View in the store</a>'
+                    : '';
+                const catName = CATEGORY_NAMES[p.category] || p.category || '';
+                return `
+                <div class="py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div>
+                        <p class="font-bold text-brandDarkBlue">${escapeHtml(p.title)}</p>
+                        <p class="text-xs text-slate-500 mt-0.5">${escapeHtml(catName)} · ${priceLabel(p)} · by ${escapeHtml(p.creator)}</p>
+                    </div>
+                    <div class="flex items-center gap-3 shrink-0">
+                        ${chip}
+                        ${storeLink}
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        function renderMyPromotions(rows) {
+            const promoEl = document.getElementById('myPromoList');
+            const live = (rows || []).filter(isLive);
+            if (live.length === 0) {
+                promoEl.innerHTML = '<p class="text-sm text-slate-500 py-4">Nothing live yet — once a submission is approved, you can promote it from here.</p>';
+                return;
+            }
+            promoEl.innerHTML = live.map(p => `
+                <div class="py-4 flex items-center justify-between gap-3">
+                    <p class="font-bold text-brandDarkBlue">${escapeHtml(p.title)}</p>
+                    <a href="promote.html" class="shrink-0 bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-4 py-2 rounded-xl text-xs shadow transition">Promote</a>
+                </div>`).join('');
+        }
+
+        lucide.createIcons();
+    </script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
+}
+</script>
+</body>
+</html>
