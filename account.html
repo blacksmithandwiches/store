@@ -178,10 +178,16 @@
                         <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue">Your account — <span id="accountEmail"></span><span id="accountRoleBadge" class="hidden align-middle ml-2 bg-brandYellow text-brandDarkBlue text-xs font-black px-2.5 py-1 rounded-full uppercase tracking-wide"></span></h2>
                         <p class="text-sm text-slate-600 mt-1">Everything you have submitted to the Marketplace lives on this page.</p>
                     </div>
-                    <button onclick="signOutCreator()" class="shrink-0 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-4 py-2.5 rounded-xl text-sm transition flex items-center space-x-1.5">
-                        <i data-lucide="log-out" class="w-4 h-4"></i>
-                        <span>Sign out</span>
-                    </button>
+                    <div class="flex items-center gap-2.5 shrink-0">
+                        <a id="adminLink" href="admin.html" class="hidden bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-4 py-2.5 rounded-xl text-sm shadow transition items-center space-x-1.5">
+                            <i data-lucide="shield-check" class="w-4 h-4"></i>
+                            <span>Admin</span>
+                        </a>
+                        <button onclick="signOutCreator()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-4 py-2.5 rounded-xl text-sm transition flex items-center space-x-1.5">
+                            <i data-lucide="log-out" class="w-4 h-4"></i>
+                            <span>Sign out</span>
+                        </button>
+                    </div>
                 </div>
             </section>
 
@@ -518,6 +524,9 @@
                         el.classList.toggle('hidden', !profile);
                     });
                     if (profile) {
+                        const adminLink = document.getElementById('adminLink');
+                        adminLink.classList.toggle('hidden', profile.is_admin !== true);
+                        adminLink.classList.toggle('flex', profile.is_admin === true);
                         document.getElementById('accountEmail').textContent = profile.display_name || user.email || '';
                         const badge = document.getElementById('accountRoleBadge');
                         badge.textContent = profile.creator_role || '';
@@ -566,6 +575,26 @@
             const formatsInput = document.getElementById('subFormats');
             if (isVideo) formatsInput.value = 'Video';
             else if (formatsInput.value === 'Video') formatsInput.value = 'EPUB, PDF';
+        }
+
+        // --- Submission auto-screen (flags only — never blocks, never rejects) ---
+        // One blocklist for every submission form on the house. The screen
+        // only writes a note for the admin queue (products.moderation_note):
+        // obvious junk is flagged at a glance, everything else is marked
+        // clean. Seller links live in their own field by design and are
+        // never screened — a link is a legitimate part of a listing.
+        const SCREEN_BLOCKLIST = [
+            // profanity / slurs (compact common set)
+            'fuck', 'shit', 'bitch', 'bastard', 'whore', 'slut',
+            'nigger', 'nigga', 'faggot', 'retard', 'kike', 'spic', 'chink',
+            // spam phrases
+            'free money', 'crypto giveaway', 'click here to win', 'make money fast',
+            'double your bitcoin', 'guaranteed income', 'casino bonus', 'viagra', 'cialis'
+        ];
+        function screenSubmission(title, description) {
+            const text = ((title || '') + ' ' + (description || '')).toLowerCase();
+            const hits = SCREEN_BLOCKLIST.filter(w => text.indexOf(w) !== -1);
+            return hits.length ? 'Flagged: ' + hits.join(', ') : 'Clean (auto-screen passed)';
         }
 
         async function handleProductSubmit(e) {
@@ -624,8 +653,15 @@
                     description: document.getElementById('subDesc').value,
                     download_url: finalUrl || '#'
                 };
+                newProd.moderation_note = screenSubmission(newProd.title, newProd.description);
 
-                const { error } = await supabaseClient.from('products').insert([newProd]).select();
+                let { error } = await supabaseClient.from('products').insert([newProd]).select();
+                if (error && /moderation_note/.test(error.message || '')) {
+                    // The moderation_note column is not in place yet —
+                    // never let the screen note block a submission.
+                    delete newProd.moderation_note;
+                    ({ error } = await supabaseClient.from('products').insert([newProd]).select());
+                }
                 if (error) throw error;
 
                 document.getElementById('submitForm').reset();
@@ -633,7 +669,7 @@
                 toggleAddWorkForm(true);
                 const successBox = document.getElementById('submitSuccess');
                 document.getElementById('submitSuccessText').textContent =
-                    'Submitted! “' + submittedTitle + '” is now listed below as Pending Review — it appears in the store once it is approved.';
+                    'Submitted for review — your work appears on the storefront once a house admin approves it. “' + submittedTitle + '” is listed below as Pending Review meanwhile.';
                 successBox.classList.remove('hidden');
                 await loadMyWork();
                 successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
