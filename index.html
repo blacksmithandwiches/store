@@ -82,6 +82,7 @@
                 </div>
 
                 <div id="authLoggedIn" class="hidden flex items-center space-x-2">
+                    <span id="headerUserEmail" class="hidden lg:block text-xs text-blue-200 max-w-[190px] truncate"></span>
                     <a href="account.html" class="bg-blue-900/80 hover:bg-blue-800 text-blue-100 border border-blue-700 font-semibold px-3 py-2 rounded-lg text-xs transition flex items-center space-x-1.5">
                         <i data-lucide="user" class="w-3.5 h-3.5 text-brandYellow"></i>
                         <span>My account</span>
@@ -103,8 +104,8 @@
     </header>
 
     <!-- HERO BANNER -->
-    <section class="bg-gradient-to-b from-brandDarkBlue to-brandBlue text-white py-12 px-4 sm:px-6 shadow-inner">
-        <div class="max-w-4xl mx-auto text-center space-y-4">
+    <section class="bg-gradient-to-b from-brandDarkBlue to-brandBlue text-white py-14 px-4 sm:px-6 shadow-inner border-b-4 border-brandYellow">
+        <div class="max-w-4xl mx-auto text-center space-y-5">
             <img src="https://blacksmithandwitches.com/images/bw-emblem.webp" alt="Blacksmith & Witches emblem" class="h-16 sm:h-20 w-auto mx-auto">
             <div class="inline-flex items-center space-x-2 bg-white/10 text-brandYellow px-3.5 py-1 rounded-full text-xs font-semibold tracking-wide border border-white/10">
                 <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
@@ -116,6 +117,25 @@
             <p class="text-blue-100 text-sm sm:text-base max-w-2xl mx-auto font-light">
                 Explore flagship dark sci-fi series, zines, audio releases, games, and independent apps. Direct downloads or straight to the creator's checkout—house takes nothing.
             </p>
+        </div>
+    </section>
+
+    <!-- BECOME A CREATOR -->
+    <section class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+        <div class="bg-white border-2 border-brandYellow rounded-2xl shadow-sm hover:shadow transition px-5 py-5 sm:px-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                    <p class="text-xs font-bold uppercase tracking-widest text-brandBlue">For creators</p>
+                    <p class="text-sm text-slate-600 mt-1"><strong class="text-brandDarkBlue">Become a creator:</strong> listing is free, you sell through your own link, and promotion is optional.</p>
+                </div>
+                <a href="account.html" class="shrink-0 bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-5 py-2.5 rounded-xl text-sm shadow transition text-center">Create your account</a>
+            </div>
+            <div class="border-t border-slate-100 mt-4 pt-3.5 flex flex-wrap gap-x-6 gap-y-1.5 text-xs font-semibold text-slate-500">
+                <span><strong id="worksCountFact" class="text-brandDarkBlue">…</strong> works live</span>
+                <span>Listing <strong class="text-brandDarkBlue">free</strong></span>
+                <span>You keep <strong class="text-brandDarkBlue">your own checkout</strong></span>
+                <span>Promote from <strong class="text-brandDarkBlue">CAD $1</strong></span>
+            </div>
         </div>
     </section>
 
@@ -238,6 +258,10 @@
                 <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Search title, creator..." class="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brandBlue transition">
             </div>
         </div>
+
+        <!-- SHELF STATUS & RESULT COUNT -->
+        <p id="shelfStatus" class="hidden text-xs font-semibold text-amber-700 bg-amber-50 border border-amber-200 rounded-xl px-3.5 py-2"></p>
+        <p id="resultCount" class="text-xs font-bold uppercase tracking-widest text-slate-500"></p>
 
         <!-- PRODUCTS GRID -->
         <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
@@ -854,9 +878,13 @@
                 outEl.classList.add('hidden');
                 inEl.classList.remove('hidden');
                 document.getElementById('creatorEmailDisplay').innerText = `Signed in as ${user.email}`;
+                const headerEmail = document.getElementById('headerUserEmail');
+                headerEmail.innerText = user.email || '';
+                headerEmail.title = user.email || '';
             } else {
                 outEl.classList.remove('hidden');
                 inEl.classList.add('hidden');
+                document.getElementById('headerUserEmail').innerText = '';
                 showOnlyMyWorks = false;
                 document.getElementById('myWorksBanner').classList.add('hidden');
             }
@@ -870,13 +898,27 @@
                     .from('products')
                     .select('*')
                     .order('created_at', { ascending: false });
+                if (error) throw error;
                 if (data && data.length > 0) {
                     products = data;
+                    document.getElementById('shelfStatus').classList.add('hidden');
                     renderProducts();
+                } else {
+                    showShelfFallbackNote();
                 }
             } catch (err) {
                 console.log("Using local fallback products:", err);
+                showShelfFallbackNote();
             }
+        }
+
+        // The in-page fallback array is the house shelf — if the live
+        // catalogue cannot be loaded, say so plainly above the grid
+        // instead of presenting the fallback as if it were live data.
+        function showShelfFallbackNote() {
+            const el = document.getElementById('shelfStatus');
+            el.textContent = 'The live catalogue could not be loaded — showing the house shelf.';
+            el.classList.remove('hidden');
         }
 
         function toggleMyWorksView() {
@@ -1065,6 +1107,14 @@
 
             // Promoted listings first (stable: fetch order kept within each group).
             filtered.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
+
+            // Live counts, computed from the current list at runtime:
+            // the result line follows search/filtering; the creator-strip
+            // fact counts the works actually live (approved) right now.
+            const resultCountEl = document.getElementById('resultCount');
+            if (resultCountEl) resultCountEl.textContent = filtered.length + (filtered.length === 1 ? ' work' : ' works');
+            const factEl = document.getElementById('worksCountFact');
+            if (factEl) factEl.textContent = products.filter(p => p.status === 'approved' || !p.status).length;
 
             if (filtered.length === 0) {
                 empty.classList.remove('hidden');

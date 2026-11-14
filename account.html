@@ -97,10 +97,7 @@
                 <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue">Sign up / Sign in</h2>
             </div>
             <p class="text-sm text-slate-600 max-w-2xl">
-                Creators sign in with a magic link — no password. New here? The same link creates your account.
-            </p>
-            <p class="text-sm font-semibold text-brandDarkBlue max-w-2xl">
-                Your account is created by the link itself — no password, no form.
+                Creators sign in with a magic link — the link verifies your email. New here? The same link starts your account; you then complete it with your creator name, your classification, and a password for next time.
             </p>
             <form onsubmit="handleMagicLinkLogin(event)" class="space-y-4 max-w-md">
                 <div>
@@ -113,16 +110,72 @@
             </form>
             <p class="text-[11px] text-slate-500 leading-relaxed max-w-md">One sign-in email per person at a time — if no email arrives within a few minutes, wait a little and try again.</p>
             <div id="authFeedback" class="hidden text-xs p-3 rounded-xl bg-blue-50 text-brandDarkBlue border border-blue-200 font-medium max-w-md"></div>
+
+            <div class="border-t border-slate-100 pt-5 space-y-3">
+                <h3 class="text-base font-black tracking-tight text-brandDarkBlue">Already set a password?</h3>
+                <p class="text-sm text-slate-600 max-w-md">If you completed your account and created a password, sign in with email + password — no email link needed.</p>
+                <form onsubmit="handlePasswordLogin(event)" class="space-y-3 max-w-md">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="pwEmail">Email</label>
+                        <input type="email" id="pwEmail" required placeholder="you@domain.com" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="pwPassword">Password</label>
+                        <input type="password" id="pwPassword" required placeholder="Your password" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                    </div>
+                    <button type="submit" id="pwSubmitBtn" class="w-full py-2.5 bg-brandBlue hover:bg-brandDarkBlue text-white font-bold rounded-xl text-sm shadow transition">Sign in with password</button>
+                </form>
+                <div id="pwFeedback" class="hidden text-xs p-3 rounded-xl bg-blue-50 text-brandDarkBlue border border-blue-200 font-medium max-w-md"></div>
+            </div>
         </section>
 
         <!-- SIGNED-IN VIEW -->
         <div id="accountSection" class="hidden space-y-10">
 
+            <!-- COMPLETE YOUR ACCOUNT (shown until a creator profile exists) -->
+            <section id="profileSetupSection" class="hidden bg-white border-2 border-brandYellow rounded-2xl shadow-sm p-6 sm:p-8 space-y-5">
+                <div class="flex items-center space-x-3">
+                    <span class="w-10 h-10 rounded-xl bg-brandYellow text-brandDarkBlue flex items-center justify-center">
+                        <i data-lucide="user-plus" class="w-5 h-5"></i>
+                    </span>
+                    <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue">Complete your account</h2>
+                </div>
+                <p class="text-sm text-slate-600 max-w-2xl">
+                    You are signed in as <strong id="setupAccountEmail"></strong>. One short form finishes your creator account — your name, your classification, and a password, so next time you can sign in directly without waiting for an email.
+                </p>
+                <form onsubmit="handleProfileSetup(event)" class="space-y-4 max-w-md">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="setupName">Creator / Pen Name</label>
+                        <input type="text" id="setupName" required placeholder="e.g. Dima Grossman" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="setupRole">Classification</label>
+                        <select id="setupRole" required class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                            <option value="">Select your craft...</option>
+                            <option value="Artist">Artist</option>
+                            <option value="Writer">Writer</option>
+                            <option value="Musician">Musician</option>
+                            <option value="Film Creator">Film Creator</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="setupBio">Bio <span class="normal-case font-semibold text-slate-400">(optional)</span></label>
+                        <textarea id="setupBio" rows="2" placeholder="A line or two about you and your work." class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="setupPassword">Create Password</label>
+                        <input type="password" id="setupPassword" required minlength="8" placeholder="Minimum 8 characters" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                    </div>
+                    <button type="submit" id="setupSubmitBtn" class="w-full py-2.5 bg-brandDarkBlue hover:bg-brandBlue text-white font-bold rounded-xl text-sm shadow transition">Save &amp; finish my account</button>
+                    <div id="setupFeedback" class="hidden text-xs p-3 rounded-xl bg-blue-50 text-brandDarkBlue border border-blue-200 font-medium"></div>
+                </form>
+            </section>
+
             <!-- ACCOUNT HEADER -->
-            <section class="bg-white border-2 border-brandBlue rounded-2xl shadow-sm p-6 sm:p-8">
+            <section class="profile-gated bg-white border-2 border-brandBlue rounded-2xl shadow-sm p-6 sm:p-8">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
-                        <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue">Your account — <span id="accountEmail"></span></h2>
+                        <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue">Your account — <span id="accountEmail"></span><span id="accountRoleBadge" class="hidden align-middle ml-2 bg-brandYellow text-brandDarkBlue text-xs font-black px-2.5 py-1 rounded-full uppercase tracking-wide"></span></h2>
                         <p class="text-sm text-slate-600 mt-1">Everything you have submitted to the Marketplace lives on this page.</p>
                     </div>
                     <button onclick="signOutCreator()" class="shrink-0 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-4 py-2.5 rounded-xl text-sm transition flex items-center space-x-1.5">
@@ -133,7 +186,7 @@
             </section>
 
             <!-- ADD YOUR WORK -->
-            <section class="bg-white border-2 border-brandYellow rounded-2xl shadow-sm p-6 sm:p-8 space-y-5">
+            <section class="profile-gated bg-white border-2 border-brandYellow rounded-2xl shadow-sm p-6 sm:p-8 space-y-5">
                 <div class="flex items-center space-x-3">
                     <span class="w-10 h-10 rounded-xl bg-brandYellow text-brandDarkBlue flex items-center justify-center">
                         <i data-lucide="plus-circle" class="w-5 h-5"></i>
@@ -225,7 +278,7 @@
             </section>
 
             <!-- MY WORK -->
-            <section class="bg-white border border-slate-200 rounded-2xl shadow-sm p-6 sm:p-8 space-y-4">
+            <section class="profile-gated bg-white border border-slate-200 rounded-2xl shadow-sm p-6 sm:p-8 space-y-4">
                 <div class="flex items-center space-x-3">
                     <span class="w-10 h-10 rounded-xl bg-blue-50 text-brandBlue flex items-center justify-center">
                         <i data-lucide="folder-kanban" class="w-5 h-5"></i>
@@ -237,7 +290,7 @@
             </section>
 
             <!-- MY PROMOTIONS -->
-            <section class="bg-white border border-slate-200 rounded-2xl shadow-sm p-6 sm:p-8 space-y-4">
+            <section class="profile-gated bg-white border border-slate-200 rounded-2xl shadow-sm p-6 sm:p-8 space-y-4">
                 <div class="flex items-center space-x-3">
                     <span class="w-10 h-10 rounded-xl bg-brandYellow text-brandDarkBlue flex items-center justify-center">
                         <i data-lucide="megaphone" class="w-5 h-5"></i>
@@ -280,6 +333,8 @@
         let supabaseClient = null;
         let currentUser = null;
         let loadedForUserId = null;
+        let currentProfile = null;
+        let profileLoadedForId = null;
         try { supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth: { flowType: 'implicit', detectSessionInUrl: true, persistSession: true, autoRefreshToken: true } }); } catch (e) { supabaseClient = null; }
 
         // Session recovery for magic-link returns (same pattern as the
@@ -360,6 +415,93 @@
             }
         }
 
+        async function handlePasswordLogin(e) {
+            e.preventDefault();
+            if (!supabaseClient) {
+                alert("Sign-in is unavailable right now — please try again in a moment.");
+                return;
+            }
+            const email = document.getElementById('pwEmail').value.trim();
+            const password = document.getElementById('pwPassword').value;
+            const btn = document.getElementById('pwSubmitBtn');
+            const feedback = document.getElementById('pwFeedback');
+
+            btn.disabled = true;
+            btn.innerText = "Signing in...";
+            feedback.className = "text-xs p-3 rounded-xl bg-blue-50 text-brandDarkBlue border border-blue-200 font-medium max-w-md";
+            feedback.innerText = "Connecting to auth service...";
+            feedback.classList.remove('hidden');
+
+            try {
+                const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+                if (error) throw error;
+                feedback.innerText = "Signed in — welcome back.";
+                // onAuthStateChange refreshes the view into the account.
+            } catch (err) {
+                feedback.className = "text-xs p-3 rounded-xl bg-red-50 text-red-700 border border-red-200 font-medium max-w-md";
+                feedback.innerText = "Sign-in error: " + err.message;
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Sign in with password";
+            }
+        }
+
+        // Creator profile (public.profiles): one row per auth user with
+        // display_name + creator_role. A signed-in user WITHOUT a profile
+        // sees the "Complete your account" form instead of the studio.
+        async function loadProfile(user) {
+            if (profileLoadedForId === user.id) return currentProfile;
+            profileLoadedForId = user.id;
+            currentProfile = null;
+            try {
+                const { data, error } = await supabaseClient
+                    .from('profiles')
+                    .select('*')
+                    .eq('id', user.id)
+                    .maybeSingle();
+                if (!error && data) currentProfile = data;
+            } catch (e) { /* no readable profile — treat as not completed */ }
+            return currentProfile;
+        }
+
+        async function handleProfileSetup(e) {
+            e.preventDefault();
+            if (!supabaseClient || !currentUser) return;
+            const name = document.getElementById('setupName').value.trim();
+            const role = document.getElementById('setupRole').value;
+            const bio = document.getElementById('setupBio').value.trim();
+            const password = document.getElementById('setupPassword').value;
+            const btn = document.getElementById('setupSubmitBtn');
+            const feedback = document.getElementById('setupFeedback');
+            const showError = (msg) => {
+                feedback.className = "text-xs p-3 rounded-xl bg-red-50 text-red-700 border border-red-200 font-medium";
+                feedback.innerText = msg;
+                feedback.classList.remove('hidden');
+            };
+
+            if (!name) { showError('Please enter your creator / pen name.'); return; }
+            if (!role) { showError('Please choose your classification.'); return; }
+            if (!password || password.length < 8) { showError('Please choose a password of at least 8 characters.'); return; }
+
+            btn.disabled = true;
+            btn.innerText = "Saving...";
+            try {
+                const { error: pwErr } = await supabaseClient.auth.updateUser({ password });
+                if (pwErr) throw new Error('Password: ' + pwErr.message);
+                const { error: insErr } = await supabaseClient
+                    .from('profiles')
+                    .insert([{ id: currentUser.id, display_name: name, creator_role: role, bio: bio || null }]);
+                if (insErr) throw new Error('Profile: ' + insErr.message);
+                profileLoadedForId = null; // force a fresh profile read
+                await refreshAccountView();
+            } catch (err) {
+                showError('Could not finish your account: ' + err.message);
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Save & finish my account";
+            }
+        }
+
         async function refreshAccountView() {
             if (!supabaseClient) return;
             try {
@@ -369,13 +511,28 @@
                 document.getElementById('authSection').classList.toggle('hidden', !!user);
                 document.getElementById('accountSection').classList.toggle('hidden', !user);
                 if (user) {
-                    document.getElementById('accountEmail').textContent = user.email || '';
-                    if (loadedForUserId !== user.id) {
-                        loadedForUserId = user.id;
-                        loadMyWork();
+                    document.getElementById('setupAccountEmail').textContent = user.email || '';
+                    const profile = await loadProfile(user);
+                    document.getElementById('profileSetupSection').classList.toggle('hidden', !!profile);
+                    document.querySelectorAll('#accountSection .profile-gated').forEach(el => {
+                        el.classList.toggle('hidden', !profile);
+                    });
+                    if (profile) {
+                        document.getElementById('accountEmail').textContent = profile.display_name || user.email || '';
+                        const badge = document.getElementById('accountRoleBadge');
+                        badge.textContent = profile.creator_role || '';
+                        badge.classList.toggle('hidden', !profile.creator_role);
+                        const creatorInput = document.getElementById('subCreator');
+                        if (creatorInput && !creatorInput.value) creatorInput.value = profile.display_name || '';
+                        if (loadedForUserId !== user.id) {
+                            loadedForUserId = user.id;
+                            loadMyWork();
+                        }
                     }
                 } else {
                     loadedForUserId = null;
+                    profileLoadedForId = null;
+                    currentProfile = null;
                 }
             } catch (e) { /* leave the sign-in form visible */ }
         }
@@ -388,6 +545,8 @@
             if (supabaseClient) await supabaseClient.auth.signOut();
             currentUser = null;
             loadedForUserId = null;
+            profileLoadedForId = null;
+            currentProfile = null;
             refreshAccountView();
         }
 
