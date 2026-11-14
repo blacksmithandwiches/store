@@ -68,11 +68,6 @@
             </div>
 
             <div class="flex items-center space-x-3">
-                <button onclick="openDbModal()" class="hidden md:flex items-center space-x-1.5 text-xs bg-blue-900/80 hover:bg-blue-900 text-blue-100 px-3 py-1.5 rounded-full border border-blue-700 transition">
-                    <i data-lucide="database" class="w-3.5 h-3.5 text-brandYellow"></i>
-                    <span id="dbStatusText">Configure DB</span>
-                </button>
-
                 <!-- Auth Controls -->
                 <div id="authLoggedOut">
                     <button onclick="openAuthModal()" class="bg-blue-900/80 hover:bg-blue-800 text-white border border-blue-700 font-semibold px-3.5 py-2 rounded-lg text-sm transition flex items-center space-x-1.5">
@@ -509,30 +504,6 @@
         </div>
     </div>
 
-    <!-- SUPABASE CONFIG MODAL -->
-    <div id="dbModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 space-y-4">
-            <div class="flex items-center justify-between border-b pb-3">
-                <h3 class="font-bold text-brandDarkBlue">Supabase Connection Settings</h3>
-                <button onclick="closeDbModal()" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
-            </div>
-            <p class="text-xs text-slate-500">Paste your Supabase project credentials below to connect your live database, Auth, and Storage.</p>
-            <div class="space-y-3">
-                <div>
-                    <label class="block text-xs font-bold text-slate-600 mb-1">Project URL</label>
-                    <input type="text" id="cfgUrl" placeholder="https://qmamsagrouzkldylxrqk.supabase.co" class="w-full px-3 py-2 bg-slate-50 border rounded-xl text-xs font-mono">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-slate-600 mb-1">Anon / Publishable Key</label>
-                    <input type="password" id="cfgKey" placeholder="eyJhbGciOi..." class="w-full px-3 py-2 bg-slate-50 border rounded-xl text-xs font-mono">
-                </div>
-            </div>
-            <div class="pt-2 flex justify-end space-x-2">
-                <button onclick="saveDbConfig()" class="w-full py-2.5 bg-brandDarkBlue text-white font-bold rounded-xl text-sm hover:bg-brandBlue transition">Save & Connect</button>
-            </div>
-        </div>
-    </div>
-
     <!-- SCRIPT LOGIC -->
     <script>
         let DEFAULT_SUPABASE_URL = "https://qmamsagrouzkldylxrqk.supabase.co";
@@ -852,16 +823,16 @@
         }
 
         async function initSupabase() {
-            const savedUrl = localStorage.getItem('bw_sb_url') || DEFAULT_SUPABASE_URL;
-            const savedKey = localStorage.getItem('bw_sb_key') || DEFAULT_SUPABASE_ANON_KEY;
+            // Baked-in project config is the single init path (Nov 14, 2026:
+            // the public "Supabase Connection Settings" panel was removed).
+            const savedUrl = DEFAULT_SUPABASE_URL;
+            const savedKey = DEFAULT_SUPABASE_ANON_KEY;
 
             if (savedUrl && savedKey && savedUrl !== "YOUR_SUPABASE_URL") {
                 try {
                     supabaseClient = window.supabase.createClient(savedUrl, savedKey, {
                         auth: { flowType: 'implicit', detectSessionInUrl: true, persistSession: true, autoRefreshToken: true }
                     });
-                    document.getElementById('dbStatusText').innerText = "Connected DB";
-
                     // Magic Link return: recover the session from whichever
                     // form the link came back in before rendering auth state.
                     const session = await recoverSession();
@@ -1242,7 +1213,7 @@
         async function handleMagicLinkLogin(e) {
             e.preventDefault();
             if (!supabaseClient) {
-                alert("Please configure your Supabase URL & Anon Key first via 'Configure DB'.");
+                alert("Sign-in is unavailable right now — please reload the page and try again.");
                 return;
             }
             const email = document.getElementById('authEmail').value.trim();
@@ -1410,19 +1381,6 @@
             }
             products = products.filter(p => p.id !== id);
             renderProducts();
-        }
-
-        // DB Config Modal
-        function openDbModal() { document.getElementById('dbModal').classList.remove('hidden'); }
-        function closeDbModal() { document.getElementById('dbModal').classList.add('hidden'); }
-        function saveDbConfig() {
-            const url = document.getElementById('cfgUrl').value.trim();
-            const key = document.getElementById('cfgKey').value.trim();
-            if (url && key) {
-                localStorage.setItem('bw_sb_url', url);
-                localStorage.setItem('bw_sb_key', key);
-                location.reload();
-            }
         }
 
         window.onload = () => {
