@@ -845,6 +845,9 @@
                 return matchesCat && matchesSearch;
             });
 
+            // Promoted listings first (stable: fetch order kept within each group).
+            filtered.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
+
             if (filtered.length === 0) {
                 empty.classList.remove('hidden');
                 return;
