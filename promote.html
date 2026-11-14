@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promote your work — Blacksmith &amp; Witches Marketplace</title>
+<meta name="keywords" content="promote your work, featured placement, creator marketplace, BW Stage, sell your ebook, indie authors, Blacksmith & Witches, Dima Grossman">
+<meta name="robots" content="index,follow">
+<meta name="author" content="Dima Grossman">
+<link rel="canonical" href="https://store.blacksmithandwitches.com/promote.html">
+<meta property="og:title" content="Promote your work — Blacksmith &amp; Witches Marketplace">
+<meta property="og:description" content="Featured placement at the top of the Blacksmith &amp; Witches Marketplace and in the BW Stage feed — sold by the day, priced in CAD. Listing is always free; promotion is optional.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://store.blacksmithandwitches.com/promote.html">
+<meta property="og:image" content="https://blacksmithandwitches.com/pwa-icons/icon-512.png">
+<meta property="og:site_name" content="Blacksmith &amp; Witches">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Promote your work — Blacksmith &amp; Witches Marketplace">
+<meta name="twitter:description" content="Featured placement at the top of the Blacksmith &amp; Witches Marketplace and in the BW Stage feed — sold by the day, priced in CAD. Listing is always free; promotion is optional.">
+<meta name="twitter:image" content="https://blacksmithandwitches.com/pwa-icons/icon-512.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"Promote your work — Blacksmith & Witches Marketplace","url":"https://store.blacksmithandwitches.com/promote.html","isPartOf":{"@type":"WebSite","name":"Blacksmith & Witches — The Marketplace","url":"https://store.blacksmithandwitches.com/"}}
+</script>
+<meta name="description" content="Promote your work on the Blacksmith &amp; Witches Marketplace: featured placement at the top of the store and in the BW Stage feed, sold by the day, priced in CAD. Listing is always free — promotion is optional.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandBlue: '#0F3D91',
+                        brandDarkBlue: '#0A2458',
+                        brandYellow: '#FFD000',
+                        brandYellowHover: '#E5BA00',
+                        brandBg: '#F4F8FF',
+                        brandCard: '#FFFFFF',
+                        brandText: '#1E293B',
+                        brandMuted: '#64748B'
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
+    </style>
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#005BBB">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+</head>
+<body class="bg-brandBg text-brandText min-h-screen flex flex-col font-sans selection:bg-brandYellow selection:text-brandDarkBlue">
+
+    <!-- TOP BAR NAVIGATION -->
+    <header class="bg-brandDarkBlue text-white border-b border-blue-900 sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <a href="https://store.blacksmithandwitches.com/" class="w-10 h-10 rounded-lg bg-brandYellow flex items-center justify-center font-black text-brandDarkBlue text-xl shadow">
+                    b&amp;w
+                </a>
+                <div>
+                    <a href="https://store.blacksmithandwitches.com/" class="font-bold text-lg tracking-tight hover:text-brandYellow transition">Blacksmith &amp; Witches</a>
+                    <span class="text-xs block text-blue-200 uppercase tracking-widest">The Marketplace</span>
+                </div>
+            </div>
+            <a href="https://store.blacksmithandwitches.com/" class="text-xs sm:text-sm font-semibold text-blue-100 hover:text-brandYellow transition">&larr; Back to the store</a>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="bg-gradient-to-b from-brandDarkBlue to-brandBlue text-white py-12 px-4 sm:px-6 shadow-inner">
+        <div class="max-w-4xl mx-auto text-center space-y-4">
+            <div class="inline-flex items-center space-x-2 bg-white/10 text-brandYellow px-3.5 py-1 rounded-full text-xs font-semibold tracking-wide border border-white/10">
+                <i data-lucide="megaphone" class="w-3.5 h-3.5"></i>
+                <span>Featured placement, sold by the day</span>
+            </div>
+            <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-white">
+                Promote your work
+            </h1>
+            <p class="text-blue-100 text-sm sm:text-base max-w-2xl mx-auto font-light">
+                Featured placement at the top of the Marketplace and in the BW Stage feed — sold by the day, priced in CAD.
+            </p>
+            <p class="text-sm font-semibold text-brandYellow">
+                Listing is always free — promotion is optional.
+            </p>
+        </div>
+    </section>
+
+    <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10 flex-1">
+
+        <!-- HOW IT WORKS -->
+        <section class="space-y-4">
+            <h2 class="text-lg sm:text-xl font-black tracking-tight text-brandDarkBlue">How it works</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-2">
+                    <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center"><i data-lucide="upload-cloud" class="w-5 h-5"></i></span>
+                    <h3 class="font-bold text-brandDarkBlue text-sm">1 · Submit your work — free</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">List your book, music, art or video at the Marketplace. Listing is always free.</p>
+                    <a href="https://store.blacksmithandwitches.com/" class="inline-block text-xs font-bold text-brandBlue hover:text-brandDarkBlue underline underline-offset-4 decoration-brandYellow decoration-2 transition">List your work at the Marketplace &rarr;</a>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-2">
+                    <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center"><i data-lucide="shield-check" class="w-5 h-5"></i></span>
+                    <h3 class="font-bold text-brandDarkBlue text-sm">2 · It is reviewed</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">A human reviews every submission before it appears in the store — nothing goes up automatically.</p>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-2">
+                    <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center"><i data-lucide="megaphone" class="w-5 h-5"></i></span>
+                    <h3 class="font-bold text-brandDarkBlue text-sm">3 · Promote it</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">When you want the top spot, pick a goal and a package below and secure your promotion.</p>
+                </div>
+            </div>
+        </section>
+
+<!-- SIGN UP / SIGN IN -->
+        <section id="auth" class="bg-white border-2 border-brandBlue rounded-2xl shadow-sm p-6 sm:p-8 space-y-4">
+            <div class="flex items-center space-x-3">
+                <span class="w-10 h-10 rounded-xl bg-brandBlue text-white flex items-center justify-center">
+                    <i data-lucide="key-round" class="w-5 h-5"></i>
+                </span>
+                <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue">Sign up / Sign in</h2>
+            </div>
+            <p class="text-sm text-slate-600 max-w-2xl">
+                Creators sign in with a magic link — no password. New here? The same link creates your account.
+            </p>
+            <div id="authSignedOut">
+                <form onsubmit="handleMagicLinkLogin(event)" class="space-y-4 max-w-md">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="authEmail">Creator Email</label>
+                        <input type="email" id="authEmail" required placeholder="you@domain.com" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                    </div>
+                    <button type="submit" id="authSubmitBtn" class="w-full py-2.5 bg-brandDarkBlue hover:bg-brandBlue text-white font-bold rounded-xl text-sm shadow transition">
+                        Send Magic Sign-In Link
+                    </button>
+                </form>
+                <p class="text-[11px] text-slate-500 leading-relaxed mt-3 max-w-md">One sign-in email per person at a time — if no email arrives within a few minutes, wait a little and try again.</p>
+                <div id="authFeedback" class="hidden text-xs p-3 rounded-xl bg-blue-50 text-brandDarkBlue border border-blue-200 font-medium mt-3 max-w-md"></div>
+            </div>
+            <div id="authSignedIn" class="hidden">
+                <p class="text-sm font-semibold text-brandDarkBlue">Signed in as <span id="authEmailLabel"></span></p>
+                <p class="text-xs text-slate-500 mt-1">You can submit your work at the Marketplace and promote it below.</p>
+            </div>
+        </section>
+
+<!-- PROMOTE YOUR WORK -->
+        <section id="promote" class="bg-white border-2 border-brandYellow rounded-2xl shadow-sm p-6 sm:p-8 space-y-6">
+            <div class="flex items-center space-x-3">
+                <span class="w-10 h-10 rounded-xl bg-brandYellow text-brandDarkBlue flex items-center justify-center">
+                    <i data-lucide="megaphone" class="w-5 h-5"></i>
+                </span>
+                <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue">Promote your work</h2>
+            </div>
+            <p class="text-sm text-slate-600 max-w-2xl">
+                Select your listing, choose a placement goal and package below, and secure your promotion. Checkout runs in TEST mode — no real charge.
+            </p>
+            <div class="max-w-2xl">
+                <label for="promoteTitle" class="block text-xs font-bold uppercase tracking-wider text-brandDarkBlue mb-1.5">1 · Pick your listing</label>
+                <input type="text" id="promoteTitle" oninput="updatePromoteReview()" placeholder="Listing title — exactly as it appears in the store" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brandBlue transition">
+            </div>
+            <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-brandDarkBlue mb-2">2 · Pick a goal</label>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-3xl">
+                    <label class="promote-goal block cursor-pointer border-2 rounded-2xl p-4 transition bg-slate-50 border-slate-200">
+                        <input type="radio" name="promoteGoal" value="store" class="sr-only" onchange="onGoalChange('store')" checked>
+                        <span class="block font-black text-brandDarkBlue text-sm">Top of the store</span>
+                        <span class="block text-xs text-slate-600 mt-1">Leads the store&rsquo;s Featured row with a Promoted badge.</span>
+                    </label>
+                    <label class="promote-goal block cursor-pointer border-2 rounded-2xl p-4 transition bg-slate-50 border-slate-200">
+                        <input type="radio" name="promoteGoal" value="stage" class="sr-only" onchange="onGoalChange('stage')">
+                        <span class="block font-black text-brandDarkBlue text-sm">In the Stage feed</span>
+                        <span class="block text-xs text-slate-600 mt-1">Gets a slot in the BW Stage video feed.</span>
+                    </label>
+                    <label class="promote-goal block cursor-pointer border-2 rounded-2xl p-4 transition bg-slate-50 border-slate-200">
+                        <input type="radio" name="promoteGoal" value="everywhere" class="sr-only" onchange="onGoalChange('everywhere')">
+                        <span class="block font-black text-brandDarkBlue text-sm">Everywhere</span>
+                        <span class="block text-xs text-slate-600 mt-1">Store + Stage feed + one Telegram channel post.</span>
+                    </label>
+                </div>
+            </div>
+            <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-brandDarkBlue mb-2">3 · Pick a package</label>
+                <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-3 max-w-5xl">
+                    <label class="promote-pkg block cursor-pointer border-2 rounded-2xl p-4 transition bg-slate-50 border-slate-200">
+                        <input type="radio" name="promotePkg" value="trial" class="sr-only" onchange="updatePromoteReview()">
+                        <span class="flex items-center justify-between">
+                            <span class="font-black text-brandDarkBlue">Trial</span>
+                            <span class="text-lg font-black text-brandDarkBlue">CAD $1</span>
+                        </span>
+                        <span class="block text-xs font-bold text-brandBlue mt-0.5">1 day</span>
+                        <span class="block text-xs text-slate-600 mt-2">Featured row + Promoted badge.</span>
+                    </label>
+                    <label class="promote-pkg block cursor-pointer border-2 rounded-2xl p-4 transition bg-slate-50 border-slate-200">
+                        <input type="radio" name="promotePkg" value="starter" class="sr-only" onchange="updatePromoteReview()">
+                        <span class="flex items-center justify-between">
+                            <span class="font-black text-brandDarkBlue">Starter</span>
+                            <span class="text-lg font-black text-brandDarkBlue">CAD $3</span>
+                        </span>
+                        <span class="block text-xs font-bold text-brandBlue mt-0.5">3 days</span>
+                        <span class="block text-xs text-slate-600 mt-2">Featured row + Promoted badge.</span>
+                    </label>
+                    <label class="promote-pkg block cursor-pointer border-2 rounded-2xl p-4 transition bg-slate-50 border-slate-200">
+                        <input type="radio" name="promotePkg" value="featured" class="sr-only" onchange="updatePromoteReview()" checked>
+                        <span class="flex items-center justify-between">
+                            <span class="font-black text-brandDarkBlue">Featured ⭐</span>
+                            <span class="text-lg font-black text-brandDarkBlue">CAD $5</span>
+                        </span>
+                        <span class="block text-xs font-bold text-brandBlue mt-0.5">7 days</span>
+                        <span class="inline-block bg-brandYellow text-brandDarkBlue text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wide mt-1.5">Most popular</span>
+                        <span class="block text-xs text-slate-600 mt-2">Featured row + badge + BW Stage feed slot.</span>
+                    </label>
+                    <label class="promote-pkg block cursor-pointer border-2 rounded-2xl p-4 transition bg-slate-50 border-slate-200">
+                        <input type="radio" name="promotePkg" value="spotlight" class="sr-only" onchange="updatePromoteReview()">
+                        <span class="flex items-center justify-between">
+                            <span class="font-black text-brandDarkBlue">Spotlight</span>
+                            <span class="text-lg font-black text-brandDarkBlue">CAD $9</span>
+                        </span>
+                        <span class="block text-xs font-bold text-brandBlue mt-0.5">14 days</span>
+                        <span class="block text-xs text-slate-600 mt-2">Featured row + badge + Stage slot + Telegram post.</span>
+                    </label>
+                    <label class="promote-pkg block cursor-pointer border-2 rounded-2xl p-4 transition bg-slate-50 border-slate-200">
+                        <input type="radio" name="promotePkg" value="top" class="sr-only" onchange="updatePromoteReview()">
+                        <span class="flex items-center justify-between">
+                            <span class="font-black text-brandDarkBlue">Top</span>
+                            <span class="text-lg font-black text-brandDarkBlue">CAD $15</span>
+                        </span>
+                        <span class="block text-xs font-bold text-brandBlue mt-0.5">30 days</span>
+                        <span class="block text-xs text-slate-600 mt-2">Everything in Spotlight for 30 days.</span>
+                    </label>
+                </div>
+                <p id="promoteGoalWarning" class="text-xs text-amber-700 font-medium mt-2 hidden"></p>
+            </div>
+            <div class="border-t pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div id="promoteReview" class="text-sm font-semibold text-brandDarkBlue"></div>
+                <button onclick="startPromoteCheckout()" class="shrink-0 bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-6 py-3 rounded-xl text-sm shadow transition">Proceed to checkout</button>
+            </div>
+            <p id="promoteMsg" class="hidden text-sm font-medium"></p>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-brandDarkBlue text-blue-200 border-t border-blue-900 py-10 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+            <div class="flex items-center space-x-3">
+                <img src="https://blacksmithandwitches.com/images/bw-monogram.png" alt="Blacksmith & Witches monogram" class="w-8 h-8 rounded">
+                <span class="text-sm font-medium">© 2026 Blacksmith & Witches House Platform. Powered by Supabase.</span>
+            </div>
+            <div class="flex space-x-6 text-sm">
+                <a href="https://app.blacksmithandwitches.com" class="hover:text-brandYellow transition">Main Dashboard</a>
+                <a href="https://blacksmithandwitches.com" class="hover:text-brandYellow transition">House Site</a>
+                <a href="https://t.me/StoreofBnW" class="hover:text-brandYellow transition">Telegram Store</a>
+                <a href="https://wallet.blacksmithandwitches.com" class="hover:text-brandYellow transition">BlacksmithPay</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- BlacksmithPay Connect (TEST MODE) ---
+        // TEST_DESTINATION is the sandbox test creator account; live seller
+        // routing replaces it at activation. No real money in test mode.
+        const CONNECT_API = 'https://blacksmithpay-connect.vercel.app';
+        const TEST_DESTINATION = 'acct_1UazV6BcdnQKHp48';
+
+        // --- Creator sign up / sign in (Supabase magic link) ---
+        // Same project as the store (anon key is public by design). One
+        // magic link both signs in existing creators and creates accounts
+        // for new ones. Sessions are shared with the store (same origin).
+        const SUPABASE_URL = "https://qmamsagrouzkldylxrqk.supabase.co";
+        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFtYW1zYWdyb3V6a2xkeWx4cnFrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ0MzMxNDgsImV4cCI6MjExMDAwOTE0OH0.YJKjJbRvJ5XkVAMWuB-1_CAKmNn47smSVy4_I4foj2I";
+        let supabaseClient = null;
+        try { supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY); } catch (e) { supabaseClient = null; }
+
+        async function handleMagicLinkLogin(e) {
+            e.preventDefault();
+            if (!supabaseClient) {
+                alert("Sign-in is unavailable right now — please try the Marketplace sign-in instead.");
+                return;
+            }
+            const email = document.getElementById('authEmail').value.trim();
+            const btn = document.getElementById('authSubmitBtn');
+            const feedback = document.getElementById('authFeedback');
+
+            btn.disabled = true;
+            btn.innerText = "Sending Secure Link...";
+            feedback.className = "text-xs p-3 rounded-xl bg-blue-50 text-brandDarkBlue border border-blue-200 font-medium mt-3 max-w-md";
+            feedback.innerText = "Connecting to auth service...";
+            feedback.classList.remove('hidden');
+
+            try {
+                const { error } = await supabaseClient.auth.signInWithOtp({
+                    email,
+                    options: { emailRedirectTo: window.location.origin }
+                });
+
+                if (error) throw error;
+
+                feedback.innerText = `Success! Magic link sent to ${email}. Check your inbox (and spam folder) to sign in instantly.`;
+            } catch (err) {
+                feedback.className = "text-xs p-3 rounded-xl bg-red-50 text-red-700 border border-red-200 font-medium mt-3 max-w-md";
+                feedback.innerText = "Sign-in error: " + err.message;
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Send Magic Sign-In Link";
+            }
+        }
+
+        async function refreshAuthBlock() {
+            if (!supabaseClient) return;
+            try {
+                const { data: { session } } = await supabaseClient.auth.getSession();
+                const user = session && session.user ? session.user : null;
+                document.getElementById('authSignedOut').classList.toggle('hidden', !!user);
+                document.getElementById('authSignedIn').classList.toggle('hidden', !user);
+                if (user) document.getElementById('authEmailLabel').textContent = user.email || '';
+            } catch (e) { /* leave the sign-in form visible */ }
+        }
+        if (supabaseClient) {
+            supabaseClient.auth.onAuthStateChange(() => refreshAuthBlock());
+        }
+        refreshAuthBlock();
+
+// --- Promote a listing (TEST MODE) ---
+        // TikTok/Meta-style paid promotion, v2 (Gemini draft integrated by
+        // Car, Nov 14, 2026): goal picker with package preselection, the
+        // five packages (Dmitri's rulings, Nov 14, 2026) sold through the
+        // same Connect test service, with the package, goal and listing
+        // title carried in the product name so the house can identify the
+        // order. Fulfilment is manual: on a completed test checkout the
+        // house sets featured=true and badge='Promoted' on the listing for
+        // the package's days, adds a BW Stage feed slot (Featured and up)
+        // and a Telegram channel post (Spotlight and Top) — see
+        // PROMOTE-RUNBOOK.md. No real money in test mode. While the Stripe
+        // test key is not configured the service answers 503 — say so
+        // plainly instead of failing silently.
+        const PROMOTE_PACKAGES = {
+            trial:     { name: 'Trial',     days: 1,  amountCents: 100, minGoal: 'store' },
+            starter:   { name: 'Starter',   days: 3,  amountCents: 300, minGoal: 'store' },
+            featured:  { name: 'Featured ⭐', days: 7,  amountCents: 500, minGoal: 'stage' },
+            spotlight: { name: 'Spotlight', days: 14, amountCents: 900, minGoal: 'everywhere' },
+            top:       { name: 'Top',       days: 30, amountCents: 1500, minGoal: 'everywhere' }
+        };
+        const PROMOTE_GOAL_NAMES = {
+            store: 'Top of the store',
+            stage: 'In the Stage feed',
+            everywhere: 'Everywhere'
+        };
+        function escapePromoteHtml(s) {
+            return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+        function selectedPromoteGoal() {
+            const el = document.querySelector('input[name="promoteGoal"]:checked');
+            return el ? el.value : 'store';
+        }
+        function selectedPromotePackage() {
+            const el = document.querySelector('input[name="promotePkg"]:checked');
+            return PROMOTE_PACKAGES[el ? el.value : 'featured'];
+        }
+        function onGoalChange(goal) {
+            // Preselect cheapest package satisfying goal
+            let targetPkg = 'trial';
+            if (goal === 'stage') targetPkg = 'featured';
+            if (goal === 'everywhere') targetPkg = 'spotlight';
+            const radio = document.querySelector(`input[name="promotePkg"][value="${targetPkg}"]`);
+            if (radio) radio.checked = true;
+            updatePromoteReview();
+        }
+        function updatePromoteReview() {
+            // Update Goal card styles
+            document.querySelectorAll('.promote-goal').forEach(card => {
+                const on = card.querySelector('input[name="promoteGoal"]').checked;
+                card.classList.toggle('border-brandYellow', on);
+                card.classList.toggle('bg-yellow-50', on);
+                card.classList.toggle('border-slate-200', !on);
+                card.classList.toggle('bg-slate-50', !on);
+            });
+            // Update Package card styles
+            document.querySelectorAll('.promote-pkg').forEach(card => {
+                const on = card.querySelector('input[name="promotePkg"]').checked;
+                card.classList.toggle('border-brandYellow', on);
+                card.classList.toggle('bg-yellow-50', on);
+                card.classList.toggle('border-slate-200', !on);
+                card.classList.toggle('bg-slate-50', !on);
+            });
+            const goal = selectedPromoteGoal();
+            const pkg = selectedPromotePackage();
+            const title = (document.getElementById('promoteTitle').value || '').trim();
+            // Check if package fulfills goal
+            const warningEl = document.getElementById('promoteGoalWarning');
+            let fulfills = true;
+            if (goal === 'stage' && pkg.amountCents < 500) fulfills = false;
+            if (goal === 'everywhere' && pkg.amountCents < 900) fulfills = false;
+            if (!fulfills) {
+                warningEl.textContent = `Note: The selected "${pkg.name}" package does not include full coverage for your chosen "${PROMOTE_GOAL_NAMES[goal]}" goal.`;
+                warningEl.classList.remove('hidden');
+            } else {
+                warningEl.classList.add('hidden');
+            }
+            document.getElementById('promoteReview').innerHTML = `
+                <div class="space-y-1">
+                    <div><strong>Listing:</strong> ${title ? '“' + escapePromoteHtml(title) + '”' : '<i>(Enter your listing title above)</i>'}</div>
+                    <div><strong>Goal:</strong> ${goal === 'store' ? 'Top of the store' : goal === 'stage' ? 'In the Stage feed' : 'Everywhere (Store + Stage + Telegram)'}</div>
+                    <div><strong>Package:</strong> ${pkg.name} (${pkg.days} days) — <strong>Total: CAD $${(pkg.amountCents / 100).toFixed(2)}</strong></div>
+                    <div class="text-xs text-slate-500 font-normal">Checkout runs in TEST mode — no real charge.</div>
+                </div>
+            `;
+        }
+        async function startPromoteCheckout() {
+            const input = document.getElementById('promoteTitle');
+            const msg = document.getElementById('promoteMsg');
+            const show = (text) => {
+                msg.textContent = text;
+                msg.className = 'text-sm font-medium text-amber-700 mt-2 block';
+                msg.classList.remove('hidden');
+            };
+            const title = (input.value || '').trim();
+            if (!title) {
+                show('Type your listing title first — exactly as it appears in the store.');
+                input.focus();
+                return;
+            }
+            const goal = selectedPromoteGoal();
+            const pkg = selectedPromotePackage();
+            try {
+                const res = await fetch(CONNECT_API + '/api/checkout', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        accountId: TEST_DESTINATION,
+                        amountCents: pkg.amountCents,
+                        label: 'Featured placement — ' + pkg.name + ' ' + pkg.days + ' days (TEST) (Goal: ' + goal + ') — ' + title
+                    })
+                });
+                const data = await res.json().catch(() => ({}));
+                if (res.status === 503) {
+                    show('Promotion checkout opens soon — test key pending. No charge was made.');
+                    return;
+                }
+                if (!res.ok || !data.checkoutUrl) throw new Error(data.error || 'Checkout unavailable');
+                window.location.href = data.checkoutUrl;
+            } catch (e) {
+                show('Promotion checkout unavailable: ' + e.message);
+            }
+        }
+        updatePromoteReview();
+
+        lucide.createIcons();
+    </script>
+</body>
+</html>
