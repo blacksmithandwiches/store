@@ -227,6 +227,7 @@
                 <button onclick="filterCategory('music', this)" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Music & Audio</button>
                 <button onclick="filterCategory('games', this)" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Games</button>
                 <button onclick="filterCategory('apps', this)" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Apps & Tools</button>
+                <button onclick="filterCategory('video', this)" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Video</button>
             </div>
             <div class="relative w-full md:w-72">
                 <i data-lucide="search" class="absolute left-3.5 top-3 w-4 h-4 text-slate-400"></i>
@@ -389,11 +390,12 @@
                     </div>
                     <div>
                         <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Category</label>
-                        <select id="subCategory" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                        <select id="subCategory" onchange="onSubCategoryChange()" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
                             <option value="books">Books & Zines</option>
                             <option value="music">Music & Audio</option>
                             <option value="games">Games</option>
                             <option value="apps">Apps & Tools</option>
+                            <option value="video">Video</option>
                         </select>
                     </div>
                 </div>
@@ -408,8 +410,17 @@
                     </div>
                 </div>
 
+                <!-- Video link fields (shown only when Category = Video) -->
+                <div id="videoFields" class="hidden bg-blue-50/70 border border-blue-200 rounded-xl p-3.5 space-y-2.5">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-brandDarkBlue">
+                        Video URL (YouTube, TikTok, Vimeo or direct video file link)
+                    </label>
+                    <input type="url" id="subVideoUrl" placeholder="https://www.youtube.com/watch?v=..." class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                    <p class="text-[11px] text-slate-500"><strong>Submit your video — free listing.</strong> We store the link, not the file, so keep the video on your own channel. Set Price to 0 for free viewing. Videos are reviewed before they appear — nothing goes public automatically.</p>
+                </div>
+
                 <!-- File Upload to Supabase Storage -->
-                <div class="bg-blue-50/70 border border-blue-200 rounded-xl p-3.5 space-y-2.5">
+                <div id="fileUploadBlock" class="bg-blue-50/70 border border-blue-200 rounded-xl p-3.5 space-y-2.5">
                     <label class="block text-xs font-bold uppercase tracking-wider text-brandDarkBlue">
                         Upload Release File (PDF, EPUB, Audio, ZIP)
                     </label>
@@ -952,7 +963,7 @@
                 const isFree = Number(p.price) === 0;
                 const priceDisplay = isFree ? 'Free' : `$${Number(p.price).toFixed(2)}`;
                 const formatsStr = Array.isArray(p.formats) ? p.formats.join(' • ') : (p.formats || 'Digital');
-                const actionLabel = isFree ? 'Get Release' : 'Seller Checkout';
+                const actionLabel = p.category === 'video' ? 'Watch Video' : (isFree ? 'Get Release' : 'Seller Checkout');
                 const isOwner = currentUser && p.user_id === currentUser.id;
 
                 card.innerHTML = `
@@ -1044,8 +1055,19 @@
                 return;
             }
             document.getElementById('submitModal').classList.remove('hidden');
+            onSubCategoryChange();
         }
         function closeSubmitModal() { document.getElementById('submitModal').classList.add('hidden'); }
+
+        // Video submissions are link-based: show the video URL field, hide the file upload.
+        function onSubCategoryChange() {
+            const isVideo = document.getElementById('subCategory').value === 'video';
+            document.getElementById('videoFields').classList.toggle('hidden', !isVideo);
+            document.getElementById('fileUploadBlock').classList.toggle('hidden', isVideo);
+            const formatsInput = document.getElementById('subFormats');
+            if (isVideo) formatsInput.value = 'Video';
+            else if (formatsInput.value === 'Video') formatsInput.value = 'EPUB, PDF';
+        }
 
         async function handleProductSubmit(e) {
             e.preventDefault();
@@ -1054,16 +1076,24 @@
                 return;
             }
 
+            const isVideo = document.getElementById('subCategory').value === 'video';
+            if (isVideo && !document.getElementById('subVideoUrl').value.trim()) {
+                alert('Please paste your video link (YouTube, TikTok, Vimeo or a direct video file URL) — video submissions are link-based.');
+                return;
+            }
+
             const btn = document.getElementById('submitBtn');
             btn.disabled = true;
             btn.innerText = "Uploading & Saving...";
 
             try {
-                let finalUrl = document.getElementById('subUrl').value.trim();
+                let finalUrl = isVideo
+                    ? document.getElementById('subVideoUrl').value.trim()
+                    : document.getElementById('subUrl').value.trim();
                 const fileInput = document.getElementById('subFileUpload');
 
-                // Upload file to Supabase Storage if selected
-                if (fileInput.files && fileInput.files.length > 0) {
+                // Upload file to Supabase Storage if selected (skipped for video — link-based)
+                if (!isVideo && fileInput.files && fileInput.files.length > 0) {
                     const file = fileInput.files[0];
                     const cleanName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
                     const filePath = `${currentUser.id}/${Date.now()}_${cleanName}`;
@@ -1102,6 +1132,7 @@
                 renderProducts();
                 closeSubmitModal();
                 document.getElementById('submitForm').reset();
+                onSubCategoryChange();
                 alert('Submitted! Your release is now listed as Pending Review in your My Works tab.');
             } catch (err) {
                 alert('Submission error: ' + err.message);
