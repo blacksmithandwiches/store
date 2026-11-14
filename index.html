@@ -380,6 +380,7 @@
                     Send Magic Sign-In Link
                 </button>
             </form>
+            <p class="text-[11px] text-slate-500 leading-relaxed">One sign-in email per person at a time — if no email arrives within a few minutes, wait a little and try again.</p>
             <div id="authFeedback" class="hidden text-xs p-3 rounded-xl bg-blue-50 text-brandDarkBlue border border-blue-200 font-medium"></div>
         </div>
     </div>
@@ -1095,21 +1096,26 @@
             const feedback = document.getElementById('authFeedback');
 
             btn.disabled = true;
-            btn.innerText = "Sending Magic Link...";
-
-            const { error } = await supabaseClient.auth.signInWithOtp({
-                email,
-                options: { emailRedirectTo: window.location.origin }
-            });
-
-            btn.disabled = false;
-            btn.innerText = "Send Magic Sign-In Link";
+            btn.innerText = "Sending Secure Link...";
+            feedback.className = "text-xs p-3 rounded-xl bg-blue-50 text-brandDarkBlue border border-blue-200 font-medium";
+            feedback.innerText = "Connecting to auth service...";
             feedback.classList.remove('hidden');
 
-            if (error) {
-                feedback.innerText = "Error: " + error.message;
-            } else {
-                feedback.innerText = `Magic link sent to ${email}! Check your inbox and click the link to sign in.`;
+            try {
+                const { error } = await supabaseClient.auth.signInWithOtp({
+                    email,
+                    options: { emailRedirectTo: window.location.origin }
+                });
+
+                if (error) throw error;
+
+                feedback.innerText = `Success! Magic link sent to ${email}. Check your inbox (and spam folder) to sign in instantly.`;
+            } catch (err) {
+                feedback.className = "text-xs p-3 rounded-xl bg-red-50 text-red-700 border border-red-200 font-medium";
+                feedback.innerText = "Sign-in error: " + err.message;
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Send Magic Sign-In Link";
             }
         }
 
