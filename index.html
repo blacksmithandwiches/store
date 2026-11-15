@@ -670,6 +670,7 @@
                 worksLiveMany: "works live",
                 newsTitle: "New on the shelf",
                 newsSub: "Short reviews of the latest uploads.",
+                viewProduct: "View product",
                 portalTitle: "The whole house — one door",
                 portalSub: "Every Blacksmith & Witches place, linked from here.",
                 portalUploadSub: "Creators: sign in & add your work",
@@ -881,6 +882,7 @@
                 worksLiveMany: "Werke online",
                 newsTitle: "Neu im Regal",
                 newsSub: "Kurze Besprechungen der neuesten Uploads.",
+                viewProduct: "Produkt ansehen",
                 portalTitle: "Das ganze Haus — eine Tür",
                 portalSub: "Jeder Ort von Blacksmith & Witches, von hier aus verlinkt.",
                 portalUploadSub: "Creator: anmelden & Werk hinzufügen",
@@ -1092,6 +1094,7 @@
                 worksLiveMany: "œuvres en ligne",
                 newsTitle: "Nouveautés sur l'étagère",
                 newsSub: "Courtes critiques des derniers ajouts.",
+                viewProduct: "Voir le produit",
                 portalTitle: "Toute la maison — une seule porte",
                 portalSub: "Tous les lieux Blacksmith & Witches, liés depuis ici.",
                 portalUploadSub: "Créateurs : connectez-vous et ajoutez votre œuvre",
@@ -1303,6 +1306,7 @@
                 worksLiveMany: "робіт онлайн",
                 newsTitle: "Новинки на полиці",
                 newsSub: "Короткі огляди найновіших завантажень.",
+                viewProduct: "Переглянути товар",
                 portalTitle: "Весь дім — одні двері",
                 portalSub: "Усі місця Blacksmith & Witches — за посиланнями звідси.",
                 portalUploadSub: "Автори: увійдіть і додайте свою роботу",
@@ -1514,6 +1518,7 @@
                 worksLiveMany: "работ онлайн",
                 newsTitle: "Новинки на полке",
                 newsSub: "Короткие обзоры новейших загрузок.",
+                viewProduct: "Смотреть товар",
                 portalTitle: "Весь дом — одна дверь",
                 portalSub: "Все места Blacksmith & Witches — по ссылкам отсюда.",
                 portalUploadSub: "Авторы: войдите и добавьте свою работу",
@@ -2058,6 +2063,63 @@
         // the section always shows a balanced multiple of three (3 or 6).
         // If the table is empty or unreachable the section stays hidden —
         // no error text on the public page.
+        // Each review links to the product it describes (owner's order,
+        // Nov 15, 2026): the review title jumps to that product's card on
+        // the shelf (and flashes it), and a "View product" link under the
+        // review opens the product's own page. Matching is by the product
+        // title appearing in the review text, with a token-score fallback.
+        var houseNewsCache = null;
+        function normNewsText(s) {
+            return (s || '').toLowerCase().replace(/[^a-z0-9а-яёіїєґ ]+/gi, ' ').replace(/\s+/g, ' ');
+        }
+        function newsProductMatch(n) {
+            if (!products || !products.length) return null;
+            const text = normNewsText((n.title || '') + ' ' + (n.body || ''));
+            const stop = { the: 1, and: 1, from: 1, with: 1, annotated: 1, shelf: 1, new: 1, vol: 1, classics: 1, blacksmith: 1, witches: 1, selection: 1, parts: 1 };
+            let best = null, bestScore = 0;
+            products.forEach(p => {
+                const full = normNewsText(p.title || '').trim();
+                let score = 0;
+                if (full && text.includes(full)) score += 10;
+                const words = [...new Set(normNewsText((p.title || '') + ' ' + (p.creator || '')).split(' ').filter(w => w.length >= 3 && !stop[w]))];
+                words.forEach(w => { if (text.includes(w)) score += 1; });
+                if (score > bestScore) { bestScore = score; best = p; }
+            });
+            return bestScore >= 4 ? best : null;
+        }
+        function flashProduct(id) {
+            const el = document.getElementById('product-' + id);
+            if (!el) return;
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            el.style.transition = 'box-shadow .3s ease';
+            el.style.boxShadow = '0 0 0 3px #FFD500, 0 12px 28px rgba(0,0,0,.18)';
+            setTimeout(() => { el.style.boxShadow = ''; }, 2400);
+        }
+        function renderHouseNews() {
+            if (!houseNewsCache || !houseNewsCache.length) return;
+            const listEl = document.getElementById('houseNewsList');
+            if (!listEl) return;
+            listEl.innerHTML = houseNewsCache.map(n => {
+                const d = new Date(n.created_at);
+                const when = isNaN(d.getTime()) ? '' : d.toLocaleDateString(BW_LOCALES[curLang], { year: 'numeric', month: 'short', day: 'numeric' });
+                const prod = newsProductMatch(n);
+                const titleHtml = prod
+                    ? `<a href="#product-${prod.id}" onclick="flashProduct('${prod.id}')" class="hover:text-brandBlue hover:underline">${escapePromoteHtml(n.title || '')}</a>`
+                    : escapePromoteHtml(n.title || '');
+                const viewHtml = prod
+                    ? `<p class="mt-3"><a href="${prod.download_url || '#'}" target="_blank" rel="noopener noreferrer" class="text-sm font-bold text-brandBlue hover:underline">${t('viewProduct')} &rarr;</a></p>`
+                    : '';
+                return `
+                <article class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:border-brandBlue hover:shadow transition">
+                    <p class="font-bold text-brandDarkBlue">${titleHtml}</p>
+                    <p class="text-xs text-slate-500 mt-1">${when}${n.author_name ? ' · ' + t('byWord') + ' ' + escapePromoteHtml(n.author_name) : ''}</p>
+                    <p class="text-sm text-slate-600 mt-2.5 whitespace-pre-line">${escapePromoteHtml(n.body || '')}</p>
+                    ${viewHtml}
+                </article>`;
+            }).join('');
+            document.getElementById('houseNewsSection').classList.remove('hidden');
+            if (window.lucide) lucide.createIcons();
+        }
         async function loadHouseNews() {
             if (!supabaseClient) return;
             try {
@@ -2069,19 +2131,8 @@
                     .limit(6);
                 if (error) throw error;
                 if (!data || data.length === 0) return;
-                const listEl = document.getElementById('houseNewsList');
-                listEl.innerHTML = data.map(n => {
-                    const d = new Date(n.created_at);
-                    const when = isNaN(d.getTime()) ? '' : d.toLocaleDateString(BW_LOCALES[curLang], { year: 'numeric', month: 'short', day: 'numeric' });
-                    return `
-                    <article class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:border-brandBlue hover:shadow transition">
-                        <p class="font-bold text-brandDarkBlue">${escapePromoteHtml(n.title || '')}</p>
-                        <p class="text-xs text-slate-500 mt-1">${when}${n.author_name ? ' · ' + t('byWord') + ' ' + escapePromoteHtml(n.author_name) : ''}</p>
-                        <p class="text-sm text-slate-600 mt-2.5 whitespace-pre-line">${escapePromoteHtml(n.body || '')}</p>
-                    </article>`;
-                }).join('');
-                document.getElementById('houseNewsSection').classList.remove('hidden');
-                if (window.lucide) lucide.createIcons();
+                houseNewsCache = data;
+                renderHouseNews();
             } catch (e) { /* news stays hidden — quiet by design */ }
         }
 
@@ -2300,6 +2351,8 @@
 
             filtered.forEach(p => {
                 const card = document.createElement('div');
+                card.id = 'product-' + p.id;
+                card.style.scrollMarginTop = '120px';
                 card.className = "bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col overflow-hidden";
                 
                 const isPending = p.status === 'pending';
@@ -2352,6 +2405,7 @@
                 grid.appendChild(card);
             });
             lucide.createIcons();
+            if (houseNewsCache) renderHouseNews();
         }
 
         function filterCategory(cat, btnEl) {
