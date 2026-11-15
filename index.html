@@ -80,7 +80,11 @@
                     <button type="button" data-lang-btn="ru" onclick="setLang('ru')" class="text-[11px] sm:text-xs font-bold px-1.5 sm:px-2 py-1 rounded-md transition">RU</button>
                 </div>
                 <!-- Auth Controls -->
-                <div id="authLoggedOut">
+                <div id="authLoggedOut" class="flex items-center space-x-2">
+                    <a href="account.html" class="hover:text-brandYellow text-white border border-blue-700 bg-blue-900/80 hover:bg-blue-800 font-semibold px-3 py-2 rounded-lg text-sm transition flex items-center space-x-1.5">
+                        <i data-lucide="log-in" class="w-4 h-4 text-brandYellow"></i>
+                        <span data-i18n="loginBtn">Login</span>
+                    </a>
                     <button onclick="openAuthModal()" class="bg-blue-900/80 hover:bg-blue-800 text-white border border-blue-700 font-semibold px-3.5 py-2 rounded-lg text-sm transition flex items-center space-x-1.5">
                         <i data-lucide="key-round" class="w-4 h-4 text-brandYellow"></i>
                         <span data-i18n="signInBtn">Creator Sign In</span>
@@ -650,6 +654,7 @@
                 noLiveYet: "Nothing live yet — once a submission is approved, you can promote it from here.",
                 promote: "Promote",
                 signInBtn: "Creator Sign In",
+                loginBtn: "Login",
                 myAccount: "My account",
                 myWorks: "My Works",
                 publishWork: "Publish Work",
@@ -860,6 +865,7 @@
                 noLiveYet: "Noch nichts live — sobald eine Einreichung freigegeben ist, können Sie sie von hier aus bewerben.",
                 promote: "Bewerben",
                 signInBtn: "Creator-Anmeldung",
+                loginBtn: "Anmelden",
                 myAccount: "Mein Konto",
                 myWorks: "Meine Werke",
                 publishWork: "Werk veröffentlichen",
@@ -1070,6 +1076,7 @@
                 noLiveYet: "Rien en ligne pour le moment — dès qu'une soumission est approuvée, vous pouvez la promouvoir depuis cette page.",
                 promote: "Promouvoir",
                 signInBtn: "Connexion créateur",
+                loginBtn: "Se connecter",
                 myAccount: "Mon compte",
                 myWorks: "Mes œuvres",
                 publishWork: "Publier une œuvre",
@@ -1280,6 +1287,7 @@
                 noLiveYet: "Ще нічого не опубліковано — щойно подання схвалять, ви зможете просувати його звідси.",
                 promote: "Просувати",
                 signInBtn: "Вхід для авторів",
+                loginBtn: "Увійти",
                 myAccount: "Мій обліковий запис",
                 myWorks: "Мої роботи",
                 publishWork: "Опублікувати роботу",
@@ -1490,6 +1498,7 @@
                 noLiveYet: "Ещё ничего не опубликовано — как только отправку одобрят, вы сможете продвигать её отсюда.",
                 promote: "Продвигать",
                 signInBtn: "Вход для авторов",
+                loginBtn: "Войти",
                 myAccount: "Мой аккаунт",
                 myWorks: "Мои работы",
                 publishWork: "Опубликовать работу",
