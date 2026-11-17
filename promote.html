@@ -154,7 +154,7 @@
                 <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue">Promote your work</h2>
             </div>
             <p class="text-sm text-slate-600 max-w-2xl">
-                Select your listing, choose a placement goal and package below, and secure your promotion. Checkout runs in TEST mode — no real charge.
+                Select your listing, choose a placement goal and package below, and secure your promotion. Secure checkout by Stripe.
             </p>
             <div class="max-w-2xl">
                 <label for="promoteTitle" class="block text-xs font-bold uppercase tracking-wider text-brandDarkBlue mb-1.5">1 · Pick your listing</label>
@@ -257,11 +257,11 @@
     </footer>
 
     <script>
-        // --- BlacksmithPay Connect (TEST MODE) ---
-        // TEST_DESTINATION is the sandbox test creator account; live seller
+        // --- BlacksmithPay Connect (LIVE) ---
+        // LIVE_DESTINATION is the live seller account;
         // routing replaces it at activation. No real money in test mode.
         const CONNECT_API = 'https://blacksmithpay-connect.vercel.app';
-        const TEST_DESTINATION = 'acct_1UazV6BcdnQKHp48';
+        const LIVE_DESTINATION = 'acct_1UcbfJDpjR4YIHyW';
 
         // --- Creator sign up / sign in (Supabase magic link) ---
         // Same project as the store (anon key is public by design). One
@@ -365,7 +365,7 @@
         }
         refreshAuthBlock();
 
-// --- Promote a listing (TEST MODE) ---
+// --- Promote a listing (LIVE) ---
         // TikTok/Meta-style paid promotion, v2 (Gemini draft integrated by
         // Car, Nov 14, 2026): goal picker with package preselection, the
         // five packages (Dmitri's rulings, Nov 14, 2026) sold through the
@@ -446,7 +446,7 @@
                     <div><strong>Listing:</strong> ${title ? '“' + escapePromoteHtml(title) + '”' : '<i>(Enter your listing title above)</i>'}</div>
                     <div><strong>Goal:</strong> ${goal === 'store' ? 'Top of the store' : goal === 'stage' ? 'In the Stage feed' : 'Everywhere (Store + Stage + Telegram)'}</div>
                     <div><strong>Package:</strong> ${pkg.name} (${pkg.days} days) — <strong>Total: CAD $${(pkg.amountCents / 100).toFixed(2)}</strong></div>
-                    <div class="text-xs text-slate-500 font-normal">Checkout runs in TEST mode — no real charge.</div>
+                    <div class="text-xs text-slate-500 font-normal">Secure checkout by Stripe.</div>
                 </div>
             `;
         }
@@ -471,9 +471,9 @@
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        accountId: TEST_DESTINATION,
+                        accountId: LIVE_DESTINATION,
                         amountCents: pkg.amountCents,
-                        label: 'Featured placement — ' + pkg.name + ' ' + pkg.days + ' days (TEST) (Goal: ' + goal + ') — ' + title
+                        label: 'Featured placement — ' + pkg.name + ' ' + pkg.days + ' days (Goal: ' + goal + ') — ' + title
                     })
                 });
                 const data = await res.json().catch(() => ({}));
