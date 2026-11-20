@@ -58,6 +58,11 @@ html, body { overflow-x: clip; }
   .bw-topnav { position: fixed; top: 0; left: 0; z-index: 70; width: min(258px, 76vw); height: 100vh; height: 100dvh; background: #0A2458; border-right: 1px solid rgba(255,255,255,.14); box-shadow: 2px 0 14px rgba(0,0,0,.25); padding: 22px 16px; box-sizing: border-box; flex-direction: column; align-items: flex-start; gap: 14px; overflow-y: auto; transform: translateX(-110%); transition: transform .25s ease; font-size: 14px; }
   .bw-topnav * { max-width: 100%; box-sizing: border-box; }
   .bw-topnav img, .bw-topnav svg { flex: none; }
+  .bw-topnav > a { width: 100%; }
+  #authLoggedOut { width: 100%; flex-direction: column; align-items: stretch; gap: 10px; }
+  #authLoggedOut > * { width: 100%; text-align: left; }
+  .bw-topnav > div:not(#authLoggedOut):not(#authLoggedIn) { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; width: 100%; background: transparent; border: none; border-radius: 0; padding: 0; }
+  .bw-topnav > div:not(#authLoggedOut):not(#authLoggedIn) > button { width: 100%; text-align: center; }
   .bw-topnav.bw-open { transform: translateX(0); }
   .bw-topnav > * { margin-left: 0 !important; }
   .bw-topnav > div { flex-wrap: wrap; }
