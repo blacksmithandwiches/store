@@ -157,6 +157,7 @@
                 <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Search title, creator..." data-i18n-ph="searchPh" class="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brandBlue transition">
                 </div>
                 <button type="button" onclick="runStoreSearch()" class="bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-5 py-2 rounded-xl text-sm shadow transition">Go</button>
+                <span id="searchResultLine" class="text-sm font-semibold text-brandDarkBlue"></span>
             </div>
         </div>
     </section>
@@ -2923,8 +2924,9 @@
                 }
 
                 const matchesCat = currentCategory === 'all' || p.category === currentCategory;
-                const matchesSearch = p.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                                      p.creator.toLowerCase().includes(searchQuery.toLowerCase());
+                const q = searchQuery.trim().toLowerCase();
+                const hay = [p.title, p.creator, p.category, p.description, p.excerpt].filter(Boolean).join(' ').toLowerCase();
+                const matchesSearch = !q || hay.includes(q);
                 return matchesCat && matchesSearch;
             });
 
@@ -2936,6 +2938,11 @@
             // fact counts the works actually live (approved) right now.
             const resultCountEl = document.getElementById('resultCount');
             if (resultCountEl) resultCountEl.textContent = pluralText('result', filtered.length);
+            const srl = document.getElementById('searchResultLine');
+            if (srl) {
+                const qNow = searchQuery.trim();
+                srl.textContent = !qNow ? '' : (filtered.length === 0 ? 'No matching editions found in the catalogue.' : pluralText('result', filtered.length) + ' for \u201C' + qNow + '\u201D');
+            }
             const liveCount = products.filter(p => p.status === 'approved' || !p.status).length;
             const factEl = document.getElementById('worksCountFact');
             if (factEl) factEl.textContent = liveCount;
@@ -3019,11 +3026,17 @@
 
         function runStoreSearch() {
             handleSearch();
-            var g = document.getElementById('productGrid');
-            if (g) { g.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
         }
         function handleSearch() {
             searchQuery = document.getElementById('searchInput').value;
+            if (searchQuery.trim() && currentCategory !== 'all') {
+                currentCategory = 'all';
+                document.querySelectorAll('.cat-btn').forEach(btn => {
+                    btn.className = "cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition";
+                });
+                const allBtn = document.querySelector('.cat-btn[onclick*="filterCategory('all'"]');
+                if (allBtn) allBtn.className = "cat-btn px-4 py-2 rounded-xl text-sm font-bold bg-brandDarkBlue text-white transition shadow-sm";
+            }
             renderProducts();
         }
 
