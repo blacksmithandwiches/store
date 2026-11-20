@@ -55,7 +55,9 @@
 html, body { overflow-x: clip; }
 @media (max-width: 767px) {
   header .max-w-7xl { flex-wrap: wrap; height: auto; min-height: 4rem; padding-top: 8px; padding-bottom: 8px; }
-  .bw-topnav { position: fixed; top: 0; left: 0; z-index: 70; width: min(300px, 84vw); height: 100vh; height: 100dvh; background: #0A2458; box-shadow: 4px 0 24px rgba(0,0,0,.35); padding: 18px 16px; flex-direction: column; align-items: stretch; gap: 12px; overflow-y: auto; transform: translateX(-110%); transition: transform .25s ease; }
+  .bw-topnav { position: fixed; top: 0; left: 0; z-index: 70; width: min(258px, 76vw); height: 100vh; height: 100dvh; background: #0A2458; border-right: 1px solid rgba(255,255,255,.14); box-shadow: 2px 0 14px rgba(0,0,0,.25); padding: 22px 16px; box-sizing: border-box; flex-direction: column; align-items: flex-start; gap: 14px; overflow-y: auto; transform: translateX(-110%); transition: transform .25s ease; font-size: 14px; }
+  .bw-topnav * { max-width: 100%; box-sizing: border-box; }
+  .bw-topnav img, .bw-topnav svg { flex: none; }
   .bw-topnav.bw-open { transform: translateX(0); }
   .bw-topnav > * { margin-left: 0 !important; }
   .bw-topnav > div { flex-wrap: wrap; }
