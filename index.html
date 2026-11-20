@@ -156,6 +156,7 @@
                 <i data-lucide="search" class="absolute left-3.5 top-3 w-4 h-4 text-slate-400"></i>
                 <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Search title, creator..." data-i18n-ph="searchPh" class="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brandBlue transition">
                 </div>
+                <button type="button" onclick="runStoreSearch()" class="bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-5 py-2 rounded-xl text-sm shadow transition">Go</button>
             </div>
         </div>
     </section>
@@ -3016,6 +3017,11 @@
             renderProducts();
         }
 
+        function runStoreSearch() {
+            handleSearch();
+            var g = document.getElementById('productGrid');
+            if (g) { g.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+        }
         function handleSearch() {
             searchQuery = document.getElementById('searchInput').value;
             renderProducts();
