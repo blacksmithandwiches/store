@@ -2058,8 +2058,11 @@
         }
 
         // House news: approved posts from the public.news table, newest
-        // first, at most six — the grid is three columns on desktop, so
-        // the section always shows a balanced multiple of three (3 or 6).
+        // first — the grid is three columns on desktop, so the section
+        // always shows a balanced multiple of three (3 or 6). The six
+        // shown rotate twice a day through the whole approved pool
+        // (owner's order, Nov 20, 2026), so older reviews resurface
+        // instead of only the six newest ever appearing.
         // If the table is empty or unreachable the section stays hidden —
         // no error text on the public page.
         // Each review links to the product it describes (owner's order,
@@ -2127,10 +2130,18 @@
                     .select('*')
                     .eq('status', 'approved')
                     .order('created_at', { ascending: false })
-                    .limit(6);
+                    .limit(24);
                 if (error) throw error;
                 if (!data || data.length === 0) return;
-                houseNewsCache = data;
+                let rows = data;
+                if (rows.length > 6) {
+                    const block = Math.floor(Date.now() / (12 * 60 * 60 * 1000));
+                    const start = (block * 6) % rows.length;
+                    const picked = [];
+                    for (let i = 0; i < 6; i++) picked.push(rows[(start + i) % rows.length]);
+                    rows = picked;
+                }
+                houseNewsCache = rows;
                 renderHouseNews();
             } catch (e) { /* news stays hidden — quiet by design */ }
         }
