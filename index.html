@@ -51,6 +51,13 @@
 <link rel="manifest" href="/manifest.webmanifest">
 <meta name="theme-color" content="#005BBB">
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<style id="bw-mobile-nav">
+@media (max-width: 767px) {
+  header .max-w-7xl { flex-wrap: wrap; height: auto; min-height: 4rem; padding-top: 8px; padding-bottom: 8px; }
+  .bw-topnav { display: none; }
+  .bw-topnav.bw-open { display: flex; flex-wrap: wrap; width: 100%; order: 3; padding: 10px 0 6px; row-gap: 8px; }
+}
+</style>
 </head>
 <body class="bg-brandBg text-brandText min-h-screen flex flex-col font-sans selection:bg-brandYellow selection:text-brandDarkBlue">
 
@@ -67,7 +74,8 @@
                 </div>
             </div>
 
-            <div class="flex items-center space-x-3">
+            <button type="button" id="bwMenuBtn" class="md:hidden bg-brandYellow text-brandDarkBlue font-black px-3.5 py-2 rounded-lg text-sm shadow" aria-expanded="false">Menu</button>
+            <div id="bwTopNav" class="bw-topnav flex items-center space-x-3">
                 <a href="https://news.blacksmithandwitches.com" class="hover:text-brandYellow text-white border border-blue-700 bg-blue-900/80 hover:bg-blue-800 font-semibold px-3 py-2 rounded-lg text-sm transition flex items-center space-x-1.5" title="Blacksmith & Witches — News">
                     <i data-lucide="newspaper" class="w-4 h-4 text-brandYellow"></i>
                     <span>News</span>
@@ -3227,6 +3235,17 @@
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
 }
+</script>
+<script>
+(function () {
+  var b = document.getElementById('bwMenuBtn'), n = document.getElementById('bwTopNav');
+  if (!b || !n) return;
+  b.addEventListener('click', function () {
+    var o = n.classList.toggle('bw-open');
+    b.setAttribute('aria-expanded', String(o));
+    b.textContent = o ? 'Close' : 'Menu';
+  });
+})();
 </script>
 </body>
 </html>
