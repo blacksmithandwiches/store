@@ -3034,7 +3034,7 @@
                 document.querySelectorAll('.cat-btn').forEach(btn => {
                     btn.className = "cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition";
                 });
-                const allBtn = document.querySelector('.cat-btn[onclick*="filterCategory('all'"]');
+                const allBtn = Array.from(document.querySelectorAll('.cat-btn')).find(b => (b.getAttribute('onclick') || '').indexOf("'all'") > -1);
                 if (allBtn) allBtn.className = "cat-btn px-4 py-2 rounded-xl text-sm font-bold bg-brandDarkBlue text-white transition shadow-sm";
             }
             renderProducts();
