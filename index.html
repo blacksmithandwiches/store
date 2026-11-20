@@ -3047,7 +3047,12 @@
 
         function runStoreSearch() {
             handleSearch();
+            const q = document.getElementById('searchInput').value.trim();
+            if (q) { window.location.href = 'search.html?q=' + encodeURIComponent(q); }
         }
+        document.getElementById('searchInput').addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') { e.preventDefault(); runStoreSearch(); }
+        });
         function clearStoreSearch() {
             const i = document.getElementById('searchInput');
             i.value = '';
