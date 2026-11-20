@@ -165,8 +165,14 @@
                 <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Search title, creator..." data-i18n-ph="searchPh" class="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brandBlue transition">
                 </div>
                 <button type="button" onclick="runStoreSearch()" class="bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-5 py-2 rounded-xl text-sm shadow transition">Go</button>
-                <span id="searchResultLine" class="text-sm font-semibold text-brandDarkBlue"></span>
             </div>
+        </div>
+        <div id="searchFeedback" style="display:none" class="mt-3 items-center justify-between gap-3 flex-wrap rounded-xl border border-brandBlue bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 shadow-sm">
+            <span id="searchFeedbackText"></span>
+            <span class="flex gap-2">
+                <button type="button" onclick="jumpToResults()" class="bg-brandDarkBlue hover:bg-brandBlue text-white rounded-lg px-3 py-1.5 text-xs font-extrabold transition">View Results \u2193</button>
+                <button type="button" onclick="clearStoreSearch()" class="bg-brandYellow text-slate-900 rounded-lg px-3 py-1.5 text-xs font-extrabold">Clear</button>
+            </span>
         </div>
     </section>
 
@@ -2946,10 +2952,17 @@
             // fact counts the works actually live (approved) right now.
             const resultCountEl = document.getElementById('resultCount');
             if (resultCountEl) resultCountEl.textContent = pluralText('result', filtered.length);
-            const srl = document.getElementById('searchResultLine');
-            if (srl) {
+            const fb = document.getElementById('searchFeedback');
+            const fbt = document.getElementById('searchFeedbackText');
+            if (fb && fbt) {
                 const qNow = searchQuery.trim();
-                srl.textContent = !qNow ? '' : (filtered.length === 0 ? 'No matching editions found in the catalogue.' : pluralText('result', filtered.length) + ' for \u201C' + qNow + '\u201D');
+                if (!qNow) { fb.style.display = 'none'; }
+                else {
+                    fb.style.display = 'flex';
+                    fbt.textContent = filtered.length === 0
+                        ? 'No matching editions found in the catalogue.'
+                        : 'Showing ' + filtered.length + ' matching edition' + (filtered.length === 1 ? '' : 's') + ' for \u201C' + qNow + '\u201D';
+                }
             }
             const liveCount = products.filter(p => p.status === 'approved' || !p.status).length;
             const factEl = document.getElementById('worksCountFact');
@@ -3034,6 +3047,16 @@
 
         function runStoreSearch() {
             handleSearch();
+        }
+        function clearStoreSearch() {
+            const i = document.getElementById('searchInput');
+            i.value = '';
+            handleSearch();
+            i.focus();
+        }
+        function jumpToResults() {
+            const g = document.getElementById('productGrid');
+            if (g) { g.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
         }
         function handleSearch() {
             searchQuery = document.getElementById('searchInput').value;
