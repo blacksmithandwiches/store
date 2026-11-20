@@ -55,8 +55,12 @@
 html, body { overflow-x: clip; }
 @media (max-width: 767px) {
   header .max-w-7xl { flex-wrap: wrap; height: auto; min-height: 4rem; padding-top: 8px; padding-bottom: 8px; }
-  .bw-topnav { display: none; }
-  .bw-topnav.bw-open { display: flex; flex-wrap: wrap; width: 100%; order: 3; padding: 10px 0 6px; row-gap: 8px; }
+  .bw-topnav { position: fixed; top: 0; left: 0; z-index: 70; width: min(300px, 84vw); height: 100vh; height: 100dvh; background: #0A2458; box-shadow: 4px 0 24px rgba(0,0,0,.35); padding: 18px 16px; flex-direction: column; align-items: stretch; gap: 12px; overflow-y: auto; transform: translateX(-110%); transition: transform .25s ease; }
+  .bw-topnav.bw-open { transform: translateX(0); }
+  .bw-topnav > * { margin-left: 0 !important; }
+  .bw-topnav > div { flex-wrap: wrap; }
+  #bwNavShade { position: fixed; inset: 0; z-index: 40; background: rgba(2,10,40,.45); opacity: 0; pointer-events: none; transition: opacity .25s ease; }
+  #bwNavShade.bw-on { opacity: 1; pointer-events: auto; }
 }
 </style>
 </head>
@@ -3269,11 +3273,18 @@ if ('serviceWorker' in navigator) {
 (function () {
   var b = document.getElementById('bwMenuBtn'), n = document.getElementById('bwTopNav');
   if (!b || !n) return;
-  b.addEventListener('click', function () {
-    var o = n.classList.toggle('bw-open');
+  var shade = document.createElement('div');
+  shade.id = 'bwNavShade';
+  document.body.appendChild(shade);
+  function setOpen(o) {
+    n.classList.toggle('bw-open', o);
+    shade.classList.toggle('bw-on', o);
     b.setAttribute('aria-expanded', String(o));
     b.textContent = o ? 'Close' : 'Menu';
-  });
+  }
+  b.addEventListener('click', function () { setOpen(!n.classList.contains('bw-open')); });
+  shade.addEventListener('click', function () { setOpen(false); });
+  n.addEventListener('click', function (e) { if (e.target && e.target.closest && e.target.closest('a')) setOpen(false); });
 })();
 </script>
 </body>
