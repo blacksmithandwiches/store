@@ -173,6 +173,7 @@ html, body { overflow-x: clip; }
             <div class="flex flex-wrap gap-2 w-full md:w-auto" id="categoryFilters">
                 <button onclick="filterCategory('all', this)" class="cat-btn px-4 py-2 rounded-xl text-sm font-bold bg-brandDarkBlue text-white transition shadow-sm" data-i18n="catAll">All Releases</button>
                 <button onclick="filterCategory('books', this)" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition" data-i18n="cat_books">Books & Zines</button>
+                <button onclick="filterCategory('kids', this)" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition" data-i18n="cat_kids">Kids' Books</button>
                 <button onclick="filterCategory('music', this)" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition" data-i18n="cat_music">Music & Audio</button>
                 <button onclick="filterCategory('games', this)" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition" data-i18n="cat_games">Games</button>
                 <button onclick="filterCategory('apps', this)" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition" data-i18n="cat_apps">Apps & Tools</button>
@@ -635,6 +636,7 @@ html, body { overflow-x: clip; }
                 fCreatorPh: "e.g. Dima Grossman",
                 fCategory: "Category",
                 cat_books: "Books & Zines",
+                cat_kids: "Kids' Books",
                 cat_music: "Music & Audio",
                 cat_games: "Games",
                 cat_apps: "Apps & Tools",
@@ -848,6 +850,7 @@ html, body { overflow-x: clip; }
                 fCreatorPh: "z. B. Dima Grossman",
                 fCategory: "Kategorie",
                 cat_books: "Bücher & Zines",
+                cat_kids: "Kinderbücher",
                 cat_music: "Musik & Audio",
                 cat_games: "Spiele",
                 cat_apps: "Apps & Tools",
@@ -1061,6 +1064,7 @@ html, body { overflow-x: clip; }
                 fCreatorPh: "ex. Dima Grossman",
                 fCategory: "Catégorie",
                 cat_books: "Livres & fanzines",
+                cat_kids: "Livres pour enfants",
                 cat_music: "Musique & audio",
                 cat_games: "Jeux",
                 cat_apps: "Applications & outils",
@@ -1274,6 +1278,7 @@ html, body { overflow-x: clip; }
                 fCreatorPh: "напр., Dima Grossman",
                 fCategory: "Категорія",
                 cat_books: "Книги та зіни",
+                cat_kids: "Дитячі книжки",
                 cat_music: "Музика та аудіо",
                 cat_games: "Ігри",
                 cat_apps: "Застосунки та інструменти",
@@ -1487,6 +1492,7 @@ html, body { overflow-x: clip; }
                 fCreatorPh: "напр., Dima Grossman",
                 fCategory: "Категория",
                 cat_books: "Книги и зины",
+                cat_kids: "Детские книги",
                 cat_music: "Музыка и аудио",
                 cat_games: "Игры",
                 cat_apps: "Приложения и инструменты",
@@ -1731,7 +1737,7 @@ html, body { overflow-x: clip; }
                                 "title": "Paul of Teraura",
                                 "creator": "Dima Grossman",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB"
                                 ],
@@ -1747,7 +1753,7 @@ html, body { overflow-x: clip; }
                                 "title": "Paul von Teraura",
                                 "creator": "Dima Grossman",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB"
                                 ],
@@ -1763,7 +1769,7 @@ html, body { overflow-x: clip; }
                                 "title": "Пол з Тераури (Paul of Teraura)",
                                 "creator": "Dima Grossman",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB"
                                 ],
@@ -1779,7 +1785,7 @@ html, body { overflow-x: clip; }
                                 "title": "Пол с Терауры (Paul of Teraura)",
                                 "creator": "Dima Grossman",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB"
                                 ],
@@ -1795,7 +1801,7 @@ html, body { overflow-x: clip; }
                                 "title": "Paul de Teraura",
                                 "creator": "Dima Grossman",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB"
                                 ],
@@ -1811,7 +1817,7 @@ html, body { overflow-x: clip; }
                                 "title": "Selected Stories (Annotated)",
                                 "creator": "Anton Chekhov",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -1828,7 +1834,7 @@ html, body { overflow-x: clip; }
                                 "title": "Meditations (Annotated)",
                                 "creator": "Marcus Aurelius",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -1845,7 +1851,7 @@ html, body { overflow-x: clip; }
                                 "title": "Tao Te Ching (Annotated) - Bilingual",
                                 "creator": "Laozi",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -1862,7 +1868,7 @@ html, body { overflow-x: clip; }
                                 "title": "The Last Days of Socrates (Annotated)",
                                 "creator": "Plato",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -1879,7 +1885,7 @@ html, body { overflow-x: clip; }
                                 "title": "The Prince (Annotated)",
                                 "creator": "Niccolò Machiavelli",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -1896,7 +1902,7 @@ html, body { overflow-x: clip; }
                                 "title": "The Time Machine (Annotated)",
                                 "creator": "H. G. Wells",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -1913,7 +1919,7 @@ html, body { overflow-x: clip; }
                                 "title": "Notes from Underground (Annotated)",
                                 "creator": "Fyodor Dostoevsky",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -1964,7 +1970,7 @@ html, body { overflow-x: clip; }
                                 "title": "Thus Spoke Zarathustra (Annotated)",
                                 "creator": "Friedrich Nietzsche",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -1981,7 +1987,7 @@ html, body { overflow-x: clip; }
                                 "title": "Selected Poems (Annotated)",
                                 "creator": "Emily Dickinson",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -1998,7 +2004,7 @@ html, body { overflow-x: clip; }
                                 "title": "The Lower Depths (Annotated)",
                                 "creator": "Maxim Gorky",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -2015,7 +2021,7 @@ html, body { overflow-x: clip; }
                                 "title": "The Letters of Mozart (Annotated)",
                                 "creator": "Wolfgang Amadeus Mozart",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -2032,7 +2038,7 @@ html, body { overflow-x: clip; }
                                 "title": "Beethoven's Letters (Annotated)",
                                 "creator": "Ludwig van Beethoven",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -2049,7 +2055,7 @@ html, body { overflow-x: clip; }
                                 "title": "Johann Sebastian Bach: His Life, Art and Work (Annotated)",
                                 "creator": "Johann Nikolaus Forkel",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -2066,7 +2072,7 @@ html, body { overflow-x: clip; }
                                 "title": "Paul & Marry — a short drama · Episode 1: The Smile Was Late",
                                 "creator": "Dima Grossman",
                                 "category": "video",
-                                "price": 0,
+                                "price": 3.45,
                                 "formats": [
                                             "Video"
                                 ],
@@ -2082,7 +2088,7 @@ html, body { overflow-x: clip; }
                                 "title": "Fifteen classics, one forge — the Classics shelf",
                                 "creator": "Dima Grossman",
                                 "category": "video",
-                                "price": 0,
+                                "price": 3.45,
                                 "formats": [
                                             "Video"
                                 ],
@@ -2098,7 +2104,7 @@ html, body { overflow-x: clip; }
                                 "title": "Creators: the Marketplace is open",
                                 "creator": "Dima Grossman",
                                 "category": "video",
-                                "price": 0,
+                                "price": 3.45,
                                 "formats": [
                                             "Video"
                                 ],
@@ -2114,7 +2120,7 @@ html, body { overflow-x: clip; }
                                 "title": "Paul of Teraura — trailer short",
                                 "creator": "Dima Grossman",
                                 "category": "video",
-                                "price": 0,
+                                "price": 3.45,
                                 "formats": [
                                             "Video"
                                 ],
@@ -2130,7 +2136,7 @@ html, body { overflow-x: clip; }
                                 "title": "Paul of Teraura — The Animated Series",
                                 "creator": "Dima Grossman",
                                 "category": "video",
-                                "price": 0,
+                                "price": 3.45,
                                 "formats": [
                                             "Video"
                                 ],
@@ -2146,7 +2152,7 @@ html, body { overflow-x: clip; }
                                 "title": "The Classics Reading Room — read first chapters free",
                                 "creator": "Dima Grossman",
                                 "category": "books",
-                                "price": 0,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "PDF"
@@ -2163,7 +2169,7 @@ html, body { overflow-x: clip; }
                                 "title": "The Republic (Annotated)",
                                 "creator": "Plato",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -2180,7 +2186,7 @@ html, body { overflow-x: clip; }
                                 "title": "Michelangelo: His Works, Sonnets & Letters (Illustrated)",
                                 "creator": "Michelangelo Buonarroti",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -2197,7 +2203,7 @@ html, body { overflow-x: clip; }
                                 "title": "The Nicomachean Ethics (Annotated)",
                                 "creator": "Aristotle",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -2214,7 +2220,7 @@ html, body { overflow-x: clip; }
                                 "title": "On Liberty (Annotated)",
                                 "creator": "John Stuart Mill",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -2231,7 +2237,7 @@ html, body { overflow-x: clip; }
                                 "title": "Second Treatise of Government (Annotated)",
                                 "creator": "John Locke",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -2248,7 +2254,7 @@ html, body { overflow-x: clip; }
                                 "title": "The Social Contract (Annotated)",
                                 "creator": "Jean-Jacques Rousseau",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -2265,7 +2271,7 @@ html, body { overflow-x: clip; }
                                 "title": "Groundwork of the Metaphysics of Morals (Annotated)",
                                 "creator": "Immanuel Kant",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -2282,7 +2288,7 @@ html, body { overflow-x: clip; }
                                 "title": "Meditations on First Philosophy (Annotated)",
                                 "creator": "René Descartes",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -2299,7 +2305,7 @@ html, body { overflow-x: clip; }
                                 "title": "Leviathan, Parts I–II (Annotated)",
                                 "creator": "Thomas Hobbes",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -2316,7 +2322,7 @@ html, body { overflow-x: clip; }
                                 "title": "An Enquiry Concerning Human Understanding (Annotated)",
                                 "creator": "David Hume",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -2333,7 +2339,7 @@ html, body { overflow-x: clip; }
                                 "title": "An Introduction to the Principles of Morals and Legislation (Annotated)",
                                 "creator": "Jeremy Bentham",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -2350,7 +2356,7 @@ html, body { overflow-x: clip; }
                                 "title": "The Spirit of the Laws (Annotated)",
                                 "creator": "Montesquieu",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -2367,7 +2373,7 @@ html, body { overflow-x: clip; }
                                 "title": "Letters from a Stoic (Annotated)",
                                 "creator": "Seneca",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -2384,7 +2390,7 @@ html, body { overflow-x: clip; }
                                 "title": "Enchiridion & Discourses: A Selection (Annotated)",
                                 "creator": "Epictetus",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -2401,7 +2407,7 @@ html, body { overflow-x: clip; }
                                 "title": "Memorabilia (Annotated)",
                                 "creator": "Xenophon",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -2418,7 +2424,7 @@ html, body { overflow-x: clip; }
                                 "title": "Politics (Annotated)",
                                 "creator": "Aristotle",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -2435,7 +2441,7 @@ html, body { overflow-x: clip; }
                                 "title": "Lives of the Eminent Philosophers: A Selection (Annotated)",
                                 "creator": "Diogenes Laërtius",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -2452,7 +2458,7 @@ html, body { overflow-x: clip; }
                                 "title": "The Gallic War (Annotated)",
                                 "creator": "Julius Caesar",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -2469,7 +2475,7 @@ html, body { overflow-x: clip; }
                                 "title": "Utilitarianism (Annotated)",
                                 "creator": "John Stuart Mill",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -2486,7 +2492,7 @@ html, body { overflow-x: clip; }
                                 "title": "The Twelve Caesars (Annotated)",
                                 "creator": "Suetonius",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -2503,7 +2509,7 @@ html, body { overflow-x: clip; }
                                 "title": "The Annals (Annotated)",
                                 "creator": "Tacitus",
                                 "category": "books",
-                                "price": 2.99,
+                                "price": 3.45,
                                 "formats": [
                                             "EPUB",
                                             "Paperback"
@@ -2520,7 +2526,7 @@ html, body { overflow-x: clip; }
                                 "title": "Paul & Marry — a short drama · Episode 2: Sacred",
                                 "creator": "Dima Grossman",
                                 "category": "video",
-                                "price": 0,
+                                "price": 3.45,
                                 "formats": [
                                             "Video"
                                 ],
@@ -2536,7 +2542,7 @@ html, body { overflow-x: clip; }
                                 "title": "Paul & Marry — a short drama · Episode 3: No Promises",
                                 "creator": "Dima Grossman",
                                 "category": "video",
-                                "price": 0,
+                                "price": 3.45,
                                 "formats": [
                                             "Video"
                                 ],
@@ -2552,7 +2558,7 @@ html, body { overflow-x: clip; }
                                 "title": "Paul & Marry — a short drama · Episode 4: They Keep the Lights On",
                                 "creator": "Dima Grossman",
                                 "category": "video",
-                                "price": 0,
+                                "price": 3.45,
                                 "formats": [
                                             "Video"
                                 ],
@@ -2562,6 +2568,150 @@ html, body { overflow-x: clip; }
                                 "description": "Paul & Marry — a short drama. Episode 4. \"They keep the lights on. For travelers.\" The village was not hiding. The village was beckoning. From \"Paul of Teraura\" by Dima Grossman.",
                                 "download_url": "https://www.youtube.com/shorts/WvELcmZpbWM",
                                 "cover_url": null
+                    },
+                    {
+                                "id": 57,
+                                "title": "Hugo the Hedgehog and the Forest Path",
+                                "creator": "Dima Grossman",
+                                "category": "kids",
+                                "price": 3.45,
+                                "formats": [
+                                            "EPUB"
+                                ],
+                                "status": "approved",
+                                "badge": "Hugo the Hedgehog - Book One",
+                                "excerpt": "Hugo the Hedgehog sets out along the forest path to visit Auntie Hazel — a gentle picture-book adventure about courage, asking for help, and finding the way home. For young readers ages 4–7.",
+                                "description": "Hugo the Hedgehog sets out along the forest path to visit Auntie Hazel — a gentle picture-book adventure about courage, asking for help, and finding the way home. For young readers ages 4–7.",
+                                "download_url": "https://www.kobo.com/ca/en/ebook/hugo-the-hedgehog-and-the-forest-path",
+                                "cover_url": "https://keplers-catalogue.vercel.app/covers/hugo1-en.jpg"
+                    },
+                    {
+                                "id": 58,
+                                "title": "Hugo der Igel und der Waldweg",
+                                "creator": "Dima Grossman",
+                                "category": "kids",
+                                "price": 3.45,
+                                "formats": [
+                                            "EPUB"
+                                ],
+                                "status": "approved",
+                                "badge": "German Edition",
+                                "excerpt": "Hugo der Igel macht sich auf den Waldweg, um Tante Hazel zu besuchen — ein sanftes Bilderbuch-Abenteuer über Mut, darum, um Hilfe zu bitten, und den Weg nach Hause zu finden. Für junge Leser von 4 bis 7 Jahren.",
+                                "description": "Hugo der Igel macht sich auf den Waldweg, um Tante Hazel zu besuchen — ein sanftes Bilderbuch-Abenteuer über Mut, darum, um Hilfe zu bitten, und den Weg nach Hause zu finden. Für junge Leser von 4 bis 7 Jahren.",
+                                "download_url": "https://www.kobo.com/ca/en/ebook/hugo-der-igel-und-der-waldweg",
+                                "cover_url": "https://keplers-catalogue.vercel.app/covers/hugo1-de.jpg"
+                    },
+                    {
+                                "id": 59,
+                                "title": "Їжачок Х'юго і лісова стежка (Hugo the Hedgehog)",
+                                "creator": "Dima Grossman",
+                                "category": "kids",
+                                "price": 3.45,
+                                "formats": [
+                                            "EPUB"
+                                ],
+                                "status": "approved",
+                                "badge": "Ukrainian Edition",
+                                "excerpt": "Їжачок Х'юго вирушає лісовою стежкою в гості до тітоньки Гейзел — добра книжка-картинка про сміливість, про те, як попросити про допомогу, і як знайти дорогу додому. Для юних читачів 4–7 років.",
+                                "description": "Їжачок Х'юго вирушає лісовою стежкою в гості до тітоньки Гейзел — добра книжка-картинка про сміливість, про те, як попросити про допомогу, і як знайти дорогу додому. Для юних читачів 4–7 років.",
+                                "download_url": "https://www.kobo.com/ca/en/search?query=1990000138645",
+                                "cover_url": "https://keplers-catalogue.vercel.app/covers/hugo1-uk.jpg"
+                    },
+                    {
+                                "id": 60,
+                                "title": "Ёжик Хьюго и лесная тропинка (Hugo the Hedgehog)",
+                                "creator": "Dima Grossman",
+                                "category": "kids",
+                                "price": 3.45,
+                                "formats": [
+                                            "EPUB"
+                                ],
+                                "status": "approved",
+                                "badge": "Russian Edition",
+                                "excerpt": "Ёжик Хьюго отправляется по лесной тропинке в гости к тёте Хейзел — трогательная книжка-картинка о смелости, о том, как попросить о помощи и найти дорогу домой. Для юных читателей 4–7 лет.",
+                                "description": "Ёжик Хьюго отправляется по лесной тропинке в гости к тёте Хейзел — трогательная книжка-картинка о смелости, о том, как попросить о помощи и найти дорогу домой. Для юных читателей 4–7 лет.",
+                                "download_url": "https://www.kobo.com/ca/en/search?query=1990000138676",
+                                "cover_url": "https://keplers-catalogue.vercel.app/covers/hugo1-ru.jpg"
+                    },
+                    {
+                                "id": 61,
+                                "title": "Hugo le hérisson et le sentier de la forêt",
+                                "creator": "Dima Grossman",
+                                "category": "kids",
+                                "price": 3.45,
+                                "formats": [
+                                            "EPUB"
+                                ],
+                                "status": "approved",
+                                "badge": "French Edition",
+                                "excerpt": "Hugo le hérisson part sur le sentier de la forêt pour rendre visite à Tante Hazel — une douce aventure sur le courage, demander de l'aide et retrouver le chemin de la maison. Pour les jeunes lecteurs de 4 à 7 ans.",
+                                "description": "Hugo le hérisson part sur le sentier de la forêt pour rendre visite à Tante Hazel — une douce aventure sur le courage, demander de l'aide et retrouver le chemin de la maison. Pour les jeunes lecteurs de 4 à 7 ans.",
+                                "download_url": "https://www.kobo.com/ca/en/ebook/hugo-le-herisson-et-le-sentier-de-la-foret",
+                                "cover_url": "https://keplers-catalogue.vercel.app/covers/hugo1-fr.jpg"
+                    },
+                    {
+                                "id": 62,
+                                "title": "Hugo the Hedgehog and the Race to the Animal Hospital",
+                                "creator": "Dima Grossman",
+                                "category": "kids",
+                                "price": 3.45,
+                                "formats": [
+                                            "EPUB"
+                                ],
+                                "status": "approved",
+                                "badge": "Hugo the Hedgehog - Book Two",
+                                "excerpt": "When Auntie Hazel breaks her ankle and cannot walk, little Hugo races all the way to the Animal Hospital in town to bring her help. A gentle sequel about caring for someone you love — for young readers ages 4–7.",
+                                "description": "When Auntie Hazel breaks her ankle and cannot walk, little Hugo races all the way to the Animal Hospital in town to bring her help. A gentle sequel about caring for someone you love — for young readers ages 4–7.",
+                                "download_url": "https://www.kobo.com/ca/en/ebook/hugo-the-hedgehog-and-the-race-to-the-animal-hospital",
+                                "cover_url": "https://keplers-catalogue.vercel.app/covers/hugo2-en.jpg"
+                    },
+                    {
+                                "id": 63,
+                                "title": "Hugo der Igel und der Wettlauf zur Tierklinik",
+                                "creator": "Dima Grossman",
+                                "category": "kids",
+                                "price": 3.45,
+                                "formats": [
+                                            "EPUB"
+                                ],
+                                "status": "approved",
+                                "badge": "German Edition",
+                                "excerpt": "Als Tante Hazel sich den Knöchel bricht und nicht mehr laufen kann, eilt der kleine Hugo zur Tierklinik in der Stadt, um Hilfe zu holen. Eine sanfte Fortsetzung über Fürsorge — für junge Leser von 4 bis 7 Jahren.",
+                                "description": "Als Tante Hazel sich den Knöchel bricht und nicht mehr laufen kann, eilt der kleine Hugo zur Tierklinik in der Stadt, um Hilfe zu holen. Eine sanfte Fortsetzung über Fürsorge — für junge Leser von 4 bis 7 Jahren.",
+                                "download_url": "https://www.kobo.com/ca/en/ebook/hugo-der-igel-und-der-wettlauf-zur-tierklinik",
+                                "cover_url": "https://keplers-catalogue.vercel.app/covers/hugo2-de.jpg"
+                    },
+                    {
+                                "id": 64,
+                                "title": "Їжачок Х'юго і перегони до лікарні для тварин (Hugo the Hedgehog)",
+                                "creator": "Dima Grossman",
+                                "category": "kids",
+                                "price": 3.45,
+                                "formats": [
+                                            "EPUB"
+                                ],
+                                "status": "approved",
+                                "badge": "Ukrainian Edition",
+                                "excerpt": "Коли тітонька Гейзел ламає щиколотку й не може ходити, маленький Х'юго мчить до лікарні для тварин у місті, щоб привести допомогу. Добре продовження про турботу — для юних читачів 4–7 років.",
+                                "description": "Коли тітонька Гейзел ламає щиколотку й не може ходити, маленький Х'юго мчить до лікарні для тварин у місті, щоб привести допомогу. Добре продовження про турботу — для юних читачів 4–7 років.",
+                                "download_url": "https://www.kobo.com/ca/en/search?query=1990000138959",
+                                "cover_url": "https://keplers-catalogue.vercel.app/covers/hugo2-uk.jpg"
+                    },
+                    {
+                                "id": 65,
+                                "title": "Ёжик Хьюго и гонка к больнице для животных (Hugo the Hedgehog)",
+                                "creator": "Dima Grossman",
+                                "category": "kids",
+                                "price": 3.45,
+                                "formats": [
+                                            "EPUB"
+                                ],
+                                "status": "approved",
+                                "badge": "Russian Edition",
+                                "excerpt": "Когда тётя Хейзел ломает лодыжку и не может ходить, маленький Хьюго мчится в больницу для животных в городе, чтобы привести помощь. Доброе продолжение о заботе — для юных читателей 4–7 лет.",
+                                "description": "Когда тётя Хейзел ломает лодыжку и не может ходить, маленький Хьюго мчится в больницу для животных в городе, чтобы привести помощь. Доброе продолжение о заботе — для юных читателей 4–7 лет.",
+                                "download_url": "https://www.kobo.com/ca/en/search?query=1990000138997",
+                                "cover_url": "https://keplers-catalogue.vercel.app/covers/hugo2-ru.jpg"
                     }
         ];
 
