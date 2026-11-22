@@ -6,7 +6,7 @@
     <title>Admin — Blacksmith &amp; Witches Marketplace</title>
 <meta name="robots" content="noindex,nofollow">
 <meta name="author" content="Dima Grossman">
-<meta name="description" content="House admin backoffice for the Blacksmith & Witches Marketplace: moderation queue, creator directory, and house news publishing.">
+<meta name="description" content="House admin backoffice for the Blacksmith & Witches Marketplace: product catalogue, moderation queue, creator directory, and house news publishing.">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -149,6 +149,96 @@
                 </div>
             </section>
 
+            <!-- PRODUCT CATALOGUE (BACK OFFICE) -->
+            <section class="bg-white border-2 border-brandBlue rounded-2xl shadow-sm p-6 sm:p-8 space-y-5">
+                <div class="flex items-center space-x-3">
+                    <span class="w-10 h-10 rounded-xl bg-brandBlue text-white flex items-center justify-center">
+                        <i data-lucide="layout-grid" class="w-5 h-5"></i>
+                    </span>
+                    <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue">Product catalogue</h2>
+                </div>
+                <p class="text-sm text-slate-600 max-w-2xl">
+                    Every product in the store — on sale and hidden. Change a price, switch a product on or off sale, or add a new one. Saves go straight to the store's product table; the public storefront reads the same table.
+                </p>
+                <p class="text-sm text-slate-600 max-w-2xl">
+                    Orders &amp; payments live in Stripe, not in this table.
+                    <a href="https://dashboard.stripe.com/" target="_blank" rel="noopener" class="font-bold text-brandBlue hover:text-brandDarkBlue underline underline-offset-4 decoration-brandYellow decoration-2 transition">Open the Stripe dashboard &rarr;</a>
+                </p>
+                <div class="flex flex-col md:flex-row md:items-end gap-3">
+                    <div class="flex-1 min-w-[180px]">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="catSearch">Search</label>
+                        <input type="text" id="catSearch" placeholder="Title or creator…" oninput="renderCatalogue()" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="catCategoryFilter">Category</label>
+                        <select id="catCategoryFilter" onchange="renderCatalogue()" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                            <option value="">All categories</option>
+                            <option value="books">Books &amp; Zines</option>
+                            <option value="music">Music &amp; Audio</option>
+                            <option value="games">Games</option>
+                            <option value="apps">Apps &amp; Tools</option>
+                            <option value="video">Video</option>
+                            <option value="kids">Kids</option>
+                            <option value="art">Art &amp; Prints</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="catStatusFilter">Sale state</label>
+                        <select id="catStatusFilter" onchange="renderCatalogue()" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                            <option value="">All products</option>
+                            <option value="approved">On sale</option>
+                            <option value="off">Not on sale</option>
+                        </select>
+                    </div>
+                    <button type="button" onclick="loadCatalogue()" class="shrink-0 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-4 py-2.5 rounded-xl text-sm transition">Refresh</button>
+                </div>
+                <p id="catalogueStatus" class="text-sm text-slate-500"></p>
+                <div id="catalogueList" class="divide-y divide-slate-100"></div>
+
+                <div class="border-t border-slate-100 pt-5">
+                    <h3 class="text-base font-black tracking-tight text-brandDarkBlue mb-1">Add a product</h3>
+                    <p class="text-sm text-slate-600 max-w-2xl mb-4">New products start <strong>not on sale</strong> (pending). Switch them on from their Edit panel once the buy link and price are right.</p>
+                    <form id="addProductForm" onsubmit="handleAddProduct(event)" class="space-y-4 max-w-2xl">
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="addTitle">Title</label>
+                                <input type="text" id="addTitle" required class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="addCreator">Creator</label>
+                                <input type="text" id="addCreator" required class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="addCategory">Category</label>
+                                <select id="addCategory" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                                    <option value="books">Books &amp; Zines</option>
+                                    <option value="music">Music &amp; Audio</option>
+                                    <option value="games">Games</option>
+                                    <option value="apps">Apps &amp; Tools</option>
+                                    <option value="video">Video</option>
+                                    <option value="kids">Kids</option>
+                                    <option value="art">Art &amp; Prints</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="addPrice">Price (CAD)</label>
+                                <input type="number" id="addPrice" required min="0" step="0.01" placeholder="5.45" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="addLink">Buy link (Stripe payment link or store page)</label>
+                            <input type="url" id="addLink" placeholder="https://buy.stripe.com/…" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="addExcerpt">Short description (excerpt)</label>
+                            <textarea id="addExcerpt" rows="3" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none"></textarea>
+                        </div>
+                        <button type="submit" id="addProductBtn" class="px-5 py-2 bg-brandDarkBlue hover:bg-brandBlue text-white font-bold rounded-xl text-sm shadow transition">Add product (not on sale)</button>
+                        <div id="addProductFeedback" class="hidden text-xs p-3 rounded-xl font-medium"></div>
+                    </form>
+                </div>
+            </section>
+
             <!-- MODERATION QUEUE -->
             <section class="bg-white border-2 border-brandYellow rounded-2xl shadow-sm p-6 sm:p-8 space-y-5">
                 <div class="flex items-center space-x-3">
@@ -237,6 +327,15 @@
         let profileLoadedForId = null;
         let adminLoadedForId = null;
         try { supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth: { flowType: 'implicit', detectSessionInUrl: true, persistSession: true, autoRefreshToken: true } }); } catch (e) { supabaseClient = null; }
+
+        // The backoffice door: only these two house admin accounts get in —
+        // the store admin profile and Dmitri's own account. The matching
+        // RLS policies (upgrade/admin-rls-policy.sql) are the real lock:
+        // they are what lets these two accounts write to every product row.
+        const ADMIN_USER_IDS = [
+            '1c87f101-dd0a-4e1d-bac8-99bf3e8b0fe3',
+            '905b3f11-974b-40c7-a7e1-25f1f422a62c'
+        ];
 
         // Session recovery for magic-link returns — identical to the
         // account page: try the stored session, then a ?code= exchange,
@@ -364,17 +463,18 @@
                     profileLoadedForId = user.id;
                     currentProfile = await loadProfile(user);
                 }
-                const isAdmin = !!(user && currentProfile && currentProfile.is_admin === true);
+                const isAdmin = !!(user && ADMIN_USER_IDS.indexOf(user.id) !== -1);
                 document.getElementById('authSection').classList.toggle('hidden', !!user);
                 document.getElementById('notAdminSection').classList.toggle('hidden', !(user && !isAdmin));
                 document.getElementById('adminSection').classList.toggle('hidden', !isAdmin);
                 if (isAdmin) {
-                    document.getElementById('adminName').textContent = currentProfile.display_name || user.email || '';
+                    document.getElementById('adminName').textContent = (currentProfile && currentProfile.display_name) || user.email || '';
                     document.getElementById('adminEmail').textContent = user.email || '';
                     const authorInput = document.getElementById('newsAuthor');
-                    if (authorInput && !authorInput.value) authorInput.value = currentProfile.display_name || '';
+                    if (authorInput && !authorInput.value) authorInput.value = (currentProfile && currentProfile.display_name) || '';
                     if (adminLoadedForId !== user.id) {
                         adminLoadedForId = user.id;
+                        loadCatalogue();
                         loadQueue();
                         loadDirectory();
                         loadNewsList();
@@ -402,7 +502,9 @@
             music: 'Music & Audio',
             games: 'Games',
             apps: 'Apps & Tools',
-            video: 'Video'
+            video: 'Video',
+            kids: 'Kids',
+            art: 'Art & Prints'
         };
         function escapeHtml(s) {
             return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -488,6 +590,244 @@
                 await loadQueue();
             } catch (err) {
                 alert('Moderation error: ' + err.message);
+            }
+        }
+
+        // --- Product catalogue (back office) ---
+        // Every product row, not just the public shelf: the admins' RLS
+        // SELECT policy (upgrade/admin-rls-policy.sql) is what makes the
+        // hidden rows visible here. Writes go through the same session.
+        let catalogueRows = [];
+
+        async function loadCatalogue() {
+            if (!supabaseClient || !currentUser) return;
+            const statusEl = document.getElementById('catalogueStatus');
+            const listEl = document.getElementById('catalogueList');
+            statusEl.textContent = 'Loading the catalogue…';
+            try {
+                const { data, error } = await supabaseClient
+                    .from('products')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+                if (error) throw error;
+                catalogueRows = data || [];
+                renderCatalogue();
+            } catch (err) {
+                statusEl.textContent = 'Could not load the catalogue: ' + err.message;
+                listEl.innerHTML = '';
+            }
+        }
+
+        function catalogueFiltered() {
+            const q = (document.getElementById('catSearch').value || '').trim().toLowerCase();
+            const cat = document.getElementById('catCategoryFilter').value;
+            const state = document.getElementById('catStatusFilter').value;
+            return catalogueRows.filter(p => {
+                if (cat && p.category !== cat) return false;
+                if (state === 'approved' && p.status !== 'approved') return false;
+                if (state === 'off' && p.status === 'approved') return false;
+                if (q) {
+                    const hay = ((p.title || '') + ' ' + (p.creator || '')).toLowerCase();
+                    if (hay.indexOf(q) === -1) return false;
+                }
+                return true;
+            });
+        }
+
+        function statusPill(p) {
+            if (p.status === 'approved') return '<span class="bg-green-100 text-green-800 border border-green-300 text-xs font-bold px-2.5 py-1 rounded-full">On sale</span>';
+            if (p.status === 'rejected') return '<span class="bg-red-100 text-red-800 border border-red-300 text-xs font-bold px-2.5 py-1 rounded-full">Rejected</span>';
+            return '<span class="bg-slate-100 text-slate-600 border border-slate-300 text-xs font-bold px-2.5 py-1 rounded-full">Not on sale</span>';
+        }
+
+        function categoryOptions(selected) {
+            return Object.keys(CATEGORY_NAMES).map(k =>
+                `<option value="${k}"${k === selected ? ' selected' : ''}>${CATEGORY_NAMES[k]}</option>`
+            ).join('');
+        }
+
+        function renderCatalogue() {
+            const statusEl = document.getElementById('catalogueStatus');
+            const listEl = document.getElementById('catalogueList');
+            const rows = catalogueFiltered();
+            const onSale = catalogueRows.filter(p => p.status === 'approved').length;
+            statusEl.textContent = `Showing ${rows.length} of ${catalogueRows.length} products · ${onSale} on sale`;
+            if (!rows.length) {
+                listEl.innerHTML = '<p class="text-sm text-slate-500 py-4">No products match.</p>';
+                return;
+            }
+            listEl.innerHTML = rows.map(p => {
+                const cover = (p.cover_url || '').trim()
+                    ? `<img src="${escapeHtml(p.cover_url)}" alt="" class="w-12 h-[4.5rem] object-cover rounded-lg border border-slate-200 shrink-0">`
+                    : '';
+                const link = (p.download_url || '').trim();
+                const linkHtml = link && link !== '#'
+                    ? `<a href="${escapeHtml(link)}" target="_blank" rel="noopener" class="text-xs font-bold text-brandBlue hover:text-brandDarkBlue underline underline-offset-4 decoration-brandYellow decoration-2 break-all">${escapeHtml(link)}</a>`
+                    : '<span class="text-xs text-slate-400">No buy link</span>';
+                const featChip = p.featured
+                    ? '<span class="bg-brandYellow text-brandDarkBlue text-xs font-black px-2.5 py-1 rounded-full uppercase tracking-wide">Featured</span>'
+                    : '';
+                const rejectedNote = p.status === 'rejected'
+                    ? '<p class="text-xs text-red-700 mt-1">This product is marked rejected. Saving with “On sale” off keeps it rejected; switch “On sale” on to put it back on the shelf as approved.</p>'
+                    : '';
+                return `
+                <div class="py-5">
+                    <div class="flex gap-4">
+                        ${cover}
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <p class="font-bold text-brandDarkBlue">${escapeHtml(p.title)}</p>
+                                ${statusPill(p)}
+                                ${featChip}
+                            </div>
+                            <p class="text-xs text-slate-500 mt-0.5">by ${escapeHtml(p.creator)} · ${escapeHtml(CATEGORY_NAMES[p.category] || p.category || '')} · ${priceLabel(p)} · #${p.id} · ${dateLabel(p.created_at)}</p>
+                            <p class="mt-1.5">${linkHtml}</p>
+                            <div class="mt-3">
+                                <button type="button" onclick="toggleCatalogueEdit(${p.id})" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-4 py-2 rounded-xl text-xs transition">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="catEdit-${p.id}" class="hidden mt-4 bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-5">
+                        <div class="grid sm:grid-cols-2 gap-4 max-w-3xl">
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="catTitle-${p.id}">Title</label>
+                                <input type="text" id="catTitle-${p.id}" value="${escapeHtml(p.title)}" class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="catCreator-${p.id}">Creator</label>
+                                <input type="text" id="catCreator-${p.id}" value="${escapeHtml(p.creator)}" class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="catPrice-${p.id}">Price (CAD)</label>
+                                <input type="number" id="catPrice-${p.id}" value="${p.price == null ? '' : Number(p.price)}" min="0" step="0.01" class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="catCategory-${p.id}">Category</label>
+                                <select id="catCategory-${p.id}" class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">${categoryOptions(p.category)}</select>
+                            </div>
+                        </div>
+                        <div class="mt-4 max-w-3xl">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="catLink-${p.id}">Buy link</label>
+                            <input type="text" id="catLink-${p.id}" value="${escapeHtml(p.download_url || '')}" class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
+                        </div>
+                        <div class="mt-4 max-w-3xl">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="catExcerpt-${p.id}">Excerpt (short text on the card)</label>
+                            <textarea id="catExcerpt-${p.id}" rows="2" class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">${escapeHtml(p.excerpt || '')}</textarea>
+                        </div>
+                        <div class="mt-4 max-w-3xl">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="catDesc-${p.id}">Description (full text)</label>
+                            <textarea id="catDesc-${p.id}" rows="4" class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">${escapeHtml(p.description || '')}</textarea>
+                        </div>
+                        <div class="mt-4 flex flex-wrap gap-6 max-w-3xl">
+                            <label class="flex items-center gap-2 text-sm font-semibold text-slate-700">
+                                <input type="checkbox" id="catOnSale-${p.id}" ${p.status === 'approved' ? 'checked' : ''} class="w-4 h-4 accent-[#0F3D91]">
+                                On sale (approved &amp; public)
+                            </label>
+                            <label class="flex items-center gap-2 text-sm font-semibold text-slate-700">
+                                <input type="checkbox" id="catFeatured-${p.id}" ${p.featured ? 'checked' : ''} class="w-4 h-4 accent-[#0F3D91]">
+                                Featured
+                            </label>
+                        </div>
+                        ${rejectedNote}
+                        <div class="mt-4 flex items-center gap-3">
+                            <button type="button" id="catSave-${p.id}" onclick="saveCatalogueProduct(${p.id})" class="bg-brandBlue hover:bg-brandDarkBlue text-white font-bold px-5 py-2 rounded-xl text-xs shadow transition">Save changes</button>
+                            <span id="catFeedback-${p.id}" class="text-xs font-semibold"></span>
+                        </div>
+                    </div>
+                </div>`;
+            }).join('');
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function toggleCatalogueEdit(id) {
+            const el = document.getElementById('catEdit-' + id);
+            if (el) el.classList.toggle('hidden');
+        }
+
+        async function saveCatalogueProduct(id) {
+            if (!supabaseClient) return;
+            const row = catalogueRows.find(p => p.id === id);
+            const feedback = document.getElementById('catFeedback-' + id);
+            const btn = document.getElementById('catSave-' + id);
+            const onSale = document.getElementById('catOnSale-' + id).checked;
+            const status = onSale ? 'approved' : (row && row.status === 'rejected' ? 'rejected' : 'pending');
+            const updates = {
+                title: document.getElementById('catTitle-' + id).value.trim(),
+                creator: document.getElementById('catCreator-' + id).value.trim(),
+                price: parseFloat(document.getElementById('catPrice-' + id).value) || 0,
+                category: document.getElementById('catCategory-' + id).value,
+                download_url: document.getElementById('catLink-' + id).value.trim() || '#',
+                excerpt: document.getElementById('catExcerpt-' + id).value,
+                description: document.getElementById('catDesc-' + id).value,
+                featured: document.getElementById('catFeatured-' + id).checked,
+                status: status
+            };
+            btn.disabled = true;
+            btn.innerText = 'Saving…';
+            feedback.className = 'text-xs font-semibold text-slate-500';
+            feedback.textContent = '';
+            try {
+                const { data, error } = await supabaseClient
+                    .from('products')
+                    .update(updates)
+                    .eq('id', id)
+                    .select();
+                if (error) throw error;
+                if (!data || !data.length) throw new Error('the row did not accept the update (no row returned) — the admin policy may not be applied yet');
+                const idx = catalogueRows.findIndex(p => p.id === id);
+                if (idx !== -1) catalogueRows[idx] = data[0];
+                renderCatalogue();
+                document.getElementById('catalogueStatus').textContent = 'Saved: ' + updates.title;
+                const panel = document.getElementById('catEdit-' + id);
+                if (panel) panel.classList.remove('hidden');
+                const fb = document.getElementById('catFeedback-' + id);
+                if (fb) { fb.className = 'text-xs font-semibold text-green-700'; fb.textContent = 'Saved ✓'; }
+            } catch (err) {
+                feedback.className = 'text-xs font-semibold text-red-700';
+                feedback.textContent = 'Save failed: ' + err.message;
+                btn.disabled = false;
+                btn.innerText = 'Save changes';
+            }
+        }
+
+        async function handleAddProduct(e) {
+            e.preventDefault();
+            if (!supabaseClient || !currentUser) return;
+            const btn = document.getElementById('addProductBtn');
+            const feedback = document.getElementById('addProductFeedback');
+            const newProd = {
+                user_id: currentUser.id,
+                title: document.getElementById('addTitle').value.trim(),
+                creator: document.getElementById('addCreator').value.trim(),
+                category: document.getElementById('addCategory').value,
+                price: parseFloat(document.getElementById('addPrice').value) || 0,
+                formats: ['EPUB'],
+                featured: false,
+                badge: 'New Release',
+                excerpt: document.getElementById('addExcerpt').value,
+                description: document.getElementById('addExcerpt').value,
+                download_url: document.getElementById('addLink').value.trim() || '#',
+                status: 'pending'
+            };
+            btn.disabled = true;
+            btn.innerText = 'Adding…';
+            feedback.classList.add('hidden');
+            try {
+                const { data, error } = await supabaseClient.from('products').insert([newProd]).select();
+                if (error) throw error;
+                if (data && data.length) catalogueRows.unshift(data[0]);
+                document.getElementById('addProductForm').reset();
+                renderCatalogue();
+                feedback.className = 'text-xs p-3 rounded-xl bg-green-50 text-green-800 border border-green-200 font-medium';
+                feedback.textContent = 'Added “' + newProd.title + '” — it is not on sale yet. Find it in the list above and switch it on when ready.';
+                feedback.classList.remove('hidden');
+            } catch (err) {
+                feedback.className = 'text-xs p-3 rounded-xl bg-red-50 text-red-700 border border-red-200 font-medium';
+                feedback.textContent = 'Could not add the product: ' + err.message;
+                feedback.classList.remove('hidden');
+            } finally {
+                btn.disabled = false;
+                btn.innerText = 'Add product (not on sale)';
             }
         }
 
