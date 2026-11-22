@@ -71,10 +71,19 @@
                 </a>
                 <div>
                     <a href="https://store.blacksmithandwitches.com/" class="font-bold text-lg tracking-tight hover:text-brandYellow transition">Blacksmith &amp; Witches</a>
-                    <span class="text-xs block text-blue-200 uppercase tracking-widest">The Marketplace</span>
+                    <span class="text-xs block text-blue-200 uppercase tracking-widest" data-i18n="marketplace">The Marketplace</span>
                 </div>
             </div>
-            <a href="https://store.blacksmithandwitches.com/" class="text-xs sm:text-sm font-semibold text-blue-100 hover:text-brandYellow transition">&larr; Back to the store</a>
+            <div class="flex items-center gap-2 sm:gap-3">
+                <div class="flex items-center gap-1" role="group" aria-label="Language">
+                    <button type="button" data-lang-btn="en" onclick="setLang('en')" class="text-[11px] sm:text-xs font-bold px-1.5 sm:px-2 py-1 rounded-md transition">EN</button>
+                    <button type="button" data-lang-btn="de" onclick="setLang('de')" class="text-[11px] sm:text-xs font-bold px-1.5 sm:px-2 py-1 rounded-md transition">DE</button>
+                    <button type="button" data-lang-btn="fr" onclick="setLang('fr')" class="text-[11px] sm:text-xs font-bold px-1.5 sm:px-2 py-1 rounded-md transition">FR</button>
+                    <button type="button" data-lang-btn="uk" onclick="setLang('uk')" class="text-[11px] sm:text-xs font-bold px-1.5 sm:px-2 py-1 rounded-md transition">UK</button>
+                    <button type="button" data-lang-btn="ru" onclick="setLang('ru')" class="text-[11px] sm:text-xs font-bold px-1.5 sm:px-2 py-1 rounded-md transition">RU</button>
+                </div>
+                <a href="https://store.blacksmithandwitches.com/" class="text-xs sm:text-sm font-semibold text-blue-100 hover:text-brandYellow transition whitespace-nowrap" data-i18n="backToStore">&larr; Back to the store</a>
+            </div>
         </div>
     </header>
 
@@ -83,17 +92,11 @@
         <div class="max-w-4xl mx-auto text-center space-y-4">
             <div class="inline-flex items-center space-x-2 bg-white/10 text-brandYellow px-3.5 py-1 rounded-full text-xs font-semibold tracking-wide border border-white/10">
                 <i data-lucide="megaphone" class="w-3.5 h-3.5"></i>
-                <span>Featured placement, sold by the day</span>
+                <span data-i18n="heroBadge">Featured placement, sold by the day</span>
             </div>
-            <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-white">
-                Promote your work
-            </h1>
-            <p class="text-blue-100 text-sm sm:text-base max-w-2xl mx-auto font-light">
-                Featured placement at the top of the Marketplace and in the BW Stage feed — sold by the day, priced in CAD.
-            </p>
-            <p class="text-sm font-semibold text-brandYellow">
-                Listing is always free — promotion is optional.
-            </p>
+            <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-white" data-i18n="promoteTitle">Promote your work</h1>
+            <p class="text-blue-100 text-sm sm:text-base max-w-2xl mx-auto font-light" data-i18n="heroSub">Featured placement at the top of the Marketplace and in the BW Stage feed — sold by the day, priced in CAD.</p>
+            <p class="text-sm font-semibold text-brandYellow" data-i18n="heroFree">Listing is always free — promotion is optional.</p>
         </div>
     </section>
 
@@ -101,23 +104,23 @@
 
         <!-- HOW IT WORKS -->
         <section class="space-y-4">
-            <h2 class="text-lg sm:text-xl font-black tracking-tight text-brandDarkBlue">How it works</h2>
+            <h2 class="text-lg sm:text-xl font-black tracking-tight text-brandDarkBlue" data-i18n="howTitle">How it works</h2>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-2">
                     <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center"><i data-lucide="upload-cloud" class="w-5 h-5"></i></span>
-                    <h3 class="font-bold text-brandDarkBlue text-sm">1 · Submit your work — free</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">List your book, music, art or video at the Marketplace. Listing is always free.</p>
-                    <a href="https://store.blacksmithandwitches.com/" class="inline-block text-xs font-bold text-brandBlue hover:text-brandDarkBlue underline underline-offset-4 decoration-brandYellow decoration-2 transition">List your work at the Marketplace &rarr;</a>
+                    <h3 class="font-bold text-brandDarkBlue text-sm" data-i18n="how1Title">1 · Submit your work — free</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed" data-i18n="how1Text">List your book, music, art or video at the Marketplace. Listing is always free.</p>
+                    <a href="https://store.blacksmithandwitches.com/" class="inline-block text-xs font-bold text-brandBlue hover:text-brandDarkBlue underline underline-offset-4 decoration-brandYellow decoration-2 transition" data-i18n="how1Link">List your work at the Marketplace &rarr;</a>
                 </div>
                 <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-2">
                     <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center"><i data-lucide="shield-check" class="w-5 h-5"></i></span>
-                    <h3 class="font-bold text-brandDarkBlue text-sm">2 · It is reviewed</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">A human reviews every submission before it appears in the store — nothing goes up automatically.</p>
+                    <h3 class="font-bold text-brandDarkBlue text-sm" data-i18n="how2Title">2 · It is reviewed</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed" data-i18n="how2Text">A human reviews every submission before it appears in the store — nothing goes up automatically.</p>
                 </div>
                 <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-2">
                     <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center"><i data-lucide="megaphone" class="w-5 h-5"></i></span>
-                    <h3 class="font-bold text-brandDarkBlue text-sm">3 · Promote it</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">When you want the top spot, pick a goal and a package below and secure your promotion.</p>
+                    <h3 class="font-bold text-brandDarkBlue text-sm" data-i18n="how3Title">3 · Promote it</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed" data-i18n="how3Text">When you want the top spot, pick a goal and a package below and secure your promotion.</p>
                 </div>
             </div>
         </section>
@@ -128,28 +131,24 @@
                 <span class="w-10 h-10 rounded-xl bg-brandBlue text-white flex items-center justify-center">
                     <i data-lucide="key-round" class="w-5 h-5"></i>
                 </span>
-                <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue">Sign up / Sign in</h2>
+                <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue" data-i18n="authHeading">Sign up / Sign in</h2>
             </div>
-            <p class="text-sm text-slate-600 max-w-2xl">
-                Creators sign in with a magic link — no password. New here? The same link creates your account.
-            </p>
+            <p class="text-sm text-slate-600 max-w-2xl" data-i18n="authText">Creators sign in with a magic link — no password. New here? The same link creates your account.</p>
             <div id="authSignedOut">
                 <form onsubmit="handleMagicLinkLogin(event)" class="space-y-4 max-w-md">
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="authEmail">Creator Email</label>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="authEmail" data-i18n="authEmailLabel">Creator Email</label>
                         <input type="email" id="authEmail" required placeholder="you@domain.com" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none">
                     </div>
-                    <button type="submit" id="authSubmitBtn" class="w-full py-2.5 bg-brandDarkBlue hover:bg-brandBlue text-white font-bold rounded-xl text-sm shadow transition">
-                        Send Magic Sign-In Link
-                    </button>
+                    <button type="submit" id="authSubmitBtn" class="w-full py-2.5 bg-brandDarkBlue hover:bg-brandBlue text-white font-bold rounded-xl text-sm shadow transition" data-i18n="authSubmit">Send Magic Sign-In Link</button>
                 </form>
-                <p class="text-[11px] text-slate-500 leading-relaxed mt-3 max-w-md">One sign-in email per person at a time — if no email arrives within a few minutes, wait a little and try again.</p>
+                <p class="text-[11px] text-slate-500 leading-relaxed mt-3 max-w-md" data-i18n="authNote">One sign-in email per person at a time — if no email arrives within a few minutes, wait a little and try again.</p>
                 <div id="authFeedback" class="hidden text-xs p-3 rounded-xl bg-blue-50 text-brandDarkBlue border border-blue-200 font-medium mt-3 max-w-md"></div>
             </div>
             <div id="authSignedIn" class="hidden">
-                <p class="text-sm font-semibold text-brandDarkBlue">Signed in as <span id="authEmailLabel"></span></p>
-                <p class="text-xs text-slate-500 mt-1">You can submit your work at the Marketplace and promote it below.</p>
-                <a href="account.html" class="inline-block mt-3 text-sm font-bold text-brandBlue hover:text-brandDarkBlue underline underline-offset-4 decoration-brandYellow decoration-2 transition">Go to your account &rarr;</a>
+                <p class="text-sm font-semibold text-brandDarkBlue"><span data-i18n="authSignedInAs">Signed in as</span> <span id="authEmailLabel"></span></p>
+                <p class="text-xs text-slate-500 mt-1" data-i18n="authSignedInText">You can submit your work at the Marketplace and promote it below.</p>
+                <a href="account.html" class="inline-block mt-3 text-sm font-bold text-brandBlue hover:text-brandDarkBlue underline underline-offset-4 decoration-brandYellow decoration-2 transition" data-i18n="authGoAccount">Go to your account &rarr;</a>
             </div>
         </section>
 
@@ -159,90 +158,88 @@
                 <span class="w-10 h-10 rounded-xl bg-brandYellow text-brandDarkBlue flex items-center justify-center">
                     <i data-lucide="megaphone" class="w-5 h-5"></i>
                 </span>
-                <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue">Promote your work</h2>
+                <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue" data-i18n="promoteTitle">Promote your work</h2>
             </div>
-            <p class="text-sm text-slate-600 max-w-2xl">
-                Select your listing, choose a placement goal and package below, and secure your promotion. Secure checkout by Stripe.
-            </p>
+            <p class="text-sm text-slate-600 max-w-2xl" data-i18n="promoteIntro">Select your listing, choose a placement goal and package below, and secure your promotion. Secure checkout by Stripe.</p>
             <div class="max-w-2xl">
-                <label for="promoteTitle" class="block text-xs font-bold uppercase tracking-wider text-brandDarkBlue mb-1.5">1 · Pick your listing</label>
-                <input type="text" id="promoteTitle" oninput="updatePromoteReview()" placeholder="Listing title — exactly as it appears in the store" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brandBlue transition">
+                <label for="promoteTitle" class="block text-xs font-bold uppercase tracking-wider text-brandDarkBlue mb-1.5" data-i18n="promoteStep1">1 · Pick your listing</label>
+                <input type="text" id="promoteTitle" oninput="updatePromoteReview()" placeholder="Listing title — exactly as it appears in the store" data-i18n-ph="promoteTitlePh" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brandBlue transition">
             </div>
             <div>
-                <label class="block text-xs font-bold uppercase tracking-wider text-brandDarkBlue mb-2">2 · Pick a goal</label>
+                <label class="block text-xs font-bold uppercase tracking-wider text-brandDarkBlue mb-2" data-i18n="promoteStep2">2 · Pick a goal</label>
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-3xl">
                     <label class="promote-goal block cursor-pointer border-2 rounded-2xl p-4 transition bg-slate-50 border-slate-200">
                         <input type="radio" name="promoteGoal" value="store" class="sr-only" onchange="onGoalChange('store')" checked>
-                        <span class="block font-black text-brandDarkBlue text-sm">Top of the store</span>
-                        <span class="block text-xs text-slate-600 mt-1">Leads the store&rsquo;s Featured row with a Promoted badge.</span>
+                        <span class="block font-black text-brandDarkBlue text-sm" data-i18n="goalStore">Top of the store</span>
+                        <span class="block text-xs text-slate-600 mt-1" data-i18n="goalStoreDesc">Leads the store&rsquo;s Featured row with a Promoted badge.</span>
                     </label>
                     <label class="promote-goal block cursor-pointer border-2 rounded-2xl p-4 transition bg-slate-50 border-slate-200">
                         <input type="radio" name="promoteGoal" value="stage" class="sr-only" onchange="onGoalChange('stage')">
-                        <span class="block font-black text-brandDarkBlue text-sm">In the Stage feed</span>
-                        <span class="block text-xs text-slate-600 mt-1">Gets a slot in the BW Stage video feed.</span>
+                        <span class="block font-black text-brandDarkBlue text-sm" data-i18n="goalStage">In the Stage feed</span>
+                        <span class="block text-xs text-slate-600 mt-1" data-i18n="goalStageDesc">Gets a slot in the BW Stage video feed.</span>
                     </label>
                     <label class="promote-goal block cursor-pointer border-2 rounded-2xl p-4 transition bg-slate-50 border-slate-200">
                         <input type="radio" name="promoteGoal" value="everywhere" class="sr-only" onchange="onGoalChange('everywhere')">
-                        <span class="block font-black text-brandDarkBlue text-sm">Everywhere</span>
-                        <span class="block text-xs text-slate-600 mt-1">Store + Stage feed + one Telegram channel post.</span>
+                        <span class="block font-black text-brandDarkBlue text-sm" data-i18n="goalEverywhere">Everywhere</span>
+                        <span class="block text-xs text-slate-600 mt-1" data-i18n="goalEverywhereDesc">Store + Stage feed + one Telegram channel post.</span>
                     </label>
                 </div>
             </div>
             <div>
-                <label class="block text-xs font-bold uppercase tracking-wider text-brandDarkBlue mb-2">3 · Pick a package</label>
+                <label class="block text-xs font-bold uppercase tracking-wider text-brandDarkBlue mb-2" data-i18n="promoteStep3">3 · Pick a package</label>
                 <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-3 max-w-5xl">
                     <label class="promote-pkg block cursor-pointer border-2 rounded-2xl p-4 transition bg-slate-50 border-slate-200">
                         <input type="radio" name="promotePkg" value="trial" class="sr-only" onchange="updatePromoteReview()">
                         <span class="flex items-center justify-between">
-                            <span class="font-black text-brandDarkBlue">Trial</span>
+                            <span class="font-black text-brandDarkBlue" data-i18n="pkg_trial">Trial</span>
                             <span class="text-lg font-black text-brandDarkBlue">CAD $1</span>
                         </span>
-                        <span class="block text-xs font-bold text-brandBlue mt-0.5">1 day</span>
-                        <span class="block text-xs text-slate-600 mt-2">Featured row + Promoted badge.</span>
+                        <span class="block text-xs font-bold text-brandBlue mt-0.5" data-i18n="d1">1 day</span>
+                        <span class="block text-xs text-slate-600 mt-2" data-i18n="pkgBasicDesc">Featured row + Promoted badge.</span>
                     </label>
                     <label class="promote-pkg block cursor-pointer border-2 rounded-2xl p-4 transition bg-slate-50 border-slate-200">
                         <input type="radio" name="promotePkg" value="starter" class="sr-only" onchange="updatePromoteReview()">
                         <span class="flex items-center justify-between">
-                            <span class="font-black text-brandDarkBlue">Starter</span>
+                            <span class="font-black text-brandDarkBlue" data-i18n="pkg_starter">Starter</span>
                             <span class="text-lg font-black text-brandDarkBlue">CAD $3</span>
                         </span>
-                        <span class="block text-xs font-bold text-brandBlue mt-0.5">3 days</span>
-                        <span class="block text-xs text-slate-600 mt-2">Featured row + Promoted badge.</span>
+                        <span class="block text-xs font-bold text-brandBlue mt-0.5" data-i18n="d3">3 days</span>
+                        <span class="block text-xs text-slate-600 mt-2" data-i18n="pkgBasicDesc">Featured row + Promoted badge.</span>
                     </label>
                     <label class="promote-pkg block cursor-pointer border-2 rounded-2xl p-4 transition bg-slate-50 border-slate-200">
                         <input type="radio" name="promotePkg" value="featured" class="sr-only" onchange="updatePromoteReview()" checked>
                         <span class="flex items-center justify-between">
-                            <span class="font-black text-brandDarkBlue">Featured ⭐</span>
+                            <span class="font-black text-brandDarkBlue" data-i18n="pkg_featured">Featured ⭐</span>
                             <span class="text-lg font-black text-brandDarkBlue">CAD $5</span>
                         </span>
-                        <span class="block text-xs font-bold text-brandBlue mt-0.5">7 days</span>
-                        <span class="inline-block bg-brandYellow text-brandDarkBlue text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wide mt-1.5">Most popular</span>
-                        <span class="block text-xs text-slate-600 mt-2">Featured row + badge + BW Stage feed slot.</span>
+                        <span class="block text-xs font-bold text-brandBlue mt-0.5" data-i18n="d7">7 days</span>
+                        <span class="inline-block bg-brandYellow text-brandDarkBlue text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wide mt-1.5" data-i18n="mostPopular">Most popular</span>
+                        <span class="block text-xs text-slate-600 mt-2" data-i18n="pkgFeaturedDesc">Featured row + badge + BW Stage feed slot.</span>
                     </label>
                     <label class="promote-pkg block cursor-pointer border-2 rounded-2xl p-4 transition bg-slate-50 border-slate-200">
                         <input type="radio" name="promotePkg" value="spotlight" class="sr-only" onchange="updatePromoteReview()">
                         <span class="flex items-center justify-between">
-                            <span class="font-black text-brandDarkBlue">Spotlight</span>
+                            <span class="font-black text-brandDarkBlue" data-i18n="pkg_spotlight">Spotlight</span>
                             <span class="text-lg font-black text-brandDarkBlue">CAD $9</span>
                         </span>
-                        <span class="block text-xs font-bold text-brandBlue mt-0.5">14 days</span>
-                        <span class="block text-xs text-slate-600 mt-2">Featured row + badge + Stage slot + Telegram post.</span>
+                        <span class="block text-xs font-bold text-brandBlue mt-0.5" data-i18n="d14">14 days</span>
+                        <span class="block text-xs text-slate-600 mt-2" data-i18n="pkgSpotlightDesc">Featured row + badge + Stage slot + Telegram post.</span>
                     </label>
                     <label class="promote-pkg block cursor-pointer border-2 rounded-2xl p-4 transition bg-slate-50 border-slate-200">
                         <input type="radio" name="promotePkg" value="top" class="sr-only" onchange="updatePromoteReview()">
                         <span class="flex items-center justify-between">
-                            <span class="font-black text-brandDarkBlue">Top</span>
+                            <span class="font-black text-brandDarkBlue" data-i18n="pkg_top">Top</span>
                             <span class="text-lg font-black text-brandDarkBlue">CAD $15</span>
                         </span>
-                        <span class="block text-xs font-bold text-brandBlue mt-0.5">30 days</span>
-                        <span class="block text-xs text-slate-600 mt-2">Everything in Spotlight for 30 days.</span>
+                        <span class="block text-xs font-bold text-brandBlue mt-0.5" data-i18n="d30">30 days</span>
+                        <span class="block text-xs text-slate-600 mt-2" data-i18n="pkgTopDesc">Everything in Spotlight for 30 days.</span>
                     </label>
                 </div>
                 <p id="promoteGoalWarning" class="text-xs text-amber-700 font-medium mt-2 hidden"></p>
             </div>
             <div class="border-t pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div id="promoteReview" class="text-sm font-semibold text-brandDarkBlue"></div>
-                <button onclick="startPromoteCheckout()" class="shrink-0 bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-6 py-3 rounded-xl text-sm shadow transition">Proceed to checkout</button>
+                <button onclick="startPromoteCheckout()" class="shrink-0 bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-6 py-3 rounded-xl text-sm shadow transition" data-i18n="checkoutBtn">Proceed to checkout</button>
             </div>
             <p id="promoteMsg" class="hidden text-sm font-medium"></p>
         </section>
@@ -256,15 +253,437 @@
                 <span class="text-sm font-medium">© 2026 Blacksmith & Witches House Platform. Powered by Supabase.</span>
             </div>
             <div class="flex space-x-6 text-sm">
-                <a href="https://blacksmithandwitches.com/account.html" class="hover:text-brandYellow transition">Upload your work</a>
-                <a href="https://home.blacksmithandwitches.com" class="hover:text-brandYellow transition">House Site</a>
-                <a href="https://t.me/StoreofBnW" class="hover:text-brandYellow transition">Telegram Store</a>
+                <a href="https://blacksmithandwitches.com/account.html" class="hover:text-brandYellow transition" data-i18n="footerUpload">Upload your work</a>
+                <a href="https://home.blacksmithandwitches.com" class="hover:text-brandYellow transition" data-i18n="footerHouse">House Site</a>
+                <a href="https://t.me/StoreofBnW" class="hover:text-brandYellow transition" data-i18n="footerTelegram">Telegram Store</a>
                 <a href="https://wallet.blacksmithandwitches.com" class="hover:text-brandYellow transition">BlacksmithPay</a>
             </div>
         </div>
     </footer>
 
     <script>
+        // --- Interface languages (EN · DE · FR · UK · RU) ---
+        // Same mechanism as the store and the account page: one shared
+        // house choice persists in localStorage ('bw_lang'), switcher
+        // in the top-right corner of the header. Added Nov 21, 2026 —
+        // this page used to be English-only, so a visitor arriving from
+        // a French/German/Ukrainian/Russian store page lost their
+        // language here. Dictionary entries for the promote flow are
+        // the store's own (index.html), reused verbatim.
+        const I18N = {
+            en: {
+                promoteTitle: "Promote your work",
+                promoteIntro: "Select your listing, choose a placement goal and package below, and secure your promotion. Secure checkout by Stripe.",
+                promoteStep1: "1 · Pick your listing",
+                promoteTitlePh: "Listing title — exactly as it appears in the store",
+                promoteStep2: "2 · Pick a goal",
+                goalStore: "Top of the store",
+                goalStoreDesc: "Leads the store's Featured row with a Promoted badge.",
+                goalStage: "In the Stage feed",
+                goalStageDesc: "Gets a slot in the BW Stage video feed.",
+                goalEverywhere: "Everywhere",
+                goalEverywhereDesc: "Store + Stage feed + one Telegram channel post.",
+                promoteStep3: "3 · Pick a package",
+                pkg_trial: "Trial",
+                pkg_starter: "Starter",
+                pkg_featured: "Featured ⭐",
+                pkg_spotlight: "Spotlight",
+                pkg_top: "Top",
+                daysOne: "{n} day",
+                daysFew: "{n} days",
+                daysMany: "{n} days",
+                pkgBasicDesc: "Featured row + Promoted badge.",
+                pkgFeaturedDesc: "Featured row + badge + BW Stage feed slot.",
+                pkgSpotlightDesc: "Featured row + badge + Stage slot + Telegram post.",
+                pkgTopDesc: "Everything in Spotlight for 30 days.",
+                mostPopular: "Most popular",
+                checkoutBtn: "Proceed to checkout",
+                reviewListing: "Listing:",
+                reviewEnterTitle: "(Enter your listing title above)",
+                reviewGoal: "Goal:",
+                reviewGoalEverywhereFull: "Everywhere (Store + Stage + Telegram)",
+                reviewPackage: "Package:",
+                reviewTotal: "Total:",
+                reviewTestNote: "Secure checkout by Stripe.",
+                promoteWarning: "Note: The selected \"{pkg}\" package does not include full coverage for your chosen \"{goal}\" goal.",
+                promoteNeedTitle: "Type your listing title first — exactly as it appears in the store.",
+                promotePending: "Promotion checkout opens soon. No charge was made.",
+                promoteUnavailable: "Promotion checkout unavailable: ",
+                marketplace: "The Marketplace",
+                backToStore: "← Back to the store",
+                footerUpload: "Upload your work",
+                footerHouse: "House Site",
+                footerTelegram: "Telegram Store",
+                docTitle: "Promote your work — Blacksmith & Witches Marketplace",
+                heroBadge: "Featured placement, sold by the day",
+                heroSub: "Featured placement at the top of the Marketplace and in the BW Stage feed — sold by the day, priced in CAD.",
+                heroFree: "Listing is always free — promotion is optional.",
+                howTitle: "How it works",
+                how1Title: "1 · Submit your work — free",
+                how1Text: "List your book, music, art or video at the Marketplace. Listing is always free.",
+                how1Link: "List your work at the Marketplace →",
+                how2Title: "2 · It is reviewed",
+                how2Text: "A human reviews every submission before it appears in the store — nothing goes up automatically.",
+                how3Title: "3 · Promote it",
+                how3Text: "When you want the top spot, pick a goal and a package below and secure your promotion.",
+                authHeading: "Sign up / Sign in",
+                authText: "Creators sign in with a magic link — no password. New here? The same link creates your account.",
+                authEmailLabel: "Creator Email",
+                authSubmit: "Send Magic Sign-In Link",
+                authNote: "One sign-in email per person at a time — if no email arrives within a few minutes, wait a little and try again.",
+                authSignedInAs: "Signed in as",
+                authSignedInText: "You can submit your work at the Marketplace and promote it below.",
+                authGoAccount: "Go to your account →",
+                authUnavailable: "Sign-in is unavailable right now — please try the Marketplace sign-in instead.",
+                authSending: "Sending Secure Link...",
+                authConnecting: "Connecting to auth service...",
+                authSuccess: "Success! Magic link sent to {email}. Check your inbox (and spam folder) to sign in instantly.",
+                authError: "Sign-in error: ",
+                d1: "1 day",
+                d3: "3 days",
+                d7: "7 days",
+                d14: "14 days",
+                d30: "30 days"
+            },
+            de: {
+                promoteTitle: "Bewerben Sie Ihr Werk",
+                promoteIntro: "Wählen Sie Ihr Listing, unten ein Platzierungsziel und ein Paket, und sichern Sie sich Ihre Werbung. Sichere Kaufabwicklung über Stripe.",
+                promoteStep1: "1 · Wählen Sie Ihr Listing",
+                promoteTitlePh: "Titel des Listings — genau wie im Shop",
+                promoteStep2: "2 · Wählen Sie ein Ziel",
+                goalStore: "Oben im Shop",
+                goalStoreDesc: "Führt die Featured-Zeile des Shops mit einem Promoted-Badge an.",
+                goalStage: "Im Stage-Feed",
+                goalStageDesc: "Erhält einen Platz im BW-Stage-Video-Feed.",
+                goalEverywhere: "Überall",
+                goalEverywhereDesc: "Shop + Stage-Feed + ein Post im Telegram-Kanal.",
+                promoteStep3: "3 · Wählen Sie ein Paket",
+                pkg_trial: "Test",
+                pkg_starter: "Starter",
+                pkg_featured: "Empfohlen ⭐",
+                pkg_spotlight: "Rampenlicht",
+                pkg_top: "Top",
+                daysOne: "{n} Tag",
+                daysFew: "{n} Tage",
+                daysMany: "{n} Tage",
+                pkgBasicDesc: "Featured-Zeile + Promoted-Badge.",
+                pkgFeaturedDesc: "Featured-Zeile + Badge + Platz im BW-Stage-Feed.",
+                pkgSpotlightDesc: "Featured-Zeile + Badge + Stage-Platz + Telegram-Post.",
+                pkgTopDesc: "Alles aus Rampenlicht für 30 Tage.",
+                mostPopular: "Am beliebtesten",
+                checkoutBtn: "Zur Kasse",
+                reviewListing: "Listing:",
+                reviewEnterTitle: "(Geben Sie oben den Titel Ihres Listings ein)",
+                reviewGoal: "Ziel:",
+                reviewGoalEverywhereFull: "Überall (Shop + Stage + Telegram)",
+                reviewPackage: "Paket:",
+                reviewTotal: "Gesamt:",
+                reviewTestNote: "Sichere Kaufabwicklung über Stripe.",
+                promoteWarning: "Hinweis: Das gewählte Paket „{pkg}“ deckt Ihr gewähltes Ziel „{goal}“ nicht vollständig ab.",
+                promoteNeedTitle: "Geben Sie zuerst den Titel Ihres Listings ein — genau wie im Shop.",
+                promotePending: "Die Promote-Kasse öffnet in Kürze. Es wurde nichts abgebucht.",
+                promoteUnavailable: "Promote-Kasse nicht verfügbar: ",
+                marketplace: "Der Marketplace",
+                backToStore: "← Zurück zum Shop",
+                footerUpload: "Ihr Werk hochladen",
+                footerHouse: "Hausseite",
+                footerTelegram: "Telegram-Shop",
+                docTitle: "Bewerben Sie Ihr Werk — Blacksmith & Witches Marketplace",
+                heroBadge: "Featured-Platzierung, tageweise verkauft",
+                heroSub: "Featured-Platzierung oben im Marketplace und im BW-Stage-Feed — tageweise verkauft, Preise in CAD.",
+                heroFree: "Das Listing ist immer kostenlos — Werbung ist optional.",
+                howTitle: "So funktioniert es",
+                how1Title: "1 · Reichen Sie Ihr Werk ein — kostenlos",
+                how1Text: "Listen Sie Ihr Buch, Ihre Musik, Kunst oder Ihr Video im Marketplace. Das Listing ist immer kostenlos.",
+                how1Link: "Ihr Werk im Marketplace listen →",
+                how2Title: "2 · Es wird geprüft",
+                how2Text: "Ein Mensch prüft jede Einreichung, bevor sie im Shop erscheint — nichts geht automatisch online.",
+                how3Title: "3 · Bewerben Sie es",
+                how3Text: "Wenn Sie den Spitzenplatz wollen, wählen Sie unten ein Ziel und ein Paket und sichern Sie sich Ihre Werbung.",
+                authHeading: "Registrieren / Anmelden",
+                authText: "Autoren melden sich mit einem Magic-Link an — kein Passwort. Neu hier? Derselbe Link erstellt Ihr Konto.",
+                authEmailLabel: "Autoren-E-Mail",
+                authSubmit: "Magic-Link zum Anmelden senden",
+                authNote: "Nur eine Anmelde-E-Mail pro Person gleichzeitig — wenn innerhalb weniger Minuten keine E-Mail ankommt, warten Sie kurz und versuchen Sie es erneut.",
+                authSignedInAs: "Angemeldet als",
+                authSignedInText: "Sie können Ihr Werk im Marketplace einreichen und es unten bewerben.",
+                authGoAccount: "Zu Ihrem Konto →",
+                authUnavailable: "Die Anmeldung ist gerade nicht verfügbar — bitte versuchen Sie stattdessen die Marketplace-Anmeldung.",
+                authSending: "Sicherer Link wird gesendet …",
+                authConnecting: "Verbindung zum Anmeldedienst …",
+                authSuccess: "Geschafft! Magic-Link an {email} gesendet. Prüfen Sie Ihr Postfach (und den Spam-Ordner), um sich sofort anzumelden.",
+                authError: "Fehler bei der Anmeldung: ",
+                d1: "1 Tag",
+                d3: "3 Tage",
+                d7: "7 Tage",
+                d14: "14 Tage",
+                d30: "30 Tage"
+            },
+            fr: {
+                promoteTitle: "Promouvez votre œuvre",
+                promoteIntro: "Sélectionnez votre annonce, choisissez ci-dessous un objectif de placement et un forfait, et réservez votre promotion. Paiement sécurisé par Stripe.",
+                promoteStep1: "1 · Choisissez votre annonce",
+                promoteTitlePh: "Titre de l'annonce — exactement comme dans la boutique",
+                promoteStep2: "2 · Choisissez un objectif",
+                goalStore: "En tête de la boutique",
+                goalStoreDesc: "En tête de la rangée « À la une » de la boutique, avec un badge Promu.",
+                goalStage: "Dans le flux Stage",
+                goalStageDesc: "Obtient une place dans le flux vidéo BW Stage.",
+                goalEverywhere: "Partout",
+                goalEverywhereDesc: "Boutique + flux Stage + un message sur le canal Telegram.",
+                promoteStep3: "3 · Choisissez un forfait",
+                pkg_trial: "Essai",
+                pkg_starter: "Démarrage",
+                pkg_featured: "À la une ⭐",
+                pkg_spotlight: "Pleins feux",
+                pkg_top: "Top",
+                daysOne: "{n} jour",
+                daysFew: "{n} jours",
+                daysMany: "{n} jours",
+                pkgBasicDesc: "Rangée « À la une » + badge Promu.",
+                pkgFeaturedDesc: "Rangée « À la une » + badge + place dans le flux BW Stage.",
+                pkgSpotlightDesc: "Rangée « À la une » + badge + place Stage + message Telegram.",
+                pkgTopDesc: "Tout Pleins feux pendant 30 jours.",
+                mostPopular: "Le plus populaire",
+                checkoutBtn: "Passer à la caisse",
+                reviewListing: "Annonce :",
+                reviewEnterTitle: "(Saisissez le titre de votre annonce ci-dessus)",
+                reviewGoal: "Objectif :",
+                reviewGoalEverywhereFull: "Partout (Boutique + Stage + Telegram)",
+                reviewPackage: "Forfait :",
+                reviewTotal: "Total :",
+                reviewTestNote: "Paiement sécurisé par Stripe.",
+                promoteWarning: "Remarque : le forfait « {pkg} » sélectionné ne couvre pas entièrement l'objectif « {goal} » choisi.",
+                promoteNeedTitle: "Saisissez d'abord le titre de votre annonce — exactement comme dans la boutique.",
+                promotePending: "La caisse de promotion ouvre bientôt. Aucun débit n'a été effectué.",
+                promoteUnavailable: "Caisse de promotion indisponible : ",
+                marketplace: "La place de marché",
+                backToStore: "← Retour à la boutique",
+                footerUpload: "Publiez votre œuvre",
+                footerHouse: "Site de la maison",
+                footerTelegram: "Boutique Telegram",
+                docTitle: "Promouvez votre œuvre — Blacksmith & Witches Marketplace",
+                heroBadge: "Placement à la une, vendu à la journée",
+                heroSub: "Placement à la une en tête de la Marketplace et dans le flux BW Stage — vendu à la journée, prix en CAD.",
+                heroFree: "L'annonce est toujours gratuite — la promotion est facultative.",
+                howTitle: "Comment ça marche",
+                how1Title: "1 · Soumettez votre œuvre — gratuit",
+                how1Text: "Publiez votre livre, votre musique, votre art ou votre vidéo sur la Marketplace. L'annonce est toujours gratuite.",
+                how1Link: "Publier votre œuvre sur la Marketplace →",
+                how2Title: "2 · Elle est examinée",
+                how2Text: "Un humain examine chaque soumission avant son apparition dans la boutique — rien n'est publié automatiquement.",
+                how3Title: "3 · Promouvez-la",
+                how3Text: "Quand vous voulez la première place, choisissez ci-dessous un objectif et un forfait, et sécurisez votre promotion.",
+                authHeading: "Inscription / Connexion",
+                authText: "Les créateurs se connectent avec un lien magique — aucun mot de passe. Nouveau ici ? Le même lien crée votre compte.",
+                authEmailLabel: "E-mail du créateur",
+                authSubmit: "Envoyer le lien magique de connexion",
+                authNote: "Un seul e-mail de connexion par personne à la fois — si aucun e-mail n'arrive sous quelques minutes, patientez un peu et réessayez.",
+                authSignedInAs: "Connecté en tant que",
+                authSignedInText: "Vous pouvez soumettre votre œuvre sur la Marketplace et la promouvoir ci-dessous.",
+                authGoAccount: "Aller à votre compte →",
+                authUnavailable: "La connexion est indisponible pour le moment — veuillez essayer la connexion Marketplace à la place.",
+                authSending: "Envoi du lien sécurisé…",
+                authConnecting: "Connexion au service d'authentification…",
+                authSuccess: "Réussi ! Lien magique envoyé à {email}. Vérifiez votre boîte de réception (et le dossier spam) pour vous connecter instantanément.",
+                authError: "Erreur de connexion : ",
+                d1: "1 jour",
+                d3: "3 jours",
+                d7: "7 jours",
+                d14: "14 jours",
+                d30: "30 jours"
+            },
+            uk: {
+                promoteTitle: "Просувайте свою роботу",
+                promoteIntro: "Виберіть свій лістинг, мету розміщення та пакет нижче й забронюйте просування. Оплата працює в ТЕСТОВОМУ режимі — без справжніх списань.",
+                promoteStep1: "1 · Виберіть свій лістинг",
+                promoteTitlePh: "Назва лістингу — точно як у магазині",
+                promoteStep2: "2 · Виберіть мету",
+                goalStore: "Угорі магазину",
+                goalStoreDesc: "Очолює рядок вибраного в магазині зі значком «Просувається».",
+                goalStage: "У стрічці Stage",
+                goalStageDesc: "Отримує місце у відеострічці BW Stage.",
+                goalEverywhere: "Скрізь",
+                goalEverywhereDesc: "Магазин + стрічка Stage + один допис у Telegram-каналі.",
+                promoteStep3: "3 · Виберіть пакет",
+                pkg_trial: "Пробний",
+                pkg_starter: "Стартовий",
+                pkg_featured: "Рекомендований ⭐",
+                pkg_spotlight: "У центрі уваги",
+                pkg_top: "Топ",
+                daysOne: "{n} день",
+                daysFew: "{n} дні",
+                daysMany: "{n} днів",
+                pkgBasicDesc: "Рядок вибраного + значок «Просувається».",
+                pkgFeaturedDesc: "Рядок вибраного + значок + місце у стрічці BW Stage.",
+                pkgSpotlightDesc: "Рядок вибраного + значок + місце у Stage + допис у Telegram.",
+                pkgTopDesc: "Все з пакета «У центрі уваги» на 30 днів.",
+                mostPopular: "Найпопулярніший",
+                checkoutBtn: "Перейти до оплати",
+                reviewListing: "Лістинг:",
+                reviewEnterTitle: "(Введіть назву свого лістингу вище)",
+                reviewGoal: "Мета:",
+                reviewGoalEverywhereFull: "Скрізь (Магазин + Stage + Telegram)",
+                reviewPackage: "Пакет:",
+                reviewTotal: "Разом:",
+                reviewTestNote: "Безпечна оплата через Stripe.",
+                promoteWarning: "Примітка: вибраний пакет «{pkg}» не покриває повністю вибрану мету «{goal}».",
+                promoteNeedTitle: "Спочатку введіть назву свого лістингу — точно як у магазині.",
+                promotePending: "Оплата просування відкриється скоро. Списань не було.",
+                promoteUnavailable: "Оплата просування недоступна: ",
+                marketplace: "Маркетплейс",
+                backToStore: "← Назад до магазину",
+                footerUpload: "Завантажити свою роботу",
+                footerHouse: "Головний сайт",
+                footerTelegram: "Магазин у Telegram",
+                docTitle: "Просувайте свою роботу — Blacksmith & Witches Marketplace",
+                heroBadge: "Розміщення в обраному — продаж по днях",
+                heroSub: "Розміщення в обраному вгорі Marketplace та у стрічці BW Stage — продаж по днях, ціни в CAD.",
+                heroFree: "Лістинг завжди безкоштовний — просування необов'язкове.",
+                howTitle: "Як це працює",
+                how1Title: "1 · Надішліть свою роботу — безкоштовно",
+                how1Text: "Розмістіть свою книгу, музику, мистецтво чи відео на Marketplace. Лістинг завжди безкоштовний.",
+                how1Link: "Розмістити роботу на Marketplace →",
+                how2Title: "2 · Її перевіряють",
+                how2Text: "Людина перевіряє кожну надіслану роботу, перш ніж вона з'явиться в магазині, — автоматично нічого не публікується.",
+                how3Title: "3 · Просувайте її",
+                how3Text: "Коли захочете верхню позицію, оберіть нижче мету й пакет та оформіть просування.",
+                authHeading: "Реєстрація / Вхід",
+                authText: "Автори входять за магічним посиланням — без пароля. Ви тут уперше? Те саме посилання створить ваш обліковий запис.",
+                authEmailLabel: "Електронна пошта автора",
+                authSubmit: "Надіслати магічне посилання для входу",
+                authNote: "Лише один лист для входу на людину одночасно — якщо лист не прийшов за кілька хвилин, зачекайте трохи й спробуйте ще раз.",
+                authSignedInAs: "Ви увійшли як",
+                authSignedInText: "Ви можете надіслати свою роботу на Marketplace і просувати її нижче.",
+                authGoAccount: "До вашого облікового запису →",
+                authUnavailable: "Вхід зараз недоступний — спробуйте, будь ласка, вхід через Marketplace.",
+                authSending: "Надсилаємо безпечне посилання...",
+                authConnecting: "З'єднання зі службою входу...",
+                authSuccess: "Готово! Магічне посилання надіслано на {email}. Перевірте вхідні (і папку спаму), щоб увійти миттєво.",
+                authError: "Помилка входу: ",
+                d1: "1 день",
+                d3: "3 дні",
+                d7: "7 днів",
+                d14: "14 днів",
+                d30: "30 днів"
+            },
+            ru: {
+                promoteTitle: "Продвигайте свою работу",
+                promoteIntro: "Выберите свой листинг, цель размещения и пакет ниже и забронируйте продвижение. Оплата работает в ТЕСТОВОМ режиме — без настоящих списаний.",
+                promoteStep1: "1 · Выберите свой листинг",
+                promoteTitlePh: "Название листинга — точно как в магазине",
+                promoteStep2: "2 · Выберите цель",
+                goalStore: "Наверху магазина",
+                goalStoreDesc: "Возглавляет строку избранного в магазине со значком «Продвигается».",
+                goalStage: "В ленте Stage",
+                goalStageDesc: "Получает место в видеоленте BW Stage.",
+                goalEverywhere: "Везде",
+                goalEverywhereDesc: "Магазин + лента Stage + один пост в Telegram-канале.",
+                promoteStep3: "3 · Выберите пакет",
+                pkg_trial: "Пробный",
+                pkg_starter: "Стартовый",
+                pkg_featured: "Рекомендуемый ⭐",
+                pkg_spotlight: "В центре внимания",
+                pkg_top: "Топ",
+                daysOne: "{n} день",
+                daysFew: "{n} дня",
+                daysMany: "{n} дней",
+                pkgBasicDesc: "Строка избранного + значок «Продвигается».",
+                pkgFeaturedDesc: "Строка избранного + значок + место в ленте BW Stage.",
+                pkgSpotlightDesc: "Строка избранного + значок + место в Stage + пост в Telegram.",
+                pkgTopDesc: "Всё из пакета «В центре внимания» на 30 дней.",
+                mostPopular: "Самый популярный",
+                checkoutBtn: "Перейти к оплате",
+                reviewListing: "Листинг:",
+                reviewEnterTitle: "(Введите название своего листинга выше)",
+                reviewGoal: "Цель:",
+                reviewGoalEverywhereFull: "Везде (Магазин + Stage + Telegram)",
+                reviewPackage: "Пакет:",
+                reviewTotal: "Итого:",
+                reviewTestNote: "Безопасная оплата через Stripe.",
+                promoteWarning: "Примечание: выбранный пакет «{pkg}» не покрывает полностью выбранную цель «{goal}».",
+                promoteNeedTitle: "Сначала введите название своего листинга — точно как в магазине.",
+                promotePending: "Оплата продвижения откроется скоро. Списаний не было.",
+                promoteUnavailable: "Оплата продвижения недоступна: ",
+                marketplace: "Маркетплейс",
+                backToStore: "← Назад в магазин",
+                footerUpload: "Загрузить свою работу",
+                footerHouse: "Главный сайт",
+                footerTelegram: "Магазин в Telegram",
+                docTitle: "Продвигайте свою работу — Blacksmith & Witches Marketplace",
+                heroBadge: "Размещение в избранном — продажа по дням",
+                heroSub: "Размещение в избранном наверху Marketplace и в ленте BW Stage — продажа по дням, цены в CAD.",
+                heroFree: "Листинг всегда бесплатен — продвижение необязательно.",
+                howTitle: "Как это работает",
+                how1Title: "1 · Отправьте свою работу — бесплатно",
+                how1Text: "Разместите свою книгу, музыку, искусство или видео на Marketplace. Листинг всегда бесплатен.",
+                how1Link: "Разместить работу на Marketplace →",
+                how2Title: "2 · Её проверяют",
+                how2Text: "Человек проверяет каждую отправленную работу, прежде чем она появится в магазине, — автоматически ничего не публикуется.",
+                how3Title: "3 · Продвигайте её",
+                how3Text: "Когда захотите верхнюю позицию, выберите ниже цель и пакет и оформите продвижение.",
+                authHeading: "Регистрация / Вход",
+                authText: "Авторы входят по магической ссылке — без пароля. Вы здесь впервые? Та же ссылка создаст вашу учётную запись.",
+                authEmailLabel: "Электронная почта автора",
+                authSubmit: "Отправить магическую ссылку для входа",
+                authNote: "Только одно письмо для входа на человека одновременно — если письмо не пришло за несколько минут, подождите немного и попробуйте ещё раз.",
+                authSignedInAs: "Вы вошли как",
+                authSignedInText: "Вы можете отправить свою работу на Marketplace и продвигать её ниже.",
+                authGoAccount: "К вашей учётной записи →",
+                authUnavailable: "Вход сейчас недоступен — попробуйте, пожалуйста, вход через Marketplace.",
+                authSending: "Отправляем безопасную ссылку...",
+                authConnecting: "Соединение со службой входа...",
+                authSuccess: "Готово! Магическая ссылка отправлена на {email}. Проверьте входящие (и папку спама), чтобы войти мгновенно.",
+                authError: "Ошибка входа: ",
+                d1: "1 день",
+                d3: "3 дня",
+                d7: "7 дней",
+                d14: "14 дней",
+                d30: "30 дней"
+            }
+        };
+        let curLang = 'en';
+        try {
+            const savedLang = localStorage.getItem('bw_lang');
+            if (savedLang && I18N[savedLang]) curLang = savedLang;
+        } catch (e) { /* storage unavailable — stay on English */ }
+        function t(k) {
+            const d = I18N[curLang];
+            if (d && d[k] != null) return d[k];
+            if (I18N.en[k] != null) return I18N.en[k];
+            return k;
+        }
+        function applyLang(lang) {
+            document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.getAttribute('data-i18n')); });
+            document.querySelectorAll('[data-i18n-html]').forEach(el => { el.innerHTML = t(el.getAttribute('data-i18n-html')); });
+            document.querySelectorAll('[data-i18n-ph]').forEach(el => { el.setAttribute('placeholder', t(el.getAttribute('data-i18n-ph'))); });
+            document.documentElement.lang = lang;
+            document.title = t('docTitle');
+            document.querySelectorAll('[data-lang-btn]').forEach(b => {
+                const active = b.getAttribute('data-lang-btn') === lang;
+                b.className = 'text-[11px] sm:text-xs px-1.5 sm:px-2 py-1 rounded-md transition ' + (active ? 'bg-brandYellow text-brandDarkBlue font-black shadow' : 'text-blue-100 font-bold hover:text-brandYellow');
+            });
+        }
+        function setLang(lang) {
+            if (!I18N[lang]) lang = 'en';
+            curLang = lang;
+            try { localStorage.setItem('bw_lang', lang); } catch (e) { /* ignore */ }
+            applyLang(lang);
+            if (typeof updatePromoteReview === 'function') updatePromoteReview();
+        }
+        function daysLabel(n) {
+            let form = 'daysFew';
+            if (n === 1) form = 'daysOne';
+            else if (curLang === 'uk' || curLang === 'ru') {
+                const a = n % 10, b = n % 100;
+                form = (a >= 2 && a <= 4 && (b < 12 || b > 14)) ? 'daysFew' : 'daysMany';
+            }
+            return t(form).replace('{n}', n);
+        }
+        function goalName(g) { return t(g === 'store' ? 'goalStore' : g === 'stage' ? 'goalStage' : 'goalEverywhere'); }
+        function pkgDisplayName(key) { return t('pkg_' + key); }
+        applyLang(curLang);
+
         // --- BlacksmithPay Connect (LIVE) ---
         // LIVE_DESTINATION is the live seller account;
         // routing replaces it at activation. No real money in test mode.
@@ -327,7 +746,7 @@
         async function handleMagicLinkLogin(e) {
             e.preventDefault();
             if (!supabaseClient) {
-                alert("Sign-in is unavailable right now — please try the Marketplace sign-in instead.");
+                alert(t('authUnavailable'));
                 return;
             }
             const email = document.getElementById('authEmail').value.trim();
@@ -335,9 +754,9 @@
             const feedback = document.getElementById('authFeedback');
 
             btn.disabled = true;
-            btn.innerText = "Sending Secure Link...";
+            btn.innerText = t('authSending');
             feedback.className = "text-xs p-3 rounded-xl bg-blue-50 text-brandDarkBlue border border-blue-200 font-medium mt-3 max-w-md";
-            feedback.innerText = "Connecting to auth service...";
+            feedback.innerText = t('authConnecting');
             feedback.classList.remove('hidden');
 
             try {
@@ -348,13 +767,13 @@
 
                 if (error) throw error;
 
-                feedback.innerText = `Success! Magic link sent to ${email}. Check your inbox (and spam folder) to sign in instantly.`;
+                feedback.innerText = t('authSuccess').replace('{email}', email);
             } catch (err) {
                 feedback.className = "text-xs p-3 rounded-xl bg-red-50 text-red-700 border border-red-200 font-medium mt-3 max-w-md";
-                feedback.innerText = "Sign-in error: " + err.message;
+                feedback.innerText = t('authError') + err.message;
             } finally {
                 btn.disabled = false;
-                btn.innerText = "Send Magic Sign-In Link";
+                btn.innerText = t('authSubmit');
             }
         }
 
@@ -393,11 +812,7 @@
             spotlight: { name: 'Spotlight', days: 14, amountCents: 900, minGoal: 'everywhere' },
             top:       { name: 'Top',       days: 30, amountCents: 1500, minGoal: 'everywhere' }
         };
-        const PROMOTE_GOAL_NAMES = {
-            store: 'Top of the store',
-            stage: 'In the Stage feed',
-            everywhere: 'Everywhere'
-        };
+        // Goal names render through the dictionary (goalName above).
         function escapePromoteHtml(s) {
             return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
         }
@@ -437,6 +852,7 @@
             });
             const goal = selectedPromoteGoal();
             const pkg = selectedPromotePackage();
+            const pkgKey = (document.querySelector('input[name="promotePkg"]:checked') || {}).value || 'featured';
             const title = (document.getElementById('promoteTitle').value || '').trim();
             // Check if package fulfills goal
             const warningEl = document.getElementById('promoteGoalWarning');
@@ -444,17 +860,17 @@
             if (goal === 'stage' && pkg.amountCents < 500) fulfills = false;
             if (goal === 'everywhere' && pkg.amountCents < 900) fulfills = false;
             if (!fulfills) {
-                warningEl.textContent = `Note: The selected "${pkg.name}" package does not include full coverage for your chosen "${PROMOTE_GOAL_NAMES[goal]}" goal.`;
+                warningEl.textContent = t('promoteWarning').replace('{pkg}', pkgDisplayName(pkgKey)).replace('{goal}', goalName(goal));
                 warningEl.classList.remove('hidden');
             } else {
                 warningEl.classList.add('hidden');
             }
             document.getElementById('promoteReview').innerHTML = `
                 <div class="space-y-1">
-                    <div><strong>Listing:</strong> ${title ? '“' + escapePromoteHtml(title) + '”' : '<i>(Enter your listing title above)</i>'}</div>
-                    <div><strong>Goal:</strong> ${goal === 'store' ? 'Top of the store' : goal === 'stage' ? 'In the Stage feed' : 'Everywhere (Store + Stage + Telegram)'}</div>
-                    <div><strong>Package:</strong> ${pkg.name} (${pkg.days} days) — <strong>Total: CAD $${(pkg.amountCents / 100).toFixed(2)}</strong></div>
-                    <div class="text-xs text-slate-500 font-normal">Secure checkout by Stripe.</div>
+                    <div><strong>${t('reviewListing')}</strong> ${title ? '"' + escapePromoteHtml(title) + '"' : '<i>' + t('reviewEnterTitle') + '</i>'}</div>
+                    <div><strong>${t('reviewGoal')}</strong> ${goal === 'everywhere' ? t('reviewGoalEverywhereFull') : goalName(goal)}</div>
+                    <div><strong>${t('reviewPackage')}</strong> ${pkgDisplayName(pkgKey)} (${daysLabel(pkg.days)}) — <strong>${t('reviewTotal')} CAD $${(pkg.amountCents / 100).toFixed(2)}</strong></div>
+                    <div class="text-xs text-slate-500 font-normal">${t('reviewTestNote')}</div>
                 </div>
             `;
         }
@@ -468,7 +884,7 @@
             };
             const title = (input.value || '').trim();
             if (!title) {
-                show('Type your listing title first — exactly as it appears in the store.');
+                show(t('promoteNeedTitle'));
                 input.focus();
                 return;
             }
@@ -486,13 +902,13 @@
                 });
                 const data = await res.json().catch(() => ({}));
                 if (res.status === 503) {
-                    show('Promotion checkout opens soon — test key pending. No charge was made.');
+                    show(t('promotePending'));
                     return;
                 }
                 if (!res.ok || !data.checkoutUrl) throw new Error(data.error || 'Checkout unavailable');
                 window.location.href = data.checkoutUrl;
             } catch (e) {
-                show('Promotion checkout unavailable: ' + e.message);
+                show(t('promoteUnavailable') + e.message);
             }
         }
         updatePromoteReview();
