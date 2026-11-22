@@ -348,6 +348,9 @@ html, body { overflow-x: clip; }
             <p class="text-sm text-slate-500" data-i18n="emptyText">Try adjusting your search terms or category filter.</p>
         </div>
 
+        <!-- PAGINATION -->
+        <nav id="paginationBar" class="flex flex-wrap items-center justify-center gap-2 pt-2" aria-label="Product pages"></nav>
+
 <!-- PROMOTE YOUR WORK -->
         <section id="promote" class="bg-white border-2 border-brandYellow rounded-2xl shadow-sm p-6 sm:p-8 space-y-6">
             <div class="flex items-center space-x-3">
@@ -582,6 +585,8 @@ html, body { overflow-x: clip; }
         let supabaseClient = null;
         let currentUser = null;
         let showOnlyMyWorks = false;
+        let currentPage = 1;
+        const PRODUCTS_PER_PAGE = 20; // Barnes & Noble pattern (Nov 21, 2026): 20 per page, numbered pages + Previous/Next
 
         // --- Interface languages (EN · DE · FR · UK · RU) ---
         // Dmitri's order, Nov 14 2026: the front page speaks all five
@@ -749,6 +754,8 @@ html, body { overflow-x: clip; }
                 resultMany: "{n} works",
                 emptyTitle: "No releases found",
                 emptyText: "Try adjusting your search terms or category filter.",
+                pagePrev: "Previous",
+                pageNext: "Next",
                 watchVideo: "Watch Video",
                 getRelease: "Get Release",
                 sellerCheckout: "Seller Checkout",
@@ -962,6 +969,8 @@ html, body { overflow-x: clip; }
                 resultOne: "{n} Werk",
                 resultFew: "{n} Werke",
                 resultMany: "{n} Werke",
+                pagePrev: "Zurück",
+                pageNext: "Weiter",
                 emptyTitle: "Keine Releases gefunden",
                 emptyText: "Passen Sie Ihre Suchbegriffe oder den Kategoriefilter an.",
                 watchVideo: "Video ansehen",
@@ -1175,6 +1184,8 @@ html, body { overflow-x: clip; }
                 searchPh: "Rechercher un titre, un créateur...",
                 shelfFallback: "Le catalogue en direct n'a pas pu être chargé — affichage de l'étagère de la maison.",
                 resultOne: "{n} œuvre",
+                pagePrev: "Précédent",
+                pageNext: "Suivant",
                 resultFew: "{n} œuvres",
                 resultMany: "{n} œuvres",
                 emptyTitle: "Aucune sortie trouvée",
@@ -1388,6 +1399,8 @@ html, body { overflow-x: clip; }
                 backToStorefront: "Назад до публічного магазину",
                 catAll: "Усі релізи",
                 searchPh: "Пошук за назвою, автором...",
+                pagePrev: "Назад",
+                pageNext: "Далі",
                 shelfFallback: "Не вдалося завантажити живий каталог — показано домашню полицю.",
                 resultOne: "{n} робота",
                 resultFew: "{n} роботи",
@@ -1601,6 +1614,8 @@ html, body { overflow-x: clip; }
                 managingYours: "Управление вашими публикациями",
                 signedInAs: "Вы вошли как {email}",
                 backToStorefront: "Назад в публичный магазин",
+                pagePrev: "Назад",
+                pageNext: "Далее",
                 catAll: "Все релизы",
                 searchPh: "Поиск по названию, автору...",
                 shelfFallback: "Не удалось загрузить живой каталог — показана домашняя полка.",
@@ -1724,6 +1739,7 @@ html, body { overflow-x: clip; }
             curLang = lang;
             try { localStorage.setItem('bw_lang', lang); } catch (e) { /* ignore */ }
             applyLang(lang);
+            currentPage = 1;
             renderProducts();
             updatePromoteReview();
             if (currentUser) {
@@ -3425,6 +3441,38 @@ html, body { overflow-x: clip; }
                                 "description": "The original cover painting created for the Blacksmith & Witches Classics annotated edition of The Hound of the Baskervilles by Arthur Conan Doyle — the complete painting, without the cover lettering, as a full-resolution digital file (1280x1920 pixels, JPG). It is delivered right after Stripe checkout: download it, print it, frame it, hang it, or use it as wallpaper. Personal use. This is the exact art that appears on our edition of The Hound of the Baskervilles, at the full size it was made. Blacksmith & Witches Cover Art, Volume 68.",
                                 "download_url": "https://buy.stripe.com/fZu3cv8F91h3gz8bO13VC19",
                                 "cover_url": "https://bw-files.vercel.app/art-vol68-1c2f9381fe47f5d9.jpg"
+                    },
+                    {
+                                "id": 110,
+                                "title": "Odes and Selected Poems (Annotated)",
+                                "creator": "John Keats",
+                                "category": "books",
+                                "price": 5.45,
+                                "formats": [
+                                            "EPUB"
+                                ],
+                                "status": "approved",
+                                "badge": "Blacksmith & Witches Classics - Volume 69",
+                                "excerpt": null,
+                                "description": "In the spring and summer of 1819, a twenty-three-year-old ex-medical student with less than two years to live wrote the odes on which English poetry has rested his name ever since — to a Nightingale, on a Grecian Urn, to Psyche, on Indolence, on Melancholy, and To Autumn. This Blacksmith & Witches Classics edition (Volume 69) gathers the six odes of that miraculous year with The Eve of St. Agnes, La Belle Dame sans Merci, Lamia, and six sonnets from Chapman's Homer to Bright Star, in the texts Keats published in 1820 and the standard early sources. It adds an original introduction, a note on the texts, a short life of Keats with a chronology, notes on every poem, and a reading guide. The poems are public domain (Keats died in 1821); the apparatus © 2026 Dima Grossman.",
+                                "download_url": "https://buy.stripe.com/4gM6oH1cHcZLciS8BP3VC1a",
+                                "cover_url": "https://keplers-catalogue.vercel.app/covers/keats-odes-and-selected-poems.jpg"
+                    },
+                    {
+                                "id": 111,
+                                "title": "Вибрані поезії",
+                                "creator": "Леся Українка",
+                                "category": "books",
+                                "price": 5.45,
+                                "formats": [
+                                            "EPUB"
+                                ],
+                                "status": "approved",
+                                "badge": "Blacksmith & Witches Ukrainian Classics - Volume 2",
+                                "excerpt": null,
+                                "description": "Тринадцять ліричних віршів із двох перших книжок Лесі Українки — «На крилах пісень» (1892) і «Думи і мрії» (1899) — у документальній орфографії першодруків, із наголосами видання 1892 року: життєве гасло «Contra spem spero!», перший дитячий вірш «Надія», «Досвітні огні», «Слово» — поезія як єдина зброя, — «Давня весна» і «Як дитиною, бувало…». Видання додає вступ, примітку про текст, короткий життєпис із хронологією, примітки до кожного вірша й посібник для читання — увесь апарат українською мовою, написаний упорядником. Вірші — суспільне надбання (поетеса померла 1913 року); апарат © 2026 Діма Гроссман. Українська класика Blacksmith & Witches, том 2.",
+                                "download_url": "https://buy.stripe.com/00w6oH6x12l75Uu6tH3VC1b",
+                                "cover_url": "https://keplers-catalogue.vercel.app/covers/lesya-ukrainka-vybrani-poezii.jpg"
                     }
         ];
 
@@ -3804,6 +3852,27 @@ html, body { overflow-x: clip; }
         }
         updatePromoteReview();
 
+        function renderPagination(totalPages) {
+            const bar = document.getElementById('paginationBar');
+            if (!bar) return;
+            if (!totalPages || totalPages <= 1) { bar.innerHTML = ''; return; }
+            const btnBase = 'px-3.5 py-2 rounded-xl text-sm transition ';
+            let html = '';
+            if (currentPage > 1) html += `<button onclick="goToPage(${currentPage - 1})" class="${btnBase}bg-slate-100 text-slate-700 hover:bg-slate-200 font-semibold">${t('pagePrev')}</button>`;
+            for (let i = 1; i <= totalPages; i++) {
+                html += i === currentPage
+                    ? `<span class="${btnBase}bg-brandDarkBlue text-white font-bold shadow-sm">${i}</span>`
+                    : `<button onclick="goToPage(${i})" class="${btnBase}bg-slate-100 text-slate-700 hover:bg-slate-200 font-semibold">${i}</button>`;
+            }
+            if (currentPage < totalPages) html += `<button onclick="goToPage(${currentPage + 1})" class="${btnBase}bg-slate-100 text-slate-700 hover:bg-slate-200 font-semibold">${t('pageNext')}</button>`;
+            bar.innerHTML = html;
+        }
+        function goToPage(n) {
+            currentPage = n;
+            renderProducts();
+            jumpToResults();
+        }
+
         function renderProducts() {
             const grid = document.getElementById('productGrid');
             const empty = document.getElementById('emptyState');
@@ -3830,6 +3899,11 @@ html, body { overflow-x: clip; }
             // Promoted listings first (stable: fetch order kept within each group).
             filtered.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
 
+            // Pagination (B&N pattern): page slice of the sorted, filtered list.
+            const totalPages = Math.max(1, Math.ceil(filtered.length / PRODUCTS_PER_PAGE));
+            if (currentPage > totalPages) currentPage = totalPages;
+            if (currentPage < 1) currentPage = 1;
+
             // Live counts, computed from the current list at runtime:
             // the result line follows search/filtering; the creator-strip
             // fact counts the works actually live (approved) right now.
@@ -3855,12 +3929,14 @@ html, body { overflow-x: clip; }
 
             if (filtered.length === 0) {
                 empty.classList.remove('hidden');
+                renderPagination(0);
                 return;
             } else {
                 empty.classList.add('hidden');
             }
 
-            filtered.forEach(p => {
+            const pageItems = filtered.slice((currentPage - 1) * PRODUCTS_PER_PAGE, currentPage * PRODUCTS_PER_PAGE);
+            pageItems.forEach(p => {
                 const card = document.createElement('div');
                 card.id = 'product-' + p.id;
                 card.style.scrollMarginTop = '120px';
@@ -3915,12 +3991,14 @@ html, body { overflow-x: clip; }
                 `;
                 grid.appendChild(card);
             });
+            renderPagination(totalPages);
             lucide.createIcons();
             if (houseNewsCache) renderHouseNews();
         }
 
         function filterCategory(cat, btnEl) {
             currentCategory = cat;
+            currentPage = 1;
             document.querySelectorAll('.cat-btn').forEach(btn => {
                 btn.className = "cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition";
             });
@@ -3947,6 +4025,7 @@ html, body { overflow-x: clip; }
             if (g) { g.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
         }
         function handleSearch() {
+            currentPage = 1;
             searchQuery = document.getElementById('searchInput').value;
             if (searchQuery.trim() && currentCategory !== 'all') {
                 currentCategory = 'all';
