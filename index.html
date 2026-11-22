@@ -336,6 +336,38 @@ html, body { overflow-x: clip; }
         <p id="shelfStatus" class="hidden text-xs font-semibold text-amber-700 bg-amber-50 border border-amber-200 rounded-xl px-3.5 py-2"></p>
         <p id="resultCount" class="text-xs font-bold uppercase tracking-widest text-slate-500"></p>
 
+        <!-- SORT & WISHLIST CONTROLS (B&N / Kobo / Lulu pattern, Nov 22, 2026) -->
+        <div class="flex flex-wrap items-center gap-3">
+            <div class="flex items-center gap-2">
+                <label for="sortSelect" class="text-xs font-bold uppercase tracking-widest text-slate-500" data-i18n="sortLabel">Sort by</label>
+                <select id="sortSelect" onchange="setSort(this.value)" class="px-3 py-2 bg-white border border-slate-200 rounded-xl text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-brandBlue transition">
+                    <option value="featured" data-i18n="sortFeatured">Featured</option>
+                    <option value="newest" data-i18n="sortNewest">Newest</option>
+                    <option value="price-asc" data-i18n="sortPriceAsc">Price: Low to High</option>
+                    <option value="price-desc" data-i18n="sortPriceDesc">Price: High to Low</option>
+                    <option value="title" data-i18n="sortTitle">Title A–Z</option>
+                </select>
+            </div>
+            <button type="button" id="wishlistBtn" onclick="toggleWishlistOnly()" class="px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition inline-flex items-center gap-1.5" aria-pressed="false">
+                <span id="wishlistBtnHeart" class="text-base leading-none text-slate-400">&#9825;</span>
+                <span data-i18n="wishlist">Wishlist</span>
+                <span id="wishlistCount" class="text-xs font-black text-brandBlue"></span>
+            </button>
+            <span id="seriesChip" class="hidden items-center gap-2 bg-blue-50 border border-brandBlue text-brandDarkBlue text-xs font-bold px-3 py-2 rounded-xl">
+                <span id="seriesChipName"></span>
+                <button type="button" onclick="clearSeriesFilter()" class="underline underline-offset-2 hover:text-brandBlue" data-i18n="showAll">Show all</button>
+            </span>
+        </div>
+
+        <!-- RECENTLY VIEWED (local, this browser only) -->
+        <section id="recentSection" class="hidden space-y-3">
+            <div class="flex items-center justify-between">
+                <h3 class="text-sm font-black uppercase tracking-widest text-brandDarkBlue" data-i18n="recentlyViewed">Recently viewed</h3>
+                <button type="button" onclick="clearRecent()" class="text-xs font-semibold text-slate-500 hover:text-brandBlue underline underline-offset-2" data-i18n="clearRecent">Clear</button>
+            </div>
+            <div id="recentRow" class="flex gap-3 overflow-x-auto pb-2"></div>
+        </section>
+
         <!-- PRODUCTS GRID -->
         <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
 
@@ -464,6 +496,13 @@ html, body { overflow-x: clip; }
     </footer>
 
     <!-- MAGIC LINK AUTH MODAL -->
+    <!-- PRODUCT DETAIL (B&N / Kobo detail-page pattern, Nov 22, 2026): breadcrumbs, series line, more-in-series + more-like-this rails -->
+    <div id="productModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4" onclick="if (event.target === this) closeProduct()">
+        <div class="bg-white rounded-2xl shadow-xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
+            <div id="productModalContent" class="p-6 sm:p-8"></div>
+        </div>
+    </div>
+
     <div id="authModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 space-y-5">
             <div class="flex items-center justify-between border-b pb-3">
@@ -756,6 +795,28 @@ html, body { overflow-x: clip; }
                 emptyText: "Try adjusting your search terms or category filter.",
                 pagePrev: "Previous",
                 pageNext: "Next",
+                sortLabel: "Sort by",
+                sortFeatured: "Featured",
+                sortNewest: "Newest",
+                sortPriceAsc: "Price: Low to High",
+                sortPriceDesc: "Price: High to Low",
+                sortTitle: "Title A–Z",
+                wishlist: "Wishlist",
+                addWishlist: "Add to wishlist",
+                removeWishlist: "Remove from wishlist",
+                recentlyViewed: "Recently viewed",
+                moreLikeThis: "More like this",
+                moreInSeries: "More in this series",
+                moreByCreator: "More by this creator",
+                seriesLabel: "Series",
+                seriesTeraura: "The Teraura Saga",
+                seriesHugo: "Hugo the Hedgehog",
+                seriesClassics: "Blacksmith & Witches Classics",
+                seriesVol: "Vol.",
+                homeCrumb: "Home",
+                detailsBtn: "Details",
+                showAll: "Show all",
+                clearRecent: "Clear",
                 watchVideo: "Watch Video",
                 getRelease: "Get Release",
                 sellerCheckout: "Seller Checkout",
@@ -971,6 +1032,28 @@ html, body { overflow-x: clip; }
                 resultMany: "{n} Werke",
                 pagePrev: "Zurück",
                 pageNext: "Weiter",
+                sortLabel: "Sortieren",
+                sortFeatured: "Empfohlen",
+                sortNewest: "Neueste",
+                sortPriceAsc: "Preis: aufsteigend",
+                sortPriceDesc: "Preis: absteigend",
+                sortTitle: "Titel A–Z",
+                wishlist: "Wunschliste",
+                addWishlist: "Zur Wunschliste",
+                removeWishlist: "Von Wunschliste entfernen",
+                recentlyViewed: "Zuletzt angesehen",
+                moreLikeThis: "Mehr wie dieses",
+                moreInSeries: "Mehr aus dieser Reihe",
+                moreByCreator: "Mehr von diesem Autor",
+                seriesLabel: "Reihe",
+                seriesTeraura: "Die Teraura-Saga",
+                seriesHugo: "Hugo der Igel",
+                seriesClassics: "Blacksmith & Witches Classics",
+                seriesVol: "Bd.",
+                homeCrumb: "Start",
+                detailsBtn: "Details",
+                showAll: "Alle anzeigen",
+                clearRecent: "Leeren",
                 emptyTitle: "Keine Releases gefunden",
                 emptyText: "Passen Sie Ihre Suchbegriffe oder den Kategoriefilter an.",
                 watchVideo: "Video ansehen",
@@ -1186,6 +1269,28 @@ html, body { overflow-x: clip; }
                 resultOne: "{n} œuvre",
                 pagePrev: "Précédent",
                 pageNext: "Suivant",
+                sortLabel: "Trier par",
+                sortFeatured: "À la une",
+                sortNewest: "Nouveautés",
+                sortPriceAsc: "Prix croissant",
+                sortPriceDesc: "Prix décroissant",
+                sortTitle: "Titre A–Z",
+                wishlist: "Liste de souhaits",
+                addWishlist: "Ajouter aux souhaits",
+                removeWishlist: "Retirer des souhaits",
+                recentlyViewed: "Vus récemment",
+                moreLikeThis: "Du même genre",
+                moreInSeries: "Dans la même série",
+                moreByCreator: "Plus du même créateur",
+                seriesLabel: "Série",
+                seriesTeraura: "La saga de Teraura",
+                seriesHugo: "Hugo le hérisson",
+                seriesClassics: "Blacksmith & Witches Classics",
+                seriesVol: "Vol.",
+                homeCrumb: "Accueil",
+                detailsBtn: "Détails",
+                showAll: "Tout afficher",
+                clearRecent: "Effacer",
                 resultFew: "{n} œuvres",
                 resultMany: "{n} œuvres",
                 emptyTitle: "Aucune sortie trouvée",
@@ -1401,6 +1506,28 @@ html, body { overflow-x: clip; }
                 searchPh: "Пошук за назвою, автором...",
                 pagePrev: "Назад",
                 pageNext: "Далі",
+                sortLabel: "Сортувати",
+                sortFeatured: "Рекомендоване",
+                sortNewest: "Найновіші",
+                sortPriceAsc: "Ціна: за зростанням",
+                sortPriceDesc: "Ціна: за спаданням",
+                sortTitle: "Назва А–Я",
+                wishlist: "Список бажань",
+                addWishlist: "Додати до списку бажань",
+                removeWishlist: "Прибрати зі списку бажань",
+                recentlyViewed: "Нещодавно переглянуті",
+                moreLikeThis: "Схожі видання",
+                moreInSeries: "Ще з цієї серії",
+                moreByCreator: "Більше від цього автора",
+                seriesLabel: "Серія",
+                seriesTeraura: "Сага про Терауру",
+                seriesHugo: "Їжачок Х'юго",
+                seriesClassics: "Blacksmith & Witches Classics",
+                seriesVol: "Т.",
+                homeCrumb: "Головна",
+                detailsBtn: "Деталі",
+                showAll: "Показати всі",
+                clearRecent: "Очистити",
                 shelfFallback: "Не вдалося завантажити живий каталог — показано домашню полицю.",
                 resultOne: "{n} робота",
                 resultFew: "{n} роботи",
@@ -1616,6 +1743,28 @@ html, body { overflow-x: clip; }
                 backToStorefront: "Назад в публичный магазин",
                 pagePrev: "Назад",
                 pageNext: "Далее",
+                sortLabel: "Сортировать",
+                sortFeatured: "Рекомендуемое",
+                sortNewest: "Новейшие",
+                sortPriceAsc: "Цена: по возрастанию",
+                sortPriceDesc: "Цена: по убыванию",
+                sortTitle: "Название А–Я",
+                wishlist: "Список желаний",
+                addWishlist: "В список желаний",
+                removeWishlist: "Убрать из списка желаний",
+                recentlyViewed: "Недавно просмотренные",
+                moreLikeThis: "Похожие издания",
+                moreInSeries: "Ещё из этой серии",
+                moreByCreator: "Ещё от этого автора",
+                seriesLabel: "Серия",
+                seriesTeraura: "Сага о Терауре",
+                seriesHugo: "Ёжик Хьюго",
+                seriesClassics: "Blacksmith & Witches Classics",
+                seriesVol: "Т.",
+                homeCrumb: "Главная",
+                detailsBtn: "Подробнее",
+                showAll: "Показать все",
+                clearRecent: "Очистить",
                 catAll: "Все релизы",
                 searchPh: "Поиск по названию, автору...",
                 shelfFallback: "Не удалось загрузить живой каталог — показана домашняя полка.",
@@ -1741,6 +1890,7 @@ html, body { overflow-x: clip; }
             applyLang(lang);
             currentPage = 1;
             renderProducts();
+            if (detailProductId !== null) renderProductModal();
             updatePromoteReview();
             if (currentUser) {
                 const el = document.getElementById('creatorEmailDisplay');
@@ -3543,6 +3693,275 @@ html, body { overflow-x: clip; }
         let currentCategory = 'all';
         let searchQuery = '';
 
+        // ===== Competitor-pattern features (Nov 22, 2026): sort, wishlist,
+        // recently viewed, series, product detail view. All client-side;
+        // wishlist + recent live in this browser's localStorage only. =====
+        let currentSort = 'featured';
+        let wishlistOnly = false;
+        let currentSeries = null;
+        let detailProductId = null;
+
+        function loadIdList(key) {
+            try { const v = JSON.parse(localStorage.getItem(key) || '[]'); return Array.isArray(v) ? v : []; }
+            catch (e) { return []; }
+        }
+        function saveIdList(key, list) {
+            try { localStorage.setItem(key, JSON.stringify(list)); } catch (e) { /* storage unavailable */ }
+        }
+        function getWishlist() { return loadIdList('bw_wishlist'); }
+        function isWished(id) { return getWishlist().indexOf(String(id)) !== -1; }
+        function toggleWishlist(id) {
+            id = String(id);
+            let list = getWishlist();
+            if (list.indexOf(id) !== -1) list = list.filter(x => x !== id);
+            else list.unshift(id);
+            saveIdList('bw_wishlist', list);
+            updateWishlistBtn();
+            if (wishlistOnly) renderProducts();
+            else refreshWishlistHearts();
+            if (detailProductId !== null && String(detailProductId) === id) renderProductModal();
+        }
+        function refreshWishlistHearts() {
+            document.querySelectorAll('[data-wish-btn]').forEach(btn => {
+                const on = isWished(btn.getAttribute('data-wish-btn'));
+                btn.innerHTML = on ? '&#9829;' : '&#9825;';
+                btn.className = 'text-lg leading-none px-1.5 py-1 transition ' + (on ? 'text-red-500' : 'text-slate-400 hover:text-red-400');
+                btn.title = t(on ? 'removeWishlist' : 'addWishlist');
+            });
+        }
+        function updateWishlistBtn() {
+            const n = getWishlist().length;
+            const countEl = document.getElementById('wishlistCount');
+            if (countEl) countEl.textContent = n ? '(' + n + ')' : '';
+            const heart = document.getElementById('wishlistBtnHeart');
+            if (heart) { heart.innerHTML = wishlistOnly || n ? '&#9829;' : '&#9825;'; heart.className = 'text-base leading-none ' + (wishlistOnly || n ? 'text-red-500' : 'text-slate-400'); }
+            const btn = document.getElementById('wishlistBtn');
+            if (btn) {
+                btn.setAttribute('aria-pressed', wishlistOnly ? 'true' : 'false');
+                btn.className = 'px-4 py-2 rounded-xl text-sm font-semibold transition inline-flex items-center gap-1.5 ' + (wishlistOnly ? 'bg-brandDarkBlue text-white shadow-sm' : 'bg-slate-100 text-slate-700 hover:bg-slate-200');
+            }
+        }
+        function toggleWishlistOnly() {
+            wishlistOnly = !wishlistOnly;
+            currentPage = 1;
+            updateWishlistBtn();
+            renderProducts();
+        }
+        function pushRecent(id) {
+            id = String(id);
+            let list = loadIdList('bw_recent').filter(x => x !== id);
+            list.unshift(id);
+            saveIdList('bw_recent', list.slice(0, 12));
+        }
+        function clearRecent() {
+            saveIdList('bw_recent', []);
+            renderRecent();
+        }
+        function isPublicVisible(p) {
+            const isApproved = p.status === 'approved' || !p.status;
+            const isMine = currentUser && p.user_id === currentUser.id;
+            return isApproved || isMine;
+        }
+        // Series membership derived only from real catalogue data:
+        // Teraura titles in any language, the kids shelf (Hugo editions),
+        // and the annotated Classics line (title marker and/or the
+        // "Classics, Volume N" line printed in the book's own description).
+        function seriesOf(p) {
+            const title = (p.title || '');
+            if (/teraura|тераур/i.test(title)) return { key: 'teraura', vol: null };
+            if (p.category === 'kids') return { key: 'hugo', vol: null };
+            if (p.category === 'books' && /\(Annotated\)|\(Illustrated\)|\(Translated\)/i.test(title)) {
+                const m = (p.description || '').match(/Classics, Volume\s*(\d+)/i);
+                return { key: 'classics', vol: m ? parseInt(m[1], 10) : null };
+            }
+            return null;
+        }
+        function seriesName(key) { return t('series' + key.charAt(0).toUpperCase() + key.slice(1)); }
+        function setSeriesFilter(key) {
+            currentSeries = key;
+            currentCategory = 'all';
+            wishlistOnly = false;
+            currentPage = 1;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.className = "cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition";
+            });
+            const allBtn = document.querySelector('.cat-btn');
+            if (allBtn) allBtn.className = "cat-btn px-4 py-2 rounded-xl text-sm font-bold bg-brandDarkBlue text-white transition shadow-sm";
+            closeProduct();
+            updateWishlistBtn();
+            renderProducts();
+            jumpToResults();
+        }
+        function crumbCategory(cat) {
+            closeProduct();
+            const btns = document.querySelectorAll('.cat-btn');
+            let target = btns[0];
+            btns.forEach(b => { if ((b.getAttribute('onclick') || '').indexOf("'" + cat + "'") !== -1) target = b; });
+            if (target) filterCategory(cat, target);
+        }
+        function clearSeriesFilter() {
+            currentSeries = null;
+            currentPage = 1;
+            renderProducts();
+        }
+        function renderSeriesChip() {
+            const chip = document.getElementById('seriesChip');
+            if (!chip) return;
+            if (currentSeries) {
+                document.getElementById('seriesChipName').textContent = t('seriesLabel') + ': ' + seriesName(currentSeries);
+                chip.classList.remove('hidden');
+                chip.classList.add('inline-flex');
+            } else {
+                chip.classList.add('hidden');
+                chip.classList.remove('inline-flex');
+            }
+        }
+        function setSort(v) {
+            currentSort = v || 'featured';
+            currentPage = 1;
+            renderProducts();
+        }
+        function sortFiltered(list) {
+            // Featured-first is the house default (existing behaviour);
+            // explicit sorts replace it, keeping featured order as tiebreak.
+            list.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
+            if (currentSort === 'price-asc') list.sort((a, b) => Number(a.price) - Number(b.price));
+            else if (currentSort === 'price-desc') list.sort((a, b) => Number(b.price) - Number(a.price));
+            else if (currentSort === 'title') list.sort((a, b) => String(a.title).localeCompare(String(b.title), curLang));
+            else if (currentSort === 'newest') list.sort((a, b) => {
+                const da = a.created_at ? Date.parse(a.created_at) : NaN;
+                const db = b.created_at ? Date.parse(b.created_at) : NaN;
+                if (!isNaN(da) && !isNaN(db)) return db - da;
+                if (!isNaN(da)) return -1;
+                if (!isNaN(db)) return 1;
+                return 0;
+            });
+            return list;
+        }
+        function escHtml(s) {
+            return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+        function miniCardHtml(p) {
+            const coverUrl = (p.cover_url || '').trim();
+            const cover = coverUrl
+                ? `<img src="${coverUrl.replace(/"/g, '%22')}" alt="" loading="lazy" class="w-full h-28 object-cover rounded-lg border border-slate-200">`
+                : `<span class="w-full h-28 rounded-lg bg-blue-50 border border-slate-200 flex items-center justify-center text-brandBlue text-2xl font-black">${escHtml((p.title || '?').charAt(0))}</span>`;
+            const price = Number(p.price) === 0 ? t('free') : '$' + Number(p.price).toFixed(2);
+            return `<button type="button" onclick="openProduct('${p.id}')" class="shrink-0 w-28 text-left group">
+                ${cover}
+                <span class="block mt-1.5 text-xs font-bold text-brandDarkBlue leading-snug line-clamp-2 group-hover:underline">${escHtml(p.title)}</span>
+                <span class="block text-xs font-black text-slate-600">${price}</span>
+            </button>`;
+        }
+        function renderRecent() {
+            const section = document.getElementById('recentSection');
+            const row = document.getElementById('recentRow');
+            if (!section || !row) return;
+            const ids = loadIdList('bw_recent');
+            const items = ids.map(id => products.find(p => String(p.id) === id)).filter(p => p && isPublicVisible(p));
+            if (!items.length || searchQuery.trim()) { section.classList.add('hidden'); return; }
+            row.innerHTML = items.slice(0, 8).map(miniCardHtml).join('');
+            section.classList.remove('hidden');
+        }
+        function relatedProducts(p, limit) {
+            const mySeries = seriesOf(p);
+            const scored = [];
+            products.forEach(q => {
+                if (String(q.id) === String(p.id) || !isPublicVisible(q)) return;
+                let score = 0;
+                const qs = seriesOf(q);
+                if (mySeries && qs && qs.key === mySeries.key) score += 4;
+                if (q.creator && p.creator && q.creator === p.creator) score += 2;
+                if (q.category === p.category) score += 1;
+                if (q.featured) score += 0.5;
+                if (score > 0) scored.push({ q, score });
+            });
+            scored.sort((a, b) => b.score - a.score);
+            return scored.slice(0, limit).map(x => x.q);
+        }
+        function openProduct(id) {
+            const p = products.find(x => String(x.id) === String(id));
+            if (!p) return;
+            detailProductId = p.id;
+            pushRecent(p.id);
+            renderProductModal();
+            const modal = document.getElementById('productModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            renderRecent();
+        }
+        function closeProduct() {
+            detailProductId = null;
+            const modal = document.getElementById('productModal');
+            if (modal) { modal.classList.add('hidden'); modal.classList.remove('flex'); }
+        }
+        function renderProductModal() {
+            const p = products.find(x => String(x.id) === String(detailProductId));
+            const box = document.getElementById('productModalContent');
+            if (!p || !box) return;
+            const isFree = Number(p.price) === 0;
+            const priceDisplay = isFree ? t('free') : `$${Number(p.price).toFixed(2)}`;
+            const formatsStr = Array.isArray(p.formats) ? p.formats.join(' • ') : (p.formats || t('digitalFmt'));
+            const actionLabel = p.category === 'video' ? t('watchVideo') : (isFree ? t('getRelease') : t('sellerCheckout'));
+            const coverUrl = (p.cover_url || '').trim();
+            const coverHtml = coverUrl
+                ? `<img src="${coverUrl.replace(/"/g, '%22')}" alt="Cover of ${escHtml(p.title)}" class="w-[160px] h-[240px] shrink-0 object-cover rounded-lg border border-slate-200 shadow-sm">`
+                : '';
+            const s = seriesOf(p);
+            const seriesLine = s
+                ? `<div class="pt-1"><span class="text-xs font-bold uppercase tracking-wider text-slate-500">${t('seriesLabel')}: </span><button type="button" onclick="setSeriesFilter('${s.key}')" class="text-sm font-bold text-brandBlue hover:text-brandDarkBlue underline underline-offset-2 decoration-brandYellow decoration-2">${escHtml(seriesName(s.key))}${s.vol ? ' · ' + t('seriesVol') + ' ' + s.vol : ''}</button></div>`
+                : '';
+            const wished = isWished(p.id);
+            let rails = '';
+            if (s) {
+                const members = products.filter(q => String(q.id) !== String(p.id) && isPublicVisible(q) && (seriesOf(q) || {}).key === s.key);
+                members.sort((a, b) => {
+                    const va = (seriesOf(a) || {}).vol, vb = (seriesOf(b) || {}).vol;
+                    if (va != null && vb != null) return va - vb;
+                    if (va != null) return -1;
+                    if (vb != null) return 1;
+                    return String(a.title).localeCompare(String(b.title), curLang);
+                });
+                if (members.length) rails += `<div class="pt-5"><h4 class="text-sm font-black uppercase tracking-widest text-brandDarkBlue pb-2">${t('moreInSeries')}</h4><div class="flex gap-3 overflow-x-auto pb-2">${members.slice(0, 8).map(miniCardHtml).join('')}</div></div>`;
+            }
+            const byCreator = products.filter(q => String(q.id) !== String(p.id) && isPublicVisible(q) && q.creator && q.creator === p.creator && (!s || (seriesOf(q) || {}).key !== s.key));
+            if (byCreator.length) rails += `<div class="pt-5"><h4 class="text-sm font-black uppercase tracking-widest text-brandDarkBlue pb-2">${t('moreByCreator')}</h4><div class="flex gap-3 overflow-x-auto pb-2">${byCreator.slice(0, 8).map(miniCardHtml).join('')}</div></div>`;
+            const related = relatedProducts(p, 8).filter(q => (!s || (seriesOf(q) || {}).key !== s.key) && q.creator !== p.creator);
+            if (related.length) rails += `<div class="pt-5"><h4 class="text-sm font-black uppercase tracking-widest text-brandDarkBlue pb-2">${t('moreLikeThis')}</h4><div class="flex gap-3 overflow-x-auto pb-2">${related.map(miniCardHtml).join('')}</div></div>`;
+            box.innerHTML = `
+                <nav class="flex items-center gap-1.5 text-xs font-semibold text-slate-500 pb-4 flex-wrap" aria-label="Breadcrumb">
+                    <button type="button" onclick="closeProduct()" class="hover:text-brandBlue underline-offset-2 hover:underline">${t('homeCrumb')}</button>
+                    <span aria-hidden="true">›</span>
+                    <button type="button" onclick="crumbCategory('${p.category}')" class="hover:text-brandBlue underline-offset-2 hover:underline">${escHtml(catLabel(p.category))}</button>
+                    <span aria-hidden="true">›</span>
+                    <span class="text-brandDarkBlue font-bold">${escHtml(p.title)}</span>
+                    <button type="button" onclick="closeProduct()" class="ml-auto text-slate-400 hover:text-slate-700 text-xl leading-none px-1" aria-label="Close">&times;</button>
+                </nav>
+                <div class="flex flex-col sm:flex-row gap-5">
+                    ${coverHtml}
+                    <div class="space-y-3 min-w-0">
+                        <span class="text-xs font-bold uppercase tracking-wider text-brandBlue bg-blue-50 px-2.5 py-1 rounded-lg inline-block">${escHtml(catLabel(p.category))}</span>
+                        <h3 class="text-2xl font-black text-brandDarkBlue leading-tight">${escHtml(p.title)}</h3>
+                        <p class="text-sm text-slate-500">${t('byWord')} ${escHtml(p.creator)}</p>
+                        ${seriesLine}
+                        <p class="text-sm text-slate-600 whitespace-pre-line">${escHtml(p.description || p.excerpt || '')}</p>
+                        <div class="text-xs text-slate-400 font-medium">${t('fFormats')}: ${escHtml(formatsStr)}</div>
+                    </div>
+                </div>
+                <div class="bg-slate-50 px-5 py-4 mt-6 rounded-xl border border-slate-100 flex flex-wrap items-center justify-between gap-3">
+                    <span class="text-xl font-black text-brandDarkBlue">${priceDisplay}</span>
+                    <div class="flex items-center gap-2">
+                        <button type="button" onclick="toggleWishlist('${p.id}')" class="bg-white border border-slate-200 hover:border-red-300 font-bold px-3 py-2 rounded-xl text-xs transition inline-flex items-center gap-1.5 ${wished ? 'text-red-500' : 'text-slate-600'}" title="${t(wished ? 'removeWishlist' : 'addWishlist')}">
+                            <span class="text-base leading-none">${wished ? '&#9829;' : '&#9825;'}</span><span>${t('wishlist')}</span>
+                        </button>
+                        ${!isFree ? `<button onclick="startCheckout('${String(p.title).replace(/'/g, "\\'")}', ${Number(p.price)})" class="bg-white border-2 border-brandYellow text-brandDarkBlue hover:bg-brandYellow font-bold px-3 py-2 rounded-xl text-xs transition shadow inline-flex items-center space-x-1" title="${t('stripeTestTitle')}"><span>${t('stripeTest')}</span></button>` : ''}
+                        <a href="${p.download_url || '#'}" target="_blank" rel="noopener noreferrer" class="bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-4 py-2 rounded-xl text-xs transition shadow inline-flex items-center space-x-1"><span>${actionLabel}</span></a>
+                    </div>
+                </div>
+                ${rails}`;
+            if (window.lucide) lucide.createIcons();
+        }
+
         // Session recovery for magic-link returns. Email links are usually
         // tapped inside a mail app, which can open a different browser than
         // the one that requested the link — and with the library default
@@ -3957,11 +4376,14 @@ html, body { overflow-x: clip; }
                 const q = searchQuery.trim().toLowerCase();
                 const hay = [p.title, p.creator, p.category, p.description, p.excerpt].filter(Boolean).join(' ').toLowerCase();
                 const matchesSearch = !q || hay.includes(q);
-                return matchesCat && matchesSearch;
+                const matchesWish = !wishlistOnly || isWished(p.id);
+                const matchesSeries = !currentSeries || (seriesOf(p) || {}).key === currentSeries;
+                return matchesCat && matchesSearch && matchesWish && matchesSeries;
             });
 
-            // Promoted listings first (stable: fetch order kept within each group).
-            filtered.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
+            // Ordering: featured-first by default; the sort control
+            // (newest / price / title) replaces it when the shopper picks one.
+            sortFiltered(filtered);
 
             // Pagination (B&N pattern): page slice of the sorted, filtered list.
             const totalPages = Math.max(1, Math.ceil(filtered.length / PRODUCTS_PER_PAGE));
@@ -3994,6 +4416,9 @@ html, body { overflow-x: clip; }
             if (filtered.length === 0) {
                 empty.classList.remove('hidden');
                 renderPagination(0);
+                updateWishlistBtn();
+                renderSeriesChip();
+                renderRecent();
                 return;
             } else {
                 empty.classList.add('hidden');
@@ -4022,7 +4447,7 @@ html, body { overflow-x: clip; }
                 // Cover thumbnail at Google size (128x192, 2:3) — only when the listing actually carries one; no placeholder otherwise.
                 const coverUrl = (p.cover_url || '').trim();
                 const coverHtml = coverUrl
-                    ? `<img src="${coverUrl.replace(/"/g, '%22')}" alt="Cover of ${String(p.title).replace(/"/g, '&quot;')}" loading="lazy" class="w-[128px] h-[192px] shrink-0 object-cover rounded-lg border border-slate-200 shadow-sm">`
+                    ? `<img src="${coverUrl.replace(/"/g, '%22')}" alt="Cover of ${String(p.title).replace(/"/g, '&quot;')}" loading="lazy" onclick="openProduct('${p.id}')" class="w-[128px] h-[192px] shrink-0 object-cover rounded-lg border border-slate-200 shadow-sm cursor-pointer">`
                     : '';
 
                 card.innerHTML = `
@@ -4033,7 +4458,7 @@ html, body { overflow-x: clip; }
                             <span class="text-xs font-bold uppercase tracking-wider text-brandBlue bg-blue-50 px-2.5 py-1 rounded-lg">${catLabel(p.category)}</span>
                             ${statusBadge}
                         </div>
-                        <h3 class="text-lg font-bold text-brandDarkBlue">${p.title}</h3>
+                        <h3 class="text-lg font-bold text-brandDarkBlue cursor-pointer hover:underline" onclick="openProduct('${p.id}')">${p.title}</h3>
                         <p class="text-xs text-slate-500">${t('byWord')} ${p.creator}</p>
                         <p class="text-sm text-slate-600 line-clamp-2">${p.excerpt || p.description}</p>
                         <div class="text-xs text-slate-400 font-medium pt-2">${t('fFormats')}: ${formatsStr}</div>
@@ -4042,6 +4467,8 @@ html, body { overflow-x: clip; }
                     <div class="bg-slate-50 px-6 py-4 border-t border-slate-100 flex items-center justify-between">
                         <span class="text-lg font-black text-brandDarkBlue">${priceDisplay}</span>
                         <div class="flex items-center space-x-2">
+                            <button type="button" data-wish-btn="${p.id}" onclick="toggleWishlist('${p.id}')" class="text-lg leading-none px-1.5 py-1 text-slate-400 transition" title="${t('addWishlist')}">&#9825;</button>
+                            <button type="button" onclick="openProduct('${p.id}')" class="bg-white border border-slate-300 text-brandDarkBlue hover:border-brandBlue font-bold px-3 py-2 rounded-xl text-xs transition">${t('detailsBtn')}</button>
                             ${isOwner ? `<button onclick="deleteProduct('${p.id}')" class="text-xs text-red-500 hover:text-red-700 font-semibold px-2 py-1.5">${t('deleteBtn')}</button>` : ''}
                             ${!isFree ? `<button onclick="startCheckout('${p.title.replace(/'/g, "\\'")}', ${Number(p.price)})" class="bg-white border-2 border-brandYellow text-brandDarkBlue hover:bg-brandYellow font-bold px-3 py-2 rounded-xl text-xs transition shadow inline-flex items-center space-x-1" title="${t('stripeTestTitle')}">
                                 <span>${t('stripeTest')}</span>
@@ -4057,11 +4484,16 @@ html, body { overflow-x: clip; }
             });
             renderPagination(totalPages);
             lucide.createIcons();
+            refreshWishlistHearts();
+            updateWishlistBtn();
+            renderSeriesChip();
+            renderRecent();
             if (houseNewsCache) renderHouseNews();
         }
 
         function filterCategory(cat, btnEl) {
             currentCategory = cat;
+            currentSeries = null;
             currentPage = 1;
             document.querySelectorAll('.cat-btn').forEach(btn => {
                 btn.className = "cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition";
