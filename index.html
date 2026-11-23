@@ -82,6 +82,100 @@ html, body { overflow-x: clip; }
 </script>
 </head>
 <body class="bg-brandBg text-brandText min-h-screen flex flex-col font-sans selection:bg-brandYellow selection:text-brandDarkBlue">
+<!-- CHRISTMAS DECORATION — temporary, remove after Jan 2 -->
+<style>
+    /* CHRISTMAS OFF — remove this one rule to switch the decoration ON */
+    .bw-xmas { display: none; }
+    .bw-xmas, .bw-xmas * { pointer-events: none !important; }
+    .bw-xmas-garland { position: absolute; top: 64px; left: 0; right: 0; height: 68px; z-index: 30; overflow: hidden; }
+    .bw-xmas-garland svg { display: block; width: 100%; height: 68px; }
+    .bw-xmas-card { position: absolute; top: 88px; right: max(16px, calc((100% - 80rem) / 2 + 24px)); width: 190px; z-index: 30; border: 3px solid #ffffff; border-radius: 14px; box-shadow: 0 10px 24px rgba(0,0,0,.35); transform: rotate(2deg); overflow: hidden; background: #ffffff; }
+    .bw-xmas-card img { display: block; width: 100%; height: auto; }
+    @media (max-width: 1180px) { .bw-xmas-card { width: 150px; } }
+    @media (max-width: 980px) { .bw-xmas-card { display: none; } }
+    .bw-xmas-tree { position: fixed; left: 10px; bottom: 10px; width: 84px; z-index: 30; }
+    .bw-xmas-tree svg { display: block; width: 100%; height: auto; }
+    @media (max-width: 640px) { .bw-xmas-tree { width: 58px; left: 6px; bottom: 6px; } }
+    .bw-xmas-glow { animation: bwXmasTwinkle 1.5s ease-in-out infinite alternate; }
+    .bw-xmas-bulbc { animation: bwXmasBulb 1.5s ease-in-out infinite alternate; }
+    .bw-xmas-bauble { transform-box: view-box; animation: bwXmasSway 3.6s ease-in-out infinite alternate; }
+    @keyframes bwXmasTwinkle { from { opacity: .25; } to { opacity: .95; } }
+    @keyframes bwXmasBulb { from { opacity: .78; } to { opacity: 1; } }
+    @keyframes bwXmasSway { from { transform: rotate(-2.4deg); } to { transform: rotate(2.4deg); } }
+    @media (prefers-reduced-motion: reduce) { .bw-xmas-glow, .bw-xmas-bulbc, .bw-xmas-bauble { animation: none; } }
+</style>
+<div class="bw-xmas" aria-hidden="true">
+    <div class="bw-xmas-garland"><svg id="bwXmasGarland" preserveAspectRatio="xMidYMin slice" xmlns="http://www.w3.org/2000/svg" role="presentation"></svg></div>
+    <div class="bw-xmas-card"><img src="christmas-tree.jpg" alt="" loading="lazy"></div>
+    <div class="bw-xmas-tree">
+        <svg viewBox="0 0 100 118" xmlns="http://www.w3.org/2000/svg" role="presentation">
+            <polygon points="50,3 52.6,9.4 59.4,9.7 54.2,14.1 55.7,20.8 50,17.2 44.3,20.8 45.8,14.1 40.6,9.7 47.4,9.4" fill="#ffffff" stroke="rgba(0,0,0,.12)" stroke-width=".6"/>
+            <path d="M50 12 L66 40 L34 40 Z" fill="#0e8a3c"/>
+            <path d="M50 30 L74 62 L26 62 Z" fill="#0b7a34"/>
+            <path d="M50 52 L84 92 L16 92 Z" fill="#09652c"/>
+            <circle cx="53" cy="46" r="2.7" fill="#d92323"/>
+            <circle cx="43" cy="68" r="2.9" fill="#d92323"/>
+            <circle cx="58" cy="74" r="2.7" fill="#d92323"/>
+            <circle cx="47" cy="87" r="2.9" fill="#d92323"/>
+            <circle cx="44" cy="34" r="1.8" fill="#ffffff" opacity=".9"/>
+            <circle cx="57" cy="36" r="1.5" fill="#ffffff" opacity=".9"/>
+            <circle cx="40" cy="55" r="2" fill="#ffffff" opacity=".9"/>
+            <circle cx="61" cy="58" r="1.7" fill="#ffffff" opacity=".9"/>
+            <circle cx="66" cy="84" r="1.6" fill="#ffffff" opacity=".9"/>
+            <circle cx="35" cy="84" r="1.5" fill="#ffffff" opacity=".9"/>
+            <rect x="46" y="92" width="8" height="8" fill="#14532d"/>
+            <path d="M38 100 L62 100 L58 114 L42 114 Z" fill="#d92323"/>
+            <rect x="36" y="98" width="28" height="4" rx="2" fill="#b91c1c"/>
+        </svg>
+    </div>
+</div>
+<script>
+    (function () {
+        var wrap = document.querySelector('.bw-xmas');
+        var svg = document.getElementById('bwXmasGarland');
+        if (!wrap || !svg) return;
+        if (window.getComputedStyle(wrap).display === 'none') return; // decoration switched OFF
+        var NS = 'http://www.w3.org/2000/svg';
+        function el(name, attrs) {
+            var e = document.createElementNS(NS, name);
+            for (var k in attrs) e.setAttribute(k, attrs[k]);
+            return e;
+        }
+        var W = svg.parentNode.clientWidth || 1200;
+        if (W < 320) W = 320;
+        svg.setAttribute('viewBox', '0 0 ' + W + ' 68');
+        var colors = [
+            { fill: '#d92323', glow: '#ff7a6b' },
+            { fill: '#0e9f4e', glow: '#57e389' },
+            { fill: '#fff8ea', glow: '#ffffff' }
+        ];
+        var swagW = 240, sag = 30, topY = 2, idx = 0;
+        for (var x0 = 0; x0 < W; x0 += swagW) {
+            var x1 = Math.min(x0 + swagW, W);
+            var path = el('path', { d: 'M ' + x0 + ' ' + topY + ' Q ' + ((x0 + x1) / 2) + ' ' + (topY + sag * 2) + ' ' + x1 + ' ' + topY, fill: 'none', stroke: '#14532d', 'stroke-width': 2.5 });
+            svg.appendChild(path);
+            var len = path.getTotalLength();
+            var n = Math.max(3, Math.floor(len / 40));
+            for (var i = 0; i < n; i++) {
+                var pt = path.getPointAtLength(len * (i + 0.5) / n);
+                var c = colors[idx % 3]; idx++;
+                var delay = ((idx * 0.17) % 1.5).toFixed(2) + 's';
+                svg.appendChild(el('line', { x1: pt.x, y1: pt.y, x2: pt.x, y2: pt.y + 5, stroke: '#14532d', 'stroke-width': 1.6 }));
+                svg.appendChild(el('circle', { cx: pt.x, cy: pt.y + 11, r: 9.5, fill: c.glow, opacity: .55, 'class': 'bw-xmas-glow', style: 'animation-delay:' + delay }));
+                svg.appendChild(el('circle', { cx: pt.x, cy: pt.y + 11, r: 5, fill: c.fill, stroke: 'rgba(0,0,0,.18)', 'stroke-width': .6, 'class': 'bw-xmas-bulbc', style: 'animation-delay:' + delay }));
+            }
+            var mid = path.getPointAtLength(len / 2);
+            var bc = (idx % 2 === 0) ? '#d92323' : '#0e9f4e';
+            var bg = el('g', { 'class': 'bw-xmas-bauble', style: 'transform-origin:' + mid.x + 'px ' + mid.y + 'px; animation-delay:' + ((idx * 0.23) % 1.2).toFixed(2) + 's' });
+            bg.appendChild(el('line', { x1: mid.x, y1: mid.y, x2: mid.x, y2: mid.y + 13, stroke: '#14532d', 'stroke-width': 1.2 }));
+            bg.appendChild(el('rect', { x: mid.x - 3, y: mid.y + 12, width: 6, height: 4.5, rx: 1, fill: '#ffffff', stroke: 'rgba(0,0,0,.15)', 'stroke-width': .5 }));
+            bg.appendChild(el('circle', { cx: mid.x, cy: mid.y + 25, r: 8.5, fill: bc, stroke: 'rgba(0,0,0,.15)', 'stroke-width': .6 }));
+            bg.appendChild(el('circle', { cx: mid.x - 2.8, cy: mid.y + 21.8, r: 2.4, fill: '#ffffff', opacity: .75 }));
+            svg.appendChild(bg);
+        }
+    })();
+</script>
+<!-- /CHRISTMAS DECORATION -->
 
     <!-- TOP BAR NAVIGATION -->
     <header class="bg-brandDarkBlue text-white border-b border-blue-900 sticky top-0 z-50 shadow-md">
@@ -152,19 +246,16 @@ html, body { overflow-x: clip; }
     </header>
 
     <!-- HERO BANNER -->
-    <section class="bg-gradient-to-b from-brandDarkBlue to-brandBlue text-white py-14 px-4 sm:px-6 shadow-inner border-b-4 border-brandYellow">
-        <div class="max-w-4xl mx-auto text-center space-y-5">
-            <img src="https://home.blacksmithandwitches.com/images/bw-emblem.webp" alt="Blacksmith & Witches emblem" class="h-16 sm:h-20 w-auto mx-auto">
+    <section class="bg-gradient-to-b from-brandDarkBlue to-brandBlue text-white py-8 px-4 sm:px-6 shadow-inner border-b-4 border-brandYellow">
+        <div class="max-w-4xl mx-auto text-center space-y-3">
+            <img src="https://home.blacksmithandwitches.com/images/bw-emblem.webp" alt="Blacksmith & Witches emblem" class="h-12 sm:h-14 w-auto mx-auto">
             <div class="inline-flex items-center space-x-2 bg-white/10 text-brandYellow px-3.5 py-1 rounded-full text-xs font-semibold tracking-wide border border-white/10">
                 <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
-                <span data-i18n="heroBadge">Zero-Fee House Publications & Creator Marketplace</span>
+                <span data-i18n="heroBadge">House Publications & Creator Marketplace</span>
             </div>
             <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-white" data-i18n="heroTitle">
                 Independent Digital Editions & Media
             </h1>
-            <p class="text-blue-100 text-sm sm:text-base max-w-2xl mx-auto font-light" data-i18n="heroText">
-                Explore flagship dark sci-fi series, zines, audio releases, games, and independent apps. Direct downloads or straight to the creator's checkout—house takes nothing.
-            </p>
         </div>
     </section>
 
@@ -200,123 +291,93 @@ html, body { overflow-x: clip; }
         </div>
     </section>
 
-    <!-- BECOME A CREATOR -->
-    <section class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-8">
-        <div class="bg-white border-2 border-brandYellow rounded-2xl shadow-sm hover:shadow transition px-5 py-5 sm:px-6">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div>
-                    <p class="text-xs font-bold uppercase tracking-widest text-brandBlue" data-i18n="forCreators">For creators</p>
-                    <p class="text-sm text-slate-600 mt-1" data-i18n-html="becomeCreatorHtml"><strong class="text-brandDarkBlue">Become a creator:</strong> listing is free, you sell through your own link, and promotion is optional.</p>
-                </div>
-                <a href="account.html" class="shrink-0 bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-5 py-2.5 rounded-xl text-sm shadow transition text-center" data-i18n="createAccountBtn">Create your account</a>
-            </div>
-            <div class="border-t border-slate-100 mt-4 pt-3.5 flex flex-wrap gap-x-6 gap-y-1.5 text-xs font-semibold text-slate-500">
-                <span><strong id="worksCountFact" class="text-brandDarkBlue">…</strong> <span id="worksLiveLabel">works live</span></span>
-                <span data-i18n-html="factListingFreeHtml">Listing <strong class="text-brandDarkBlue">free</strong></span>
-                <span data-i18n-html="factOwnCheckoutHtml">You keep <strong class="text-brandDarkBlue">your own checkout</strong></span>
-                <span data-i18n-html="factPromoteFromHtml">Promote from <strong class="text-brandDarkBlue">CAD $1</strong></span>
-            </div>
-        </div>
-    </section>
-
-    <!-- HOUSE NEWS (approved posts from the news table; hides quietly when empty) -->
-    <section id="houseNewsSection" class="hidden max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-10">
+    <!-- NEW ON THE SHELF — static, picture-led house reviews of the latest uploads (always shown);
+         approved HOUSE NEWS posts from the news table render below them when published. -->
+    <section id="houseNewsSection" class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-10">
         <div class="text-center space-y-1.5 mb-6">
             <h2 class="text-2xl sm:text-3xl font-black tracking-tight text-brandDarkBlue" data-i18n="newsTitle">New on the shelf</h2>
-            <p class="text-sm text-slate-500" data-i18n="newsSub">Short reviews of the latest uploads.</p>
+            <p class="text-sm text-slate-500" data-i18n="newsSub">The latest uploads.</p>
+            <span class="block w-20 h-1.5 bg-brandYellow rounded-full mx-auto"></span>
         </div>
-        <div id="houseNewsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        <div id="shelfReviews" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <article class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:border-brandBlue hover:shadow transition flex flex-col">
+                <a href="https://buy.stripe.com/8x25kDdZt8Jv3MmcS53VC1f" target="_blank" rel="noopener noreferrer" class="block">
+                    <img src="https://keplers-catalogue.vercel.app/covers/haggard-she.jpg" alt="She (Annotated) — cover" loading="lazy" style="aspect-ratio:2/3" class="w-full object-cover">
+                </a>
+                <div class="p-3 flex flex-col gap-1.5 flex-grow">
+                    <h3 class="font-bold text-brandDarkBlue leading-snug">She (Annotated)</h3>
+                    <div class="mt-auto pt-2 flex items-center justify-between gap-3">
+                        <span class="text-lg font-black text-brandDarkBlue">$5.45</span>
+                        <a href="https://buy.stripe.com/8x25kDdZt8Jv3MmcS53VC1f" target="_blank" rel="noopener noreferrer" class="bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-4 py-2 rounded-xl text-sm shadow transition" data-i18n="viewProduct">View product</a>
+                    </div>
+                </div>
+            </article>
+            <article class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:border-brandBlue hover:shadow transition flex flex-col">
+                <a href="https://buy.stripe.com/14A9AT7B56BndmW4lz3VC1e" target="_blank" rel="noopener noreferrer" class="block">
+                    <img src="https://keplers-catalogue.vercel.app/covers/shelley-frankenstein.jpg" alt="Gothic Horror (Annotated) — cover" loading="lazy" style="aspect-ratio:2/3" class="w-full object-cover">
+                </a>
+                <div class="p-3 flex flex-col gap-1.5 flex-grow">
+                    <h3 class="font-bold text-brandDarkBlue leading-snug">Gothic Horror (Annotated)</h3>
+                    <div class="mt-auto pt-2 flex items-center justify-between gap-3">
+                        <span class="text-lg font-black text-brandDarkBlue">$10.45</span>
+                        <a href="https://buy.stripe.com/14A9AT7B56BndmW4lz3VC1e" target="_blank" rel="noopener noreferrer" class="bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-4 py-2 rounded-xl text-sm shadow transition" data-i18n="viewProduct">View product</a>
+                    </div>
+                </div>
+            </article>
+            <article class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:border-brandBlue hover:shadow transition flex flex-col">
+                <a href="https://buy.stripe.com/5kQbJ1aNh4tfciScS53VC1d" target="_blank" rel="noopener noreferrer" class="block">
+                    <img src="https://keplers-catalogue.vercel.app/covers/wells-war-of-the-worlds.jpg" alt="The Wells Collection (Annotated) — cover" loading="lazy" style="aspect-ratio:2/3" class="w-full object-cover">
+                </a>
+                <div class="p-3 flex flex-col gap-1.5 flex-grow">
+                    <h3 class="font-bold text-brandDarkBlue leading-snug">The Wells Collection (Annotated)</h3>
+                    <div class="mt-auto pt-2 flex items-center justify-between gap-3">
+                        <span class="text-lg font-black text-brandDarkBlue">$10.45</span>
+                        <a href="https://buy.stripe.com/5kQbJ1aNh4tfciScS53VC1d" target="_blank" rel="noopener noreferrer" class="bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-4 py-2 rounded-xl text-sm shadow transition" data-i18n="viewProduct">View product</a>
+                    </div>
+                </div>
+            </article>
+            <article class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:border-brandBlue hover:shadow transition flex flex-col">
+                <a href="https://buy.stripe.com/8x23cv2gLaRD5Uu8BP3VC1c" target="_blank" rel="noopener noreferrer" class="block">
+                    <img src="https://keplers-catalogue.vercel.app/covers/burroughs-princess-of-mars.jpg" alt="The Mars Collection (Annotated) — cover" loading="lazy" style="aspect-ratio:2/3" class="w-full object-cover">
+                </a>
+                <div class="p-3 flex flex-col gap-1.5 flex-grow">
+                    <h3 class="font-bold text-brandDarkBlue leading-snug">The Mars Collection (Annotated)</h3>
+                    <div class="mt-auto pt-2 flex items-center justify-between gap-3">
+                        <span class="text-lg font-black text-brandDarkBlue">$10.45</span>
+                        <a href="https://buy.stripe.com/8x23cv2gLaRD5Uu8BP3VC1c" target="_blank" rel="noopener noreferrer" class="bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-4 py-2 rounded-xl text-sm shadow transition" data-i18n="viewProduct">View product</a>
+                    </div>
+                </div>
+            </article>
+            <article class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:border-brandBlue hover:shadow transition flex flex-col">
+                <a href="https://buy.stripe.com/00w6oH6x12l75Uu6tH3VC1b" target="_blank" rel="noopener noreferrer" class="block">
+                    <img src="https://keplers-catalogue.vercel.app/covers/lesya-ukrainka-vybrani-poezii.jpg" alt="Вибрані поезії — cover" loading="lazy" style="aspect-ratio:2/3" class="w-full object-cover">
+                </a>
+                <div class="p-3 flex flex-col gap-1.5 flex-grow">
+                    <h3 class="font-bold text-brandDarkBlue leading-snug">Вибрані поезії</h3>
+                    <div class="mt-auto pt-2 flex items-center justify-between gap-3">
+                        <span class="text-lg font-black text-brandDarkBlue">$5.45</span>
+                        <a href="https://buy.stripe.com/00w6oH6x12l75Uu6tH3VC1b" target="_blank" rel="noopener noreferrer" class="bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-4 py-2 rounded-xl text-sm shadow transition" data-i18n="viewProduct">View product</a>
+                    </div>
+                </div>
+            </article>
+            <article class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:border-brandBlue hover:shadow transition flex flex-col">
+                <a href="https://buy.stripe.com/4gM6oH1cHcZLciS8BP3VC1a" target="_blank" rel="noopener noreferrer" class="block">
+                    <img src="https://keplers-catalogue.vercel.app/covers/keats-odes-and-selected-poems.jpg" alt="Odes and Selected Poems (Annotated) — cover" loading="lazy" style="aspect-ratio:2/3" class="w-full object-cover">
+                </a>
+                <div class="p-3 flex flex-col gap-1.5 flex-grow">
+                    <h3 class="font-bold text-brandDarkBlue leading-snug">Odes and Selected Poems (Annotated)</h3>
+                    <div class="mt-auto pt-2 flex items-center justify-between gap-3">
+                        <span class="text-lg font-black text-brandDarkBlue">$5.45</span>
+                        <a href="https://buy.stripe.com/4gM6oH1cHcZLciS8BP3VC1a" target="_blank" rel="noopener noreferrer" class="bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-4 py-2 rounded-xl text-sm shadow transition" data-i18n="viewProduct">View product</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+        <div id="houseNewsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5"></div>
     </section>
 
-    <!-- THE WHOLE HOUSE — PORTAL -->
-    <section class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-10">
-        <div class="text-center space-y-1.5 mb-6">
-            <h2 class="text-2xl sm:text-3xl font-black tracking-tight text-brandDarkBlue" data-i18n="portalTitle">The whole house — one door</h2>
-            <p class="text-sm text-slate-500" data-i18n="portalSub">Every Blacksmith &amp; Witches place, linked from here.</p>
-        </div>
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-            <a href="https://app.blacksmithandwitches.com" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:border-brandBlue hover:shadow transition block">
-                <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center mb-2.5"><i data-lucide="upload" class="w-5 h-5"></i></span>
-                <span class="block font-bold text-brandDarkBlue text-sm" data-i18n="footerUpload">Upload your work</span>
-                <span class="block text-xs text-slate-500 mt-0.5" data-i18n="portalUploadSub">Creators: sign in &amp; add your work</span>
-            </a>
-            <a href="https://home.blacksmithandwitches.com" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:border-brandBlue hover:shadow transition block">
-                <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center mb-2.5"><i data-lucide="home" class="w-5 h-5"></i></span>
-                <span class="block font-bold text-brandDarkBlue text-sm" data-i18n="footerHouse">House Site</span>
-                <span class="block text-xs text-slate-500 mt-0.5" data-i18n="portalHouseSub">Home of Paul of Teraura</span>
-            </a>
-            <a href="https://books.blacksmithandwitches.com" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:border-brandBlue hover:shadow transition block">
-                <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center mb-2.5"><i data-lucide="book-open" class="w-5 h-5"></i></span>
-                <span class="block font-bold text-brandDarkBlue text-sm" data-i18n="portalBooks">Books</span>
-                <span class="block text-xs text-slate-500 mt-0.5" data-i18n="portalBooksSub">The bookshop shelf</span>
-            </a>
-            <a href="https://movies.blacksmithandwitches.com" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:border-brandBlue hover:shadow transition block">
-                <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center mb-2.5"><i data-lucide="film" class="w-5 h-5"></i></span>
-                <span class="block font-bold text-brandDarkBlue text-sm" data-i18n="portalFilms">Films</span>
-                <span class="block text-xs text-slate-500 mt-0.5" data-i18n="portalFilmsSub">The movie shelf</span>
-            </a>
-            <a href="https://keplers-catalogue.vercel.app" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:border-brandBlue hover:shadow transition block">
-                <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center mb-2.5"><i data-lucide="library-big" class="w-5 h-5"></i></span>
-                <span class="block font-bold text-brandDarkBlue text-sm" data-i18n="portalCatalogue">The Catalogue</span>
-                <span class="block text-xs text-slate-500 mt-0.5" data-i18n="portalCatalogueSub">The indexed house shelf</span>
-            </a>
-            <a href="https://stage.blacksmithandwitches.com" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:border-brandBlue hover:shadow transition block">
-                <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center mb-2.5"><i data-lucide="smartphone" class="w-5 h-5"></i></span>
-                <span class="block font-bold text-brandDarkBlue text-sm">BW Stage</span>
-                <span class="block text-xs text-slate-500 mt-0.5" data-i18n="portalStageSub">The artists&rsquo; app</span>
-                <span class="block text-xs text-slate-500 mt-1" data-i18n="portalStageDesc">The house video stage — Paul of Teraura films, the animated series and STELLA, plus clips from house artists. New videos every day.</span>
-            </a>
-            <a href="https://home.blacksmithandwitches.com/reading-room.html" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:border-brandBlue hover:shadow transition block">
-                <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center mb-2.5"><i data-lucide="scroll-text" class="w-5 h-5"></i></span>
-                <span class="block font-bold text-brandDarkBlue text-sm" data-i18n="portalReading">Reading Room</span>
-                <span class="block text-xs text-slate-500 mt-0.5" data-i18n="portalReadingSub">Free chapters to read</span>
-            </a>
-            <a href="https://home.blacksmithandwitches.com/kit.html" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:border-brandBlue hover:shadow transition block">
-                <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center mb-2.5"><i data-lucide="package" class="w-5 h-5"></i></span>
-                <span class="block font-bold text-brandDarkBlue text-sm">Resistance Kit</span>
-                <span class="block text-xs text-slate-500 mt-0.5" data-i18n="portalKitSub">The free starter pack</span>
-            </a>
-            <a href="https://home.blacksmithandwitches.com/board.html" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:border-brandBlue hover:shadow transition block">
-                <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center mb-2.5"><i data-lucide="messages-square" class="w-5 h-5"></i></span>
-                <span class="block font-bold text-brandDarkBlue text-sm">Kepler's Board</span>
-                <span class="block text-xs text-slate-500 mt-0.5" data-i18n="portalBoardSub">The community rooms</span>
-            </a>
-            <a href="https://t.me/StoreofBnW" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:border-brandBlue hover:shadow transition block">
-                <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center mb-2.5"><i data-lucide="send" class="w-5 h-5"></i></span>
-                <span class="block font-bold text-brandDarkBlue text-sm" data-i18n="footerTelegram">Telegram Store</span>
-                <span class="block text-xs text-slate-500 mt-0.5" data-i18n="portalTelegramSub">The shop on Telegram</span>
-            </a>
-            <a href="https://wallet.blacksmithandwitches.com" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:border-brandBlue hover:shadow transition block">
-                <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center mb-2.5"><i data-lucide="wallet" class="w-5 h-5"></i></span>
-                <span class="block font-bold text-brandDarkBlue text-sm">BlacksmithPay</span>
-                <span class="block text-xs text-slate-500 mt-0.5" data-i18n="portalPaySub">Demo wallet — test money only</span>
-            </a>
-            <a href="https://www.patreon.com/c/BlacksmithAndWitches" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:border-brandBlue hover:shadow transition block">
-                <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center mb-2.5"><i data-lucide="heart-handshake" class="w-5 h-5"></i></span>
-                <span class="block font-bold text-brandDarkBlue text-sm">Patreon</span>
-                <span class="block text-xs text-slate-500 mt-0.5" data-i18n="portalPatreonSub">Memberships &amp; patron cuts</span>
-            </a>
-            <a href="https://www.youtube.com/@BlacksmithandWitches" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:border-brandBlue hover:shadow transition block">
-                <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center mb-2.5"><i data-lucide="play" class="w-5 h-5"></i></span>
-                <span class="block font-bold text-brandDarkBlue text-sm">YouTube</span>
-                <span class="block text-xs text-slate-500 mt-0.5" data-i18n="portalYoutubeSub">The films &amp; the series</span>
-            </a>
-        </div>
-    </section>
-
-    <!-- READER LIST — EMAIL CAPTURE (Brevo list: Paul of Teraura — Readers) -->
-    <section id="readerList" class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-10">
-        <div class="bg-white border-2 border-brandYellow rounded-2xl shadow-sm p-6 sm:p-8 text-center space-y-4">
-            <span class="inline-flex w-11 h-11 rounded-xl bg-brandYellow text-brandDarkBlue items-center justify-center"><i data-lucide="mail" class="w-5 h-5"></i></span>
-            <p class="text-xs font-bold uppercase tracking-widest text-brandBlue" data-i18n="captureKicker">The Reader List</p>
-            <h2 class="text-2xl sm:text-3xl font-black tracking-tight text-brandDarkBlue" data-i18n="captureTitle">Read the first chapters free</h2>
-            <p class="text-sm text-slate-600 max-w-2xl mx-auto" data-i18n="captureText">Start with Paul of Teraura in the Reading Room, and taste the annotated Classics — first chapters free in the Reading Room. Join the list for book news and new episodes, straight to your inbox.</p>
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-1">
-                <a href="https://aeb48fe4.sibforms.com/v2/serve/MUIFABkDntGzlxokSiaxJsoQ5hZ8ONHWnp8-Lk_FDeNZEp0yHtkPLsJbqTpo9rOYBDgppWRiuW_m_lVzisIW0zutO-Tth857KPh_GTtr8A1qsb0gluDa1H2zeBRcUa8BWoMUDWUPnnFeKo97CitVzXmZ50R0_GgxLgc9S7yGzp3ncYUKChhKuNqaKN0w117ujzCasy2CiN6ntI-mLQ==" class="bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-6 py-3 rounded-xl text-sm shadow transition" data-i18n="captureBtn">Join the reader list</a>
-                <a href="https://home.blacksmithandwitches.com/reading-room.html" class="font-bold text-brandBlue hover:text-brandDarkBlue underline underline-offset-4 decoration-brandYellow decoration-2 transition text-sm" data-i18n="portalReading">Reading Room</a>
-            </div>
-        </div>
-    </section>
+    <!-- SERIES RAILS — cover-led rows from the live catalogue (Amazon pattern, Nov 23, 2026) -->
+    <section id="seriesRails" class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-10 space-y-8"></section>
 
     <!-- CONTROLS & FILTERS -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
@@ -421,26 +482,8 @@ html, body { overflow-x: clip; }
             </div>
             <div>
                 <label class="block text-xs font-bold uppercase tracking-wider text-brandDarkBlue mb-2" data-i18n="promoteStep3">3 · Pick a package</label>
-                <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-3 max-w-5xl">
-                    <label class="promote-pkg block cursor-pointer border-2 rounded-2xl p-4 transition bg-slate-50 border-slate-200">
-                        <input type="radio" name="promotePkg" value="trial" class="sr-only" onchange="updatePromoteReview()">
-                        <span class="flex items-center justify-between">
-                            <span class="font-black text-brandDarkBlue" data-i18n="pkg_trial">Trial</span>
-                            <span class="text-lg font-black text-brandDarkBlue">CAD $1</span>
-                        </span>
-                        <span class="block text-xs font-bold text-brandBlue mt-0.5" data-i18n-days="1">1 day</span>
-                        <span class="block text-xs text-slate-600 mt-2" data-i18n="pkgBasicDesc">Featured row + Promoted badge.</span>
-                    </label>
-                    <label class="promote-pkg block cursor-pointer border-2 rounded-2xl p-4 transition bg-slate-50 border-slate-200">
-                        <input type="radio" name="promotePkg" value="starter" class="sr-only" onchange="updatePromoteReview()">
-                        <span class="flex items-center justify-between">
-                            <span class="font-black text-brandDarkBlue" data-i18n="pkg_starter">Starter</span>
-                            <span class="text-lg font-black text-brandDarkBlue">CAD $3</span>
-                        </span>
-                        <span class="block text-xs font-bold text-brandBlue mt-0.5" data-i18n-days="3">3 days</span>
-                        <span class="block text-xs text-slate-600 mt-2" data-i18n="pkgBasicDesc">Featured row + Promoted badge.</span>
-                    </label>
-                    <label class="promote-pkg block cursor-pointer border-2 rounded-2xl p-4 transition bg-slate-50 border-slate-200">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-5xl">
+                                                            <label class="promote-pkg block cursor-pointer border-2 rounded-2xl p-4 transition bg-slate-50 border-slate-200">
                         <input type="radio" name="promotePkg" value="featured" class="sr-only" onchange="updatePromoteReview()" checked>
                         <span class="flex items-center justify-between">
                             <span class="font-black text-brandDarkBlue" data-i18n="pkg_featured">Featured ⭐</span>
@@ -478,6 +521,116 @@ html, body { overflow-x: clip; }
             <p id="promoteMsg" class="hidden text-sm font-medium"></p>
         </section>
     </main>
+    <!-- BECOME A CREATOR -->
+    <section class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+        <div class="bg-white border-2 border-brandYellow rounded-2xl shadow-sm hover:shadow transition px-5 py-5 sm:px-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                    <p class="text-xs font-bold uppercase tracking-widest text-brandBlue" data-i18n="forCreators">For creators</p>
+                    <p class="text-sm text-slate-600 mt-1" data-i18n-html="becomeCreatorHtml"><strong class="text-brandDarkBlue">Become a creator:</strong> listing is free, you sell through your own link, and promotion is optional.</p>
+                    <p class="text-sm text-slate-600 mt-2" data-i18n="heroText">Explore flagship dark sci-fi series, zines, audio releases, games, and independent apps. Direct downloads or straight to the creator's checkout.</p>
+                </div>
+                <a href="account.html" class="shrink-0 bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-5 py-2.5 rounded-xl text-sm shadow transition text-center" data-i18n="createAccountBtn">Create your account</a>
+            </div>
+            <div class="border-t border-slate-100 mt-4 pt-3.5 flex flex-wrap gap-x-6 gap-y-1.5 text-xs font-semibold text-slate-500">
+                <span><strong id="worksCountFact" class="text-brandDarkBlue">…</strong> <span id="worksLiveLabel">works live</span></span>
+                <span data-i18n-html="factListingFreeHtml">Listing <strong class="text-brandDarkBlue">free</strong></span>
+                <span data-i18n-html="factOwnCheckoutHtml">You keep <strong class="text-brandDarkBlue">your own checkout</strong></span>
+                <span data-i18n-html="factPromoteFromHtml">Promote from <strong class="text-brandDarkBlue">CAD $5</strong></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE WHOLE HOUSE — PORTAL -->
+    <section class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-10">
+        <div class="text-center space-y-1.5 mb-6">
+            <h2 class="text-2xl sm:text-3xl font-black tracking-tight text-brandDarkBlue" data-i18n="portalTitle">The whole house — one door</h2>
+            <p class="text-sm text-slate-500" data-i18n="portalSub">Every Blacksmith &amp; Witches place, linked from here.</p>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+            <a href="https://app.blacksmithandwitches.com" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:border-brandBlue hover:shadow transition block">
+                <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center mb-2.5"><i data-lucide="upload" class="w-5 h-5"></i></span>
+                <span class="block font-bold text-brandDarkBlue text-sm" data-i18n="footerUpload">Upload your work</span>
+                <span class="block text-xs text-slate-500 mt-0.5" data-i18n="portalUploadSub">Creators: sign in &amp; add your work</span>
+            </a>
+            <a href="https://home.blacksmithandwitches.com" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:border-brandBlue hover:shadow transition block">
+                <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center mb-2.5"><i data-lucide="home" class="w-5 h-5"></i></span>
+                <span class="block font-bold text-brandDarkBlue text-sm" data-i18n="footerHouse">House Site</span>
+                <span class="block text-xs text-slate-500 mt-0.5" data-i18n="portalHouseSub">Home of Paul of Teraura</span>
+            </a>
+            <a href="https://books.blacksmithandwitches.com" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:border-brandBlue hover:shadow transition block">
+                <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center mb-2.5"><i data-lucide="book-open" class="w-5 h-5"></i></span>
+                <span class="block font-bold text-brandDarkBlue text-sm" data-i18n="portalBooks">Books</span>
+                <span class="block text-xs text-slate-500 mt-0.5" data-i18n="portalBooksSub">The bookshop shelf</span>
+            </a>
+            <a href="https://movies.blacksmithandwitches.com" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:border-brandBlue hover:shadow transition block">
+                <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center mb-2.5"><i data-lucide="film" class="w-5 h-5"></i></span>
+                <span class="block font-bold text-brandDarkBlue text-sm" data-i18n="portalFilms">Films</span>
+                <span class="block text-xs text-slate-500 mt-0.5" data-i18n="portalFilmsSub">The movie shelf</span>
+            </a>
+            <a href="https://keplers-catalogue.vercel.app" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:border-brandBlue hover:shadow transition block">
+                <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center mb-2.5"><i data-lucide="library-big" class="w-5 h-5"></i></span>
+                <span class="block font-bold text-brandDarkBlue text-sm" data-i18n="portalCatalogue">The Catalogue</span>
+                <span class="block text-xs text-slate-500 mt-0.5" data-i18n="portalCatalogueSub">The indexed house shelf</span>
+            </a>
+            <a href="https://stage.blacksmithandwitches.com" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:border-brandBlue hover:shadow transition block">
+                <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center mb-2.5"><i data-lucide="smartphone" class="w-5 h-5"></i></span>
+                <span class="block font-bold text-brandDarkBlue text-sm">BW Stage</span>
+                <span class="block text-xs text-slate-500 mt-0.5" data-i18n="portalStageSub">The artists&rsquo; app</span>
+                <span class="block text-xs text-slate-500 mt-1" data-i18n="portalStageDesc">The house video stage — Paul of Teraura films, the animated series and STELLA, plus clips from house artists. New videos every day.</span>
+            </a>
+            <a href="https://home.blacksmithandwitches.com/reading-room.html" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:border-brandBlue hover:shadow transition block">
+                <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center mb-2.5"><i data-lucide="scroll-text" class="w-5 h-5"></i></span>
+                <span class="block font-bold text-brandDarkBlue text-sm" data-i18n="portalReading">Reading Room</span>
+                <span class="block text-xs text-slate-500 mt-0.5" data-i18n="portalReadingSub">Free chapters to read</span>
+            </a>
+            <a href="https://home.blacksmithandwitches.com/kit.html" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:border-brandBlue hover:shadow transition block">
+                <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center mb-2.5"><i data-lucide="package" class="w-5 h-5"></i></span>
+                <span class="block font-bold text-brandDarkBlue text-sm">Resistance Kit</span>
+                <span class="block text-xs text-slate-500 mt-0.5" data-i18n="portalKitSub">The free starter pack</span>
+            </a>
+            <a href="https://home.blacksmithandwitches.com/board.html" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:border-brandBlue hover:shadow transition block">
+                <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center mb-2.5"><i data-lucide="messages-square" class="w-5 h-5"></i></span>
+                <span class="block font-bold text-brandDarkBlue text-sm">Kepler's Board</span>
+                <span class="block text-xs text-slate-500 mt-0.5" data-i18n="portalBoardSub">The community rooms</span>
+            </a>
+            <a href="https://t.me/StoreofBnW" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:border-brandBlue hover:shadow transition block">
+                <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center mb-2.5"><i data-lucide="send" class="w-5 h-5"></i></span>
+                <span class="block font-bold text-brandDarkBlue text-sm" data-i18n="footerTelegram">Telegram Store</span>
+                <span class="block text-xs text-slate-500 mt-0.5" data-i18n="portalTelegramSub">The shop on Telegram</span>
+            </a>
+            <a href="https://wallet.blacksmithandwitches.com" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:border-brandBlue hover:shadow transition block">
+                <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center mb-2.5"><i data-lucide="wallet" class="w-5 h-5"></i></span>
+                <span class="block font-bold text-brandDarkBlue text-sm">BlacksmithPay</span>
+                <span class="block text-xs text-slate-500 mt-0.5" data-i18n="portalPaySub">Demo wallet — test money only</span>
+            </a>
+            <a href="https://www.patreon.com/c/BlacksmithAndWitches" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:border-brandBlue hover:shadow transition block">
+                <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center mb-2.5"><i data-lucide="heart-handshake" class="w-5 h-5"></i></span>
+                <span class="block font-bold text-brandDarkBlue text-sm">Patreon</span>
+                <span class="block text-xs text-slate-500 mt-0.5" data-i18n="portalPatreonSub">Memberships &amp; patron cuts</span>
+            </a>
+            <a href="https://www.youtube.com/@BlacksmithandWitches" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:border-brandBlue hover:shadow transition block">
+                <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center mb-2.5"><i data-lucide="play" class="w-5 h-5"></i></span>
+                <span class="block font-bold text-brandDarkBlue text-sm">YouTube</span>
+                <span class="block text-xs text-slate-500 mt-0.5" data-i18n="portalYoutubeSub">The films &amp; the series</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- READER LIST — EMAIL CAPTURE (Brevo list: Paul of Teraura — Readers) -->
+    <section id="readerList" class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-10">
+        <div class="bg-white border-2 border-brandYellow rounded-2xl shadow-sm p-6 sm:p-8 text-center space-y-4">
+            <span class="inline-flex w-11 h-11 rounded-xl bg-brandYellow text-brandDarkBlue items-center justify-center"><i data-lucide="mail" class="w-5 h-5"></i></span>
+            <p class="text-xs font-bold uppercase tracking-widest text-brandBlue" data-i18n="captureKicker">The Reader List</p>
+            <h2 class="text-2xl sm:text-3xl font-black tracking-tight text-brandDarkBlue" data-i18n="captureTitle">Read the first chapters free</h2>
+            <p class="text-sm text-slate-600 max-w-2xl mx-auto" data-i18n="captureText">Start with Paul of Teraura in the Reading Room, and taste the annotated Classics — first chapters free in the Reading Room. Join the list for book news and new episodes, straight to your inbox.</p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-1">
+                <a href="https://aeb48fe4.sibforms.com/v2/serve/MUIFABkDntGzlxokSiaxJsoQ5hZ8ONHWnp8-Lk_FDeNZEp0yHtkPLsJbqTpo9rOYBDgppWRiuW_m_lVzisIW0zutO-Tth857KPh_GTtr8A1qsb0gluDa1H2zeBRcUa8BWoMUDWUPnnFeKo97CitVzXmZ50R0_GgxLgc9S7yGzp3ncYUKChhKuNqaKN0w117ujzCasy2CiN6ntI-mLQ==" class="bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-6 py-3 rounded-xl text-sm shadow transition" data-i18n="captureBtn">Join the reader list</a>
+                <a href="https://home.blacksmithandwitches.com/reading-room.html" class="font-bold text-brandBlue hover:text-brandDarkBlue underline underline-offset-4 decoration-brandYellow decoration-2 transition text-sm" data-i18n="portalReading">Reading Room</a>
+            </div>
+        </div>
+    </section>
+
 
     <!-- FOOTER -->
     <footer class="bg-brandDarkBlue text-blue-200 border-t border-blue-900 py-10 mt-16">
@@ -642,7 +795,7 @@ html, body { overflow-x: clip; }
                 backToStore: "← Back to the store",
                 creatorAccount: "Creator account",
                 heroTitle: "Independent Digital Editions & Media",
-                heroText: "Explore flagship dark sci-fi series, zines, audio releases, games, and independent apps. Direct downloads or straight to the creator's checkout—house takes nothing.",
+                heroText: "Explore flagship dark sci-fi series, zines, audio releases, games, and independent apps. Direct downloads or straight to the creator's checkout.",
                 signUpIn: "Sign up / Sign in",
                 authIntro: "Creators sign in with a magic link — the link verifies your email. New here? The same link starts your account; you then complete it with your creator name, your classification, and a password for next time.",
                 creatorEmail: "Creator Email",
@@ -745,18 +898,18 @@ html, body { overflow-x: clip; }
                 myAccount: "My account",
                 myWorks: "My Works",
                 publishWork: "Publish Work",
-                heroBadge: "Zero-Fee House Publications & Creator Marketplace",
+                heroBadge: "House Publications & Creator Marketplace",
                 forCreators: "For creators",
                 becomeCreatorHtml: "<strong class=\"text-brandDarkBlue\">Become a creator:</strong> listing is free, you sell through your own link, and promotion is optional.",
                 createAccountBtn: "Create your account",
                 factListingFreeHtml: "Listing <strong class=\"text-brandDarkBlue\">free</strong>",
                 factOwnCheckoutHtml: "You keep <strong class=\"text-brandDarkBlue\">your own checkout</strong>",
-                factPromoteFromHtml: "Promote from <strong class=\"text-brandDarkBlue\">CAD $1</strong>",
+                factPromoteFromHtml: "Promote from <strong class=\"text-brandDarkBlue\">CAD $5</strong>",
                 worksLiveOne: "work live",
                 worksLiveFew: "works live",
                 worksLiveMany: "works live",
                 newsTitle: "New on the shelf",
-                newsSub: "Short reviews of the latest uploads.",
+                newsSub: "The latest uploads.",
                 viewProduct: "View product",
                 portalTitle: "The whole house — one door",
                 portalSub: "Every Blacksmith & Witches place, linked from here.",
@@ -881,7 +1034,7 @@ html, body { overflow-x: clip; }
                 backToStore: "← Zurück zum Shop",
                 creatorAccount: "Creator-Konto",
                 heroTitle: "Unabhängige digitale Editionen & Medien",
-                heroText: "Entdecken Sie die düstere Flaggschiff-Sci-Fi-Serie, Zines, Audio-Releases, Spiele und unabhängige Apps. Direkte Downloads oder direkt zur Kasse des Creators — das Haus behält nichts.",
+                heroText: "Entdecken Sie die düstere Flaggschiff-Sci-Fi-Serie, Zines, Audio-Releases, Spiele und unabhängige Apps. Direkte Downloads oder direkt zur Kasse des Creators.",
                 signUpIn: "Registrieren / Anmelden",
                 authIntro: "Creators melden sich mit einem Magic Link an — der Link bestätigt Ihre E-Mail. Neu hier? Derselbe Link startet Ihr Konto; danach vervollständigen Sie es mit Ihrem Creator-Namen, Ihrer Einstufung und einem Passwort für das nächste Mal.",
                 creatorEmail: "Creator-E-Mail",
@@ -984,18 +1137,18 @@ html, body { overflow-x: clip; }
                 myAccount: "Mein Konto",
                 myWorks: "Meine Werke",
                 publishWork: "Werk veröffentlichen",
-                heroBadge: "Gebührenfreie Hauspublikationen & Creator-Marktplatz",
+                heroBadge: "Hauspublikationen & Creator-Marktplatz",
                 forCreators: "Für Creator",
                 becomeCreatorHtml: "<strong class=\"text-brandDarkBlue\">Werden Sie Creator:</strong> Das Einstellen ist kostenlos, Sie verkaufen über Ihren eigenen Link, und Werbung ist optional.",
                 createAccountBtn: "Konto erstellen",
                 factListingFreeHtml: "Einstellen <strong class=\"text-brandDarkBlue\">kostenlos</strong>",
                 factOwnCheckoutHtml: "Sie behalten <strong class=\"text-brandDarkBlue\">Ihre eigene Kasse</strong>",
-                factPromoteFromHtml: "Werbung ab <strong class=\"text-brandDarkBlue\">CAD $1</strong>",
+                factPromoteFromHtml: "Werbung ab <strong class=\"text-brandDarkBlue\">CAD $5</strong>",
                 worksLiveOne: "Werk online",
                 worksLiveFew: "Werke online",
                 worksLiveMany: "Werke online",
                 newsTitle: "Neu im Regal",
-                newsSub: "Kurze Besprechungen der neuesten Uploads.",
+                newsSub: "Die neuesten Uploads.",
                 viewProduct: "Produkt ansehen",
                 portalTitle: "Das ganze Haus — eine Tür",
                 portalSub: "Jeder Ort von Blacksmith & Witches, von hier aus verlinkt.",
@@ -1120,7 +1273,7 @@ html, body { overflow-x: clip; }
                 backToStore: "← Retour à la boutique",
                 creatorAccount: "Compte créateur",
                 heroTitle: "Éditions numériques & médias indépendants",
-                heroText: "Découvrez la série de science-fiction sombre phare, des zines, des sorties audio, des jeux et des applications indépendantes. Téléchargements directs ou passage direct à la caisse du créateur — la maison ne prend rien.",
+                heroText: "Découvrez la série de science-fiction sombre phare, des zines, des sorties audio, des jeux et des applications indépendantes. Téléchargements directs ou passage direct à la caisse du créateur.",
                 signUpIn: "Inscription / Connexion",
                 authIntro: "Les créateurs se connectent avec un lien magique — le lien vérifie votre e-mail. Nouveau ici ? Le même lien crée votre compte ; vous le complétez ensuite avec votre nom de créateur, votre classification et un mot de passe pour la prochaine fois.",
                 creatorEmail: "E-mail du créateur",
@@ -1223,18 +1376,18 @@ html, body { overflow-x: clip; }
                 myAccount: "Mon compte",
                 myWorks: "Mes œuvres",
                 publishWork: "Publier une œuvre",
-                heroBadge: "Publications maison sans frais & place de marché des créateurs",
+                heroBadge: "Publications maison & place de marché des créateurs",
                 forCreators: "Pour les créateurs",
                 becomeCreatorHtml: "<strong class=\"text-brandDarkBlue\">Devenez créateur :</strong> la mise en vente est gratuite, vous vendez via votre propre lien, et la promotion est facultative.",
                 createAccountBtn: "Créez votre compte",
                 factListingFreeHtml: "Mise en vente <strong class=\"text-brandDarkBlue\">gratuite</strong>",
                 factOwnCheckoutHtml: "Vous gardez <strong class=\"text-brandDarkBlue\">votre propre caisse</strong>",
-                factPromoteFromHtml: "Promotion dès <strong class=\"text-brandDarkBlue\">1 $ CAD</strong>",
+                factPromoteFromHtml: "Promotion dès <strong class=\"text-brandDarkBlue\">5 $ CAD</strong>",
                 worksLiveOne: "œuvre en ligne",
                 worksLiveFew: "œuvres en ligne",
                 worksLiveMany: "œuvres en ligne",
                 newsTitle: "Nouveautés sur l'étagère",
-                newsSub: "Courtes critiques des derniers ajouts.",
+                newsSub: "Les derniers ajouts.",
                 viewProduct: "Voir le produit",
                 portalTitle: "Toute la maison — une seule porte",
                 portalSub: "Tous les lieux Blacksmith & Witches, liés depuis ici.",
@@ -1359,7 +1512,7 @@ html, body { overflow-x: clip; }
                 backToStore: "← Назад до магазину",
                 creatorAccount: "Обліковий запис автора",
                 heroTitle: "Незалежні цифрові видання та медіа",
-                heroText: "Відкрийте для себе флагманську темну науково-фантастичну серію, зіни, аудіорелізи, ігри та незалежні застосунки. Прямі завантаження або одразу до оплати автора — дім нічого не забирає.",
+                heroText: "Відкрийте для себе флагманську темну науково-фантастичну серію, зіни, аудіорелізи, ігри та незалежні застосунки. Прямі завантаження або одразу до оплати автора.",
                 signUpIn: "Реєстрація / Вхід",
                 authIntro: "Автори входять за магічним посиланням — воно підтверджує вашу електронну пошту. Ви тут уперше? Те саме посилання створить ваш обліковий запис; далі ви доповните його іменем автора, класифікацією та паролем на наступний раз.",
                 creatorEmail: "Електронна пошта автора",
@@ -1462,18 +1615,18 @@ html, body { overflow-x: clip; }
                 myAccount: "Мій обліковий запис",
                 myWorks: "Мої роботи",
                 publishWork: "Опублікувати роботу",
-                heroBadge: "Домашні публікації без комісій і маркетплейс для авторів",
+                heroBadge: "Домашні публікації та маркетплейс для авторів",
                 forCreators: "Для авторів",
                 becomeCreatorHtml: "<strong class=\"text-brandDarkBlue\">Станьте автором:</strong> розміщення безкоштовне, ви продаєте за власним посиланням, а просування — за бажанням.",
                 createAccountBtn: "Створити обліковий запис",
                 factListingFreeHtml: "Розміщення <strong class=\"text-brandDarkBlue\">безкоштовне</strong>",
                 factOwnCheckoutHtml: "Ви зберігаєте <strong class=\"text-brandDarkBlue\">власну оплату</strong>",
-                factPromoteFromHtml: "Просування від <strong class=\"text-brandDarkBlue\">CAD $1</strong>",
+                factPromoteFromHtml: "Просування від <strong class=\"text-brandDarkBlue\">CAD $5</strong>",
                 worksLiveOne: "робота онлайн",
                 worksLiveFew: "роботи онлайн",
                 worksLiveMany: "робіт онлайн",
                 newsTitle: "Новинки на полиці",
-                newsSub: "Короткі огляди найновіших завантажень.",
+                newsSub: "Найновіші завантаження.",
                 viewProduct: "Переглянути товар",
                 portalTitle: "Весь дім — одні двері",
                 portalSub: "Усі місця Blacksmith & Witches — за посиланнями звідси.",
@@ -1598,7 +1751,7 @@ html, body { overflow-x: clip; }
                 backToStore: "← Назад в магазин",
                 creatorAccount: "Аккаунт автора",
                 heroTitle: "Независимые цифровые издания и медиа",
-                heroText: "Откройте для себя флагманскую тёмную научно-фантастическую серию, зины, аудиорелизы, игры и независимые приложения. Прямые загрузки или сразу к оплате автора — дом ничего не забирает.",
+                heroText: "Откройте для себя флагманскую тёмную научно-фантастическую серию, зины, аудиорелизы, игры и независимые приложения. Прямые загрузки или сразу к оплате автора.",
                 signUpIn: "Регистрация / Вход",
                 authIntro: "Авторы входят по магической ссылке — она подтверждает вашу электронную почту. Вы здесь впервые? Та же ссылка создаст ваш аккаунт; дальше вы дополните его именем автора, классификацией и паролем на следующий раз.",
                 creatorEmail: "Электронная почта автора",
@@ -1701,18 +1854,18 @@ html, body { overflow-x: clip; }
                 myAccount: "Мой аккаунт",
                 myWorks: "Мои работы",
                 publishWork: "Опубликовать работу",
-                heroBadge: "Домашние публикации без комиссий и маркетплейс для авторов",
+                heroBadge: "Домашние публикации и маркетплейс для авторов",
                 forCreators: "Для авторов",
                 becomeCreatorHtml: "<strong class=\"text-brandDarkBlue\">Станьте автором:</strong> размещение бесплатно, вы продаёте по собственной ссылке, а продвижение — по желанию.",
                 createAccountBtn: "Создать аккаунт",
                 factListingFreeHtml: "Размещение <strong class=\"text-brandDarkBlue\">бесплатно</strong>",
                 factOwnCheckoutHtml: "Вы сохраняете <strong class=\"text-brandDarkBlue\">собственную оплату</strong>",
-                factPromoteFromHtml: "Продвижение от <strong class=\"text-brandDarkBlue\">CAD $1</strong>",
+                factPromoteFromHtml: "Продвижение от <strong class=\"text-brandDarkBlue\">CAD $5</strong>",
                 worksLiveOne: "работа онлайн",
                 worksLiveFew: "работы онлайн",
                 worksLiveMany: "работ онлайн",
                 newsTitle: "Новинки на полке",
-                newsSub: "Короткие обзоры новейших загрузок.",
+                newsSub: "Новейшие загрузки.",
                 viewProduct: "Смотреть товар",
                 portalTitle: "Весь дом — одна дверь",
                 portalSub: "Все места Blacksmith & Witches — по ссылкам отсюда.",
@@ -3687,6 +3840,38 @@ html, body { overflow-x: clip; }
                                 "description": "She-Who-Must-Be-Obeyed has waited two thousand years in the tombs of Kôr for the man she murdered to be born again — and now Leo Vincey has come, with the dead man's face. H. Rider Haggard's She (1887), the immortal lost-world romance, complete: frame Introduction, dedication to Andrew Lang, and all twenty-eight chapters with Holly's thirty footnotes. Blacksmith & Witches Classics annotated edition: original introduction, a note at every chapter, a life of the author, and a reading guide, all by Dima Grossman. EPUB, delivered after checkout.",
                                 "download_url": "https://buy.stripe.com/8x25kDdZt8Jv3MmcS53VC1f",
                                 "cover_url": "https://keplers-catalogue.vercel.app/covers/haggard-she.jpg"
+                    },
+                    {
+                                "id": 116,
+                                "title": "Treasure Island (Annotated)",
+                                "creator": "Robert Louis Stevenson",
+                                "category": "books",
+                                "price": 5.45,
+                                "formats": [
+                                            "EPUB"
+                                ],
+                                "status": "approved",
+                                "badge": "Blacksmith & Witches Classics - Volume 71",
+                                "excerpt": null,
+                                "description": "Robert Louis Stevenson's Treasure Island (Annotated) — Blacksmith & Witches Classics, Volume 71. The complete 1883 novel — Jim Hawkins, the Hispaniola, Ben Gunn, and Long John Silver with his parrot Captain Flint: the map, the black spot, and the hunt for Flint's seven hundred thousand pounds — with the dedication to S.L.O. and the prefatory poem 'To the Hesitating Purchaser.' With an original introduction ('The Map Comes First'), an editor's note at the head of every chapter, a life of Stevenson with a chronology, and a reading guide — all original to this edition, © 2026 Dima Grossman. EPUB, delivered after checkout.",
+                                "download_url": "https://buy.stripe.com/4gM7sL1cHaRD2Ii5pD3VC1g",
+                                "cover_url": "https://keplers-catalogue.vercel.app/covers/stevenson-treasure-island.jpg"
+                    },
+                    {
+                                "id": 117,
+                                "title": "The Picture of Dorian Gray (Annotated)",
+                                "creator": "Oscar Wilde",
+                                "category": "books",
+                                "price": 5.45,
+                                "formats": [
+                                            "EPUB"
+                                ],
+                                "status": "approved",
+                                "badge": "Blacksmith & Witches Classics - Volume 72",
+                                "excerpt": null,
+                                "description": "Oscar Wilde's The Picture of Dorian Gray (Annotated) — Blacksmith & Witches Classics, Volume 72. The complete 1891 novel — Dorian Gray, who stays young while his portrait grows old; Basil Hallward, who worships him; Lord Henry Wotton, who corrupts him with a philosophy; Sibyl Vane; and the picture in the locked schoolroom that keeps the record his face refuses to keep — with Wilde's Preface of 1891 ('There is no such thing as a moral or an immoral book') printed as the book's front matter. With an original introduction, an editor's note at the head of every chapter, a life of Wilde with a chronology, and a reading guide — all original to this edition, © 2026 Dima Grossman. EPUB, delivered after checkout.",
+                                "download_url": "https://buy.stripe.com/fZudR9f3xf7Tfv405j3VC1h",
+                                "cover_url": "https://keplers-catalogue.vercel.app/covers/wilde-dorian-gray.jpg"
                     }
         ];
 
@@ -3853,6 +4038,39 @@ html, body { overflow-x: clip; }
                 <span class="block text-xs font-black text-slate-600">${price}</span>
             </button>`;
         }
+        function railCardHtml(p) {
+            const coverUrl = (p.cover_url || '').trim();
+            const cover = coverUrl
+                ? `<img src="${coverUrl.replace(/"/g, '%22')}" alt="" loading="lazy" class="w-full aspect-[2/3] object-cover rounded-lg border border-slate-200 shadow-sm">`
+                : `<span class="w-full aspect-[2/3] rounded-lg bg-blue-50 border border-slate-200 flex items-center justify-center text-brandBlue text-4xl font-black">${escHtml((p.title || '?').charAt(0))}</span>`;
+            const price = Number(p.price) === 0 ? t('free') : '$' + Number(p.price).toFixed(2);
+            return `<button type="button" onclick="openProduct('${p.id}')" class="shrink-0 w-36 sm:w-40 text-left group">
+                ${cover}
+                <span class="block mt-2 text-sm font-bold text-brandDarkBlue leading-snug line-clamp-2 group-hover:underline">${escHtml(p.title)}</span>
+                <span class="block mt-0.5 text-sm font-black text-brandDarkBlue">${price}</span>
+            </button>`;
+        }
+        // Front-page series rails (Amazon pattern, Nov 23, 2026): cover-led
+        // rows built only from the live catalogue — Teraura, the annotated
+        // Classics, the Hugo kids shelf. A rail with no visible members is
+        // skipped; clicking its heading filters the catalogue to the series.
+        function renderRails() {
+            const wrap = document.getElementById('seriesRails');
+            if (!wrap) return;
+            const byTitle = (a, b) => String(a.title).localeCompare(String(b.title), curLang);
+            const defs = [
+                { key: 'teraura', sort: (a, b) => ((b.featured ? 1 : 0) - (a.featured ? 1 : 0)) || byTitle(a, b) },
+                { key: 'classics', sort: (a, b) => (((seriesOf(b) || {}).vol || 0) - ((seriesOf(a) || {}).vol || 0)) || byTitle(a, b) },
+                { key: 'hugo', sort: byTitle }
+            ];
+            let html = '';
+            defs.forEach(d => {
+                const members = products.filter(p => isPublicVisible(p) && (seriesOf(p) || {}).key === d.key).sort(d.sort).slice(0, 12);
+                if (!members.length) return;
+                html += `<div><button type="button" onclick="setSeriesFilter('${d.key}')" class="group text-left"><span class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue group-hover:underline">${escHtml(seriesName(d.key))}</span><span class="block w-14 h-1 bg-brandYellow rounded-full mt-1.5"></span></button><div class="flex gap-3 overflow-x-auto pb-2 pt-4">${members.map(railCardHtml).join('')}</div></div>`;
+            });
+            wrap.innerHTML = html;
+        }
         function renderRecent() {
             const section = document.getElementById('recentSection');
             const row = document.getElementById('recentRow');
@@ -3955,7 +4173,7 @@ html, body { overflow-x: clip; }
                             <span class="text-base leading-none">${wished ? '&#9829;' : '&#9825;'}</span><span>${t('wishlist')}</span>
                         </button>
                         ${!isFree ? `<button onclick="startCheckout('${String(p.title).replace(/'/g, "\\'")}', ${Number(p.price)})" class="bg-white border-2 border-brandYellow text-brandDarkBlue hover:bg-brandYellow font-bold px-3 py-2 rounded-xl text-xs transition shadow inline-flex items-center space-x-1" title="${t('stripeTestTitle')}"><span>${t('stripeTest')}</span></button>` : ''}
-                        <a href="${p.download_url || '#'}" target="_blank" rel="noopener noreferrer" class="bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-4 py-2 rounded-xl text-xs transition shadow inline-flex items-center space-x-1"><span>${actionLabel}</span></a>
+                        <a href="${p.download_url || '#'}" target="_blank" rel="noopener noreferrer" class="bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-4 py-2 rounded-xl text-xs transition shadow inline-flex items-center space-x-1"><span>${actionLabel}</span></a>
                     </div>
                 </div>
                 ${rails}`;
@@ -4226,8 +4444,6 @@ html, body { overflow-x: clip; }
         // test key is not configured the service answers 503 — say so
         // plainly instead of failing silently.
         const PROMOTE_PACKAGES = {
-            trial:     { name: 'Trial',     days: 1,  amountCents: 100, minGoal: 'store' },
-            starter:   { name: 'Starter',   days: 3,  amountCents: 300, minGoal: 'store' },
             featured:  { name: 'Featured ⭐', days: 7,  amountCents: 500, minGoal: 'stage' },
             spotlight: { name: 'Spotlight', days: 14, amountCents: 900, minGoal: 'everywhere' },
             top:       { name: 'Top',       days: 30, amountCents: 1500, minGoal: 'everywhere' }
@@ -4249,7 +4465,7 @@ html, body { overflow-x: clip; }
         }
         function onGoalChange(goal) {
             // Preselect cheapest package satisfying goal
-            let targetPkg = 'trial';
+            let targetPkg = 'featured';
             if (goal === 'stage') targetPkg = 'featured';
             if (goal === 'everywhere') targetPkg = 'spotlight';
             const radio = document.querySelector(`input[name="promotePkg"][value="${targetPkg}"]`);
@@ -4419,6 +4635,7 @@ html, body { overflow-x: clip; }
                 updateWishlistBtn();
                 renderSeriesChip();
                 renderRecent();
+                renderRails();
                 return;
             } else {
                 empty.classList.add('hidden');
@@ -4473,7 +4690,7 @@ html, body { overflow-x: clip; }
                             ${!isFree ? `<button onclick="startCheckout('${p.title.replace(/'/g, "\\'")}', ${Number(p.price)})" class="bg-white border-2 border-brandYellow text-brandDarkBlue hover:bg-brandYellow font-bold px-3 py-2 rounded-xl text-xs transition shadow inline-flex items-center space-x-1" title="${t('stripeTestTitle')}">
                                 <span>${t('stripeTest')}</span>
                             </button>` : ''}
-                            <a href="${p.download_url || '#'}" target="_blank" rel="noopener noreferrer" class="bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-4 py-2 rounded-xl text-xs transition shadow inline-flex items-center space-x-1">
+                            <a href="${p.download_url || '#'}" target="_blank" rel="noopener noreferrer" class="bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-4 py-2 rounded-xl text-xs transition shadow inline-flex items-center space-x-1">
                                 <span>${actionLabel}</span>
                                 <i data-lucide="external-link" class="w-3 h-3"></i>
                             </a>
@@ -4488,6 +4705,7 @@ html, body { overflow-x: clip; }
             updateWishlistBtn();
             renderSeriesChip();
             renderRecent();
+            renderRails();
             if (houseNewsCache) renderHouseNews();
         }
 
