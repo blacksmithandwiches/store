@@ -249,6 +249,61 @@ html, body { overflow-x: clip; }
         </div>
     </header>
 
+    <!-- SERVICES BAND — house services for sale, directly under the header (owner's order, Nov 23, 2026).
+         Slim by design: the books-first layout below is untouched. The four Order buttons take the
+         minted Stripe payment links — slots marked data-svc-link; see
+         ~/workspace/store-work/upgrade/services-manifest.md for the link state. -->
+    <section id="servicesBand" class="bg-white border-b-4 border-brandYellow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="text-center space-y-1 mb-5">
+                <h2 class="text-2xl sm:text-3xl font-black tracking-tight text-brandDarkBlue" data-i18n="svcTitle">Services — we build it for you</h2>
+                <p class="text-sm text-slate-500 max-w-2xl mx-auto" data-i18n="svcSub">Fixed prices, no hourly meter. Built by the house behind this store — AI-assisted, disclosed plainly, delivered by email.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                <article class="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex flex-col gap-2 hover:border-brandBlue hover:shadow transition">
+                    <h3 class="font-black text-brandDarkBlue leading-snug" data-i18n="svc1Name">Author Website</h3>
+                    <p class="text-sm text-slate-600 flex-grow" data-i18n="svc1Desc">A complete author website — home, books, about and contact — built like our own house sites.</p>
+                    <div class="mt-auto pt-2 flex items-center justify-between gap-3">
+                        <span class="text-lg font-black text-brandDarkBlue"><span data-i18n="svcFrom">from</span> CAD $545</span>
+                        <!-- STRIPE LINK SLOT svc1: replace href with the minted payment link (services-manifest.md) -->
+                        <a href="https://buy.stripe.com/9B6dR9f3x4tfgz8dW93VC1s" data-svc-link="svc1" class="bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-4 py-2 rounded-xl text-sm transition shadow" data-i18n="svcOrder">Order</a>
+                    </div>
+                </article>
+                <article class="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex flex-col gap-2 hover:border-brandBlue hover:shadow transition">
+                    <h3 class="font-black text-brandDarkBlue leading-snug" data-i18n="svc2Name">Publish-Ready Package</h3>
+                    <p class="text-sm text-slate-600 flex-grow" data-i18n="svc2Desc">Cover design, EPUB + print formatting, and publishing setup for one book — ready to upload.</p>
+                    <div class="mt-auto pt-2 flex items-center justify-between gap-3">
+                        <span class="text-lg font-black text-brandDarkBlue">CAD $945</span>
+                        <!-- STRIPE LINK SLOT svc2: replace href with the minted payment link (services-manifest.md) -->
+                        <a href="https://buy.stripe.com/bJe6oHcVp0cZ2Ii9FT3VC1t" data-svc-link="svc2" class="bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-4 py-2 rounded-xl text-sm transition shadow" data-i18n="svcOrder">Order</a>
+                    </div>
+                </article>
+                <article class="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex flex-col gap-2 hover:border-brandBlue hover:shadow transition">
+                    <h3 class="font-black text-brandDarkBlue leading-snug" data-i18n="svc3Name">Storefront Build</h3>
+                    <p class="text-sm text-slate-600 flex-grow" data-i18n="svc3Desc">Your own online store and catalogue with Stripe checkout — the same machinery as this store.</p>
+                    <div class="mt-auto pt-2 flex items-center justify-between gap-3">
+                        <span class="text-lg font-black text-brandDarkBlue">CAD $1,445</span>
+                        <!-- STRIPE LINK SLOT svc3: replace href with the minted payment link (services-manifest.md) -->
+                        <a href="https://buy.stripe.com/6oUfZhf3x9NzaaK4lz3VC1u" data-svc-link="svc3" class="bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-4 py-2 rounded-xl text-sm transition shadow" data-i18n="svcOrder">Order</a>
+                    </div>
+                </article>
+                <article class="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex flex-col gap-2 hover:border-brandBlue hover:shadow transition">
+                    <h3 class="font-black text-brandDarkBlue leading-snug" data-i18n="svc4Name">Catalogue &amp; Store Audit</h3>
+                    <p class="text-sm text-slate-600 flex-grow" data-i18n="svc4Desc">A written audit of your catalogue and store: pricing, metadata and listings, with the top fixes.</p>
+                    <div class="mt-auto pt-2 flex items-center justify-between gap-3">
+                        <span class="text-lg font-black text-brandDarkBlue">CAD $145</span>
+                        <!-- STRIPE LINK SLOT svc4: replace href with the minted payment link (services-manifest.md) -->
+                        <a href="https://buy.stripe.com/6oUaEX5sX6Bn2Ii05j3VC1v" data-svc-link="svc4" class="bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-4 py-2 rounded-xl text-sm transition shadow" data-i18n="svcOrder">Order</a>
+                    </div>
+                </article>
+            </div>
+            <div class="mt-5 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 text-center">
+                <p class="text-sm font-semibold text-slate-600" data-i18n="svcPromo">Sell here too — promote your work: Featured CAD $5 · Spotlight CAD $9 · Top CAD $15</p>
+                <a href="promote.html" class="bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-4 py-2 rounded-xl text-sm transition shadow" data-i18n="svcPromoBtn">Promote your work →</a>
+            </div>
+        </div>
+    </section>
+
     <!-- HERO BANNER -->
     <section class="bg-gradient-to-b from-brandDarkBlue to-brandBlue text-white py-8 px-4 sm:px-6 shadow-inner border-b-4 border-brandYellow">
         <div class="max-w-4xl mx-auto text-center space-y-3">
@@ -276,6 +331,8 @@ html, body { overflow-x: clip; }
                 <button onclick="filterCategory('apps', this)" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition" data-i18n="cat_apps">Apps & Tools</button>
                 <button onclick="filterCategory('video', this)" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition" data-i18n="cat_video">Video</button>
                 <button onclick="filterCategory('art', this)" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition" data-i18n="cat_art">Art & Prints</button>
+                <button onclick="filterCategory('services', this)" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition" data-i18n="cat_services">Services</button>
+                <button onclick="filterCategory('gifts', this)" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition" data-i18n="cat_gifts">Gifts</button>
             </div>
             <div class="flex items-center gap-3 w-full md:w-auto">
                 <label for="searchInput" class="text-sm font-black uppercase tracking-widest text-brandDarkBlue">Search</label>
@@ -718,6 +775,8 @@ html, body { overflow-x: clip; }
                             <option value="apps" data-i18n="cat_apps">Apps & Tools</option>
                             <option value="video" data-i18n="cat_video">Video</option>
                             <option value="art" data-i18n="cat_art">Art & Prints</option>
+                            <option value="services" data-i18n="cat_services">Services</option>
+                            <option value="gifts" data-i18n="cat_gifts">Gifts</option>
                         </select>
                     </div>
                 </div>
@@ -847,6 +906,22 @@ html, body { overflow-x: clip; }
                 cat_apps: "Apps & Tools",
                 cat_video: "Video",
                 cat_art: "Art & Prints",
+                cat_services: "Services",
+                cat_gifts: "Gifts",
+                svcTitle: "Services — we build it for you",
+                svcSub: "Fixed prices, no hourly meter. Built by the house behind this store — AI-assisted, disclosed plainly, delivered by email.",
+                svc1Name: "Author Website",
+                svc1Desc: "A complete author website — home, books, about and contact — built like our own house sites.",
+                svc2Name: "Publish-Ready Package",
+                svc2Desc: "Cover design, EPUB + print formatting, and publishing setup for one book — ready to upload.",
+                svc3Name: "Storefront Build",
+                svc3Desc: "Your own online store and catalogue with Stripe checkout — the same machinery as this store.",
+                svc4Name: "Catalogue & Store Audit",
+                svc4Desc: "A written audit of your catalogue and store: pricing, metadata and listings, with the top fixes.",
+                svcFrom: "from",
+                svcOrder: "Order",
+                svcPromo: "Sell here too — promote your work: Featured CAD $5 · Spotlight CAD $9 · Top CAD $15",
+                svcPromoBtn: "Promote your work →",
                 fPrice: "Price ($ USD — 0 for Free)",
                 fFormats: "Formats",
                 videoUrlLabel: "Video URL (YouTube, TikTok, Vimeo or direct video file link)",
@@ -1086,6 +1161,22 @@ html, body { overflow-x: clip; }
                 cat_apps: "Apps & Tools",
                 cat_video: "Video",
                 cat_art: "Kunst & Drucke",
+                cat_services: "Dienstleistungen",
+                cat_gifts: "Geschenke",
+                svcTitle: "Dienstleistungen — wir bauen es für Sie",
+                svcSub: "Festpreise, kein Stundenzähler. Gebaut vom Haus hinter diesem Shop — KI-gestützt, offen deklariert, Lieferung per E-Mail.",
+                svc1Name: "Autoren-Website",
+                svc1Desc: "Eine komplette Autoren-Website — Start, Bücher, Über mich und Kontakt — gebaut wie unsere eigenen Haus-Seiten.",
+                svc2Name: "Publish-Ready-Paket",
+                svc2Desc: "Cover-Design, EPUB- und Druckformatierung sowie Veröffentlichungs-Setup für ein Buch — bereit zum Hochladen.",
+                svc3Name: "Shop-Aufbau",
+                svc3Desc: "Ihr eigener Online-Shop mit Katalog und Stripe-Kasse — dieselbe Technik wie dieser Shop.",
+                svc4Name: "Katalog- & Shop-Audit",
+                svc4Desc: "Ein schriftliches Audit Ihres Katalogs und Shops: Preise, Metadaten und Einträge, mit den wichtigsten Korrekturen.",
+                svcFrom: "ab",
+                svcOrder: "Bestellen",
+                svcPromo: "Verkaufen Sie auch hier — bewerben Sie Ihr Werk: Featured CAD $5 · Spotlight CAD $9 · Top CAD $15",
+                svcPromoBtn: "Ihr Werk bewerben →",
                 fPrice: "Preis ($ USD — 0 für kostenlos)",
                 fFormats: "Formate",
                 videoUrlLabel: "Video-URL (YouTube, TikTok, Vimeo oder direkter Videodatei-Link)",
@@ -1325,6 +1416,22 @@ html, body { overflow-x: clip; }
                 cat_apps: "Applications & outils",
                 cat_video: "Vidéo",
                 cat_art: "Art et affiches",
+                cat_services: "Services",
+                cat_gifts: "Cadeaux",
+                svcTitle: "Services — nous le construisons pour vous",
+                svcSub: "Prix fixes, sans compteur horaire. Construit par la maison derrière cette boutique — assisté par IA, déclaré ouvertement, livré par e-mail.",
+                svc1Name: "Site d'auteur",
+                svc1Desc: "Un site d'auteur complet — accueil, livres, à propos et contact — construit comme nos propres sites.",
+                svc2Name: "Pack prêt à publier",
+                svc2Desc: "Couverture, formatage EPUB et impression, et configuration de publication pour un livre — prêt à téléverser.",
+                svc3Name: "Boutique en ligne",
+                svc3Desc: "Votre propre boutique et catalogue avec paiement Stripe — la même mécanique que cette boutique.",
+                svc4Name: "Audit catalogue & boutique",
+                svc4Desc: "Un audit écrit de votre catalogue et de votre boutique : prix, métadonnées et fiches, avec les corrections prioritaires.",
+                svcFrom: "dès",
+                svcOrder: "Commander",
+                svcPromo: "Vendez ici aussi — promouvez votre œuvre : Featured CAD $5 · Spotlight CAD $9 · Top CAD $15",
+                svcPromoBtn: "Promouvoir votre œuvre →",
                 fPrice: "Prix ($ USD — 0 pour gratuit)",
                 fFormats: "Formats",
                 videoUrlLabel: "URL de la vidéo (YouTube, TikTok, Vimeo ou lien direct vers le fichier vidéo)",
@@ -1564,6 +1671,22 @@ html, body { overflow-x: clip; }
                 cat_apps: "Застосунки та інструменти",
                 cat_video: "Відео",
                 cat_art: "Мистецтво і принти",
+                cat_services: "Послуги",
+                cat_gifts: "Подарунки",
+                svcTitle: "Послуги — ми зробимо це для вас",
+                svcSub: "Фіксовані ціни, без погодинного лічильника. Зроблено домом, що стоїть за цим магазином — за участі ШІ, відкрито зазначено, доставка електронною поштою.",
+                svc1Name: "Сайт автора",
+                svc1Desc: "Повноцінний сайт автора — головна, книги, про автора і контакти — збудований як наші власні сайти.",
+                svc2Name: "Пакет «Готово до публікації»",
+                svc2Desc: "Дизайн обкладинки, форматування EPUB і друку та налаштування публікації для однієї книги — готово до завантаження.",
+                svc3Name: "Побудова магазину",
+                svc3Desc: "Ваш власний онлайн-магазин і каталог з оплатою Stripe — та сама техніка, що й у цьому магазині.",
+                svc4Name: "Аудит каталогу й магазину",
+                svc4Desc: "Письмовий аудит вашого каталогу й магазину: ціни, метадані та картки, з головними виправленнями.",
+                svcFrom: "від",
+                svcOrder: "Замовити",
+                svcPromo: "Продавайте і тут — просувайте свою роботу: Featured CAD $5 · Spotlight CAD $9 · Top CAD $15",
+                svcPromoBtn: "Просунути свою роботу →",
                 fPrice: "Ціна ($ USD — 0 для безкоштовного)",
                 fFormats: "Формати",
                 videoUrlLabel: "URL відео (YouTube, TikTok, Vimeo або пряме посилання на відеофайл)",
@@ -1803,6 +1926,22 @@ html, body { overflow-x: clip; }
                 cat_apps: "Приложения и инструменты",
                 cat_video: "Видео",
                 cat_art: "Искусство и принты",
+                cat_services: "Услуги",
+                cat_gifts: "Подарки",
+                svcTitle: "Услуги — мы сделаем это для вас",
+                svcSub: "Фиксированные цены, без почасового счётчика. Сделано домом, стоящим за этим магазином — с участием ИИ, открыто указано, доставка по электронной почте.",
+                svc1Name: "Сайт автора",
+                svc1Desc: "Полноценный сайт автора — главная, книги, об авторе и контакты — построенный как наши собственные сайты.",
+                svc2Name: "Пакет «Готово к публикации»",
+                svc2Desc: "Дизайн обложки, форматирование EPUB и печати и настройка публикации для одной книги — готово к загрузке.",
+                svc3Name: "Построение магазина",
+                svc3Desc: "Ваш собственный онлайн-магазин и каталог с оплатой Stripe — та же техника, что и у этого магазина.",
+                svc4Name: "Аудит каталога и магазина",
+                svc4Desc: "Письменный аудит вашего каталога и магазина: цены, метаданные и карточки, с главными исправлениями.",
+                svcFrom: "от",
+                svcOrder: "Заказать",
+                svcPromo: "Продавайте и здесь — продвигайте свою работу: Featured CAD $5 · Spotlight CAD $9 · Top CAD $15",
+                svcPromoBtn: "Продвинуть свою работу →",
                 fPrice: "Цена ($ USD — 0 для бесплатного)",
                 fFormats: "Форматы",
                 videoUrlLabel: "URL видео (YouTube, TikTok, Vimeo или прямая ссылка на видеофайл)",
@@ -3988,6 +4127,70 @@ html, body { overflow-x: clip; }
                                 "description": "Battle over Zenmly — original concept art created for Paul of Teraura — Book Two: Titans and Dragons of Zenmly by Dima Grossman. Resistance fighters and InterStella Guard ships engage alien vessels above the surface of the moon, the mining terraces below, debris and laser fire across the black sky. AI-generated artwork. The download is the complete artwork at full resolution (1920x1280 pixels, JPG), WITHOUT the title lettering — the titled poster version is the picture on this card. It is delivered right after Stripe checkout: download it, print it, frame it, hang it, or use it as wallpaper. Personal use. Paul of Teraura Book Two Art, Sketch 06.",
                                 "download_url": "https://buy.stripe.com/fZu9AT6x19Nz5Uu8BP3VC1o",
                                 "cover_url": "https://bw-files.vercel.app/art-book2-06t-c45d70ac6ce0067c.jpg"
+                    },
+                    {
+                                "id": 125,
+                                "title": "Author Website",
+                                "creator": "Blacksmith & Witches",
+                                "category": "services",
+                                "price": 545,
+                                "formats": [
+                                            "Service"
+                                ],
+                                "status": "approved",
+                                "badge": "Blacksmith & Witches Services - Author Website",
+                                "excerpt": "A complete author website — home, books, about and contact — built by the house behind this store.",
+                                "description": "Author Website — built by Blacksmith & Witches, the house behind this store and a catalogue of more than 100 published books. You get a complete author website: home page, books page with buy links, about page and contact page, in the same clean style as our own house sites, set up under your domain. Fixed scope: up to 5 pages and 2 revision rounds; you supply your texts, book covers and domain. How it works: pay here, and we contact you at your checkout email to collect your materials — work begins on payment. Production is AI-assisted and human-directed, disclosed plainly: that is how we hold this price and this speed. The finished site is delivered within 14 days of receiving your materials. Price: CAD $545 (larger sites quoted before any extra work).",
+                                "download_url": "https://buy.stripe.com/9B6dR9f3x4tfgz8dW93VC1s",
+                                "cover_url": null
+                    },
+                    {
+                                "id": 126,
+                                "title": "Publish-Ready Package",
+                                "creator": "Blacksmith & Witches",
+                                "category": "services",
+                                "price": 945,
+                                "formats": [
+                                            "Service"
+                                ],
+                                "status": "approved",
+                                "badge": "Blacksmith & Witches Services - Publish-Ready Package",
+                                "excerpt": "Cover design, EPUB + print formatting, and publishing setup for one book — ready to upload.",
+                                "description": "Publish-Ready Package for one book — everything a finished manuscript needs to go on sale: cover design (ebook cover plus print wrap), EPUB and print-interior formatting, and publishing setup (metadata, categories and keywords for KDP / Lulu). You supply the finished manuscript; we return upload-ready files plus a setup sheet. Fixed scope: one book of up to 120,000 words, 2 revision rounds on the cover. How it works: pay here, and we contact you at your checkout email to collect your manuscript — work begins on payment. Production is AI-assisted and human-directed; cover art is AI-generated and disclosed as such wherever a platform asks. Price: CAD $945.",
+                                "download_url": "https://buy.stripe.com/bJe6oHcVp0cZ2Ii9FT3VC1t",
+                                "cover_url": null
+                    },
+                    {
+                                "id": 127,
+                                "title": "Storefront Build",
+                                "creator": "Blacksmith & Witches",
+                                "category": "services",
+                                "price": 1445,
+                                "formats": [
+                                            "Service"
+                                ],
+                                "status": "approved",
+                                "badge": "Blacksmith & Witches Services - Storefront Build",
+                                "excerpt": "Your own online store and catalogue with Stripe checkout — the same machinery as this store.",
+                                "description": "Storefront Build — your own online store and catalogue with Stripe checkout, built on the same machinery as this Blacksmith & Witches store: product catalogue with categories and search, payment links, and an admin door for your products. Fixed scope: up to 50 products loaded at launch and 2 revision rounds; you supply your product texts and images and your own Stripe account (we guide the setup). How it works: pay here, and we contact you at your checkout email to plan the build — work begins on payment. Production is AI-assisted and human-directed, disclosed plainly: that is how we hold this price and this speed. Price: CAD $1,445.",
+                                "download_url": "https://buy.stripe.com/6oUfZhf3x9NzaaK4lz3VC1u",
+                                "cover_url": null
+                    },
+                    {
+                                "id": 128,
+                                "title": "Catalogue & Store Audit",
+                                "creator": "Blacksmith & Witches",
+                                "category": "services",
+                                "price": 145,
+                                "formats": [
+                                            "Service"
+                                ],
+                                "status": "approved",
+                                "badge": "Blacksmith & Witches Services - Catalogue & Store Audit",
+                                "excerpt": "A written audit of your catalogue and store — pricing, metadata and listings, with the top fixes.",
+                                "description": "Catalogue & Store Audit — we read your catalogue and store the way we audit our own every week, and deliver a written report: pricing checked against your market, metadata and keywords reviewed, listing and catalogue gaps named, and the top 5 fixes in priority order. How it works: pay here, and we contact you at your checkout email to collect your store and catalogue links — work begins on payment. The report arrives by email within 5 business days. Analysis is AI-assisted and human-reviewed, disclosed plainly. Price: CAD $145.",
+                                "download_url": "https://buy.stripe.com/6oUaEX5sX6Bn2Ii05j3VC1v",
+                                "cover_url": null
                     }
         ];
 
