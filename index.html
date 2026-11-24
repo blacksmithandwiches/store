@@ -259,7 +259,7 @@ html, body { overflow-x: clip; }
                 <h2 class="text-2xl sm:text-3xl font-black tracking-tight text-brandDarkBlue" data-i18n="svcTitle">Services — we build it for you</h2>
                 <p class="text-sm text-slate-500 max-w-2xl mx-auto" data-i18n="svcSub">Fixed prices, no hourly meter. Built by the house behind this store — AI-assisted, disclosed plainly, delivered by email.</p>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
                 <article class="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex flex-col gap-2 hover:border-brandBlue hover:shadow transition">
                     <h3 class="font-black text-brandDarkBlue leading-snug" data-i18n="svc1Name">Author Website</h3>
                     <p class="text-sm text-slate-600 flex-grow" data-i18n="svc1Desc">A complete author website — home, books, about and contact — built like our own house sites.</p>
@@ -294,6 +294,15 @@ html, body { overflow-x: clip; }
                         <span class="text-lg font-black text-brandDarkBlue">CAD $145</span>
                         <!-- STRIPE LINK SLOT svc4: replace href with the minted payment link (services-manifest.md) -->
                         <a href="https://buy.stripe.com/6oUaEX5sX6Bn2Ii05j3VC1v" data-svc-link="svc4" class="bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-4 py-2 rounded-xl text-sm transition shadow" data-i18n="svcOrder">Order</a>
+                    </div>
+                </article>
+                <article class="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex flex-col gap-2 hover:border-brandBlue hover:shadow transition">
+                    <h3 class="font-black text-brandDarkBlue leading-snug" data-i18n="svc5Name">Google Business Profile Setup</h3>
+                    <p class="text-sm text-slate-600 flex-grow" data-i18n="svc5Desc">We build or rebuild your Google listing end to end — categories, services, hours, photos, description and the map pin, so customers find you first.</p>
+                    <div class="mt-auto pt-2 flex items-center justify-between gap-3">
+                        <span class="text-lg font-black text-brandDarkBlue">CAD $245</span>
+                        <!-- STRIPE LINK SLOT svc5: minted payment link (gbp-service-manifest.md) -->
+                        <a href="https://buy.stripe.com/00w9AT08D2l72Ii19n3VC1E" data-svc-link="svc5" class="bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-4 py-2 rounded-xl text-sm transition shadow" data-i18n="svcOrder">Order</a>
                     </div>
                 </article>
             </div>
@@ -918,6 +927,8 @@ html, body { overflow-x: clip; }
                 svc3Desc: "Your own online store and catalogue with Stripe checkout — the same machinery as this store.",
                 svc4Name: "Catalogue & Store Audit",
                 svc4Desc: "A written audit of your catalogue and store: pricing, metadata and listings, with the top fixes.",
+                svc5Name: "Google Business Profile Setup",
+                svc5Desc: "We build or rebuild your Google listing end to end — categories, services, hours, photos, description and the map pin, so customers find you first.",
                 svcFrom: "from",
                 svcOrder: "Order",
                 svcPromo: "Sell here too — promote your work: Featured CAD $5 · Spotlight CAD $9 · Top CAD $15",
@@ -1173,6 +1184,8 @@ html, body { overflow-x: clip; }
                 svc3Desc: "Ihr eigener Online-Shop mit Katalog und Stripe-Kasse — dieselbe Technik wie dieser Shop.",
                 svc4Name: "Katalog- & Shop-Audit",
                 svc4Desc: "Ein schriftliches Audit Ihres Katalogs und Shops: Preise, Metadaten und Einträge, mit den wichtigsten Korrekturen.",
+                svc5Name: "Google-Unternehmensprofil einrichten",
+                svc5Desc: "Wir bauen Ihren Google-Eintrag von Grund auf oder neu: Kategorien, Leistungen, Öffnungszeiten, Fotos, Beschreibung und Karten-Pin — damit Kunden Sie zuerst finden.",
                 svcFrom: "ab",
                 svcOrder: "Bestellen",
                 svcPromo: "Verkaufen Sie auch hier — bewerben Sie Ihr Werk: Featured CAD $5 · Spotlight CAD $9 · Top CAD $15",
@@ -1428,6 +1441,8 @@ html, body { overflow-x: clip; }
                 svc3Desc: "Votre propre boutique et catalogue avec paiement Stripe — la même mécanique que cette boutique.",
                 svc4Name: "Audit catalogue & boutique",
                 svc4Desc: "Un audit écrit de votre catalogue et de votre boutique : prix, métadonnées et fiches, avec les corrections prioritaires.",
+                svc5Name: "Configuration de la fiche Google",
+                svc5Desc: "Nous créons ou reconstruisons votre fiche Google de bout en bout : catégories, services, horaires, photos, description et épingle sur la carte — pour que les clients vous trouvent en premier.",
                 svcFrom: "dès",
                 svcOrder: "Commander",
                 svcPromo: "Vendez ici aussi — promouvez votre œuvre : Featured CAD $5 · Spotlight CAD $9 · Top CAD $15",
@@ -1683,6 +1698,8 @@ html, body { overflow-x: clip; }
                 svc3Desc: "Ваш власний онлайн-магазин і каталог з оплатою Stripe — та сама техніка, що й у цьому магазині.",
                 svc4Name: "Аудит каталогу й магазину",
                 svc4Desc: "Письмовий аудит вашого каталогу й магазину: ціни, метадані та картки, з головними виправленнями.",
+                svc5Name: "Налаштування профілю Google",
+                svc5Desc: "Ми створюємо або перебудовуємо ваш запис у Google від початку до кінця: категорії, послуги, години, фото, опис і мітку на карті — щоб клієнти знаходили вас першими.",
                 svcFrom: "від",
                 svcOrder: "Замовити",
                 svcPromo: "Продавайте і тут — просувайте свою роботу: Featured CAD $5 · Spotlight CAD $9 · Top CAD $15",
@@ -1938,6 +1955,8 @@ html, body { overflow-x: clip; }
                 svc3Desc: "Ваш собственный онлайн-магазин и каталог с оплатой Stripe — та же техника, что и у этого магазина.",
                 svc4Name: "Аудит каталога и магазина",
                 svc4Desc: "Письменный аудит вашего каталога и магазина: цены, метаданные и карточки, с главными исправлениями.",
+                svc5Name: "Настройка профиля Google",
+                svc5Desc: "Мы создаём или перестраиваем ваш профиль в Google от начала до конца: категории, услуги, часы, фото, описание и метку на карте — чтобы клиенты находили вас первыми.",
                 svcFrom: "от",
                 svcOrder: "Заказать",
                 svcPromo: "Продавайте и здесь — продвигайте свою работу: Featured CAD $5 · Spotlight CAD $9 · Top CAD $15",
@@ -4287,6 +4306,22 @@ html, body { overflow-x: clip; }
                                 "description": "Emily Brontë's Wuthering Heights (Annotated) — Blacksmith & Witches Classics, Volume 74. The complete 1847 novel — a foundling carried home from Liverpool to a farmhouse on the Yorkshire moors; Catherine Earnshaw and Heathcliff, inseparable; her marriage to Edgar Linton; his return, rich and polished, with a plan; two houses, two generations, marriages made as weapons, a grave opened in the night — and a love that states itself as identity: \"I am Heathcliff.\" Told by Nelly Dean to the tenant Lockwood, who hears a child's hand at the window in the night. With an original introduction, an editor's note at the head of every chapter, ten new illustrations, a life of Brontë with a chronology, and a reading guide — all original to this edition, © 2026 Dima Grossman. EPUB, delivered after checkout.",
                                 "download_url": "https://buy.stripe.com/9B67sLg7B8Jv4QqaJX3VC1D",
                                 "cover_url": "https://keplers-catalogue.vercel.app/covers/bronte-wuthering-heights.jpg"
+                    },
+                    {
+                                "id": 135,
+                                "title": "Google Business Profile Setup",
+                                "creator": "Blacksmith & Witches",
+                                "category": "services",
+                                "price": 245,
+                                "formats": [
+                                            "Service"
+                                ],
+                                "status": "approved",
+                                "badge": "Blacksmith & Witches Services - Google Business Profile Setup",
+                                "excerpt": "We build or rebuild your Google listing end to end — categories, services, hours, photos, description and the map pin, so customers find you first.",
+                                "description": "Google Business Profile Setup — we build or rebuild your Google listing end to end: categories, services, hours, photos, description and the map pin, so customers find you first. Fixed price, one-time. You supply your business details and photos (or we work with what you have) and grant us access to the profile; we set up or rebuild the listing completely and hand it back to you, with a short note on keeping it current. How it works: pay here, and we contact you at your checkout email to collect your details — work begins on payment. Production is AI-assisted and human-directed, disclosed plainly: that is how we hold this price and this speed. Price: CAD $245.",
+                                "download_url": "https://buy.stripe.com/00w9AT08D2l72Ii19n3VC1E",
+                                "cover_url": null
                     }
         ];
 
