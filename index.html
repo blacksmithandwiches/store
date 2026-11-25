@@ -378,24 +378,25 @@ html, body { overflow-x: clip; }
         </div>
     </section>
 
-    <!-- NEW ON THE SHELF — static, picture-led house reviews of the latest uploads (always shown);
+    <!-- NEW ON THE SHELF — static, picture-led house reviews of the latest uploads (always shown;
+         compact strip since Nov 25, 2026 — Dmitri: the big cards looked nice but confusing);
          approved HOUSE NEWS posts from the news table render below them when published. -->
-    <section id="houseNewsSection" class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-10">
-        <div class="text-center space-y-1.5 mb-6">
-            <h2 class="text-2xl sm:text-3xl font-black tracking-tight text-brandDarkBlue" data-i18n="newsTitle">New on the shelf</h2>
+    <section id="houseNewsSection" class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+        <div class="text-center space-y-1 mb-4">
+            <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue" data-i18n="newsTitle">New on the shelf</h2>
             <p class="text-sm text-slate-500" data-i18n="newsSub">The latest uploads.</p>
             <span class="block w-20 h-1.5 bg-brandYellow rounded-full mx-auto"></span>
         </div>
-        <div id="shelfReviews" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div id="shelfReviews" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
             <article class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:border-brandBlue hover:shadow transition flex flex-col">
                 <a href="https://buy.stripe.com/8x25kDdZt8Jv3MmcS53VC1f" target="_blank" rel="noopener noreferrer" class="block">
                     <img src="https://keplers-catalogue.vercel.app/covers/haggard-she.jpg" alt="She (Annotated) — cover" loading="lazy" style="aspect-ratio:2/3" class="w-full object-cover">
                 </a>
-                <div class="p-3 flex flex-col gap-1.5 flex-grow">
-                    <h3 class="font-bold text-brandDarkBlue leading-snug">She (Annotated)</h3>
-                    <div class="mt-auto pt-2 flex items-center justify-between gap-3">
-                        <span class="text-lg font-black text-brandDarkBlue">$5.45</span>
-                        <a href="https://buy.stripe.com/8x25kDdZt8Jv3MmcS53VC1f" target="_blank" rel="noopener noreferrer" class="bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-4 py-2 rounded-xl text-sm shadow transition" data-i18n="viewProduct">View product</a>
+                <div class="p-2.5 flex flex-col gap-1 flex-grow">
+                    <h3 class="text-sm font-bold text-brandDarkBlue leading-snug">She (Annotated)</h3>
+                    <div class="mt-auto pt-1.5 flex items-center justify-between gap-2">
+                        <span class="text-base font-black text-brandDarkBlue">$5.45</span>
+                        <a href="https://buy.stripe.com/8x25kDdZt8Jv3MmcS53VC1f" target="_blank" rel="noopener noreferrer" class="bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-3 py-1.5 rounded-lg text-xs shadow transition" data-i18n="viewProduct">View product</a>
                     </div>
                 </div>
             </article>
@@ -403,11 +404,11 @@ html, body { overflow-x: clip; }
                 <a href="https://buy.stripe.com/14A9AT7B56BndmW4lz3VC1e" target="_blank" rel="noopener noreferrer" class="block">
                     <img src="https://keplers-catalogue.vercel.app/covers/shelley-frankenstein.jpg" alt="Gothic Horror (Annotated) — cover" loading="lazy" style="aspect-ratio:2/3" class="w-full object-cover">
                 </a>
-                <div class="p-3 flex flex-col gap-1.5 flex-grow">
-                    <h3 class="font-bold text-brandDarkBlue leading-snug">Gothic Horror (Annotated)</h3>
-                    <div class="mt-auto pt-2 flex items-center justify-between gap-3">
-                        <span class="text-lg font-black text-brandDarkBlue">$10.45</span>
-                        <a href="https://buy.stripe.com/14A9AT7B56BndmW4lz3VC1e" target="_blank" rel="noopener noreferrer" class="bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-4 py-2 rounded-xl text-sm shadow transition" data-i18n="viewProduct">View product</a>
+                <div class="p-2.5 flex flex-col gap-1 flex-grow">
+                    <h3 class="text-sm font-bold text-brandDarkBlue leading-snug">Gothic Horror (Annotated)</h3>
+                    <div class="mt-auto pt-1.5 flex items-center justify-between gap-2">
+                        <span class="text-base font-black text-brandDarkBlue">$10.45</span>
+                        <a href="https://buy.stripe.com/14A9AT7B56BndmW4lz3VC1e" target="_blank" rel="noopener noreferrer" class="bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-3 py-1.5 rounded-lg text-xs shadow transition" data-i18n="viewProduct">View product</a>
                     </div>
                 </div>
             </article>
@@ -415,11 +416,11 @@ html, body { overflow-x: clip; }
                 <a href="https://buy.stripe.com/5kQbJ1aNh4tfciScS53VC1d" target="_blank" rel="noopener noreferrer" class="block">
                     <img src="https://keplers-catalogue.vercel.app/covers/wells-war-of-the-worlds.jpg" alt="The Wells Collection (Annotated) — cover" loading="lazy" style="aspect-ratio:2/3" class="w-full object-cover">
                 </a>
-                <div class="p-3 flex flex-col gap-1.5 flex-grow">
-                    <h3 class="font-bold text-brandDarkBlue leading-snug">The Wells Collection (Annotated)</h3>
-                    <div class="mt-auto pt-2 flex items-center justify-between gap-3">
-                        <span class="text-lg font-black text-brandDarkBlue">$10.45</span>
-                        <a href="https://buy.stripe.com/5kQbJ1aNh4tfciScS53VC1d" target="_blank" rel="noopener noreferrer" class="bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-4 py-2 rounded-xl text-sm shadow transition" data-i18n="viewProduct">View product</a>
+                <div class="p-2.5 flex flex-col gap-1 flex-grow">
+                    <h3 class="text-sm font-bold text-brandDarkBlue leading-snug">The Wells Collection (Annotated)</h3>
+                    <div class="mt-auto pt-1.5 flex items-center justify-between gap-2">
+                        <span class="text-base font-black text-brandDarkBlue">$10.45</span>
+                        <a href="https://buy.stripe.com/5kQbJ1aNh4tfciScS53VC1d" target="_blank" rel="noopener noreferrer" class="bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-3 py-1.5 rounded-lg text-xs shadow transition" data-i18n="viewProduct">View product</a>
                     </div>
                 </div>
             </article>
@@ -427,11 +428,11 @@ html, body { overflow-x: clip; }
                 <a href="https://buy.stripe.com/8x23cv2gLaRD5Uu8BP3VC1c" target="_blank" rel="noopener noreferrer" class="block">
                     <img src="https://keplers-catalogue.vercel.app/covers/burroughs-princess-of-mars.jpg" alt="The Mars Collection (Annotated) — cover" loading="lazy" style="aspect-ratio:2/3" class="w-full object-cover">
                 </a>
-                <div class="p-3 flex flex-col gap-1.5 flex-grow">
-                    <h3 class="font-bold text-brandDarkBlue leading-snug">The Mars Collection (Annotated)</h3>
-                    <div class="mt-auto pt-2 flex items-center justify-between gap-3">
-                        <span class="text-lg font-black text-brandDarkBlue">$10.45</span>
-                        <a href="https://buy.stripe.com/8x23cv2gLaRD5Uu8BP3VC1c" target="_blank" rel="noopener noreferrer" class="bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-4 py-2 rounded-xl text-sm shadow transition" data-i18n="viewProduct">View product</a>
+                <div class="p-2.5 flex flex-col gap-1 flex-grow">
+                    <h3 class="text-sm font-bold text-brandDarkBlue leading-snug">The Mars Collection (Annotated)</h3>
+                    <div class="mt-auto pt-1.5 flex items-center justify-between gap-2">
+                        <span class="text-base font-black text-brandDarkBlue">$10.45</span>
+                        <a href="https://buy.stripe.com/8x23cv2gLaRD5Uu8BP3VC1c" target="_blank" rel="noopener noreferrer" class="bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-3 py-1.5 rounded-lg text-xs shadow transition" data-i18n="viewProduct">View product</a>
                     </div>
                 </div>
             </article>
@@ -439,11 +440,11 @@ html, body { overflow-x: clip; }
                 <a href="https://buy.stripe.com/00w6oH6x12l75Uu6tH3VC1b" target="_blank" rel="noopener noreferrer" class="block">
                     <img src="https://keplers-catalogue.vercel.app/covers/lesya-ukrainka-vybrani-poezii.jpg" alt="Вибрані поезії — cover" loading="lazy" style="aspect-ratio:2/3" class="w-full object-cover">
                 </a>
-                <div class="p-3 flex flex-col gap-1.5 flex-grow">
-                    <h3 class="font-bold text-brandDarkBlue leading-snug">Вибрані поезії</h3>
-                    <div class="mt-auto pt-2 flex items-center justify-between gap-3">
-                        <span class="text-lg font-black text-brandDarkBlue">$5.45</span>
-                        <a href="https://buy.stripe.com/00w6oH6x12l75Uu6tH3VC1b" target="_blank" rel="noopener noreferrer" class="bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-4 py-2 rounded-xl text-sm shadow transition" data-i18n="viewProduct">View product</a>
+                <div class="p-2.5 flex flex-col gap-1 flex-grow">
+                    <h3 class="text-sm font-bold text-brandDarkBlue leading-snug">Вибрані поезії</h3>
+                    <div class="mt-auto pt-1.5 flex items-center justify-between gap-2">
+                        <span class="text-base font-black text-brandDarkBlue">$5.45</span>
+                        <a href="https://buy.stripe.com/00w6oH6x12l75Uu6tH3VC1b" target="_blank" rel="noopener noreferrer" class="bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-3 py-1.5 rounded-lg text-xs shadow transition" data-i18n="viewProduct">View product</a>
                     </div>
                 </div>
             </article>
@@ -451,11 +452,11 @@ html, body { overflow-x: clip; }
                 <a href="https://buy.stripe.com/4gM6oH1cHcZLciS8BP3VC1a" target="_blank" rel="noopener noreferrer" class="block">
                     <img src="https://keplers-catalogue.vercel.app/covers/keats-odes-and-selected-poems.jpg" alt="Odes and Selected Poems (Annotated) — cover" loading="lazy" style="aspect-ratio:2/3" class="w-full object-cover">
                 </a>
-                <div class="p-3 flex flex-col gap-1.5 flex-grow">
-                    <h3 class="font-bold text-brandDarkBlue leading-snug">Odes and Selected Poems (Annotated)</h3>
-                    <div class="mt-auto pt-2 flex items-center justify-between gap-3">
-                        <span class="text-lg font-black text-brandDarkBlue">$5.45</span>
-                        <a href="https://buy.stripe.com/4gM6oH1cHcZLciS8BP3VC1a" target="_blank" rel="noopener noreferrer" class="bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-4 py-2 rounded-xl text-sm shadow transition" data-i18n="viewProduct">View product</a>
+                <div class="p-2.5 flex flex-col gap-1 flex-grow">
+                    <h3 class="text-sm font-bold text-brandDarkBlue leading-snug">Odes and Selected Poems (Annotated)</h3>
+                    <div class="mt-auto pt-1.5 flex items-center justify-between gap-2">
+                        <span class="text-base font-black text-brandDarkBlue">$5.45</span>
+                        <a href="https://buy.stripe.com/4gM6oH1cHcZLciS8BP3VC1a" target="_blank" rel="noopener noreferrer" class="bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-3 py-1.5 rounded-lg text-xs shadow transition" data-i18n="viewProduct">View product</a>
                     </div>
                 </div>
             </article>
@@ -655,7 +656,7 @@ html, body { overflow-x: clip; }
                 <span class="block font-bold text-brandDarkBlue text-sm" data-i18n="portalFilms">Films</span>
                 <span class="block text-xs text-slate-500 mt-0.5" data-i18n="portalFilmsSub">The movie shelf</span>
             </a>
-            <a href="https://keplers-catalogue.vercel.app" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:border-brandBlue hover:shadow transition block">
+            <a href="https://catalogue.blacksmithandwitches.com" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:border-brandBlue hover:shadow transition block">
                 <span class="w-9 h-9 rounded-lg bg-blue-50 text-brandBlue flex items-center justify-center mb-2.5"><i data-lucide="library-big" class="w-5 h-5"></i></span>
                 <span class="block font-bold text-brandDarkBlue text-sm" data-i18n="portalCatalogue">The Catalogue</span>
                 <span class="block text-xs text-slate-500 mt-0.5" data-i18n="portalCatalogueSub">The indexed house shelf</span>
