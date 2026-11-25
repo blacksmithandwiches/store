@@ -208,6 +208,10 @@ html, body { overflow-x: clip; }
                     <i data-lucide="play" class="w-4 h-4 text-brandYellow"></i>
                     <span>Watch</span>
                 </a>
+                <a href="services.html" class="hover:text-brandYellow text-white border border-blue-700 bg-blue-900/80 hover:bg-blue-800 font-semibold px-3 py-2 rounded-lg text-sm transition flex items-center space-x-1.5" title="Blacksmith & Witches — Services">
+                    <i data-lucide="hammer" class="w-4 h-4 text-brandYellow"></i>
+                    <span>Services</span>
+                </a>
                 <div class="flex items-center gap-1" role="group" aria-label="Language">
                     <button type="button" data-lang-btn="en" onclick="setLang('en')" class="text-[11px] sm:text-xs font-bold px-1.5 sm:px-2 py-1 rounded-md transition">EN</button>
                     <button type="button" data-lang-btn="de" onclick="setLang('de')" class="text-[11px] sm:text-xs font-bold px-1.5 sm:px-2 py-1 rounded-md transition">DE</button>
@@ -249,6 +253,20 @@ html, body { overflow-x: clip; }
         </div>
     </header>
 
+    <!-- DECEMBER OFFER BANNER — temporary, runs to Dec 31, 2026. Dismissible.
+         Removal is part of the January cleanup noted in services-manifest.md. -->
+    <div id="offerBanner" class="bg-brandYellow text-brandDarkBlue border-b border-brandYellowHover">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-center gap-3">
+            <p class="text-xs sm:text-sm font-bold text-center" data-i18n="offerBanner">The Author's Start — December: Author Website + Google Business Profile + Catalogue &amp; Store Audit — $945 until Dec 31, 2026 (regular $1,035).</p>
+            <a href="offers.html" class="shrink-0 bg-brandDarkBlue text-white font-bold px-3 py-1.5 rounded-lg text-xs sm:text-sm transition hover:bg-brandBlue" data-i18n="offerBannerBtn">See the offer →</a>
+            <button type="button" onclick="dismissOfferBanner()" class="shrink-0 font-black text-xl leading-none px-1" aria-label="Dismiss">&times;</button>
+        </div>
+    </div>
+    <script>
+        function dismissOfferBanner() { var b = document.getElementById('offerBanner'); if (b) b.style.display = 'none'; try { sessionStorage.setItem('bw_offer_dec2026_dismissed', '1'); } catch (e) { /* ignore */ } }
+        try { if (sessionStorage.getItem('bw_offer_dec2026_dismissed') === '1') { var ob = document.getElementById('offerBanner'); if (ob) ob.style.display = 'none'; } } catch (e) { /* ignore */ }
+    </script>
+
     <!-- SERVICES BAND — house services for sale, directly under the header (owner's order, Nov 23, 2026).
          Slim by design: the books-first layout below is untouched. The four Order buttons take the
          minted Stripe payment links — slots marked data-svc-link; see
@@ -264,45 +282,45 @@ html, body { overflow-x: clip; }
                     <h3 class="font-black text-brandDarkBlue leading-snug flex items-center gap-2"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" class="shrink-0"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg><span data-i18n="svc1Name">Author Website</span></h3>
                     <p class="text-sm text-slate-600 flex-grow" data-i18n="svc1Desc">A complete author website — home, books, about and contact — built like our own house sites.</p>
                     <div class="mt-auto pt-2 flex items-center justify-between gap-3">
-                        <span class="text-lg font-black text-brandDarkBlue"><span data-i18n="svcFrom">from</span> CAD $545</span>
-                        <!-- STRIPE LINK SLOT svc1: replace href with the minted payment link (services-manifest.md) -->
-                        <a href="https://buy.stripe.com/9B6dR9f3x4tfgz8dW93VC1s" data-svc-link="svc1" class="bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-4 py-2 rounded-xl text-sm transition shadow" data-i18n="svcOrder">Order</a>
+                        <span class="text-base font-black text-brandDarkBlue" data-i18n="svc1Inst">6 monthly payments of $106</span>
+                        <!-- svc1: band leads with the 6-payment figure only; the button opens the Services page section (services-manifest.md) -->
+                        <a href="services.html#svc1" class="bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-4 py-2 rounded-xl text-sm transition shadow" data-i18n="svcPageBtn">Services page</a>
                     </div>
                 </article>
                 <article class="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex flex-col gap-2 hover:border-brandBlue hover:shadow transition">
                     <h3 class="font-black text-brandDarkBlue leading-snug flex items-center gap-2"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" class="shrink-0"><rect x="3.5" y="7" width="17" height="14"/><path d="M3.5 7 12 3l8.5 4"/><path d="M3.5 10.5h17"/><path d="M12 3v7.5"/></svg><span data-i18n="svc2Name">Publish-Ready Package</span></h3>
                     <p class="text-sm text-slate-600 flex-grow" data-i18n="svc2Desc">Cover design, EPUB + print formatting, and publishing setup for one book — ready to upload.</p>
                     <div class="mt-auto pt-2 flex items-center justify-between gap-3">
-                        <span class="text-lg font-black text-brandDarkBlue">CAD $945</span>
-                        <!-- STRIPE LINK SLOT svc2: replace href with the minted payment link (services-manifest.md) -->
-                        <a href="https://buy.stripe.com/bJe6oHcVp0cZ2Ii9FT3VC1t" data-svc-link="svc2" class="bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-4 py-2 rounded-xl text-sm transition shadow" data-i18n="svcOrder">Order</a>
+                        <span class="text-base font-black text-brandDarkBlue" data-i18n="svc2Inst">6 monthly payments of $391</span>
+                        <!-- svc2: band leads with the 6-payment figure only; the button opens the Services page section (services-manifest.md) -->
+                        <a href="services.html#svc2" class="bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-4 py-2 rounded-xl text-sm transition shadow" data-i18n="svcPageBtn">Services page</a>
                     </div>
                 </article>
                 <article class="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex flex-col gap-2 hover:border-brandBlue hover:shadow transition">
                     <h3 class="font-black text-brandDarkBlue leading-snug flex items-center gap-2"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" class="shrink-0"><path d="M2.5 10 5 3.5h14L21.5 10"/><path d="M2.5 10q3.17 4 6.33 0 3.17 4 6.34 0 3.17 4 6.33 0"/><rect x="4.5" y="13.5" width="15" height="7.5"/><rect x="10" y="16" width="4" height="5"/></svg><span data-i18n="svc3Name">Storefront Build</span></h3>
                     <p class="text-sm text-slate-600 flex-grow" data-i18n="svc3Desc">Your own online store and catalogue with Stripe checkout — the same machinery as this store.</p>
                     <div class="mt-auto pt-2 flex items-center justify-between gap-3">
-                        <span class="text-lg font-black text-brandDarkBlue">CAD $1,445</span>
-                        <!-- STRIPE LINK SLOT svc3: replace href with the minted payment link (services-manifest.md) -->
-                        <a href="https://buy.stripe.com/6oUfZhf3x9NzaaK4lz3VC1u" data-svc-link="svc3" class="bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-4 py-2 rounded-xl text-sm transition shadow" data-i18n="svcOrder">Order</a>
+                        <span class="text-base font-black text-brandDarkBlue" data-i18n="svc3Inst">6 monthly payments of $267</span>
+                        <!-- svc3: band leads with the 6-payment figure only; the button opens the Services page section (services-manifest.md) -->
+                        <a href="services.html#svc3" class="bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-4 py-2 rounded-xl text-sm transition shadow" data-i18n="svcPageBtn">Services page</a>
                     </div>
                 </article>
                 <article class="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex flex-col gap-2 hover:border-brandBlue hover:shadow transition">
                     <h3 class="font-black text-brandDarkBlue leading-snug flex items-center gap-2"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" class="shrink-0"><rect x="5" y="3" width="14" height="18.5" rx="1.5"/><rect x="9.5" y="1.5" width="5" height="4" rx="1"/><path d="M8.3 14l2.7 2.7 5.3-7"/></svg><span data-i18n="svc4Name">Catalogue &amp; Store Audit</span></h3>
                     <p class="text-sm text-slate-600 flex-grow" data-i18n="svc4Desc">A written audit of your catalogue and store: pricing, metadata and listings, with the top fixes.</p>
                     <div class="mt-auto pt-2 flex items-center justify-between gap-3">
-                        <span class="text-lg font-black text-brandDarkBlue">CAD $145</span>
-                        <!-- STRIPE LINK SLOT svc4: replace href with the minted payment link (services-manifest.md) -->
-                        <a href="https://buy.stripe.com/6oUaEX5sX6Bn2Ii05j3VC1v" data-svc-link="svc4" class="bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-4 py-2 rounded-xl text-sm transition shadow" data-i18n="svcOrder">Order</a>
+                        <span class="text-base font-black text-brandDarkBlue" data-i18n="svc4Inst">6 monthly payments of $26</span>
+                        <!-- svc4: band leads with the 6-payment figure only; the button opens the Services page section (services-manifest.md) -->
+                        <a href="services.html#svc4" class="bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-4 py-2 rounded-xl text-sm transition shadow" data-i18n="svcPageBtn">Services page</a>
                     </div>
                 </article>
                 <article class="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex flex-col gap-2 hover:border-brandBlue hover:shadow transition">
                     <h3 class="font-black text-brandDarkBlue leading-snug flex items-center gap-2"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" class="shrink-0"><path d="M12 21.5S5.5 15.9 5.5 11a6.5 6.5 0 1 1 13 0c0 4.9-6.5 10.5-6.5 10.5z"/><circle cx="12" cy="11" r="2.3"/></svg><span data-i18n="svc5Name">Google Business Profile Setup</span></h3>
                     <p class="text-sm text-slate-600 flex-grow" data-i18n="svc5Desc">We build or rebuild your Google listing end to end — categories, services, hours, photos, description and the map pin, so customers find you first.</p>
                     <div class="mt-auto pt-2 flex items-center justify-between gap-3">
-                        <span class="text-lg font-black text-brandDarkBlue">CAD $245</span>
-                        <!-- STRIPE LINK SLOT svc5: minted payment link (gbp-service-manifest.md) -->
-                        <a href="https://buy.stripe.com/00w9AT08D2l72Ii19n3VC1E" data-svc-link="svc5" class="bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-4 py-2 rounded-xl text-sm transition shadow" data-i18n="svcOrder">Order</a>
+                        <span class="text-base font-black text-brandDarkBlue" data-i18n="svc5Inst">6 monthly payments of $53</span>
+                        <!-- svc5: band leads with the 6-payment figure only; the button opens the Services page section (services-manifest.md) -->
+                        <a href="services.html#svc5" class="bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-4 py-2 rounded-xl text-sm transition shadow" data-i18n="svcPageBtn">Services page</a>
                     </div>
                 </article>
             </div>
@@ -933,6 +951,26 @@ html, body { overflow-x: clip; }
                 svcOrder: "Order",
                 svcPromo: "Sell here too — promote your work: Featured CAD $5 · Spotlight CAD $9 · Top CAD $15",
                 svcPromoBtn: "Promote your work →",
+                svc1Inst: "6 monthly payments of $106",
+                svc2Inst: "6 monthly payments of $391",
+                svc3Inst: "6 monthly payments of $267",
+                svc4Inst: "6 monthly payments of $26",
+                svc5Inst: "6 monthly payments of $53",
+                svc1InstShort: "6 × $106/mo",
+                svc2InstShort: "6 × $391/mo",
+                svc3InstShort: "6 × $267/mo",
+                svc4InstShort: "6 × $26/mo",
+                svc5InstShort: "6 × $53/mo",
+                svcPageBtn: "Services page",
+                svcTotalWord: "total",
+                svcNoTax: "No tax added — the total you see is the total you pay.",
+                svcPayFull: "Pay in full",
+                svcPayParts: "Pay in parts",
+                svcPartsTotal: "Pay in parts total",
+                svcPerMo: "/mo",
+                svcMech: "Pay in parts runs as a monthly subscription that stops after your last payment — we cancel it the day the final payment lands; nothing continues after.",
+                offerBanner: "The Author's Start — December: Author Website + Google Business Profile + Catalogue & Store Audit — $945 until Dec 31, 2026 (regular $1,035).",
+                offerBannerBtn: "See the offer →",
                 fPrice: "Price ($ USD — 0 for Free)",
                 fFormats: "Formats",
                 videoUrlLabel: "Video URL (YouTube, TikTok, Vimeo or direct video file link)",
@@ -1190,6 +1228,26 @@ html, body { overflow-x: clip; }
                 svcOrder: "Bestellen",
                 svcPromo: "Verkaufen Sie auch hier — bewerben Sie Ihr Werk: Featured CAD $5 · Spotlight CAD $9 · Top CAD $15",
                 svcPromoBtn: "Ihr Werk bewerben →",
+                svc1Inst: "6 Monatsraten à $106",
+                svc2Inst: "6 Monatsraten à $391",
+                svc3Inst: "6 Monatsraten à $267",
+                svc4Inst: "6 Monatsraten à $26",
+                svc5Inst: "6 Monatsraten à $53",
+                svc1InstShort: "6 × $106/Monat",
+                svc2InstShort: "6 × $391/Monat",
+                svc3InstShort: "6 × $267/Monat",
+                svc4InstShort: "6 × $26/Monat",
+                svc5InstShort: "6 × $53/Monat",
+                svcPageBtn: "Zu den Leistungen",
+                svcTotalWord: "gesamt",
+                svcNoTax: "Keine Steuer obendrauf — der Betrag, den Sie sehen, ist der Betrag, den Sie zahlen.",
+                svcPayFull: "Auf einmal zahlen",
+                svcPayParts: "In Raten zahlen",
+                svcPartsTotal: "Gesamtbetrag in Raten",
+                svcPerMo: "/Monat",
+                svcMech: "Die Ratenzahlung läuft als monatliches Abo, das nach Ihrer letzten Zahlung endet — wir kündigen es am Tag, an dem die letzte Zahlung eingeht; danach läuft nichts weiter.",
+                offerBanner: "Der Autoren-Start — Dezember: Autoren-Website + Google-Unternehmensprofil + Katalog- & Store-Audit — $945 bis 31. Dezember 2026 (regulär $1,035).",
+                offerBannerBtn: "Zum Angebot →",
                 fPrice: "Preis ($ USD — 0 für kostenlos)",
                 fFormats: "Formate",
                 videoUrlLabel: "Video-URL (YouTube, TikTok, Vimeo oder direkter Videodatei-Link)",
@@ -1447,6 +1505,26 @@ html, body { overflow-x: clip; }
                 svcOrder: "Commander",
                 svcPromo: "Vendez ici aussi — promouvez votre œuvre : Featured CAD $5 · Spotlight CAD $9 · Top CAD $15",
                 svcPromoBtn: "Promouvoir votre œuvre →",
+                svc1Inst: "6 paiements mensuels de $106",
+                svc2Inst: "6 paiements mensuels de $391",
+                svc3Inst: "6 paiements mensuels de $267",
+                svc4Inst: "6 paiements mensuels de $26",
+                svc5Inst: "6 paiements mensuels de $53",
+                svc1InstShort: "6 × $106/mois",
+                svc2InstShort: "6 × $391/mois",
+                svc3InstShort: "6 × $267/mois",
+                svc4InstShort: "6 × $26/mois",
+                svc5InstShort: "6 × $53/mois",
+                svcPageBtn: "Page des services",
+                svcTotalWord: "au total",
+                svcNoTax: "Aucune taxe ajoutée — le total que vous voyez est le total que vous payez.",
+                svcPayFull: "Payer en une fois",
+                svcPayParts: "Payer en plusieurs fois",
+                svcPartsTotal: "Total en plusieurs fois",
+                svcPerMo: "/mois",
+                svcMech: "Le paiement en plusieurs fois fonctionne comme un abonnement mensuel qui s'arrête après votre dernier paiement — nous l'annulons le jour où le dernier paiement arrive ; rien ne continue ensuite.",
+                offerBanner: "Le départ de l'auteur — décembre : site d'auteur + fiche Google + audit catalogue & boutique — $945 jusqu'au 31 décembre 2026 (prix régulier $1,035).",
+                offerBannerBtn: "Voir l'offre →",
                 fPrice: "Prix ($ USD — 0 pour gratuit)",
                 fFormats: "Formats",
                 videoUrlLabel: "URL de la vidéo (YouTube, TikTok, Vimeo ou lien direct vers le fichier vidéo)",
@@ -1704,6 +1782,26 @@ html, body { overflow-x: clip; }
                 svcOrder: "Замовити",
                 svcPromo: "Продавайте і тут — просувайте свою роботу: Featured CAD $5 · Spotlight CAD $9 · Top CAD $15",
                 svcPromoBtn: "Просунути свою роботу →",
+                svc1Inst: "6 щомісячних платежів по $106",
+                svc2Inst: "6 щомісячних платежів по $391",
+                svc3Inst: "6 щомісячних платежів по $267",
+                svc4Inst: "6 щомісячних платежів по $26",
+                svc5Inst: "6 щомісячних платежів по $53",
+                svc1InstShort: "6 × $106/міс",
+                svc2InstShort: "6 × $391/міс",
+                svc3InstShort: "6 × $267/міс",
+                svc4InstShort: "6 × $26/міс",
+                svc5InstShort: "6 × $53/міс",
+                svcPageBtn: "Сторінка послуг",
+                svcTotalWord: "разом",
+                svcNoTax: "Жодного податку зверху — сума, яку ви бачите, це сума, яку ви платите.",
+                svcPayFull: "Сплатити повністю",
+                svcPayParts: "Сплатити частинами",
+                svcPartsTotal: "Разом частинами",
+                svcPerMo: "/міс",
+                svcMech: "Оплата частинами працює як щомісячна підписка, що припиняється після вашого останнього платежу — ми скасовуємо її в день надходження останнього платежу; далі нічого не триває.",
+                offerBanner: "Авторський старт — грудень: сайт автора + профіль Google + аудит каталогу й магазину — $945 до 31 грудня 2026 року (звичайна ціна $1,035).",
+                offerBannerBtn: "Дивитися пропозицію →",
                 fPrice: "Ціна ($ USD — 0 для безкоштовного)",
                 fFormats: "Формати",
                 videoUrlLabel: "URL відео (YouTube, TikTok, Vimeo або пряме посилання на відеофайл)",
@@ -1961,6 +2059,26 @@ html, body { overflow-x: clip; }
                 svcOrder: "Заказать",
                 svcPromo: "Продавайте и здесь — продвигайте свою работу: Featured CAD $5 · Spotlight CAD $9 · Top CAD $15",
                 svcPromoBtn: "Продвинуть свою работу →",
+                svc1Inst: "6 ежемесячных платежей по $106",
+                svc2Inst: "6 ежемесячных платежей по $391",
+                svc3Inst: "6 ежемесячных платежей по $267",
+                svc4Inst: "6 ежемесячных платежей по $26",
+                svc5Inst: "6 ежемесячных платежей по $53",
+                svc1InstShort: "6 × $106/мес",
+                svc2InstShort: "6 × $391/мес",
+                svc3InstShort: "6 × $267/мес",
+                svc4InstShort: "6 × $26/мес",
+                svc5InstShort: "6 × $53/мес",
+                svcPageBtn: "Страница услуг",
+                svcTotalWord: "итого",
+                svcNoTax: "Никакого налога сверху — сумма, которую вы видите, это сумма, которую вы платите.",
+                svcPayFull: "Оплатить полностью",
+                svcPayParts: "Оплатить частями",
+                svcPartsTotal: "Итого частями",
+                svcPerMo: "/мес",
+                svcMech: "Оплата частями работает как ежемесячная подписка, которая прекращается после вашего последнего платежа — мы отменяем её в день поступления последнего платежа; дальше ничего не продолжается.",
+                offerBanner: "Авторский старт — декабрь: сайт автора + профиль Google + аудит каталога и магазина — $945 до 31 декабря 2026 года (обычная цена $1,035).",
+                offerBannerBtn: "Смотреть предложение →",
                 fPrice: "Цена ($ USD — 0 для бесплатного)",
                 fFormats: "Форматы",
                 videoUrlLabel: "URL видео (YouTube, TikTok, Vimeo или прямая ссылка на видеофайл)",
@@ -4152,7 +4270,7 @@ html, body { overflow-x: clip; }
                                 "title": "Author Website",
                                 "creator": "Blacksmith & Witches",
                                 "category": "services",
-                                "price": 545,
+                                "price": 595,
                                 "formats": [
                                             "Service"
                                 ],
@@ -4160,7 +4278,7 @@ html, body { overflow-x: clip; }
                                 "badge": "Blacksmith & Witches Services - Author Website",
                                 "excerpt": "A complete author website — home, books, about and contact — built by the house behind this store.",
                                 "description": "Author Website — built by Blacksmith & Witches, the house behind this store and a catalogue of more than 100 published books. You get a complete author website: home page, books page with buy links, about page and contact page, in the same clean style as our own house sites, set up under your domain. Fixed scope: up to 5 pages and 2 revision rounds; you supply your texts, book covers and domain. How it works: pay here, and we contact you at your checkout email to collect your materials — work begins on payment. Production is AI-assisted and human-directed, disclosed plainly: that is how we hold this price and this speed. The finished site is delivered within 14 days of receiving your materials. Price: CAD $545 (larger sites quoted before any extra work).",
-                                "download_url": "https://buy.stripe.com/9B6dR9f3x4tfgz8dW93VC1s",
+                                "download_url": "https://buy.stripe.com/bJe6oHbRl1h31Ee5pD3VC1P",
                                 "cover_url": null
                     },
                     {
@@ -4168,7 +4286,7 @@ html, body { overflow-x: clip; }
                                 "title": "Publish-Ready Package",
                                 "creator": "Blacksmith & Witches",
                                 "category": "services",
-                                "price": 945,
+                                "price": 2195,
                                 "formats": [
                                             "Service"
                                 ],
@@ -4176,7 +4294,7 @@ html, body { overflow-x: clip; }
                                 "badge": "Blacksmith & Witches Services - Publish-Ready Package",
                                 "excerpt": "Cover design, EPUB + print formatting, and publishing setup for one book — ready to upload.",
                                 "description": "Publish-Ready Package for one book — everything a finished manuscript needs to go on sale: cover design (ebook cover plus print wrap), EPUB and print-interior formatting, and publishing setup (metadata, categories and keywords for KDP / Lulu). You supply the finished manuscript; we return upload-ready files plus a setup sheet. Fixed scope: one book of up to 120,000 words, 2 revision rounds on the cover. How it works: pay here, and we contact you at your checkout email to collect your manuscript — work begins on payment. Production is AI-assisted and human-directed; cover art is AI-generated and disclosed as such wherever a platform asks. Price: CAD $945.",
-                                "download_url": "https://buy.stripe.com/bJe6oHcVp0cZ2Ii9FT3VC1t",
+                                "download_url": "https://buy.stripe.com/28E9ATg7B1h3dmWf0d3VC1Q",
                                 "cover_url": null
                     },
                     {
@@ -4184,7 +4302,7 @@ html, body { overflow-x: clip; }
                                 "title": "Storefront Build",
                                 "creator": "Blacksmith & Witches",
                                 "category": "services",
-                                "price": 1445,
+                                "price": 1495,
                                 "formats": [
                                             "Service"
                                 ],
@@ -4192,7 +4310,7 @@ html, body { overflow-x: clip; }
                                 "badge": "Blacksmith & Witches Services - Storefront Build",
                                 "excerpt": "Your own online store and catalogue with Stripe checkout — the same machinery as this store.",
                                 "description": "Storefront Build — your own online store and catalogue with Stripe checkout, built on the same machinery as this Blacksmith & Witches store: product catalogue with categories and search, payment links, and an admin door for your products. Fixed scope: up to 50 products loaded at launch and 2 revision rounds; you supply your product texts and images and your own Stripe account (we guide the setup). How it works: pay here, and we contact you at your checkout email to plan the build — work begins on payment. Production is AI-assisted and human-directed, disclosed plainly: that is how we hold this price and this speed. Price: CAD $1,445.",
-                                "download_url": "https://buy.stripe.com/6oUfZhf3x9NzaaK4lz3VC1u",
+                                "download_url": "https://buy.stripe.com/6oU7sL08Df7T5Uu4lz3VC1R",
                                 "cover_url": null
                     },
                     {
@@ -4312,7 +4430,7 @@ html, body { overflow-x: clip; }
                                 "title": "Google Business Profile Setup",
                                 "creator": "Blacksmith & Witches",
                                 "category": "services",
-                                "price": 245,
+                                "price": 295,
                                 "formats": [
                                             "Service"
                                 ],
@@ -4320,7 +4438,7 @@ html, body { overflow-x: clip; }
                                 "badge": "Blacksmith & Witches Services - Google Business Profile Setup",
                                 "excerpt": "We build or rebuild your Google listing end to end — categories, services, hours, photos, description and the map pin, so customers find you first.",
                                 "description": "Google Business Profile Setup — we build or rebuild your Google listing end to end: categories, services, hours, photos, description and the map pin, so customers find you first. Fixed price, one-time. You supply your business details and photos (or we work with what you have) and grant us access to the profile; we set up or rebuild the listing completely and hand it back to you, with a short note on keeping it current. How it works: pay here, and we contact you at your checkout email to collect your details — work begins on payment. Production is AI-assisted and human-directed, disclosed plainly: that is how we hold this price and this speed. Price: CAD $245.",
-                                "download_url": "https://buy.stripe.com/00w9AT08D2l72Ii19n3VC1E",
+                                "download_url": "https://buy.stripe.com/3cI14nf3xbVH3Mmg4h3VC1S",
                                 "cover_url": null
                     }
         ];
@@ -4481,7 +4599,7 @@ html, body { overflow-x: clip; }
             const cover = coverUrl
                 ? `<img src="${coverUrl.replace(/"/g, '%22')}" alt="" loading="lazy" class="w-full h-28 object-cover rounded-lg border border-slate-200">`
                 : `<span class="w-full h-28 rounded-lg bg-blue-50 border border-slate-200 flex items-center justify-center text-brandBlue text-2xl font-black">${escHtml((p.title || '?').charAt(0))}</span>`;
-            const price = Number(p.price) === 0 ? t('free') : '$' + Number(p.price).toFixed(2);
+            const price = svcPlanFor(p.id) ? t(svcInstKey(p.id, true)) : (Number(p.price) === 0 ? t('free') : '$' + Number(p.price).toFixed(2));
             return `<button type="button" onclick="openProduct('${p.id}')" class="shrink-0 w-28 text-left group">
                 ${cover}
                 <span class="block mt-1.5 text-xs font-bold text-brandDarkBlue leading-snug line-clamp-2 group-hover:underline">${escHtml(p.title)}</span>
@@ -4493,7 +4611,7 @@ html, body { overflow-x: clip; }
             const cover = coverUrl
                 ? `<img src="${coverUrl.replace(/"/g, '%22')}" alt="" loading="lazy" class="w-full aspect-[2/3] object-cover rounded-lg border border-slate-200 shadow-sm">`
                 : `<span class="w-full aspect-[2/3] rounded-lg bg-blue-50 border border-slate-200 flex items-center justify-center text-brandBlue text-4xl font-black">${escHtml((p.title || '?').charAt(0))}</span>`;
-            const price = Number(p.price) === 0 ? t('free') : '$' + Number(p.price).toFixed(2);
+            const price = svcPlanFor(p.id) ? t(svcInstKey(p.id, true)) : (Number(p.price) === 0 ? t('free') : '$' + Number(p.price).toFixed(2));
             return `<button type="button" onclick="openProduct('${p.id}')" class="shrink-0 w-36 sm:w-40 text-left group">
                 ${cover}
                 <span class="block mt-2 text-sm font-bold text-brandDarkBlue leading-snug line-clamp-2 group-hover:underline">${escHtml(p.title)}</span>
@@ -4596,6 +4714,17 @@ html, body { overflow-x: clip; }
             if (byCreator.length) rails += `<div class="pt-5"><h4 class="text-sm font-black uppercase tracking-widest text-brandDarkBlue pb-2">${t('moreByCreator')}</h4><div class="flex gap-3 overflow-x-auto pb-2">${byCreator.slice(0, 8).map(miniCardHtml).join('')}</div></div>`;
             const related = relatedProducts(p, 8).filter(q => (!s || (seriesOf(q) || {}).key !== s.key) && q.creator !== p.creator);
             if (related.length) rails += `<div class="pt-5"><h4 class="text-sm font-black uppercase tracking-widest text-brandDarkBlue pb-2">${t('moreLikeThis')}</h4><div class="flex gap-3 overflow-x-auto pb-2">${related.map(miniCardHtml).join('')}</div></div>`;
+            const standardBarHtml = `                <div class="bg-slate-50 px-5 py-4 mt-6 rounded-xl border border-slate-100 flex flex-wrap items-center justify-between gap-3">
+                    <span class="text-xl font-black text-brandDarkBlue">${priceDisplay}</span>
+                    <div class="flex items-center gap-2">
+                        <button type="button" onclick="toggleWishlist('${p.id}')" class="bg-white border border-slate-200 hover:border-red-300 font-bold px-3 py-2 rounded-xl text-xs transition inline-flex items-center gap-1.5 ${wished ? 'text-red-500' : 'text-slate-600'}" title="${t(wished ? 'removeWishlist' : 'addWishlist')}">
+                            <span class="text-base leading-none">${wished ? '&#9829;' : '&#9825;'}</span><span>${t('wishlist')}</span>
+                        </button>
+                        ${!isFree ? `<button onclick="startCheckout('${String(p.title).replace(/'/g, "\\'")}', ${Number(p.price)})" class="bg-white border-2 border-brandYellow text-brandDarkBlue hover:bg-brandYellow font-bold px-3 py-2 rounded-xl text-xs transition shadow inline-flex items-center space-x-1" title="${t('stripeTestTitle')}"><span>${t('stripeTest')}</span></button>` : ''}
+                        <a href="${p.download_url || '#'}" target="_blank" rel="noopener noreferrer" class="bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-4 py-2 rounded-xl text-xs transition shadow inline-flex items-center space-x-1"><span>${actionLabel}</span></a>
+                    </div>
+                </div>`;
+            const actionBarHtml = svcDetailBarHtml(p) || standardBarHtml;
             box.innerHTML = `
                 <nav class="flex items-center gap-1.5 text-xs font-semibold text-slate-500 pb-4 flex-wrap" aria-label="Breadcrumb">
                     <button type="button" onclick="closeProduct()" class="hover:text-brandBlue underline-offset-2 hover:underline">${t('homeCrumb')}</button>
@@ -4616,16 +4745,7 @@ html, body { overflow-x: clip; }
                         <div class="text-xs text-slate-400 font-medium">${t('fFormats')}: ${escHtml(formatsStr)}</div>
                     </div>
                 </div>
-                <div class="bg-slate-50 px-5 py-4 mt-6 rounded-xl border border-slate-100 flex flex-wrap items-center justify-between gap-3">
-                    <span class="text-xl font-black text-brandDarkBlue">${priceDisplay}</span>
-                    <div class="flex items-center gap-2">
-                        <button type="button" onclick="toggleWishlist('${p.id}')" class="bg-white border border-slate-200 hover:border-red-300 font-bold px-3 py-2 rounded-xl text-xs transition inline-flex items-center gap-1.5 ${wished ? 'text-red-500' : 'text-slate-600'}" title="${t(wished ? 'removeWishlist' : 'addWishlist')}">
-                            <span class="text-base leading-none">${wished ? '&#9829;' : '&#9825;'}</span><span>${t('wishlist')}</span>
-                        </button>
-                        ${!isFree ? `<button onclick="startCheckout('${String(p.title).replace(/'/g, "\\'")}', ${Number(p.price)})" class="bg-white border-2 border-brandYellow text-brandDarkBlue hover:bg-brandYellow font-bold px-3 py-2 rounded-xl text-xs transition shadow inline-flex items-center space-x-1" title="${t('stripeTestTitle')}"><span>${t('stripeTest')}</span></button>` : ''}
-                        <a href="${p.download_url || '#'}" target="_blank" rel="noopener noreferrer" class="bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-4 py-2 rounded-xl text-xs transition shadow inline-flex items-center space-x-1"><span>${actionLabel}</span></a>
-                    </div>
-                </div>
+${actionBarHtml}
                 ${rails}`;
             if (window.lucide) lucide.createIcons();
         }
@@ -5039,6 +5159,48 @@ html, body { overflow-x: clip; }
             return `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-3px;margin-right:7px">${inner}</svg>`;
         }
 
+        // Pay in parts (Dmitri's rulings, Nov 25, 2026): each service
+        // sits $2-$5 under its named competitor anchor; the band and
+        // cards lead with the 6-payment figure only, and the full
+        // total lives on the Services page and in the detail view.
+        // Parts totals carry the ~7% financing premium and divide
+        // exactly into 3 or 6 whole-dollar monthly payments. A parts
+        // plan runs as a monthly subscription that stops after the
+        // last payment — the house cancels it the day the final
+        // payment lands (ledger: store-work/upgrade/installment-ledger.md).
+        const SVC_PLANS = {
+            125: { slot: 1, full: 595, partsTotal: 636, p3: 212, p6: 106, fullUrl: 'https://buy.stripe.com/bJe6oHbRl1h31Ee5pD3VC1P', url3: 'https://buy.stripe.com/bJefZhbRl5xj6Yyg4h3VC1T', url6: 'https://buy.stripe.com/5kQfZh8F9f7T5Uu9FT3VC1U' },
+            126: { slot: 2, full: 2195, partsTotal: 2346, p3: 782, p6: 391, fullUrl: 'https://buy.stripe.com/28E9ATg7B1h3dmWf0d3VC1Q', url3: 'https://buy.stripe.com/eVq4gz2gLbVH96G3hv3VC1V', url6: 'https://buy.stripe.com/00waEXg7Be3Pgz819n3VC1W' },
+            127: { slot: 3, full: 1495, partsTotal: 1602, p3: 534, p6: 267, fullUrl: 'https://buy.stripe.com/6oU7sL08Df7T5Uu4lz3VC1R', url3: 'https://buy.stripe.com/bJefZh3kP8Jv1Ee7xL3VC1X', url6: 'https://buy.stripe.com/5kQ14ncVp8JvbeOf0d3VC1Y' },
+            128: { slot: 4, full: 145, partsTotal: 156, p3: 52, p6: 26, fullUrl: 'https://buy.stripe.com/6oUaEX5sX6Bn2Ii05j3VC1v', url3: 'https://buy.stripe.com/3cIcN59Jdf7T2Ii8BP3VC1L', url6: 'https://buy.stripe.com/6oU5kD6x17FrciS3hv3VC1M' },
+            135: { slot: 5, full: 295, partsTotal: 318, p3: 106, p6: 53, fullUrl: 'https://buy.stripe.com/3cI14nf3xbVH3Mmg4h3VC1S', url3: 'https://buy.stripe.com/eVq8wPg7B5xj96G8BP3VC1Z', url6: 'https://buy.stripe.com/bJeaEXf3x6Bn6Yyf0d3VC20' }
+        };
+        function svcPlanFor(id) { return SVC_PLANS[Number(id)] || null; }
+        function svcInstKey(id, short) { const pl = svcPlanFor(id); return pl ? 'svc' + pl.slot + 'Inst' + (short ? 'Short' : '') : null; }
+        function svcMoney(n) { return '$' + Number(n).toLocaleString('en-US'); }
+        function svcDetailBarHtml(p) {
+            const pl = svcPlanFor(p.id);
+            if (!pl) return '';
+            const wishedSvc = isWished(p.id);
+            return `
+                <div class="bg-slate-50 px-5 py-4 mt-6 rounded-xl border border-slate-100 space-y-3">
+                    <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                        <span class="text-xl font-black text-brandDarkBlue">${svcMoney(pl.full)} ${t('svcTotalWord')}</span>
+                        <span class="text-sm font-bold text-slate-500">${t('svcPartsTotal')}: ${svcMoney(pl.partsTotal)}</span>
+                    </div>
+                    <p class="text-xs font-semibold text-slate-500">${t('svcNoTax')}</p>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <a href="${pl.fullUrl}" target="_blank" rel="noopener noreferrer" class="bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-4 py-2 rounded-xl text-xs transition shadow">${t('svcPayFull')} · ${svcMoney(pl.full)}</a>
+                        <a href="${pl.url3}" target="_blank" rel="noopener noreferrer" class="bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-4 py-2 rounded-xl text-xs transition shadow">${t('svcPayParts')} · 3 × ${svcMoney(pl.p3)}${t('svcPerMo')}</a>
+                        <a href="${pl.url6}" target="_blank" rel="noopener noreferrer" class="bg-brandDarkBlue hover:bg-brandBlue text-white font-bold px-4 py-2 rounded-xl text-xs transition shadow">${t('svcPayParts')} · 6 × ${svcMoney(pl.p6)}${t('svcPerMo')}</a>
+                        <button type="button" onclick="toggleWishlist('${p.id}')" class="bg-white border border-slate-200 hover:border-red-300 font-bold px-3 py-2 rounded-xl text-xs transition inline-flex items-center gap-1.5 ${wishedSvc ? 'text-red-500' : 'text-slate-600'}" title="${t(wishedSvc ? 'removeWishlist' : 'addWishlist')}">
+                            <span class="text-base leading-none">${wishedSvc ? '&#9829;' : '&#9825;'}</span><span>${t('wishlist')}</span>
+                        </button>
+                    </div>
+                    <p class="text-xs text-slate-500">${t('svcMech')}</p>
+                </div>`;
+        }
+
         function renderProducts() {
             const grid = document.getElementById('productGrid');
             const empty = document.getElementById('emptyState');
@@ -5124,7 +5286,7 @@ html, body { overflow-x: clip; }
                     : (p.badge ? `<span class="bg-brandYellow/90 text-brandDarkBlue text-xs font-black px-2.5 py-1 rounded-full">${p.badge}</span>` : '');
 
                 const isFree = Number(p.price) === 0;
-                const priceDisplay = isFree ? t('free') : `$${Number(p.price).toFixed(2)}`;
+                const priceDisplay = svcPlanFor(p.id) ? t(svcInstKey(p.id, true)) : (isFree ? t('free') : `$${Number(p.price).toFixed(2)}`);
                 const formatsStr = Array.isArray(p.formats) ? p.formats.join(' • ') : (p.formats || t('digitalFmt'));
                 const actionLabel = p.category === 'video' ? t('watchVideo') : (isFree ? t('getRelease') : t('sellerCheckout'));
                 const isOwner = currentUser && p.user_id === currentUser.id;
@@ -5154,13 +5316,13 @@ html, body { overflow-x: clip; }
                             <button type="button" data-wish-btn="${p.id}" onclick="toggleWishlist('${p.id}')" class="text-lg leading-none px-1.5 py-1 text-slate-400 transition" title="${t('addWishlist')}">&#9825;</button>
                             <button type="button" onclick="openProduct('${p.id}')" class="bg-white border border-slate-300 text-brandDarkBlue hover:border-brandBlue font-bold px-3 py-2 rounded-xl text-xs transition">${t('detailsBtn')}</button>
                             ${isOwner ? `<button onclick="deleteProduct('${p.id}')" class="text-xs text-red-500 hover:text-red-700 font-semibold px-2 py-1.5">${t('deleteBtn')}</button>` : ''}
-                            ${!isFree ? `<button onclick="startCheckout('${p.title.replace(/'/g, "\\'")}', ${Number(p.price)})" class="bg-white border-2 border-brandYellow text-brandDarkBlue hover:bg-brandYellow font-bold px-3 py-2 rounded-xl text-xs transition shadow inline-flex items-center space-x-1" title="${t('stripeTestTitle')}">
+                            ${!isFree && !svcPlanFor(p.id) ? `<button onclick="startCheckout('${p.title.replace(/'/g, "\\'")}', ${Number(p.price)})" class="bg-white border-2 border-brandYellow text-brandDarkBlue hover:bg-brandYellow font-bold px-3 py-2 rounded-xl text-xs transition shadow inline-flex items-center space-x-1" title="${t('stripeTestTitle')}">
                                 <span>${t('stripeTest')}</span>
                             </button>` : ''}
-                            <a href="${p.download_url || '#'}" target="_blank" rel="noopener noreferrer" class="bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-4 py-2 rounded-xl text-xs transition shadow inline-flex items-center space-x-1">
+                            ${svcPlanFor(p.id) ? `<a href="services.html#svc${svcPlanFor(p.id).slot}" class="bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-4 py-2 rounded-xl text-xs transition shadow inline-flex items-center space-x-1"><span>${t('svcPageBtn')}</span></a>` : `<a href="${p.download_url || '#'}" target="_blank" rel="noopener noreferrer" class="bg-brandYellow hover:bg-brandYellowHover text-brandDarkBlue font-bold px-4 py-2 rounded-xl text-xs transition shadow inline-flex items-center space-x-1">
                                 <span>${actionLabel}</span>
                                 <i data-lucide="external-link" class="w-3 h-3"></i>
-                            </a>
+                            </a>`}
                         </div>
                     </div>
                 `;
