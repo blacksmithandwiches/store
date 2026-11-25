@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maple &amp; Sons Plumbing — Demo Template</title>
+<meta name="description" content="Demo trades business website template by Blacksmith & Witches — services, service area, reviews and a quote form.">
+<style>
+  :root{
+    --navy:#10243e; --navy2:#1b3a5f; --amber:#f5a623; --amber2:#d98d0d;
+    --bg:#f5f7fa; --ink:#1d2733; --muted:#5b6a7a; --line:#dde4ec; --green:#1e7d46;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:Verdana, Geneva, sans-serif;line-height:1.5}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  header.site{background:var(--navy);color:#fff}
+  header.site .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:14px;padding-bottom:14px;flex-wrap:wrap;gap:10px}
+  .logo{font-size:1.3rem;font-weight:bold;color:#fff;text-decoration:none}
+  .logo span{color:var(--amber)}
+  .logo small{display:block;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:#a9bcd4;font-weight:normal}
+  .phone{background:var(--amber);color:var(--navy);padding:10px 18px;border-radius:8px;font-weight:bold;text-decoration:none;font-size:.95rem}
+  .phone:hover{background:var(--amber2)}
+  .hero{background:linear-gradient(120deg,var(--navy),var(--navy2));color:#fff}
+  .hero .wrap{padding-top:48px;padding-bottom:48px}
+  .hero h1{font-size:2.3rem;line-height:1.18;max-width:15em}
+  .hero h1 span{color:var(--amber)}
+  .hero p{color:#c3d2e6;margin-top:14px;max-width:40em}
+  .btns{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:13px 24px;border-radius:8px;font-weight:bold;text-decoration:none;font-size:.95rem}
+  .btn-amber{background:var(--amber);color:var(--navy)}
+  .btn-amber:hover{background:var(--amber2)}
+  .btn-ghost{border:2px solid #c3d2e6;color:#fff}
+  .btn-ghost:hover{border-color:var(--amber);color:var(--amber)}
+  .trust{background:#fff;border-bottom:1px solid var(--line)}
+  .trust .wrap{display:flex;gap:28px;flex-wrap:wrap;padding-top:14px;padding-bottom:14px;font-size:.88rem;color:var(--muted)}
+  .trust strong{color:var(--navy)}
+  .stars{color:var(--amber);letter-spacing:.1em}
+  section.block{padding:46px 0}
+  h2.sec{font-size:1.55rem;color:var(--navy);margin-bottom:4px}
+  p.secsub{color:var(--muted);margin-bottom:26px;font-size:.92rem}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .svc{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px}
+  .svc h3{color:var(--navy);font-size:1rem;margin-bottom:6px}
+  .svc p{color:var(--muted);font-size:.88rem;margin-bottom:10px}
+  .svc .from{font-weight:bold;color:var(--navy);font-size:.9rem}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+  .gcard{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px;box-shadow:0 2px 10px rgba(16,36,62,.06)}
+  .gcard .gname{font-size:1.15rem;font-weight:bold;color:var(--navy)}
+  .gcard .grow{display:flex;align-items:center;gap:10px;margin:8px 0;flex-wrap:wrap}
+  .gcard .score{font-size:1.3rem;font-weight:bold;color:var(--navy)}
+  .gcard p{color:var(--muted);font-size:.88rem;margin:6px 0}
+  .open{color:var(--green);font-weight:bold}
+  .gbtn{display:inline-block;margin-top:12px;background:var(--navy);color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:bold}
+  .gbtn:hover{background:var(--navy2)}
+  .areas{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px}
+  .areas ul{list-style:none;columns:2;font-size:.92rem;color:var(--ink)}
+  .areas li{padding:5px 0;border-bottom:1px dashed var(--line)}
+  .quote{background:var(--navy);border-radius:14px;padding:30px;color:#fff}
+  .quote h2{color:#fff;font-size:1.4rem;margin-bottom:6px}
+  .quote p{color:#c3d2e6;font-size:.9rem;margin-bottom:20px}
+  .field{background:#fff;border-radius:8px;padding:12px 14px;color:#8a97a5;font-size:.88rem;margin-bottom:12px}
+  .field.tall{min-height:74px}
+  footer.site{background:var(--navy);color:#a9bcd4;padding:30px 0 36px;text-align:center;font-size:.85rem;margin-top:46px}
+  footer.site a{color:var(--amber)}
+  @media (max-width:820px){ .grid{grid-template-columns:repeat(2,1fr)} .cols{grid-template-columns:1fr} }
+  @media (max-width:520px){ .grid{grid-template-columns:1fr} .areas ul{columns:1} }
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="#">Maple <span>&amp;</span> Sons<small>Plumbing · Ottawa</small></a>
+    <a class="phone" href="#quote">Call (613) 555-0147</a>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <h1>Plumbing problem? <span>Fixed today.</span></h1>
+    <p>Family plumbers since 1998 — drains, leaks, water heaters and full bathroom renovations across Ottawa. Upfront prices, tidy work, guaranteed in writing.</p>
+    <div class="btns">
+      <a class="btn btn-amber" href="#quote">Get a quote</a>
+      <a class="btn btn-ghost" href="#services">See services &amp; prices</a>
+    </div>
+  </div>
+</div>
+
+<div class="trust">
+  <div class="wrap">
+    <span><strong>Licensed &amp; insured</strong> in Ontario</span>
+    <span><strong>Since 1998</strong> — three generations</span>
+    <span><span class="stars">★★★★★</span> <strong>4.9</strong> from 212 Google reviews</span>
+    <span><strong>Same-day</strong> emergency calls</span>
+  </div>
+</div>
+
+<section class="block" id="services">
+  <div class="wrap">
+    <h2 class="sec">Services &amp; starting prices</h2>
+    <p class="secsub">The price we quote is the price you pay — confirmed before any work starts.</p>
+    <div class="grid">
+      <div class="svc"><h3>Drain clearing</h3><p>Blocked sinks, tubs and main lines — camera inspection included.</p><span class="from">from $145</span></div>
+      <div class="svc"><h3>Leak repair</h3><p>We find it, we fix it, we show you the old part. No surprises.</p><span class="from">from $120</span></div>
+      <div class="svc"><h3>Water heaters</h3><p>Repair or replacement, tank and tankless, same-day swap-outs.</p><span class="from">from $380</span></div>
+      <div class="svc"><h3>Bathroom renovations</h3><p>Full plumbing for remodels — rough-in to fixtures, on schedule.</p><span class="from">from $1,900</span></div>
+      <div class="svc"><h3>Sump pumps &amp; backups</h3><p>Pumps, battery backups and alarms before the spring melt.</p><span class="from">from $260</span></div>
+      <div class="svc"><h3>Emergency calls</h3><p>Burst pipe at 2 a.m.? We answer the phone ourselves, day or night.</p><span class="from">24 / 7</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="padding-top:0">
+  <div class="wrap">
+    <div class="cols">
+      <div class="gcard">
+        <div class="gname">Maple &amp; Sons Plumbing</div>
+        <div class="grow"><span class="score">4.9</span><span class="stars">★★★★★</span><span style="color:var(--muted);font-size:.88rem">212 reviews · Google</span></div>
+        <p>1284 Maple Grove Rd, Ottawa, ON</p>
+        <p><span class="open">Open now</span> · Closes 6 p.m. · Emergency line 24/7</p>
+        <p>“Showed up the same morning, fixed the leak, left the place cleaner than they found it.” — recent review</p>
+        <a class="gbtn" href="#quote">Write a review / get directions</a>
+      </div>
+      <div class="areas">
+        <h2 class="sec" style="font-size:1.2rem">Service area</h2>
+        <p class="secsub" style="margin-bottom:12px">All of Ottawa, usually within the hour.</p>
+        <ul>
+          <li>Nepean</li><li>Barrhaven</li><li>Kanata</li><li>Stittsville</li>
+          <li>Orleans</li><li>The Glebe</li><li>Westboro</li><li>Alta Vista</li>
+          <li>Manotick</li><li>Gloucester</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="quote" style="padding-top:0">
+  <div class="wrap">
+    <div class="quote">
+      <h2>Request a quote</h2>
+      <p>Tell us what's leaking, blocked or planned — we reply within one business day with a firm price.</p>
+      <div class="field">Your name</div>
+      <div class="field">Phone or email</div>
+      <div class="field">Service needed — drains, leaks, heaters, renovation…</div>
+      <div class="field tall">Tell us about the job…</div>
+      <a class="btn btn-amber" href="../services.html#svc5">Send the request</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <p>© 2026 Maple &amp; Sons Plumbing. A fictional business, shown for demonstration.</p>
+    <p style="margin-top:8px">Demo template by <a href="../services.html">Blacksmith &amp; Witches</a> — your site can look like this.</p>
+  </div>
+</footer>
+</body>
+</html>

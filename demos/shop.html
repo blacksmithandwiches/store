@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Willow Lane Goods — Demo Template</title>
+<meta name="description" content="Demo storefront template by Blacksmith & Witches — product grid, prices and checkout buttons.">
+<style>
+  :root{
+    --navy:#0A2458; --blue:#0F3D91; --yellow:#FFD000; --yellow2:#E5BA00;
+    --bg:#F4F8FF; --ink:#1E293B; --muted:#64748B; --line:#dbe4f5;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:Verdana, Geneva, sans-serif;line-height:1.5}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  .strip{background:var(--yellow);color:var(--navy);text-align:center;font-size:.8rem;font-weight:bold;padding:8px 12px;letter-spacing:.04em}
+  header.site{background:var(--navy);color:#fff}
+  header.site .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:14px;padding-bottom:14px;flex-wrap:wrap;gap:10px}
+  .logo{font-size:1.35rem;font-weight:bold;color:#fff;text-decoration:none}
+  .logo span{color:var(--yellow)}
+  nav a{color:#dbe4f5;text-decoration:none;margin-left:18px;font-size:.9rem}
+  nav a:hover{color:var(--yellow)}
+  .cart{background:var(--yellow);color:var(--navy);border-radius:8px;padding:8px 14px;font-weight:bold;font-size:.85rem;text-decoration:none}
+  .cart:hover{background:var(--yellow2)}
+  .hero{background:linear-gradient(120deg,var(--navy),var(--blue));color:#fff}
+  .hero .wrap{padding-top:44px;padding-bottom:44px}
+  .hero h1{font-size:2.2rem;line-height:1.2;max-width:16em}
+  .hero p{color:#c9d8f8;margin-top:12px;max-width:38em}
+  .hero .btn{display:inline-block;margin-top:22px;background:var(--yellow);color:var(--navy);padding:12px 22px;border-radius:8px;font-weight:bold;text-decoration:none;font-size:.92rem}
+  .hero .btn:hover{background:var(--yellow2)}
+  section.block{padding:44px 0}
+  h2.sec{font-size:1.5rem;color:var(--navy);margin-bottom:4px}
+  p.secsub{color:var(--muted);margin-bottom:26px;font-size:.92rem}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(10,36,88,.06);display:flex;flex-direction:column}
+  .tile{height:150px;display:flex;align-items:center;justify-content:center}
+  .tile span{font-family:Georgia,serif;font-size:2.6rem;color:rgba(255,255,255,.92);text-shadow:0 2px 8px rgba(0,0,0,.25)}
+  .t1{background:linear-gradient(140deg,#b34a1d,#7e2f10)}
+  .t2{background:linear-gradient(140deg,#14524c,#0d2e2c)}
+  .t3{background:linear-gradient(140deg,#5b6e8c,#33455e)}
+  .t4{background:linear-gradient(140deg,#8a6d2f,#5e4a1c)}
+  .t5{background:linear-gradient(140deg,#7a4a6e,#4e2c45)}
+  .t6{background:linear-gradient(140deg,#2f6e8c,#1c455e)}
+  .card .body{padding:16px 18px 18px;display:flex;flex-direction:column;flex:1}
+  .card h3{font-size:1rem;color:var(--navy)}
+  .card p{color:var(--muted);font-size:.87rem;margin:6px 0 12px;flex:1}
+  .rowline{display:flex;align-items:center;justify-content:space-between}
+  .price{font-weight:bold;color:var(--navy);font-size:1.05rem}
+  .add{background:var(--navy);color:#fff;padding:9px 14px;border-radius:8px;text-decoration:none;font-size:.82rem;font-weight:bold}
+  .add:hover{background:var(--blue)}
+  .feats{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .feat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;text-align:center}
+  .feat strong{display:block;color:var(--navy);margin-bottom:6px}
+  .feat p{color:var(--muted);font-size:.87rem}
+  footer.site{background:var(--navy);color:#c9d8f8;padding:30px 0 36px;text-align:center;font-size:.85rem;margin-top:10px}
+  footer.site a{color:var(--yellow)}
+  @media (max-width:820px){ .grid{grid-template-columns:repeat(2,1fr)} .feats{grid-template-columns:1fr} }
+  @media (max-width:520px){ .grid{grid-template-columns:1fr} nav a{margin-left:10px} }
+</style>
+</head>
+<body>
+<div class="strip">Free local delivery on orders over $45 · Pickup at the lane, Saturdays 9–2</div>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="#">Willow Lane <span>Goods</span></a>
+    <nav>
+      <a href="#shop">Shop</a>
+      <a href="#story">Our story</a>
+      <a href="../services.html#svc3" class="cart">Cart (0)</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <h1>Handmade goods from one small lane.</h1>
+    <p>Candles, stoneware, linen and maple — made in small batches by the people on Willow Lane, shipped from our door to yours.</p>
+    <a class="btn" href="#shop">Shop the shelf</a>
+  </div>
+</div>
+
+<section class="block" id="shop">
+  <div class="wrap">
+    <h2 class="sec">On the shelf</h2>
+    <p class="secsub">This week's batch — when a tile sells out, the next batch goes up the following Monday.</p>
+    <div class="grid">
+      <div class="card"><div class="tile t1"><span>W</span></div><div class="body">
+        <h3>Beeswax Candle — Amber</h3><p>Hand-poured, 40-hour burn, from the hives at the end of the lane.</p>
+        <div class="rowline"><span class="price">$24.00</span><a class="add" href="../services.html#svc3">Add to cart</a></div>
+      </div></div>
+      <div class="card"><div class="tile t2"><span>W</span></div><div class="body">
+        <h3>Stoneware Mug — Teal</h3><p>Wheel-thrown and glazed in deep teal. Holds a proper cup of tea.</p>
+        <div class="rowline"><span class="price">$32.00</span><a class="add" href="../services.html#svc3">Add to cart</a></div>
+      </div></div>
+      <div class="card"><div class="tile t3"><span>W</span></div><div class="body">
+        <h3>Linen Throw — Slate</h3><p>Stonewashed linen, woven wide enough for two on the couch.</p>
+        <div class="rowline"><span class="price">$58.00</span><a class="add" href="../services.html#svc3">Add to cart</a></div>
+      </div></div>
+      <div class="card"><div class="tile t4"><span>W</span></div><div class="body">
+        <h3>Maple Cutting Board</h3><p>Single-plank maple, oiled and ready. Made from storm-fallen trees.</p>
+        <div class="rowline"><span class="price">$44.00</span><a class="add" href="../services.html#svc3">Add to cart</a></div>
+      </div></div>
+      <div class="card"><div class="tile t5"><span>W</span></div><div class="body">
+        <h3>Dried Flower Wreath</h3><p>Lane-garden flowers, dried through the summer, wired by hand.</p>
+        <div class="rowline"><span class="price">$39.00</span><a class="add" href="../services.html#svc3">Add to cart</a></div>
+      </div></div>
+      <div class="card"><div class="tile t6"><span>W</span></div><div class="body">
+        <h3>Notebook Set — Three</h3><p>Recycled-paper notebooks with cloth spines, for lists and letters.</p>
+        <div class="rowline"><span class="price">$18.00</span><a class="add" href="../services.html#svc3">Add to cart</a></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="story" style="padding-top:0">
+  <div class="wrap">
+    <div class="feats">
+      <div class="feat"><strong>Secure checkout</strong><p>Card payments through a proper checkout — the same machinery the big stores use.</p></div>
+      <div class="feat"><strong>Ships in 2–3 days</strong><p>Packed on the lane, posted within three working days, tracked to your door.</p></div>
+      <div class="feat"><strong>Local pickup</strong><p>Order online, pick up at the lane on Saturday — no shipping charge, ever.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <p>© 2026 Willow Lane Goods. A fictional shop, shown for demonstration.</p>
+    <p style="margin-top:8px">Demo template by <a href="../services.html">Blacksmith &amp; Witches</a> — your site can look like this.</p>
+  </div>
+</footer>
+</body>
+</html>

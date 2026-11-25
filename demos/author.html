@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jane Doe, Author — Demo Template</title>
+<meta name="description" content="Demo author website template by Blacksmith & Witches — hero, books shelf, about and contact.">
+<style>
+  :root{
+    --paper:#f2efe8; --raised:#fbf9f4; --card:#fdfcf8; --ink:#1c2422; --soft:#4a5552;
+    --teal:#0d2e2c; --teal2:#14524c; --rust:#b34a1d; --line:#ddd5c3;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--paper);color:var(--ink);font-family:Georgia,'Times New Roman',serif;line-height:1.55}
+  a{color:var(--teal2)}
+  .wrap{max-width:1020px;margin:0 auto;padding:0 20px}
+  header.site{background:var(--teal);color:#f4ead2}
+  header.site .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:16px;padding-bottom:16px;flex-wrap:wrap;gap:10px}
+  .brand{font-size:1.5rem;letter-spacing:.02em;color:#f4ead2;text-decoration:none}
+  .brand small{display:block;font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:#cdbf9e;font-family:Verdana,sans-serif}
+  nav a{color:#f4ead2;text-decoration:none;margin-left:20px;font-size:.95rem}
+  nav a:hover{text-decoration:underline}
+  .hero{background:linear-gradient(180deg,#fdfcf8, #f2efe8);border-bottom:1px solid var(--line)}
+  .hero .wrap{display:grid;grid-template-columns:280px 1fr;gap:44px;padding-top:48px;padding-bottom:48px;align-items:center}
+  .cover{aspect-ratio:2/3;border-radius:4px 10px 10px 4px;box-shadow:0 18px 40px rgba(13,46,44,.35), inset 6px 0 12px rgba(0,0,0,.25);display:flex;flex-direction:column;justify-content:space-between;padding:26px 22px;color:#f7f1de;position:relative;overflow:hidden}
+  .cover::before{content:"";position:absolute;left:0;top:0;bottom:0;width:10px;background:rgba(0,0,0,.28)}
+  .cover .c-kicker{font-family:Verdana,sans-serif;font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;opacity:.85}
+  .cover .c-title{font-size:2rem;line-height:1.15}
+  .cover .c-author{font-size:.95rem;letter-spacing:.14em;text-transform:uppercase}
+  .c1{background:linear-gradient(160deg,#14524c,#0d2e2c 70%)}
+  .c2{background:linear-gradient(160deg,#b34a1d,#7e2f10 75%)}
+  .c3{background:linear-gradient(160deg,#5b6e8c,#33455e 75%)}
+  .hero h1{font-size:2.6rem;line-height:1.12;font-weight:normal}
+  .hero h1 em{color:var(--rust);font-style:italic}
+  .hero p.lede{margin:18px 0 8px;font-size:1.08rem;color:var(--soft);max-width:34em}
+  .stars{color:var(--rust);letter-spacing:.15em;font-size:.95rem}
+  .stars span{color:var(--soft);letter-spacing:0;font-size:.85rem;font-family:Verdana,sans-serif}
+  .btns{margin-top:24px;display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:12px 22px;border-radius:6px;text-decoration:none;font-family:Verdana,sans-serif;font-size:.9rem;font-weight:bold}
+  .btn-rust{background:var(--rust);color:#fff}
+  .btn-rust:hover{background:#963c15}
+  .btn-ghost{border:2px solid var(--teal);color:var(--teal)}
+  .btn-ghost:hover{background:var(--teal);color:#f4ead2}
+  section.block{padding:52px 0}
+  h2.sec{font-size:1.8rem;font-weight:normal;margin-bottom:6px}
+  p.secsub{color:var(--soft);margin-bottom:28px}
+  .shelf{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .book .cover{max-width:200px;margin-bottom:16px}
+  .book h3{font-size:1.15rem;font-weight:normal}
+  .book p{color:var(--soft);font-size:.95rem;margin:6px 0 12px}
+  .price{font-family:Verdana,sans-serif;font-weight:bold;color:var(--teal)}
+  .buy{display:inline-block;margin-top:8px;padding:9px 18px;background:var(--teal);color:#f4ead2;border-radius:6px;text-decoration:none;font-family:Verdana,sans-serif;font-size:.85rem;font-weight:bold}
+  .buy:hover{background:var(--teal2)}
+  .about{background:var(--raised);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .about .wrap{display:grid;grid-template-columns:150px 1fr;gap:36px;align-items:start}
+  .medal{width:150px;height:150px;border-radius:50%;background:var(--teal);color:#f4ead2;display:flex;align-items:center;justify-content:center;font-size:2.6rem;box-shadow:0 10px 24px rgba(13,46,44,.3)}
+  .about p{color:var(--soft);margin-bottom:12px;max-width:44em}
+  .contact .card{background:var(--teal);color:#f4ead2;border-radius:12px;padding:36px;text-align:center}
+  .contact h2{font-weight:normal;font-size:1.7rem;margin-bottom:8px}
+  .contact p{color:#d8cdb2;margin-bottom:22px}
+  .contact .row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .contact .fakeinput{background:#fdfcf8;color:#8a8f8c;border-radius:6px;padding:12px 18px;font-family:Verdana,sans-serif;font-size:.9rem;min-width:260px;text-align:left}
+  footer.site{padding:28px 0 36px;text-align:center;color:var(--soft);font-size:.85rem;font-family:Verdana,sans-serif}
+  footer.site a{color:var(--teal2)}
+  @media (max-width:760px){
+    .hero .wrap{grid-template-columns:1fr;gap:28px}
+    .hero .cover{max-width:220px}
+    .shelf{grid-template-columns:1fr}
+    .about .wrap{grid-template-columns:1fr}
+    nav a{margin-left:12px}
+  }
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="#">Jane Doe<small>Author</small></a>
+    <nav>
+      <a href="#books">Books</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="cover c1">
+      <div class="c-kicker">Book One</div>
+      <div class="c-title">The Salt<br>Road</div>
+      <div class="c-author">Jane Doe</div>
+    </div>
+    <div>
+      <h1>The Salt Road — <em>a novel of the coast</em></h1>
+      <p class="lede">When the ferry stops running, the island keeps its own ledger of debts. A story of one family, three winters, and the road that only appears at low tide.</p>
+      <div class="stars">★★★★★ <span>4.8 — from 212 reader reviews</span></div>
+      <div class="btns">
+        <a class="btn btn-rust" href="../services.html#svc1">Buy the book — $14.95</a>
+        <a class="btn btn-ghost" href="#books">See the trilogy</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="block" id="books">
+  <div class="wrap">
+    <h2 class="sec">The books</h2>
+    <p class="secsub">The Salt Road trilogy — each book stands on its own, together they tell the whole crossing.</p>
+    <div class="shelf">
+      <div class="book">
+        <div class="cover c1"><div class="c-kicker">Book One</div><div class="c-title">The Salt Road</div><div class="c-author">Jane Doe</div></div>
+        <h3>The Salt Road</h3>
+        <p>The ferry stops. The island keeps its ledger. The first crossing.</p>
+        <span class="price">$14.95</span><br>
+        <a class="buy" href="../services.html#svc1">Buy this book</a>
+      </div>
+      <div class="book">
+        <div class="cover c2"><div class="c-kicker">Book Two</div><div class="c-title">The Glass Harbour</div><div class="c-author">Jane Doe</div></div>
+        <h3>The Glass Harbour</h3>
+        <p>A storm, a salvage claim, and everything the tide brings back.</p>
+        <span class="price">$15.95</span><br>
+        <a class="buy" href="../services.html#svc1">Buy this book</a>
+      </div>
+      <div class="book">
+        <div class="cover c3"><div class="c-kicker">Book Three</div><div class="c-title">Winter at Lark House</div><div class="c-author">Jane Doe</div></div>
+        <h3>Winter at Lark House</h3>
+        <p>The last winter on the island — and the road home.</p>
+        <span class="price">$15.95</span><br>
+        <a class="buy" href="../services.html#svc1">Buy this book</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block about" id="about">
+  <div class="wrap">
+    <div class="medal">JD</div>
+    <div>
+      <h2 class="sec">About Jane</h2>
+      <p>Jane Doe writes novels of coast and weather. She grew up two streets from a working harbour, spent ten years as a ferry dispatcher, and now writes from a house where the tide tables are pinned beside the kettle.</p>
+      <p>The Salt Road, her first novel, was shortlisted for the Harbourlight Prize. She is at work on a fourth book, set one generation earlier.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block contact" id="contact">
+  <div class="wrap">
+    <div class="card">
+      <h2>Letters from the coast</h2>
+      <p>One letter a month — new chapters, readings, and first word of the next book. No noise.</p>
+      <div class="row">
+        <div class="fakeinput">your@email.com</div>
+        <a class="btn btn-rust" href="../services.html#svc1">Join the list</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <p>© 2026 Jane Doe. All rights reserved.</p>
+    <p style="margin-top:8px">Demo template by <a href="../services.html">Blacksmith &amp; Witches</a> — your site can look like this.</p>
+  </div>
+</footer>
+</body>
+</html>
