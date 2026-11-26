@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Bookstore — Blacksmith &amp; Witches</title>
+<meta name="description" content="The Blacksmith & Witches bookstore in one page: the Paul of Teraura saga, Hugo the Hedgehog for kids, the annotated Classics shelf, free reading, films and services for authors. Books by Dima Grossman.">
+<link rel="canonical" href="https://blacksmithandwitches.com/bookstore.html">
+<meta property="og:title" content="The Bookstore — Blacksmith &amp; Witches">
+<meta property="og:description" content="One door to the whole house: the Teraura saga, Hugo the Hedgehog, 78 annotated Classics, free reading and the films.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://blacksmithandwitches.com/bookstore.html">
+<meta property="og:image" content="https://keplers-catalogue.vercel.app/covers/paul-en.jpg">
+<meta name="theme-color" content="#0d2e2c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f2efe8; --raise:#fbf9f4; --card:#fdfcf8;
+    --ink:#1c2422; --soft:#47524d; --faint:#6d7771;
+    --line:#d8d2c2; --teal:#14524d; --teal-deep:#0d2e2c;
+    --rust:#b34a1d; --rust-soft:#f3e2d5;
+    --gold:#8a6414; --gold-soft:#f0e6c8; --hero-ink:#f4ead2;
+    --shadow:0 1px 2px rgba(20,30,28,.08),0 8px 24px rgba(20,30,28,.07);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:"Spectral",Georgia,"Times New Roman",serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{color:var(--rust)}
+  a:hover{color:var(--teal)}
+  :focus-visible{outline:2px solid var(--rust);outline-offset:2px}
+  .wrap{max-width:620px;margin:0 auto;padding:0 16px 48px}
+
+  /* --- Masthead --- */
+  .masthead{background:var(--teal-deep);color:var(--hero-ink);border-bottom:4px solid var(--rust);text-align:center;padding:34px 20px 28px}
+  .masthead .badge{display:inline-block;background:var(--rust);color:var(--hero-ink);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:5px 12px;border-radius:8px}
+  .masthead h1{font-size:clamp(2rem,8vw,2.9rem);font-weight:700;line-height:1.08;margin:14px 0 6px}
+  .masthead .sub{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-soft)}
+  .masthead .intro{max-width:46ch;margin:14px auto 0;font-size:1.05rem;opacity:.94}
+  .masthead .intro strong{color:#fff}
+
+  /* --- Sections --- */
+  section{margin-top:36px}
+  .eyebrow{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.74rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--rust)}
+  h2{font-size:1.55rem;font-weight:700;line-height:1.15;margin:4px 0 4px}
+  .sec-note{color:var(--soft);font-size:.98rem;margin-bottom:14px}
+
+  /* --- Book cards (picture-led rows) --- */
+  .book{display:flex;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:14px;margin-bottom:12px;text-decoration:none;color:var(--ink)}
+  .book:hover{border-color:var(--rust)}
+  .book img{width:86px;height:130px;object-fit:cover;border-radius:8px;flex:none;box-shadow:0 2px 8px rgba(20,30,28,.25);background:var(--rust-soft)}
+  .book .body{min-width:0;display:flex;flex-direction:column}
+  .book .tag{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.66rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+  .book h3{font-size:1.12rem;font-weight:700;line-height:1.25;margin:2px 0 3px}
+  .book .hook{color:var(--soft);font-size:.92rem;line-height:1.45}
+  .book .row{margin-top:auto;padding-top:8px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .price{font-family:"IBM Plex Mono",ui-monospace,monospace;font-weight:600;font-size:1rem;color:var(--rust)}
+  .price.free{color:var(--teal)}
+  .btn{display:inline-block;background:var(--teal-deep);color:var(--hero-ink);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;padding:8px 14px;border-radius:8px}
+  .btn:hover{background:var(--rust);color:#fff}
+  .status{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:var(--gold-soft);color:var(--gold);padding:5px 10px;border-radius:999px}
+
+  /* --- Classics grid (covers are the flash) --- */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .tile{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden;text-decoration:none;color:var(--ink);display:flex;flex-direction:column}
+  .tile:hover{border-color:var(--rust)}
+  .tile img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;background:var(--rust-soft)}
+  .tile .t-body{padding:10px 12px 12px;display:flex;flex-direction:column;gap:2px;flex:1}
+  .tile h3{font-size:.98rem;font-weight:700;line-height:1.3}
+  .tile .hook{color:var(--soft);font-size:.84rem;line-height:1.4}
+  .tile .row{margin-top:auto;padding-top:8px;display:flex;align-items:center;justify-content:space-between}
+  .tile .go{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
+
+  /* --- Door cards --- */
+  .door{display:flex;align-items:center;gap:12px;background:var(--raise);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px;text-decoration:none;color:var(--ink)}
+  .door:hover{border-color:var(--rust)}
+  .door .d-body{flex:1;min-width:0}
+  .door h3{font-size:1.05rem;font-weight:700;line-height:1.3}
+  .door p{color:var(--soft);font-size:.9rem;line-height:1.4}
+  .door .arrow{font-family:"IBM Plex Mono",ui-monospace,monospace;color:var(--rust);font-size:1.1rem;flex:none}
+  .door.free-door{border:2px solid var(--teal);background:var(--card)}
+
+  .more-note{text-align:center;color:var(--soft);font-size:.95rem;margin-top:14px}
+  footer{margin-top:44px;border-top:1px solid var(--line);padding-top:18px;text-align:center;color:var(--faint);font-size:.85rem;line-height:1.6}
+  footer .mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
+  @media (max-width:380px){ .book img{width:74px;height:112px} }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <span class="badge">Blacksmith &amp; Witches</span>
+  <h1>The Bookstore</h1>
+  <p class="sub">Publishing House · Catalogue · Shop</p>
+  <p class="intro">One door to the whole house. <strong>The Teraura saga</strong>, a hedgehog for the kids, <strong>78 annotated Classics</strong> — and a reading room that costs nothing. Everything below is ours, made by one author and his house.</p>
+</header>
+
+<div class="wrap">
+
+  <!-- THE SAGA -->
+  <section id="saga">
+    <p class="eyebrow">Start here · The saga</p>
+    <h2>Paul of Teraura</h2>
+    <p class="sec-note">Grim science fiction by Dima Grossman. An invasion that takes minds — and the one mind it cannot take.</p>
+
+    <a class="book" href="https://www.kobo.com/ca/en/ebook/paul-of-teraura">
+      <img src="https://keplers-catalogue.vercel.app/covers/paul-en.jpg" alt="Paul of Teraura — Book One cover" loading="lazy">
+      <span class="body">
+        <span class="tag">The Teraura Saga · Book One</span>
+        <h3>Paul of Teraura</h3>
+        <span class="hook">An invasion, a resistance, and a young man whose mind the invaders cannot take.</span>
+        <span class="row"><span class="price">$3.45</span><span class="btn">Get the book</span></span>
+      </span>
+    </a>
+
+    <a class="book" href="https://catalogue.blacksmithandwitches.com/item/paul-of-teraura-book-two-en">
+      <img src="https://keplers-catalogue.vercel.app/covers/book2-art-dragons-over-zenmly.jpg" alt="Dragons over Zenmly — art from Paul of Teraura, Book Two" loading="lazy">
+      <span class="body">
+        <span class="tag">The Teraura Saga · Book Two</span>
+        <h3>Paul of Teraura: Titans and Dragons</h3>
+        <span class="hook">The invaders still cannot take Paul's mind — so they hunt him across a world at war, from Teraura to its moon Zenmly.</span>
+        <span class="row"><span class="status">In preparation · Ebook $3.45</span></span>
+      </span>
+    </a>
+
+    <p class="more-note">Book One also reads in German, French, Ukrainian and Russian — all five editions live in the <a href="https://blacksmithandwitches.com/">full store</a>. The Book Two film is in production now — see Watch, below.</p>
+  </section>
+
+  <!-- HUGO -->
+  <section id="hugo">
+    <p class="eyebrow">For the kids</p>
+    <h2>Hugo the Hedgehog</h2>
+    <p class="sec-note">Gentle picture books about courage and kindness — nine editions, five languages.</p>
+
+    <a class="book" href="https://www.kobo.com/ca/en/ebook/hugo-the-hedgehog-and-the-forest-path">
+      <img src="https://keplers-catalogue.vercel.app/covers/hugo1-en.jpg" alt="Hugo the Hedgehog and the Forest Path cover" loading="lazy">
+      <span class="body">
+        <span class="tag">Hugo the Hedgehog · Book One</span>
+        <h3>Hugo the Hedgehog and the Forest Path</h3>
+        <span class="hook">Hugo sets out along the forest path to visit Auntie Hazel — a small hedgehog, a long path, and a brave heart.</span>
+        <span class="row"><span class="price">$3.45</span><span class="btn">Get the book</span></span>
+      </span>
+    </a>
+
+    <a class="book" href="https://www.kobo.com/ca/en/ebook/hugo-the-hedgehog-and-the-race-to-the-animal-hospital">
+      <img src="https://keplers-catalogue.vercel.app/covers/hugo2-en.jpg" alt="Hugo the Hedgehog and the Race to the Animal Hospital cover" loading="lazy">
+      <span class="body">
+        <span class="tag">Hugo the Hedgehog · Book Two</span>
+        <h3>Hugo the Hedgehog and the Race to the Animal Hospital</h3>
+        <span class="hook">Auntie Hazel has hurt her ankle and cannot walk — so little Hugo races all the way to the Animal Hospital to fetch help.</span>
+        <span class="row"><span class="price">$3.45</span><span class="btn">Get the book</span></span>
+      </span>
+    </a>
+  </section>
+
+  <!-- CLASSICS -->
+  <section id="classics">
+    <p class="eyebrow">The shelf</p>
+    <h2>Blacksmith &amp; Witches Classics</h2>
+    <p class="sec-note">Annotated editions with our own introductions, notes and reading guides. Six of the seventy-eight:</p>
+
+    <div class="grid">
+      <a class="tile" href="https://buy.stripe.com/7sYdR9bRl0cZ6Yy9FT3VC2D">
+        <img src="https://keplers-catalogue.vercel.app/covers/shakespeare-hamlet.jpg" alt="Hamlet (Annotated) cover" loading="lazy">
+        <span class="t-body">
+          <h3>Hamlet (Annotated)</h3>
+          <span class="hook">The prince, the ghost, and the most quoted play in English. Classics Vol. 78.</span>
+          <span class="row"><span class="price">$5.45</span><span class="go">Get it →</span></span>
+        </span>
+      </a>
+
+      <a class="tile" href="https://buy.stripe.com/14A8wPcVp0cZbeO8BP3VC1i">
+        <img src="https://keplers-catalogue.vercel.app/covers/bronte-jane-eyre.jpg" alt="Jane Eyre (Annotated) cover" loading="lazy">
+        <span class="t-body">
+          <h3>Jane Eyre (Annotated)</h3>
+          <span class="hook">Charlotte Brontë's orphan governess and the house that keeps a secret. Vol. 73.</span>
+          <span class="row"><span class="price">$5.45</span><span class="go">Get it →</span></span>
+        </span>
+      </a>
+
+      <a class="tile" href="https://buy.stripe.com/fZudR9f3xf7Tfv405j3VC1h">
+        <img src="https://keplers-catalogue.vercel.app/covers/wilde-dorian-gray.jpg" alt="The Picture of Dorian Gray (Annotated) cover" loading="lazy">
+        <span class="t-body">
+          <h3>The Picture of Dorian Gray (Annotated)</h3>
+          <span class="hook">Wilde's beautiful monster — the portrait ages so the man doesn't have to. Vol. 72.</span>
+          <span class="row"><span class="price">$5.45</span><span class="go">Get it →</span></span>
+        </span>
+      </a>
+
+      <a class="tile" href="https://buy.stripe.com/28E6oHaNhe3P0Aa3hv3VC2C">
+        <img src="https://keplers-catalogue.vercel.app/covers/dumas-monte-cristo.jpg" alt="The Count of Monte Cristo (Annotated) cover" loading="lazy">
+        <span class="t-body">
+          <h3>The Count of Monte Cristo (Annotated)</h3>
+          <span class="hook">Betrayal, escape, and the most patient revenge ever written — the whole 1,462 pages. Vol. 77.</span>
+          <span class="row"><span class="price">$5.45</span><span class="go">Get it →</span></span>
+        </span>
+      </a>
+
+      <a class="tile" href="https://buy.stripe.com/5kQ9AT1cHaRD3Mmf0d3VC0u">
+        <img src="https://keplers-catalogue.vercel.app/covers/shelley-frankenstein.jpg" alt="Frankenstein (Annotated) cover" loading="lazy">
+        <span class="t-body">
+          <h3>Frankenstein (Annotated)</h3>
+          <span class="hook">Mary Shelley's original — the maker, the creature, and who the monster really is. Vol. 38.</span>
+          <span class="row"><span class="price">$5.45</span><span class="go">Get it →</span></span>
+        </span>
+      </a>
+
+      <a class="tile" href="https://www.lulu.com/shop/anton-chekhov-and-dima-grossman-and-constance-garnett/selected-stories-annotated/ebook/product-7dzvpg5.html">
+        <img src="https://keplers-catalogue.vercel.app/covers/chekhov.jpg" alt="Chekhov — Selected Stories (Annotated) cover" loading="lazy">
+        <span class="t-body">
+          <h3>Selected Stories (Annotated)</h3>
+          <span class="hook">Ten essential Chekhov stories in Constance Garnett translations, with our notes and reading guide.</span>
+          <span class="row"><span class="price">$3.45</span><span class="go">Get it →</span></span>
+        </span>
+      </a>
+    </div>
+
+    <p class="more-note">All 78 volumes — Shakespeare to She, Verne to Dostoevsky — live in the <a href="https://blacksmithandwitches.com/">full store</a> and <a href="https://catalogue.blacksmithandwitches.com/">Kepler's Catalogue</a>.</p>
+  </section>
+
+  <!-- DOORS -->
+  <section id="doors">
+    <p class="eyebrow">The whole house</p>
+    <h2>Every door, one page</h2>
+    <p class="sec-note">The store is only one room. The rest of the house:</p>
+
+    <a class="door free-door" href="https://bw-reading.pages.dev/">
+      <span class="d-body">
+        <h3>The Reading Room — read free</h3>
+        <p>15 books · 451 chapters of philosophy and classics, free to read, no account. Start anywhere.</p>
+      </span>
+      <span class="price free">FREE</span>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="door" href="https://blacksmithandwitches.com/">
+      <span class="d-body">
+        <h3>The Full Store</h3>
+        <p>All 149 products — books, Book Two art prints, gifts and services, in one shop.</p>
+      </span>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="door" href="https://catalogue.blacksmithandwitches.com/">
+      <span class="d-body">
+        <h3>Kepler's Catalogue</h3>
+        <p>Every title and every edition, browsable — the house's full catalogue with samples.</p>
+      </span>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="door" href="https://watch.blacksmithandwitches.com/">
+      <span class="d-body">
+        <h3>Watch — the films</h3>
+        <p>The Paul of Teraura animated series and the Book Two film as it lands — plus a video marketplace where creators keep 70%.</p>
+      </span>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="door" href="https://www.patreon.com/c/BlacksmithAndWitches">
+      <span class="d-body">
+        <h3>Patreon — stand with the house</h3>
+        <p>Support the work directly. Tiers from $3.45 — every patron keeps the shelves filling.</p>
+      </span>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="door" href="https://blacksmithandwitches.com/services.html">
+      <span class="d-body">
+        <h3>Services for Authors</h3>
+        <p>Websites, editing, covers, publishing setup — the house's workshop, open to other authors and small businesses.</p>
+      </span>
+      <span class="arrow">→</span>
+    </a>
+
+  </section>
+
+  <footer>
+    <p class="mono">Blacksmith &amp; Witches · Books by Dima Grossman</p>
+    <p>An independent publishing house — an online catalogue and shop.<br>
+    Cover art across the house is AI-generated and human-directed, and is disclosed as such on every product.<br>
+    Prices in CAD, as shown in the store.</p>
+  </footer>
+
+</div>
+</body>
+</html>
