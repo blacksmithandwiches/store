@@ -143,11 +143,37 @@
                     <button type="submit" id="pwSubmitBtn" class="w-full py-2.5 bg-brandBlue hover:bg-brandDarkBlue text-white font-bold rounded-xl text-sm shadow transition" data-i18n="signInPassword">Sign in with password</button>
                 </form>
                 <div id="pwFeedback" class="hidden text-xs p-3 rounded-xl bg-blue-50 text-brandDarkBlue border border-blue-200 font-medium max-w-md"></div>
+                <div class="max-w-md pt-1">
+                    <button type="button" onclick="handleForgotPassword()" class="text-xs font-bold text-brandBlue hover:text-brandDarkBlue underline underline-offset-4 decoration-brandYellow decoration-2 transition" data-i18n="forgotPassword">Forgot password?</button>
+                </div>
             </div>
         </section>
 
         <!-- SIGNED-IN VIEW -->
         <div id="accountSection" class="hidden space-y-10">
+
+            <!-- SET A NEW PASSWORD (shown when arriving from a reset email) -->
+            <section id="recoverySection" class="hidden bg-white border-2 border-brandYellow rounded-2xl shadow-sm p-6 sm:p-8 space-y-5">
+                <div class="flex items-center space-x-3">
+                    <span class="w-10 h-10 rounded-xl bg-brandYellow text-brandDarkBlue flex items-center justify-center">
+                        <i data-lucide="key-round" class="w-5 h-5"></i>
+                    </span>
+                    <h2 class="text-xl sm:text-2xl font-black tracking-tight text-brandDarkBlue" data-i18n="setNewPassword">Set a new password</h2>
+                </div>
+                <p class="text-sm text-slate-600 max-w-2xl" data-i18n="recoveryIntro">You opened a set-password link from your email. Choose a new password for your account below.</p>
+                <form onsubmit="handleRecoverySetPassword(event)" class="space-y-4 max-w-md">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="recoveryPassword" data-i18n="newPassword">New Password</label>
+                        <input type="password" id="recoveryPassword" required minlength="8" placeholder="Minimum 8 characters" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none" data-i18n-ph="passwordMinPh">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="recoveryPassword2" data-i18n="confirmPassword">Confirm Password</label>
+                        <input type="password" id="recoveryPassword2" required minlength="8" placeholder="Minimum 8 characters" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brandBlue focus:outline-none" data-i18n-ph="passwordMinPh">
+                    </div>
+                    <button type="submit" id="recoverySubmitBtn" class="w-full py-2.5 bg-brandDarkBlue hover:bg-brandBlue text-white font-bold rounded-xl text-sm shadow transition" data-i18n="setPasswordBtn">Set password</button>
+                    <div id="recoveryFeedback" class="hidden text-xs p-3 rounded-xl bg-blue-50 text-brandDarkBlue border border-blue-200 font-medium"></div>
+                </form>
+            </section>
 
             <!-- COMPLETE YOUR ACCOUNT (shown until a creator profile exists) -->
             <section id="profileSetupSection" class="hidden bg-white border-2 border-brandYellow rounded-2xl shadow-sm p-6 sm:p-8 space-y-5">
@@ -436,6 +462,16 @@
                 errName: "Please enter your creator / pen name.",
                 errRole: "Please choose your classification.",
                 errPassword: "Please choose a password of at least 8 characters.",
+                forgotPassword: "Forgot password?",
+                resetNeedEmail: "Type your email in the Email box above first, then tap Forgot password.",
+                resetSent: "Check your email for the set-password link.",
+                setNewPassword: "Set a new password",
+                recoveryIntro: "You opened a set-password link from your email. Choose a new password for your account below.",
+                newPassword: "New Password",
+                confirmPassword: "Confirm Password",
+                setPasswordBtn: "Set password",
+                passwordMismatch: "The two passwords do not match — type the same password twice.",
+                passwordSet: "Password set. From now on you can sign in with your email + this password.",
                 errPasswordPrefix: "Password: ",
                 errProfilePrefix: "Profile: ",
                 errFinish: "Could not finish your account: ",
@@ -539,6 +575,16 @@
                 errName: "Bitte geben Sie Ihren Creator- / Künstlernamen ein.",
                 errRole: "Bitte wählen Sie Ihre Einstufung.",
                 errPassword: "Bitte wählen Sie ein Passwort mit mindestens 8 Zeichen.",
+                forgotPassword: "Passwort vergessen?",
+                resetNeedEmail: "Geben Sie zuerst Ihre E-Mail in das Feld oben ein und tippen Sie dann auf „Passwort vergessen?“.",
+                resetSent: "Prüfen Sie Ihre E-Mails auf den Link zum Festlegen des Passworts.",
+                setNewPassword: "Neues Passwort festlegen",
+                recoveryIntro: "Sie haben einen Link zum Festlegen des Passworts aus Ihrer E-Mail geöffnet. Wählen Sie unten ein neues Passwort für Ihr Konto.",
+                newPassword: "Neues Passwort",
+                confirmPassword: "Passwort bestätigen",
+                setPasswordBtn: "Passwort festlegen",
+                passwordMismatch: "Die beiden Passwörter stimmen nicht überein — geben Sie dasselbe Passwort zweimal ein.",
+                passwordSet: "Passwort festgelegt. Ab jetzt können Sie sich mit Ihrer E-Mail und diesem Passwort anmelden.",
                 errPasswordPrefix: "Passwort: ",
                 errProfilePrefix: "Profil: ",
                 errFinish: "Ihr Konto konnte nicht fertiggestellt werden: ",
@@ -642,6 +688,16 @@
                 errName: "Veuillez saisir votre nom de créateur / nom de plume.",
                 errRole: "Veuillez choisir votre classification.",
                 errPassword: "Veuillez choisir un mot de passe d'au moins 8 caractères.",
+                forgotPassword: "Mot de passe oublié ?",
+                resetNeedEmail: "Saisissez d'abord votre e-mail dans le champ ci-dessus, puis touchez « Mot de passe oublié ».",
+                resetSent: "Vérifiez vos e-mails pour le lien de définition du mot de passe.",
+                setNewPassword: "Définir un nouveau mot de passe",
+                recoveryIntro: "Vous avez ouvert un lien de définition de mot de passe depuis votre e-mail. Choisissez ci-dessous un nouveau mot de passe pour votre compte.",
+                newPassword: "Nouveau mot de passe",
+                confirmPassword: "Confirmer le mot de passe",
+                setPasswordBtn: "Définir le mot de passe",
+                passwordMismatch: "Les deux mots de passe ne correspondent pas — saisissez le même mot de passe deux fois.",
+                passwordSet: "Mot de passe défini. Vous pouvez désormais vous connecter avec votre e-mail et ce mot de passe.",
                 errPasswordPrefix: "Mot de passe : ",
                 errProfilePrefix: "Profil : ",
                 errFinish: "Impossible de terminer votre compte : ",
@@ -745,6 +801,16 @@
                 errName: "Вкажіть своє ім'я автора / псевдонім.",
                 errRole: "Оберіть свою класифікацію.",
                 errPassword: "Оберіть пароль щонайменше з 8 символів.",
+                forgotPassword: "Забули пароль?",
+                resetNeedEmail: "Спочатку введіть свою електронну пошту в поле вище, а потім натисніть «Забули пароль?».",
+                resetSent: "Перевірте свою електронну пошту — там посилання для встановлення пароля.",
+                setNewPassword: "Встановити новий пароль",
+                recoveryIntro: "Ви відкрили посилання для встановлення пароля зі своєї електронної пошти. Оберіть нижче новий пароль для свого облікового запису.",
+                newPassword: "Новий пароль",
+                confirmPassword: "Підтвердіть пароль",
+                setPasswordBtn: "Встановити пароль",
+                passwordMismatch: "Паролі не збігаються — введіть той самий пароль двічі.",
+                passwordSet: "Пароль встановлено. Тепер ви можете входити за електронною поштою та цим паролем.",
                 errPasswordPrefix: "Пароль: ",
                 errProfilePrefix: "Профіль: ",
                 errFinish: "Не вдалося завершити обліковий запис: ",
@@ -848,6 +914,16 @@
                 errName: "Укажите своё имя автора / псевдоним.",
                 errRole: "Выберите свою классификацию.",
                 errPassword: "Выберите пароль не короче 8 символов.",
+                forgotPassword: "Забыли пароль?",
+                resetNeedEmail: "Сначала введите свою электронную почту в поле выше, а затем нажмите «Забыли пароль?».",
+                resetSent: "Проверьте свою электронную почту — там ссылка для установки пароля.",
+                setNewPassword: "Установить новый пароль",
+                recoveryIntro: "Вы открыли ссылку для установки пароля из своей электронной почты. Выберите ниже новый пароль для своего аккаунта.",
+                newPassword: "Новый пароль",
+                confirmPassword: "Подтвердите пароль",
+                setPasswordBtn: "Установить пароль",
+                passwordMismatch: "Пароли не совпадают — введите один и тот же пароль дважды.",
+                passwordSet: "Пароль установлен. Теперь вы можете входить по электронной почте и этому паролю.",
                 errPasswordPrefix: "Пароль: ",
                 errProfilePrefix: "Профиль: ",
                 errFinish: "Не удалось завершить аккаунт: ",
@@ -926,6 +1002,7 @@
         const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFtYW1zYWdyb3V6a2xkeWx4cnFrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ0MzMxNDgsImV4cCI6MjExMDAwOTE0OH0.YJKjJbRvJ5XkVAMWuB-1_CAKmNn47smSVy4_I4foj2I";
         let supabaseClient = null;
         let currentUser = null;
+        let recoveryMode = false;
         let loadedForUserId = null;
         let currentProfile = null;
         let profileLoadedForId = null;
@@ -1040,6 +1117,75 @@
             }
         }
 
+        // Forgot password: emails a set-password link that returns to
+        // this page (same pattern as the store back office). Supabase
+        // only ever sends the email to an address that has an account —
+        // unknown addresses silently get nothing — and the message below
+        // is the same either way, so the page never reveals whether an
+        // address is registered.
+        async function handleForgotPassword() {
+            if (!supabaseClient) {
+                alert(t('signInUnavailable'));
+                return;
+            }
+            const feedback = document.getElementById('pwFeedback');
+            const showMsg = (msg, isError) => {
+                feedback.className = "text-xs p-3 rounded-xl font-medium max-w-md " + (isError
+                    ? "bg-red-50 text-red-700 border border-red-200"
+                    : "bg-blue-50 text-brandDarkBlue border border-blue-200");
+                feedback.innerText = msg;
+                feedback.classList.remove('hidden');
+            };
+            const email = document.getElementById('pwEmail').value.trim() || document.getElementById('authEmail').value.trim();
+            if (!email) {
+                showMsg(t('resetNeedEmail'), true);
+                return;
+            }
+            try {
+                await supabaseClient.auth.resetPasswordForEmail(email, {
+                    redirectTo: window.location.origin + window.location.pathname
+                });
+            } catch (err) { /* same message either way — see the note above */ }
+            showMsg(t('resetSent'), false);
+        }
+
+        // Set a new password after arriving from the reset email. The
+        // recovery link lands here with a session (implicit flow, as for
+        // magic links); recoveryMode — set from the link's type=recovery
+        // marker or the PASSWORD_RECOVERY auth event — keeps the
+        // set-password section visible until the password is set.
+        async function handleRecoverySetPassword(e) {
+            e.preventDefault();
+            if (!supabaseClient || !currentUser) return;
+            const feedback = document.getElementById('recoveryFeedback');
+            const showMsg = (msg, isError) => {
+                feedback.className = "text-xs p-3 rounded-xl font-medium " + (isError
+                    ? "bg-red-50 text-red-700 border border-red-200"
+                    : "bg-green-50 text-green-800 border border-green-200");
+                feedback.innerText = msg;
+                feedback.classList.remove('hidden');
+            };
+            const pw1 = document.getElementById('recoveryPassword').value;
+            const pw2 = document.getElementById('recoveryPassword2').value;
+            if (!pw1 || pw1.length < 8) { showMsg(t('errPassword'), true); return; }
+            if (pw1 !== pw2) { showMsg(t('passwordMismatch'), true); return; }
+            const btn = document.getElementById('recoverySubmitBtn');
+            btn.disabled = true;
+            try {
+                const { error } = await supabaseClient.auth.updateUser({ password: pw1 });
+                if (error) throw error;
+                document.getElementById('recoveryPassword').value = '';
+                document.getElementById('recoveryPassword2').value = '';
+                recoveryMode = false;
+                showMsg(t('passwordSet'), false);
+                setTimeout(() => { document.getElementById('recoverySection').classList.add('hidden'); }, 3000);
+            } catch (err) {
+                showMsg(t('signInError') + err.message, true);
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
         // Creator profile (public.profiles): one row per auth user with
         // display_name + creator_role. A signed-in user WITHOUT a profile
         // sees the "Complete your account" form instead of the studio.
@@ -1105,6 +1251,7 @@
                 document.getElementById('authSection').classList.toggle('hidden', !!user);
                 document.getElementById('accountSection').classList.toggle('hidden', !user);
                 if (user) {
+                    document.getElementById('recoverySection').classList.toggle('hidden', !recoveryMode);
                     document.getElementById('setupAccountEmail').textContent = user.email || '';
                     const profile = await loadProfile(user);
                     document.getElementById('profileSetupSection').classList.toggle('hidden', !!profile);
@@ -1133,8 +1280,12 @@
                 }
             } catch (e) { /* leave the sign-in form visible */ }
         }
+        if (window.location.hash && window.location.hash.indexOf('type=recovery') !== -1) recoveryMode = true;
         if (supabaseClient) {
-            supabaseClient.auth.onAuthStateChange(() => refreshAccountView());
+            supabaseClient.auth.onAuthStateChange((event) => {
+                if (event === 'PASSWORD_RECOVERY') recoveryMode = true;
+                refreshAccountView();
+            });
         }
         refreshAccountView();
 
